@@ -7,11 +7,21 @@ import {
 import './index.css'
 import { ThemeProvider } from "@material-tailwind/react";
 import Home from './routes/home';
+import Login from './routes/auth/login';
+import Register from './routes/auth/register';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Home/>,
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  },
+  {
+    path: '/register',
+    element: <Register />,
   },
 ]);
 
