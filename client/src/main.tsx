@@ -6,12 +6,12 @@ import {
 } from "react-router-dom";
 import './index.css'
 import { ThemeProvider } from "@material-tailwind/react";
-import Sample from './routes/sample';
+import Home from './routes/home';
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Sample />,
+    element: <Home/>,
   },
 ]);
 
