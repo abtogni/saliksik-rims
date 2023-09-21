@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import User from "../../models/User";
 
 interface ErrorResponse {
+  userID: string;
   email: string;
   password: string;
   [key: string]: string; // Index signature to handle dynamic properties
@@ -17,15 +18,22 @@ interface ValidationError {
 }
 
 const handleErrors = (err: any): ErrorResponse => {
-  let errors: ErrorResponse = { email: '', password: '' };
+  let errors: ErrorResponse = { userID: '', email: '', password: '' };
 
   if (err.code === 11000) {
-    errors.email = 'That email is already registered';
+    if (err.keyPattern?.email) {
+      errors.email = 'That email is already registered';
+    }
+
+    if (err.keyPattern?.userID) {
+      errors.userID = 'That user ID is already registered';
+    }
+
     return errors;
   }
 
-  if (err.message.includes('invalid email')) {
-    errors.email = 'Incorrect email';
+  if (err.message.includes('invalid ID')) {
+    errors.userID = 'Invalid username';
     return errors;
   }
 
@@ -44,6 +52,7 @@ const handleErrors = (err: any): ErrorResponse => {
   return errors;
 };
 
+
 const maxAge: number = 3 * 24 * 60 * 60;
 
 const createToken = (id: string): string => {
@@ -52,19 +61,11 @@ const createToken = (id: string): string => {
   });
 };
 
-const signup_get = (req: Request, res: Response): void => {
-  res.render('signup');
-};
-
-const login_get = (req: Request, res: Response): void => {
-  res.render('login');
-};
-
 const signup_post = async (req: Request, res: Response): Promise<void> => {
-  const { email, password } = req.body;
+  const { userID, email, password } = req.body;
 
   try {
-    const user: Document = await User.create({ email, password });
+    const user: Document = await User.create({ userID, email, password });
     const token: string = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(201).json({ user: user._id });
@@ -75,11 +76,11 @@ const signup_post = async (req: Request, res: Response): Promise<void> => {
 };
 
 const login_post = async (req: Request, res: Response): Promise<void> => {
-  const { email, password } = req.body;
+  const { userID, password } = req.body;
 
   try {
     // @ts-expect-error
-    const user: Document = await User.login(email, password);
+    const user: Document = await User.login(userID, password);
     const token: string = createToken(user._id);
     res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
     res.status(200).json({ user: user._id });
@@ -95,8 +96,6 @@ const logout = async (req: Request, res: Response): Promise<void> => {
 };
 
 export {
-  signup_get,
-  login_get,
   signup_post,
   login_post,
   logout
