@@ -1,5 +1,4 @@
 import React from 'react';
-import UncLogo from '../../assets/login.png';
 
 function Login() {
   return (
@@ -53,7 +52,7 @@ function Login() {
         </button>
       </a>
 
-      <img src={UncLogo} alt="University Logo" className="w-[233px] h-[236px]" />
+      <img src='/login.png' alt="University Logo" className="w-[233px] h-[236px]" />
 
       <div className="bg-red-500 text-white text-center p-4">
         {/* Add any additional content here */}
