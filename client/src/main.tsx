@@ -1,19 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import {
-  createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 import './index.css'
 import { ThemeProvider } from "@material-tailwind/react";
-import Sample from './routes/sample';
+import router from './router';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Sample />,
-  },
-]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
