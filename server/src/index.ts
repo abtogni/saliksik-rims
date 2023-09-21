@@ -32,4 +32,6 @@ mongoose
 
   //routes
   app.use(authRoutes);
-  
+  app.get('/api', (req, res) => {
+    res.json({ message: 'Backend is online' });
+});
