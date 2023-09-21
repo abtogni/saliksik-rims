@@ -2,6 +2,7 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
+import authRoutes from './routes/appRouter';
 import mongoose, { ConnectOptions } from 'mongoose';
 
 //.ENV
@@ -20,18 +21,15 @@ app.use(cookieParser());
 
 //DB Connection
 mongoose
-  .connect(dbURI, {
+  .connect(`${dbURI}/${process.env.MONGODB_DATABASE}`, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   } as ConnectOptions)
   .then(() => {
-    console.log('Connected to MongoDB');
-    app.listen(port, () => {
-      console.log(`Server is running on port ${port}`);
-    });
+    app.listen(port);
   })
   .catch((err) => console.error('Error connecting to MongoDB:', err));
 
   //routes
-
+  app.use(authRoutes);
   
