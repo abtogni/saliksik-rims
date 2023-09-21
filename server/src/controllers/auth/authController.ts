@@ -10,16 +10,6 @@ interface ErrorResponse {
   [key: string]: string; // Index signature to handle dynamic properties
 }
 
-interface ValidationError {
-  errors: {
-    [key: string]: {
-      properties: {
-        message: string;
-        path: string;
-      };
-    };
-  };
-}
 
 
 const handleErrors = (err: any): ErrorResponse => {
