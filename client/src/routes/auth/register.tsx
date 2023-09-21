@@ -27,11 +27,11 @@ const Register: React.FC = () => {
         headers: { 'Content-Type': 'application/json' }
       });
 
-      if (!res.ok) {
-        throw new Error(`Network response was not ok (${res.status})`);
-      }
-
       const data = await res.json();
+
+      console.log(data);
+
+
 
       if (data.errors) {
         setuserIDError(data.errors.userID);

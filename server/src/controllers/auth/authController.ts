@@ -11,13 +11,19 @@ interface ErrorResponse {
 }
 
 interface ValidationError {
-  properties: {
-    path: string;
-    message: string;
+  errors: {
+    [key: string]: {
+      properties: {
+        message: string;
+        path: string;
+      };
+    };
   };
 }
 
+
 const handleErrors = (err: any): ErrorResponse => {
+  console.log('Error Message:', err.message);
   let errors: ErrorResponse = { userID: '', email: '', password: '' };
 
   if (err.code === 11000) {
@@ -42,16 +48,16 @@ const handleErrors = (err: any): ErrorResponse => {
     return errors;
   }
 
-  if (err.message.includes('user validation failed')) {
-    const validationErrors = err.errors as ValidationError[];
-    validationErrors.forEach(error => {
-      errors[error.properties.path] = error.properties.message;
-    });
+  if (err.name === 'ValidationError' && err.errors) {
+    for (const key in err.errors) {
+      if (err.errors.hasOwnProperty(key)) {
+        errors[key] = err.errors[key].properties.message;
+      }
+    }
   }
 
   return errors;
 };
-
 
 const maxAge: number = 3 * 24 * 60 * 60;
 
