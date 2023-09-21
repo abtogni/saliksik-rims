@@ -13,7 +13,6 @@ interface ErrorResponse {
 
 
 const handleErrors = (err: any): ErrorResponse => {
-  console.log('Error Message:', err.message);
   let errors: ErrorResponse = { userID: '', email: '', password: '' };
 
   if (err.code === 11000) {
@@ -28,12 +27,12 @@ const handleErrors = (err: any): ErrorResponse => {
     return errors;
   }
 
-  if (err.message.includes('invalid ID')) {
+  if (err.message.includes('Invalid user ID')) {
     errors.userID = 'Invalid username';
     return errors;
   }
 
-  if (err.message.includes('invalid password')) {
+  if (err.message.includes('Invalid password')) {
     errors.password = 'Incorrect password';
     return errors;
   }
