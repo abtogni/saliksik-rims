@@ -44,20 +44,17 @@ const Register: React.FC = () => {
     }
   };
   return (
-    <div className="bg-gray-300">
     <div className="min-h-screen flex flex-col justify-between">
       <div className="w-1321 h-86 bg-red-600 border-black border-0.5 text-white text-5xl font-bold break-words text-center">
         UNIVERSITY RESEARCH OFFICE
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2  w-full">
-        
-      <img src='/login.png' alt="University Logo" className="w-[233px] h-[236px]" />
+      <div className="flex justify-center items-center">
         {/* Signup Form */}
-        <form className="max-w-md mx-auto bg-white p-10" onSubmit={handleFormSubmit}>
+        <form className="p-4 ml-8" onSubmit={handleFormSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="username">
-              Username
+              Username:
             </label>
             <input
               className="w-full border border-gray-300 rounded-md py-2 px-3"
@@ -70,7 +67,7 @@ const Register: React.FC = () => {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-              Email
+              Email:
             </label>
             <input
               className="w-full border border-gray-300 rounded-md py-2 px-3"
@@ -83,7 +80,7 @@ const Register: React.FC = () => {
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
-              Password
+              Password:
             </label>
             <input
               className="w-full border border-gray-300 rounded-md py-2 px-3"
@@ -110,10 +107,8 @@ const Register: React.FC = () => {
           Login
         </button>
       </a>
-      <div className="bg-red-500 text-white text-center p-4">
-        {/* Add any additional content here */}
-      </div>
-    </div>
+
+      <img src='/login.png' alt="University Logo" className="w-[233px] h-[236px]" />
     </div>
   );
 }
