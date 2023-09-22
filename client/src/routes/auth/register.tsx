@@ -31,8 +31,6 @@ const Register: React.FC = () => {
 
       console.log(data);
 
-
-
       if (data.errors) {
         setuserIDError(data.errors.userID);
         setEmailError(data.errors.email);
@@ -51,9 +49,13 @@ const Register: React.FC = () => {
         UNIVERSITY RESEARCH OFFICE
       </div>
 
-      <div className="flex justify-center items-center">
-        {/* Signup Form */}
-        <form className="p-4 ml-8" onSubmit={handleFormSubmit}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 h-scree w-full">
+      {/* UNC Logo */}
+      <img src='/login.png' alt="University Logo" className="w-[233px] h-[236px]" /> 
+
+      
+      {/* Signup Form */}
+        <form className="max-w-md mx-auto bg-white p-10" onSubmit={handleFormSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="username">
               Username:
@@ -110,7 +112,6 @@ const Register: React.FC = () => {
         </button>
       </a>
 
-      <img src='/login.png' alt="University Logo" className="w-[233px] h-[236px]" />
 
       <div className="bg-red-500 text-white text-center p-4">
         {/* Add any additional content here */}
