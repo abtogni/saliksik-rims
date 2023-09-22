@@ -83,13 +83,6 @@ const Login: React.FC = () => {
         </form>
       </div>
 
-      <a href="/register" className="flex justify-center">
-        <button
-          className="bg-red-600 text-white font-bold py-2 px-4 rounded hover:bg-red-700 mt-4"
-        >
-          Register
-        </button>
-      </a>
 
       <img src='/login.png' alt="University Logo" className="w-[233px] h-[236px]" />
 
