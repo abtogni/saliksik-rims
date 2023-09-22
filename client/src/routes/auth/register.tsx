@@ -31,8 +31,6 @@ const Register: React.FC = () => {
 
       console.log(data);
 
-
-
       if (data.errors) {
         setuserIDError(data.errors.userID);
         setEmailError(data.errors.email);
