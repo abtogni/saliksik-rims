@@ -112,9 +112,6 @@ const Register: React.FC = () => {
           Login
         </button>
       </a>
-
-      
-
       <div className="bg-red-500 text-white text-center p-4">
         {/* Add any additional content here */}
       </div>
