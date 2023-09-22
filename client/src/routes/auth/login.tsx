@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Heading from '../partials/Heading';
+import Footing from '../partials/Footing';
 
 const Login: React.FC = () => {
   const [userID, setUserID] = useState('');
@@ -40,9 +42,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-between">
-      <div className="w-1321 h-86 bg-red-600 border-black border-0.5 text-white text-5xl font-bold break-words text-center">
-        UNIVERSITY RESEARCH OFFICE
-      </div>
+      <Heading />
 
       <div className="flex justify-center items-center">
         
@@ -85,10 +85,8 @@ const Login: React.FC = () => {
 
 
       <img src='/login.png' alt="University Logo" className="w-[233px] h-[236px]" />
+      <Footing />
 
-      <div className="bg-red-500 text-white text-center p-4">
-        {/* Add any additional content here */}
-      </div>
     </div>
   );
 }

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import Footing from '../partials/Footing';
+import Heading from '../partials/Heading';
 
 
 
@@ -45,9 +47,7 @@ const Register: React.FC = () => {
   };
   return (
     <div className="min-h-screen flex flex-col justify-between">
-      <div className="w-1321 h-86 bg-red-600 border-black border-0.5 text-white text-5xl font-bold break-words text-center">
-        UNIVERSITY RESEARCH OFFICE
-      </div>
+      <Heading />
 
       <div className="flex justify-center items-center">
         {/* Signup Form */}
@@ -101,6 +101,7 @@ const Register: React.FC = () => {
       </div>
 
       <img src='/login.png' alt="University Logo" className="w-[233px] h-[236px]" />
+      <Footing />
     </div>
   );
 }
