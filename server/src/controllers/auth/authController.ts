@@ -10,12 +10,7 @@ interface ErrorResponse {
   [key: string]: string; // Index signature to handle dynamic properties
 }
 
-interface ValidationError {
-  properties: {
-    path: string;
-    message: string;
-  };
-}
+
 
 const handleErrors = (err: any): ErrorResponse => {
   let errors: ErrorResponse = { userID: '', email: '', password: '' };
@@ -32,26 +27,26 @@ const handleErrors = (err: any): ErrorResponse => {
     return errors;
   }
 
-  if (err.message.includes('invalid ID')) {
+  if (err.message.includes('Invalid user ID')) {
     errors.userID = 'Invalid username';
     return errors;
   }
 
-  if (err.message.includes('invalid password')) {
+  if (err.message.includes('Invalid password')) {
     errors.password = 'Incorrect password';
     return errors;
   }
 
-  if (err.message.includes('user validation failed')) {
-    const validationErrors = err.errors as ValidationError[];
-    validationErrors.forEach(error => {
-      errors[error.properties.path] = error.properties.message;
-    });
+  if (err.name === 'ValidationError' && err.errors) {
+    for (const key in err.errors) {
+      if (err.errors.hasOwnProperty(key)) {
+        errors[key] = err.errors[key].properties.message;
+      }
+    }
   }
 
   return errors;
 };
-
 
 const maxAge: number = 3 * 24 * 60 * 60;
 

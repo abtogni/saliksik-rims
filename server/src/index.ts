@@ -12,8 +12,6 @@ const app = express();
 const port = process.env.PORT;
 const dbURI = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_PASS}@${process.env.MONGODB_URL}`;
 
-console.log(dbURI);
-
 //middlewares
 app.use(bodyParser.json());
 app.use(cookieParser());
@@ -32,4 +30,6 @@ mongoose
 
   //routes
   app.use(authRoutes);
-  
+  app.get('/api', (req, res) => {
+    res.json({ message: 'Backend is online' });
+});
