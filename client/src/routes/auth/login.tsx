@@ -41,19 +41,31 @@ const Login: React.FC = () => {
   };
 
   return (
+    <div className="bg-gray-300"> {/*BACKROUND*/}{/*Updated class*/}
     <div className="min-h-screen flex flex-col justify-between">
       <Heading />
 
-      <div className="flex justify-center items-center">
-        
+      <div className="flex justify-between m-12 py-3 px-11"> {/* Flex Container*/}
+      {/* Logo */}
+      <div className="m-10 h-236px w-233px">
+      <img 
+      src='/login.png' 
+      alt="University Logo" 
+      className="py-1 px-1" 
+      style={{ maxWidth: '100%' }}
+      />
+     </div>
 
-        <form className="p-4 ml-8" onSubmit={handleFormSubmit}>
+      {/* Signup Form */}
+      <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+      <form className="p-6 ml-0" onSubmit={handleFormSubmit}>
+      <h2 className="text-2xl font-semibold mb-4">Login</h2>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="username">
-              Username:
+              Username
             </label>
             <input
-              className="w-full border border-gray-300 rounded-md py-2 px-3"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-red-600"
               type="text"
               id="userID"
               name="userID"
@@ -63,10 +75,10 @@ const Login: React.FC = () => {
           <div className="username error">{userIDError}</div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
-              Password:
+              Password
             </label>
             <input
-              className="w-full border border-gray-300 rounded-md py-2 px-3"
+              className="w-full border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-red-600"
               type="password"
               id="password"
               name="password"
@@ -74,19 +86,22 @@ const Login: React.FC = () => {
             />
           </div>
           <div className="password error">{passwordError}</div>
+          {/*Login Button */}
           <button
-            className="bg-red-600 text-white font-bold py-2 px-4 rounded hover:bg-red-700"
+            className="w-full bg-red-600 hover:bg-red-800 text-white font-bold py-2 px-4 mb-6 rounded"
             type="submit"
           >
             Login
           </button>
-        </form>
+          </form>
+        <footer>
+        <a className="text-indigo-700 hover:text-pink-700 text-sm float-left" href="#">Forgot Password?</a>
+        <a className="text-indigo-700 hover:text-pink-700 text-sm float-right" href="/register">Create Account</a>
+      </footer>  
       </div>
-
-
-      <img src='/login.png' alt="University Logo" className="w-[233px] h-[236px]" />
+      </div>
       <Footing />
-
+    </div>
     </div>
   );
 }
