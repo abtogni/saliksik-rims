@@ -1,6 +1,6 @@
 import React from 'react'
 
-function footing() {
+function Footing() {
   return (
     <div className="bg-red-500 text-white text-center p-4">
     {/* Add any additional content here */}
@@ -8,4 +8,4 @@ function footing() {
   )
 }
 
-export default footing
+export default Footing

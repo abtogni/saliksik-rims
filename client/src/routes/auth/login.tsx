@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Heading from '../partials/Heading';
-import Footing from '../partials/Footing';
 
 const Login: React.FC = () => {
   const [userID, setUserID] = useState('');
@@ -43,8 +41,6 @@ const Login: React.FC = () => {
   return (
     <div className="bg-gray-300"> {/*BACKROUND*/}{/*Updated class*/}
     <div className="min-h-screen flex flex-col justify-between">
-      <Heading />
-
       <div className="flex justify-between m-12 py-3 px-11"> {/* Flex Container*/}
       {/* Logo */}
       <div className="m-10 h-236px w-233px">
@@ -100,7 +96,6 @@ const Login: React.FC = () => {
       </footer>  
       </div>
       </div>
-      <Footing />
     </div>
     </div>
   );

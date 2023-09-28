@@ -1,21 +1,19 @@
 import Home from './routes/home';
 import Login from './routes/auth/login';
 import Register from './routes/auth/register';
-import { createBrowserRouter } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
+import Error404 from './routes/partials/Error';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <Home/>,
-  },
-  {
-    path: '/login',
-    element: <Login />,
-  },
-  {
-    path: '/register',
-    element: <Register />,
-  },
-]);
+
+
+const router = () => (
+        
+        <Routes>
+            <Route index element={<Home />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+            <Route path="*" element={<Error404/>} />
+        </Routes>
+        )
 
 export default router;

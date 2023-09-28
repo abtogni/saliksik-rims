@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Footing from '../partials/Footing';
-import Heading from '../partials/Heading';
 
 
 
@@ -48,7 +46,6 @@ const Register: React.FC = () => {
   return (
     <div className="bg-gray-300"> {/*BACKROUND*/}{/*Updated class*/}
     <div className="min-h-screen flex flex-col justify-between">
-      <Heading />
 
       <div className="flex justify-between m-12 py-3 px-11">{/* Flex Container*/}
       {/* Logo */}
@@ -119,7 +116,6 @@ const Register: React.FC = () => {
         </div>
 
       </div>
-      <Footing />
     </div>
     </div>
   );
