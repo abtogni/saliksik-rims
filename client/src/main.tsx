@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client'
 import {  BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css'
 import { ThemeProvider } from "@material-tailwind/react";
-import MainRouter from './router';
-import Heading from './routes/partials/Heading';
-import Footing from './routes/partials/Footing';
+import MainRouter from './routes/router';
+import Heading from './pages/partials/Heading';
+import Footing from './pages/partials/Footing';
 
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

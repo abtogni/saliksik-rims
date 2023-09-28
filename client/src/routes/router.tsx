@@ -1,13 +1,12 @@
-import Home from './routes/home';
-import Login from './routes/auth/login';
-import Register from './routes/auth/register';
+import Home from '../pages/home';
+import Login from '../pages/auth/login';
+import Register from '../pages/auth/register';
 import { Routes, Route } from "react-router-dom";
-import Error404 from './routes/partials/Error';
+import Error404 from '../pages/partials/Error';
 
 
 
 const router = () => (
-        
         <Routes>
             <Route index element={<Home />} />
             <Route path="login" element={<Login />} />
