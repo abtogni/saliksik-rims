@@ -39,9 +39,14 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray-300"> {/*BACKROUND*/}{/*Updated class*/}
+    
+    <div className="bg-gray-300"> 
+    
+    {/*Updated class*/}
     <div className="min-h-screen flex flex-col justify-between">
-      <div className="flex justify-between m-12 py-3 px-11"> {/* Flex Container*/}
+      {/* Flex Container*/}
+      <div className="flex justify-between m-12 py-3 px-11"> 
+      
       {/* Logo */}
       <div className="m-10 h-236px w-233px">
       <img 
