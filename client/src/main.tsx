@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import {  BrowserRouter, Routes, Route } from "react-router-dom";
 import './index.css'
 import { ThemeProvider } from "@material-tailwind/react";
-import MainRouter from './routes/router';
+import MainRouter from './router/router';
 import Heading from './pages/partials/Heading';
 import Footing from './pages/partials/Footing';
 
