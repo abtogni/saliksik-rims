@@ -1,9 +1,9 @@
 import React from 'react'
 
-function home() {
+function index() {
   return (
     <div>home</div>
   )
 }
 
-export default home
+export default index
