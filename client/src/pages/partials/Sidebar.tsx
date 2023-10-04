@@ -1,9 +1,9 @@
 import React from 'react'
 
-function home() {
+function Sidebar() {
   return (
     <div></div>
   )
 }
 
-export default home
+export default Sidebar
