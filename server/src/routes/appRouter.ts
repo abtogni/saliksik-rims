@@ -1,10 +1,8 @@
 const { Router } = require('express');
-const authController = require('../controllers/auth/authController');
+const authRoutes = require('./auth/authRouter');
 
 const router = Router();
-router.post('/api/signup', authController.signup_post);
-router.post('/api/login', authController.login_post);
-router.get('/api/logout', authController.logout);
+router.use(authRoutes);
 
 
 export default router;

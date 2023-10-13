@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
-import authRoutes from './routes/appRouter';
+import appRoutes from './routes/appRouter';
 import mongoose, { ConnectOptions } from 'mongoose';
 
 //.ENV
@@ -26,10 +26,10 @@ mongoose
   .then(() => {
     app.listen(port);
   })
-  .catch((err) => console.error('Error connecting to MongoDB:', err));
+  .catch((err: Error) => console.error('Error connecting to MongoDB:', err));
 
   //routes
-  app.use(authRoutes);
+  // app.use(appRoutes);
   app.get('/api', (req, res) => {
     res.json({ message: 'Backend is online' });
 });
