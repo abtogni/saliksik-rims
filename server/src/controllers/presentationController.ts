@@ -3,7 +3,7 @@ import { PresentationModel } from "../models/presentationModel";
 import mongoose, { Document } from "mongoose";
 
 
-export const getpresentations = async (req : Request, res: Response): Promise<void> => {
+export const getPresentations = async (req : Request, res: Response): Promise<void> => {
     const { researchID } = req.body;
 
     try{
