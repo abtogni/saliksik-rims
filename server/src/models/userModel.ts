@@ -1,7 +1,14 @@
-import { prop, getModelForClass } from "@typegoose/typegoose";
+import { prop, getModelForClass, pre } from "@typegoose/typegoose";
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 
+
+
+@pre<User>('save', async function(next: () => void){
+    const salt = await bcrypt.genSalt();
+    this.password = await bcrypt.hash(this.password, salt);
+    next();
+})
 
 export class User{
     @prop({ required: [true, 'Please enter your faculty ID number'],unique: true })
@@ -39,4 +46,7 @@ export class User{
 }
 
 
+
+
 export const UserModel = getModelForClass(User, {schemaOptions: {timestamps: true}});
+

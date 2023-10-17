@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { ResearchModel } from "../models/researchModel";
+import { ResearchModel } from "../../models/researchModel";
 import mongoose, { Document } from "mongoose";
 
 

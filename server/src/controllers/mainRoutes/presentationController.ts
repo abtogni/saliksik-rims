@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { PresentationModel } from "../models/presentationModel";
+import { PresentationModel } from "../../models/presentationModel";
 import mongoose, { Document } from "mongoose";
 
 
@@ -16,7 +16,7 @@ export const getPresentations = async (req : Request, res: Response): Promise<vo
 
 }
 
-export const getpresentation = async (req : Request, res: Response) => {
+export const getPresentation = async (req : Request, res: Response) => {
     const { id } = req.body;
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -33,7 +33,7 @@ export const getpresentation = async (req : Request, res: Response) => {
 
 }
 
-export const createpresentation = async (req : Request, res: Response) => {
+export const createPresentation = async (req : Request, res: Response) => {
     const { presentationDate, presentationTime, researchID, panelistID, comments, minutes } = req.body
       
 
@@ -47,7 +47,7 @@ export const createpresentation = async (req : Request, res: Response) => {
 
 }
 
-export const updatepresentation = async (req : Request, res: Response) => {
+export const updatePresentation = async (req : Request, res: Response) => {
     const { id } = req.body
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -66,7 +66,7 @@ export const updatepresentation = async (req : Request, res: Response) => {
 
 }
 
-export const deletepresentation = async (req : Request, res: Response) => {
+export const deletePresentation = async (req : Request, res: Response) => {
     const { id } = req.body
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -80,5 +80,6 @@ export const deletepresentation = async (req : Request, res: Response) => {
     }
   
     res.status(200).json(presentation)
+
 
 }

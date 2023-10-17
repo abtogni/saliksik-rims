@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CNModel } from '../models/proposalModel';
+import { CNModel } from '../../models/proposalModel';
 import mongoose, { Document } from "mongoose";
 
 
