@@ -19,6 +19,9 @@ export class Research{
 
     @prop({ type: () => String})
     public researchStatus!: string;
+
+    @prop({ type: () => String})
+    public incentiveProof!: string;
 }
 
 export const ResearchModel = getModelForClass(Research, {schemaOptions: {timestamps: true}});
