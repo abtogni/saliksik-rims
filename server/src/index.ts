@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import appRoutes from './routes/appRoutes';
@@ -14,6 +15,7 @@ const dbURI = `mongodb+srv://${process.env.MONGODB_USER}:${process.env.MONGODB_P
 
 //middlewares
 app.use(bodyParser.json());
+app.use(cors());
 app.use(cookieParser());
 
 
