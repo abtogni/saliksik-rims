@@ -1,4 +1,4 @@
-import { prop, getModelForClass, pre } from "@typegoose/typegoose";
+import { prop, getModelForClass, pre, ReturnModelType } from "@typegoose/typegoose";
 import validator from 'validator';
 import bcrypt from 'bcrypt';
 
@@ -9,6 +9,7 @@ import bcrypt from 'bcrypt';
     this.password = await bcrypt.hash(this.password, salt);
     next();
 })
+
 
 export class User{
     @prop({ required: [true, 'Please enter your faculty ID number'],unique: true })
@@ -43,6 +44,18 @@ export class User{
 
     @prop()
     public avatarLink?: string;
+
+    public static async login (this: ReturnModelType<typeof User>, email: string, password: string){
+        const user = await this.findOne({ email });
+        if (user){
+          const auth = await bcrypt.compare(password, user.password);
+          if(auth){
+            return user;
+          }
+          throw Error('invalid password');
+        }
+        throw Error('invalid email');
+    }
 }
 
 
