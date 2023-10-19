@@ -1,6 +1,34 @@
-<script>
+<script lang="ts">
+  let json = {};
 
+  function submit(e: Event) {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    json = Object.fromEntries(formData.entries());
+
+    // Make an HTTP POST request to the API
+    fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(json),
+    })
+      .then((response) => {
+        if (response.ok) {
+          // Handle a successful response (e.g., redirect to a new page)
+          window.location.href = '/main/';
+        } else {
+          // Handle errors or authentication failures
+          console.error('Login failed');
+        }
+      })
+      .catch((error) => {
+        console.error('Network error:', error);
+      });
+  }
 </script>
+
 
 <main>
     <div> 
@@ -21,7 +49,7 @@
     
           <!-- Signup Form  -->
           <div class="flex-col">
-          <form class="w-full">
+          <form class="w-full" on:submit={submit}>
     
           
           <p class=" text-white text-6xl sm:text-4xl md:text-3xl lg:text-6xl text-left  font-bold font-['Space Grotesk']">Welcome back</p>
@@ -30,10 +58,11 @@
           
           <p class="font-['Space Grotesk'] font-bold text-left text-white">Login as</p>
           
-          <select data-te-select-init class="font-['Space Grotesk'] mb-1 w-64 h-9 rounded-md">
-      <option value="personnel">Personnel</option>
-      <option value="Admin">Admin</option>
-     </select>
+          
+          <select id='userType' name='userType' data-te-select-init class="font-['Space Grotesk'] mb-1 w-64 h-9 rounded-md">
+            <option value="personnel">Personnel</option>
+            <option value="admin">Admin</option>
+          </select>
      
               <div class="mb-1">
                 <label class="block text-white font-bold mb-2" for="username">

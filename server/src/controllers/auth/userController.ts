@@ -47,24 +47,23 @@ export const createUser = async (req : Request, res: Response): Promise<void> =>
 
     try {
         const user: Document = await UserModel.create({ userID, email, password, firstName, middleName, lastName, suffix, userType });
-        const token: string = createToken(user._id);
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        res.status(201).json({ user: user._id });
+        res.status(201).json({ message: "User Successfully Created an Account",user: user._id });
       } catch (err) {
         res.status(400).json({ err });
       }
 
 }
 
+
 export const userLogin = async (req : Request, res: Response): Promise<void> => {
     const { userID, password, userType } = req.body;
   
     try {
-      // @ts-expect-error
-      const user: Document = await User.login(userID, password, userType);
+      const user: Document = await UserModel.login(userID, password, userType);
       const token: string = createToken(user._id);
+      res.status(200).json({ "message": "User Successfully Login", user: user._id });
       res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-      res.status(200).json({ user: user._id });
+      res.cookie('userID', user._id, { httpOnly: true, maxAge: maxAge * 1000 });
     } catch (err) {
       res.status(400).json({ err });
     }

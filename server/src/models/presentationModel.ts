@@ -2,25 +2,25 @@ import { prop, getModelForClass } from "@typegoose/typegoose";
 
 export class Presentation{
 
-    @prop()
+    @prop({ type: () => Date})
     public presentationDate!: Date;
 
-    @prop()
+    @prop({ type: () => Date})
     public presentationTime!: Date;
 
-    @prop()
+    @prop({ type: () => Number})
     public researchID!: number;
 
     @prop({ type: () => Array<string>})
-    public panelistID!: string[];
+    public panelistID?: string[];
 
-    @prop()
+    @prop({ type: () => String})
     public comments?: string;
 
     @prop({ type: () => Array<string>})
     public minutes?: string[];
 
-    @prop()
+    @prop({ type: () => String})
     public presentationStatus?: string;
 }
 

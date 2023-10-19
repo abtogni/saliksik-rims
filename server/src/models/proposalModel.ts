@@ -2,49 +2,49 @@ import { prop, getModelForClass } from "@typegoose/typegoose";
 
 export class conceptNote{
 
-    @prop()
+    @prop({ type: () => String })
     public researchID!: string;
 
-    @prop()
+    @prop({ type: () => String })
     public implementingDept!: string;
 
-    @prop()
+    @prop({ type: () => String })
     public coopAgency!: string;
 
-    @prop()
+    @prop({ type: () => String })
     public siteImplementation!: string;
 
-    @prop()
+    @prop({ type: () => Date})
     public projectDuration!: Date;
 
-    @prop()
+    @prop({ type: () => Number})
     public totalCost!: number;
 
-    @prop()
+    @prop({ type: () => String})
     public fundingSource!: string;
 
-    @prop()
+    @prop({ type: () => String})
     public description!: string;
 
-    @prop()
+    @prop({ type: () => String})
     public significance!: string;
     
-    @prop()
+    @prop({ type: () => String})
     public objectives!: string;
 
-    @prop()
+    @prop({ type: () => String})
     public methodology!: string;
 
-    @prop()
+    @prop({ type: () => String})
     public technologyRoadmap?: string;
 
-    @prop()
+    @prop({ type: () => String})
     public expectedOutput!: string;
 
-    @prop()
+    @prop({ type: () => String})
     public workPlan!: string;
 
-    @prop()
+    @prop({ type: () => String})
     public proposalStatus!: string;
 
 

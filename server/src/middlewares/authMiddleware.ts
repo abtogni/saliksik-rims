@@ -3,7 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { UserModel } from '../models/userModel'
 
 
-const requireAuth = (req: Request, res: Response , next: NextFunction) =>{
+export const requireAuth = (req: Request, res: Response , next: NextFunction) =>{
     const token = req.cookies.jwt;
 
     if (token){
@@ -24,10 +24,10 @@ const requireAuth = (req: Request, res: Response , next: NextFunction) =>{
 }
 
 //check current user
-const checkUser = (requiredUserType: string) => (req : Request, res: Response, next: NextFunction) => {
+export const checkUser = (requiredUserType: string) => (req : Request, res: Response, next: NextFunction) => {
   const token = req.cookies.jwt;
   if (token) {
-    jwt.verify(token, 'net ninja secret', async (err: any, decodedToken: any) => {
+    jwt.verify(token, 'unc research office', async (err: any, decodedToken: any) => {
       if (err) {
         res.locals.user = null;
         next();
@@ -47,5 +47,3 @@ const checkUser = (requiredUserType: string) => (req : Request, res: Response, n
     next();
   }
 };
-
-module.exports = { requireAuth, checkUser };

@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm i && cd server && npm i && cd .. && cd client && npm i",
+    "build": "npm i && cd server && npm i && cd .. && cd saliksik-client && npm i",
     "server": "cd server && npm run dev",
-    "client": "cd client && npm run dev",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "client": "cd saliksik-client && npm run dev",
+    "dev": "concurrently \"npm run client\" && \"npm run server\""
   },
   "keywords": [],
   "author": "",
