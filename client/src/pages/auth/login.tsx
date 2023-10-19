@@ -40,15 +40,15 @@ const Login: React.FC = () => {
 
   return (
     
-    <div className="bg-red-400"> {/*backround*/}
+    <div className="bg-backround"> {/*backround*/}
     
     {/*Updated class*/}
     <div className="min-h-screen flex flex-col justify-between">
       {/* Flex Container*/}
-      <div className="flex justify-between mt-36 ml-36 mr-16"> 
+      <div className="flex justify-between mt-36 ml-36 mr-36"> 
       
       {/* Logo */}
-      <div className="w-[300px] h-[300px] mt-20">
+      <div className="hidden lg:block w-[300px] h-[300px] mt-20">
       <img 
       src='/saliksiklogo.png' 
       alt="University Logo" 
@@ -60,13 +60,15 @@ const Login: React.FC = () => {
       {/* Signup Form */}
       <div className="flex-col">
       <form className="w-full" onSubmit={handleFormSubmit}>
-      <p className="text-white text-7xl text-left text-[80.76px] font-bold font-['Space Grotesk']">Welcome back</p>
-      <p className="text-white underline underline-offset-1 text-[50.52px] text-left font-medium font-['Space Grotesk']">Login Your Account.</p>
-      <div className="text-white text-[28.43px] text-left font-normal font-['Space Grotesk']">Enter your username and password to continue.</div>
-      <p className="font-['Space Grotesk'] font-bold text-left text-white">Login as</p>
 
+      
+      <p className=" text-white text-6xl sm:text-4xl md:text-3xl lg:text-6xl text-left  font-bold font-['Space Grotesk']">Welcome back</p>
+      <p className="text-white underline underline-offset-1 sm:text-4xl md:text-3xl lg:text-5xl text-[50.52px] text-left font-medium font-['Space Grotesk']">Login Your Account.</p>
+      <p className="text-white sm:text-xl md:text-lg lg:text-xl text-[28.43px] text-left font-normal font-['Space Grotesk']">Enter your username and password to continue.</p>
+      
+      <p className="font-['Space Grotesk'] font-bold text-left text-white">Login as</p>
+      
       <select data-te-select-init className="font-['Space Grotesk'] mb-1 w-64 h-9 rounded-md">
-    
   <option value="personnel">Personnel</option>
   <option value="Admin">Admin</option>
  </select>
@@ -89,7 +91,7 @@ const Login: React.FC = () => {
               Password
             </label>
             <input
-              className="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-blue-900"
+              className="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-red-900"
               type="password"
               id="password"
               name="password"
@@ -99,7 +101,7 @@ const Login: React.FC = () => {
           <div className="password error">{passwordError}</div>
           {/*Login Button */}
           <button
-            className="w-64 h-10  bg-red-800 hover:bg-red-900 shadow-lg text-white font-bold py-2 px-4 mb-6 rounded"
+            className="w-64 h-10  bg-red-800 hover:bg-red-900 shadow-lg text-white font-bold py-2 px-4 mb-6 border rounded"
             type="submit"
           >
             Login
