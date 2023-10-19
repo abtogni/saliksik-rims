@@ -1,54 +1,10 @@
-import React, { useState } from 'react';
-import Footing from '../partials/Footing';
-import Heading from '../partials/Heading';
+import React from 'react'
+import Footing from '../partials/Footing'
 
-
-
-
-const Register: React.FC = () => {
-  const [userID, setUserID] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [userIDError, setuserIDError] = useState('');
-  const [emailError, setEmailError] = useState('');
-  const [passwordError, setPasswordError] = useState('');
-
-
-  const handleFormSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    // Reset errors
-    setuserIDError('');
-    setEmailError('');
-    setPasswordError('');
-
-    try {
-      const res = await fetch('/api/signup', {
-        method: 'POST',
-        body: JSON.stringify({ userID, email, password }),
-        headers: { 'Content-Type': 'application/json' }
-      });
-
-      const data = await res.json();
-
-      console.log(data);
-
-      if (data.errors) {
-        setuserIDError(data.errors.userID);
-        setEmailError(data.errors.email);
-        setPasswordError(data.errors.password);
-      } else if (data.user) {
-        // Redirect or handle successful signup
-        window.location.assign('/');
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+function register() {
   return (
     <div className="bg-gray-300"> {/*BACKROUND*/}{/*Updated class*/}
     <div className="min-h-screen flex flex-col justify-between">
-      <Heading />
 
       <div className="flex justify-between m-12 py-3 px-11">{/* Flex Container*/}
       {/* Logo */}
@@ -62,7 +18,7 @@ const Register: React.FC = () => {
      </div>
         {/* Signup Form */}
         <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
-        <form className="p-6 ml-0" onSubmit={handleFormSubmit}>
+        <form className="p-6 ml-0">
         <h2 className="text-2xl font-semibold mb-4">Sign up</h2>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="username">
@@ -73,9 +29,7 @@ const Register: React.FC = () => {
               type="text"
               id="userID"
               name="userID"
-              onChange={(e) => setUserID(e.target.value)}
             />
-            <div className="username error">{userIDError}</div>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
@@ -86,9 +40,7 @@ const Register: React.FC = () => {
               type="text"
               id="email"
               name="email"
-              onChange={(e) => setEmail(e.target.value)}
             />
-            <div className="email error">{emailError}</div>
           </div>
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
@@ -99,9 +51,7 @@ const Register: React.FC = () => {
               type="password"
               id="password"
               name="password"
-              onChange={(e) => setPassword(e.target.value)}
             />
-            <div className="password error">{passwordError}</div>
           </div>
           {/*Register Button */}
           <button
@@ -122,7 +72,7 @@ const Register: React.FC = () => {
       <Footing />
     </div>
     </div>
-  );
+  )
 }
 
-export default Register;
+export default register
