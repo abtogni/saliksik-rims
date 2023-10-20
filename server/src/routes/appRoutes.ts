@@ -12,7 +12,4 @@ router.use(proposal);
 router.use(research);
 router.use(presentation);
 
-router.get('*', checkUser);
-router.get('/main', requireAuth, (res: Response, req: Request) => res.redirect('/main'));
-
 export default router;

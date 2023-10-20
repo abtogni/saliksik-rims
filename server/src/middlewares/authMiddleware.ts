@@ -12,6 +12,7 @@ export const requireAuth = (req: Request, res: Response , next: NextFunction) =>
                 console.log(err.message);
                 res.redirect('/');
             }else{
+                res.json('working!');
                 console.log(decodedToken);
                 next();
             }
@@ -30,7 +31,7 @@ export const checkUser = (req: Request, res: Response, next: NextFunction) => {
     jwt.verify(token, 'net ninja secret', async (err: any, decodedToken: any) => {
       if (err) {
         res.locals.user = null;
-        next();
+        res.redirect('/main');
       } else {
         let user = await UserModel.findById(decodedToken.id);
         res.locals.user = user;

@@ -1,4 +1,11 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
+  onMount(async () => {
+    const response = await fetch('/api/checkUser'); // Replace with your backend endpoint
+    const data = await response.json();
+	});
+
   let json = {};
 
   function submit(e: Event) {
