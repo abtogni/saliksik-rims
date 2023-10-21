@@ -7,7 +7,7 @@
     "build": "npm i && cd server && npm i && cd .. && cd saliksik-client && npm i",
     "server": "cd server && npm run dev",
     "client": "cd saliksik-client && npm run dev",
-    "dev": "concurrently \"npm run client\" && \"npm run server\""
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",

@@ -5,6 +5,7 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import appRoutes from './routes/appRoutes';
 import mongoose, { ConnectOptions } from 'mongoose';
+import { checkUser, requireAuth } from './middlewares/authMiddleware';
 
 //.ENV
 dotenv.config();
@@ -38,13 +39,12 @@ const start = async (): Promise<void> => {
 
 start();
 
-app.get('/', (req: Request, res: Response) => {
-  res.json({ message: 'Backend is online' });
-});
-
-
   //routes
   app.use(appRoutes);
+
+  app.get('/api/checkAuth', requireAuth, (req, res) => {});
+  app.get('/api/checkUser', requireAuth, (req, res) => {});
+
   app.get('/api', (req, res) => {
     res.json({ message: 'Backend is online' });
 });

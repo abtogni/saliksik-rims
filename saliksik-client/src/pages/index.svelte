@@ -1,32 +1,45 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-
-  onMount(async () => {
-    const response = await fetch('/api/checkUser'); // Replace with your backend endpoint
-    const data = await response.json();
-	});
-
-  let json = {};
-
+  import { goto } from '@roxi/routify';
+  
+    async function checkAuthentication() {
+      try {
+        const response = await fetch('/api/checkAuth');
+        const data = await response.json();
+  
+        if (data.message === 'error') {
+          $goto('/'); 
+        } else {
+          $goto('/main'); 
+        }
+      } catch (e) {
+        $goto('/');
+      }
+    }
+  
+    onMount(() => {
+      checkAuthentication();
+    });
+    
   function submit(e: Event) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    json = Object.fromEntries(formData.entries());
+    const loginData = Object.fromEntries(formData.entries());
 
-    // Make an HTTP POST request to the API
+    // Make an HTTP POST request to the API for login
     fetch('/api/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(json),
+      body: JSON.stringify(loginData),
     })
       .then((response) => {
         if (response.ok) {
-          // Handle a successful response (e.g., redirect to a new page)
-          window.location.href = '/main/';
+          // User successfully authenticated, redirect to the main page
+          $goto('/main');
         } else {
-          // Handle errors or authentication failures
+          // Handle errors or authentication failures (e.g., display an error message)
           console.error('Login failed');
         }
       })
@@ -34,7 +47,12 @@
         console.error('Network error:', error);
       });
   }
+
+  onMount(() => {
+    checkAuthentication();
+  });
 </script>
+
 
 
 <main>
