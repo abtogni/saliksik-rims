@@ -3,7 +3,6 @@ import auth from './auth/authRoutes';
 import research from './mainRoutes/researchRoutes';
 import proposal from './mainRoutes/proposalRoutes';
 import presentation from './mainRoutes/presentationRoutes';
-import { checkUser, requireAuth } from '../middlewares/authMiddleware';
 
 const router = express.Router();
 

@@ -22,11 +22,10 @@ export const requireAuth = (req: Request, res: Response , next: NextFunction) =>
     next();
 }
 
-//check current user
-export const checkUser = (req: Request, res: Response, next: NextFunction) => {
+export const checkUser = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.jwt;
   if (token) {
-    jwt.verify(token, 'net ninja secret', async (err: any, decodedToken: any) => {
+    jwt.verify(token, 'unc research office', async (err: any, decodedToken: any) => {
       if (err) {
         res.locals.user = null;
       } else {

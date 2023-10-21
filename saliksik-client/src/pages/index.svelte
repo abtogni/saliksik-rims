@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { goto } from '@roxi/routify';
+  import UNCLogo from '/saliksiklogo.png';
   
     async function checkAuthentication() {
       try {
@@ -20,7 +21,7 @@
     onMount(() => {
       checkAuthentication();
     });
-    
+
   function submit(e: Event) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -66,7 +67,7 @@
           <!--  Logo  -->
           <div class="hidden lg:block w-[300px] h-[300px] mt-20">
           <img 
-          src='/saliksiklogo.png' 
+          src={UNCLogo}
           alt="University Logo" 
           class="py-1 px-1 logo" 
           />
