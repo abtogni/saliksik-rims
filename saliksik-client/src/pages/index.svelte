@@ -2,6 +2,21 @@
   import { onMount } from 'svelte';
   import { goto } from '@roxi/routify';
   import UNCLogo from '/saliksiklogo.png';
+
+  let showError = false;
+    let errorMessage = "Change a few things up and try submitting again.";
+  
+    function handleError(err: any) {
+      showError = true;
+      errorMessage = err.error;
+    }
+  
+    function clearError() {
+      setTimeout(function() {
+        showError = false;
+      }, 3000)
+      
+    }
   
     async function checkAuthentication() {
       try {
@@ -22,32 +37,33 @@
       checkAuthentication();
     });
 
-  function submit(e: Event) {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    const loginData = Object.fromEntries(formData.entries());
+    function submit(e: Event) {
+  e.preventDefault();
+  const formData = new FormData(e.target as HTMLFormElement);
+  const loginData = Object.fromEntries(formData.entries());
 
-    // Make an HTTP POST request to the API for login
-    fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(loginData),
+  // Make an HTTP POST request to the API for login
+  fetch('/api/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(loginData),
+  })
+    .then(async (response) => {
+      if (response.ok) {
+        $goto('/main');
+      } else {
+        const errorData = await response.json();
+        handleError(errorData);
+        clearError();
+      }
     })
-      .then((response) => {
-        if (response.ok) {
-          // User successfully authenticated, redirect to the main page
-          $goto('/main');
-        } else {
-          // Handle errors or authentication failures (e.g., display an error message)
-          console.error('Login failed');
-        }
-      })
-      .catch((error) => {
-        console.error('Network error:', error);
-      });
-  }
+    .catch((error) => {
+      console.error('Network error:', error);
+    });
+}
+
 
   onMount(() => {
     checkAuthentication();
@@ -58,7 +74,19 @@
 
 <main>
     <div> 
-    
+      {#if showError}
+        <div class="fixed inset-0 overflow-y-auto w-full max-w-2xl max-h-full translate-x-1/2 z-10 mt-10">
+          <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">{errorMessage}</span> Please check and try again.
+            </div>
+          </div>
+        </div>
+        {/if}
         <!-- Updated class -->
         <div class="min-h-screen flex flex-col justify-between">
            <!-- Flex Container -->

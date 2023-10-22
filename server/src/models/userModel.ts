@@ -53,11 +53,11 @@ export class User{
             if (userType === user.userType){
               return user;
             }
-            throw Error('invalid user');
+            throw Error('User is invalid');
           }
-          throw Error('invalid password');
+          throw Error('Password is invalid');
         }
-        throw Error('invalid user');
+        throw Error('User is invalid');
     }
 }
 

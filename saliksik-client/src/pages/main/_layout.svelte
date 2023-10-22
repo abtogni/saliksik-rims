@@ -12,6 +12,7 @@
     try {
       const response = await fetch('/api/checkUser');
       userData = await response.json();
+      
 
     } catch (e) {
       $goto('/');
@@ -22,14 +23,16 @@
     fetchUser();
   });
 
+ 
+
   const menus = [
     { title: "Home", href: '/' },
     { title: "Researches" },
     { title: "Concept Notes" },
     { title: "Presentations" },
-    { title: "My Profile" },
-    { title: "Logout", href: '/api/logout' }
   ];
+
+
 </script>
 
 
@@ -55,17 +58,29 @@
         </button>
         <ul class="space-y-2 font-medium">
           {#if userData}
+          
           <div class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover-bg-gray-700 group">
             Hello, {userData.user.firstName}
           </div>
         {:else}
-          <!-- Handle the case when $userData is null or $userData.firstName is not present -->
+          <div></div>
           {/if}
             {#each menus as menu}
                  <li>
                     <a href={menu.href} class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">{menu.title}</a>
                  </li>
             {/each}
+            <hr>
+            {#if userData}
+            <li>
+              <a href={`/profile/${userData.user._id}`} class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">My Profile</a>
+            </li>
+            <li>
+              <a href='/logout' class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">Logout</a>
+            </li>
+            {:else}
+            <div></div>
+            {/if}
         </ul>
         
     </div>

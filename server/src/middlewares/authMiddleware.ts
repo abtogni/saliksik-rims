@@ -4,22 +4,22 @@ import { UserModel } from '../models/userModel'
 
 
 export const requireAuth = (req: Request, res: Response , next: NextFunction) =>{
-    const token = req.cookies.jwt;
+  const token = req.cookies.jwt;
 
-    if (token){
-        jwt.verify(token, 'unc research office', (err: any, decodedToken: any)=>{
-            if(err){
-                console.log(err.message);
-            }else{
-                res.json('working!');
-                next();
-            }
-        })
-    }else{
-        res.redirect('/');
-    }
+  if (token){
+      jwt.verify(token, 'unc research office', (err: any, decodedToken: any)=>{
+          if(err){
+              console.log(err.message);
+          }else{
+              res.json('working!');
+              next();
+          }
+      })
+  }else{
+      res.redirect('/');
+  }
 
-    next();
+  next();
 }
 
 export const checkUser = async (req: Request, res: Response, next: NextFunction) => {
