@@ -1,6 +1,6 @@
 <script lang="ts">
   let json = {};
-
+  let message: any;
 function submit(e: Event) {
   e.preventDefault();
   const formData = new FormData(e.target as HTMLFormElement);
@@ -16,11 +16,10 @@ function submit(e: Event) {
   })
     .then((response) => {
       if (response.ok) {
-        // Handle a successful response (e.g., redirect to a new page)
-        window.location.href = '/dashboard';
+        message = 'Created an account!';
       } else {
         // Handle errors or authentication failures
-        console.error('Login failed');
+        console.error('Registration failed');
       }
     })
     .catch((error) => {
