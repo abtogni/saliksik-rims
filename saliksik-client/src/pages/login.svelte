@@ -61,7 +61,7 @@
   
 
 <main>
-    <div> 
+    <div class="bg-button"> 
       {#if showError}
         <div class="fixed inset-0 overflow-y-auto w-full max-w-2xl max-h-full translate-x-1/2 z-10 mt-10">
           <div class="flex items-center p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
