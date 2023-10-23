@@ -18,7 +18,6 @@
       if (response.ok) {
         
         userData = await response.json();
-        console.log('User data:', userData);
       } else {
         
         console.error('Failed to fetch user data:', response.status);

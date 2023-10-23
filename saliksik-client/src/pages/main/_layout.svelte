@@ -19,9 +19,19 @@
     }
   }
 
-  onMount(() => {
-    fetchUser();
-  });
+  onMount(async () => {
+      try {
+        const response = await fetch('/api/checkAuth');
+  
+        if (response.status === 401) {
+          $goto('/login');
+        } else if (response.status === 200) {
+          fetchUser();
+        }
+      } catch (error) {
+        console.error('Network error:', error);
+      }
+    });
 
  
 
