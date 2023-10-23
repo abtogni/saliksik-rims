@@ -6,9 +6,9 @@ import presentation from './mainRoutes/presentationRoutes';
 
 const router = express.Router();
 
-router.use(auth);
-router.use(proposal);
-router.use(research);
-router.use(presentation);
+router.use('/user', auth);
+router.use('/proposal',proposal);
+router.use('/research',research);
+router.use('/presentation',presentation);
 
 export default router;

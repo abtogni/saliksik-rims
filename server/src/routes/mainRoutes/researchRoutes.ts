@@ -4,15 +4,15 @@ import { createResearch, getResearches, getResearch, updateResearch, deleteResea
 const router = Router();
 
 
-router.get('/api/research/getUserResearches', getResearches);
+router.get('/getUserResearches', getResearches);
 
-router.get('/api/research/getResearch', getResearch);
+router.get('/getResearch', getResearch);
 
-router.post('/api/research/createResearch', createResearch);
+router.post('/createResearch', createResearch);
 
-router.patch('/api/research/updateResearch', updateResearch);
+router.patch('/updateResearch', updateResearch);
 
-router.delete('/api/research/deleteResearch', deleteResearch);
+router.delete('/deleteResearch', deleteResearch);
 
 export default router;
 

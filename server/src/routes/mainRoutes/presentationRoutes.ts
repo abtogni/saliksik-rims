@@ -4,15 +4,15 @@ import { createPresentation, getPresentations, getPresentation, updatePresentati
 const router = express.Router();
 
 
-router.get('/api/research/getPresentations', getPresentations);
+router.get('/getPresentations', getPresentations);
 
-router.get('/api/research/getPresentation', getPresentation);
+router.get('/getPresentation', getPresentation);
 
-router.post('/api/research/createPresentation', createPresentation);
+router.post('/createPresentation', createPresentation);
 
-router.patch('/api/research/updatePresentation', updatePresentation);
+router.patch('/updatePresentation', updatePresentation);
 
-router.delete('/api/research/deletePresentation', deletePresentation);
+router.delete('/deletePresentation', deletePresentation);
 
 export default router;
 

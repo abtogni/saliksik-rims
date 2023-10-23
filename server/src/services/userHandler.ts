@@ -1,32 +1,66 @@
-const handleErrors = (err: any) => {
-    let errors = { email: '', password: '' };
-  
-    // duplicate email error
-    if (err.code === 11000) {
-      errors.email = 'that email is already registered';
-      return errors;
-    }
-  
-    //validation checker
-    if(err.message.includes('invalid email')){
-      errors.email = 'Incorrect email';
-      return errors;
-    }
-  
-    if(err.message.includes('invalid password')){
-      errors.password = 'Incorrect password';
-      return errors;
-    }
-  
-    // validation errors
-    if (err.message.includes('user validation failed')) {
-      // console.log(err);
-      // Object.values(err.errors).forEach(({ properties }) => {
-      //   // console.log(val);
-      //   // console.log(properties);
-      //   errors[properties.path] = properties.message;
-      // });
-    }
-  
-    return errors;
+// userHandler.ts
+
+import { Document } from 'mongoose';
+import { UserModel } from '../models/userModel';
+import { createToken } from './tokenHandler';
+
+export const getUsers = async (researchID: string) => {
+  try {
+    const users = await UserModel.find({ researchID }).sort({ createdAt: -1 });
+    return users;
+  } catch (err) {
+    throw new Error('An error occurred while fetching users');
   }
+};
+
+export const getUserByID = async (userID: string) => {
+  try {
+    const user = await UserModel.findById(userID);
+    if (!user) {
+      throw new Error('User not found');
+    }
+    return user;
+  } catch (err) {
+    throw new Error('An error occurred while fetching the user');
+  }
+};
+
+export const createUser = async (
+  userID: string,
+  email: string,
+  password: string,
+  firstName: string,
+  middleName: string,
+  lastName: string,
+  suffix: string,
+  userType: string
+) => {
+  try {
+    const user: Document = await UserModel.create({
+      userID,
+      email,
+      password,
+      firstName,
+      middleName,
+      lastName,
+      suffix,
+      userType,
+    });
+    return user;
+  } catch (err) {
+    throw new Error('An error occurred while creating the user');
+  }
+};
+
+export const userLogin = async (userID: string, password: string, userType: string) => {
+  try {
+    const user: Document = await UserModel.login(userID, password, userType);
+    if (!user) {
+      throw new Error('Authentication failed');
+    }
+    const token: string = createToken(user._id);
+    return token;
+  } catch (err: any) {
+    throw new Error(err.message);
+  }
+};

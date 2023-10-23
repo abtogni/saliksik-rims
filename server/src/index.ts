@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 import appRoutes from './routes/appRoutes';
 import mongoose, { ConnectOptions } from 'mongoose';
 import { checkUser, requireAuth } from './middlewares/authMiddleware';
+import { userLogin, userLogout } from './controllers/auth/userController';
 
 //.ENV
 dotenv.config();
@@ -40,13 +41,16 @@ const start = async (): Promise<void> => {
 start();
 
   //routes
-  app.use(appRoutes);
-
-  app.get('/api/checkAuth', requireAuth, (req, res) => {});
+  app.post('/api/login', userLogin);
+  app.get('/api/logout', userLogout);
   app.get('/api/checkUser', checkUser, (req, res) => {
     res.json({ user: res.locals.user });
   });
+  app.get('/api/checkAuth', requireAuth);
+  app.use('/api', appRoutes);
 
+  
+  
   app.get('/api', (req, res) => {
     res.json({ message: 'Backend is online' });
 });

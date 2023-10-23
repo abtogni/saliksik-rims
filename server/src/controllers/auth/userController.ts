@@ -1,65 +1,57 @@
+// userController.ts
+
 import { Request, Response } from 'express';
-import { UserModel } from "../../models/userModel";
-import mongoose, { Document } from "mongoose";
-import { createToken } from '../../services/tokenHandler';
+import * as userHandler from '../../services/userHandler'; // Import all functions
 
-export const getUsers = async (req : Request, res: Response) => {
-    const { researchID } = req.body;
-
-    try{
-        const presentations = await UserModel.find({researchID}).sort({createdAt: -1});
-        res.status(200).json(presentations);
-    }catch (err) {
-        res.status(400).json({err: err});
-    }
-    
-
-}
-
-export const getUser = async (req : Request, res: Response) => {
-  const userID: any = req.query.id;
-
-    if (!mongoose.Types.ObjectId.isValid(userID)) {
-        return res.status(404).json({error: 'User not found'});
-      }
-
-  const user = await UserModel.findById(userID);
-
-  if (!user) {
-    return res.status(404).json({error: 'User not found'})
-  }
-  
-  res.status(200).json(user);
-
-}
-
-export const createUser = async (req : Request, res: Response): Promise<void> => {
-    const { userID, email, password, firstName, middleName, lastName, suffix, userType } = req.body;
-    try {
-        const user: Document = await UserModel.create({ userID, email, password, firstName, middleName, lastName, suffix, userType });
-        res.status(201).json({ message: "User Successfully Created an Account",user: user._id });
-      } catch (err) {
-        res.status(400).json({ err });
-      }
-
-}
-
-
-export const userLogin = async (req: Request, res: Response): Promise<void> => {
-  const { userID, password, userType } = req.body;
-
+export const getUsers = async (req: Request, res: Response) => {
+  // Use userHandler.getUsers
   try {
-    const user: Document = await UserModel.login(userID, password, userType);
-    const token: string = createToken(user._id);
-    res.cookie('jwt', token, { httpOnly: true });
-    res.status(200).send('Login successful');
+    const users = await userHandler.getUsers(req.body.researchID);
+    res.status(200).json(users);
+  } catch (err: any) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+export const getUser = async (req: Request, res: Response) => {
+  const userId = req.query.id as string | undefined;
+
+if (userId) {
+  const user = await userHandler.getUserByID(userId);
+  if (user) {
+    res.status(200).json(user);
+  } else {
+    res.status(404).json({ error: 'User not found' });
+  }
+} else {
+  res.status(400).json({ error: 'User ID is missing in the request' });
+}
+
+};
+
+
+export const createUser = async (req: Request, res: Response): Promise<void> => {
+  // Use userHandler.createUser
+  try {
+    const user = await userHandler.createUser(req.body.userID, req.body.email, req.body.password, req.body.firstName, req.body.middleName, req.body.lastName, req.body.suffix, req.body.userType);
+    res.status(201).json({ message: 'User Successfully Created an Account', user: user._id });
   } catch (err: any) {
     res.status(400).json({ error: err.message });
   }
 };
 
-export const userLogout = async (req: Request, res: Response): Promise<void> => {
-    res.cookie('jwt', '', { maxAge: 1 });
-    res.redirect('/');
-  };
+export const userLogin = async (req: Request, res: Response): Promise<void> => {
+  // Use userHandler.userLogin
+  try {
+    const token = await userHandler.userLogin(req.body.userID, req.body.password, req.body.userType);
+    res.cookie('jwt', token, { httpOnly: true });
+    res.status(200).json({ message: 'Login successful' });
+  } catch (err: any) {
+    res.status(401).json({ error: err.message });
+  }
+};
 
+export const userLogout = async (req: Request, res: Response): Promise<void> => {
+  res.clearCookie('jwt');
+  res.status(200).json({ message: 'User logged out' });
+};

@@ -4,14 +4,14 @@ import { createProposal, getProposals, getProposal, updateProposal, deletePropos
 const router = express.Router();
 
 
-router.get('/api/research/getProposals', getProposals);
+router.get('/getProposals', getProposals);
 
-router.get('/api/research/getProposal', getProposal);
+router.get('/getProposal', getProposal);
 
-router.post('/api/research/createProposal', createProposal);
+router.post('/createProposal', createProposal);
 
-router.patch('/api/research/updateProposal', updateProposal);
+router.patch('/updateProposal', updateProposal);
 
-router.delete('/api/research/deleteProposal', deleteProposal);
+router.delete('/deleteProposal', deleteProposal);
 
 export default router;
