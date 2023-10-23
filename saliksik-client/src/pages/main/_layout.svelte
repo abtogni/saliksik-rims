@@ -1,18 +1,14 @@
 <script lang="ts">
-  import { writable } from 'svelte/store';
   import UNCLogo from '/login.png';
   import Menu from '../../assets/menu.svelte';
   import { goto } from '@roxi/routify';
   import { onMount } from 'svelte';
-
-  // Create a writable store to hold user data
   var userData: any;
 
   async function fetchUser() {
     try {
       const response = await fetch('/api/checkUser');
       userData = await response.json();
-      
 
     } catch (e) {
       $goto('/');
@@ -87,12 +83,17 @@
             {:else}
             <div></div>
             {/if}
+            
         </ul>
-        
     </div>
 </aside>
 </div>
 
 <div class="translate-x-16 mt-10 lg:translate-x-1/4 ">
-  <slot></slot>
+  {#if userData}
+    <slot scoped={{userID: userData.user._id}}></slot>
+  {:else}
+    <slot></slot>
+  {/if}
+  
 </div>
