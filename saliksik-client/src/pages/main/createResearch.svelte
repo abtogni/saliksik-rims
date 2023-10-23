@@ -29,53 +29,51 @@
   }
     </script>
     
-    <form on:submit={submit}>
+<main>
+  <form on:submit={submit}>
+    <div class="mb-4">
+        <label class="block text-white font-bold mb-2" for="researchTitle">
+          Research Title
+        </label>
+        <input
+          class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
+          type="text"
+          id="researchTitle"
+          name="researchTitle"
+        />
+      </div>
       <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="researchTitle">
-            Research Title
-          </label>
-          <input
-            class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
-            type="text"
-            id="researchTitle"
-            name="researchTitle"
-          />
-        </div>
-        <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="researchLeaders">
-            Research Leaders
-          </label>
-          <input
-            class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
-            type="text"
-            id="researchLeaders"
-            name="researchLeaders"
-          />
-        </div>
-        <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="researchMembers">
-            Research Members
-          </label>
-          <input
-            class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
-            type="text"
-            id="researchMembers"
-            name="researchMembers"
-          />
-        </div>
-        
-        <button
-        class="w-64 h-10  bg-red-800 hover:bg-red-900 shadow-lg text-white font-bold py-2 px-4 mb-6 border rounded"
-        type="submit"
-      >
-        Register
-      </button>
-    </form>
-    
-    <pre>
+        <label class="block text-white font-bold mb-2" for="researchLeaders">
+          Research Leaders
+        </label>
+        <input
+          class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
+          type="text"
+          id="researchLeaders"
+          name="researchLeaders"
+        />
+      </div>
+      <div class="mb-4">
+        <label class="block text-white font-bold mb-2" for="researchMembers">
+          Research Members
+        </label>
+        <input
+          class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
+          type="text"
+          id="researchMembers"
+          name="researchMembers"
+        />
+      </div>
       
-      {JSON.stringify(json, null, 2)}
-    </pre>
+      <button
+      class="w-64 h-10  bg-red-800 hover:bg-red-900 shadow-lg text-white font-bold py-2 px-4 mb-6 border rounded"
+      type="submit"
+    >
+      Create Research
+    </button>
+  </form>
+  
+</main>
     
     <style>
       /* Your CSS styles go here */

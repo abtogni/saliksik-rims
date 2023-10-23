@@ -1,85 +1,80 @@
 import { Request, Response } from 'express';
-import { ResearchModel } from "../../models/researchModel";
-import mongoose, { Document } from "mongoose";
+import { ResearchModel } from '../../models/researchModel';
+import mongoose from 'mongoose';
 
+const successResponse = (res: Response, data: any) => {
+  res.status(200).json(data);
+};
 
+const errorResponse = (res: Response, status: number, message: string) => {
+  res.status(status).json({ error: message });
+};
 
-export const getResearches = async (req : Request, res: Response): Promise<void> => {
+export const getResearches = async (req: Request, res: Response) => {
+  try {
     const { userID } = req.body;
+    const researches = await ResearchModel.find({ researchLeaders: userID }).sort({ createdAt: -1 });
+    successResponse(res, researches);
+  } catch (err: any) {
+    errorResponse(res, 400, err.message);
+  }
+};
 
-    try{
-        const researches = await ResearchModel.find({researchLeaders: userID}).sort({createdAt: -1});
-        res.status(200).json(researches);
-    }catch (err) {
-        res.status(400).json({err: err});
-    }
-    
+export const getResearch = async (req: Request, res: Response) => {
+  const { id } = req.body;
 
-}
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return errorResponse(res, 404, 'Research not found');
+  }
 
-export const getResearch = async (req : Request, res: Response) => {
-    const { id } = req.body;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'Research not found'});
-      }
-
-  const research = await ResearchModel.findById(id)
+  const research = await ResearchModel.findById(id);
 
   if (!research) {
-    return res.status(404).json({error: 'Research not found'})
+    return errorResponse(res, 404, 'Research not found');
   }
-  
-  res.status(200).json(research)
 
-}
+  successResponse(res, research);
+};
 
-export const createResearch = async (req : Request, res: Response) => {
-    const { researchTitle, researchLeaders, researchMembers} = req.body
-      
+export const createResearch = async (req: Request, res: Response) => {
+  const { researchTitle, researchLeaders, researchMembers } = req.body;
 
+  try {
+    const research = await ResearchModel.create({ researchTitle, researchLeaders, researchMembers, researchStatus: 'Pending' });
+    successResponse(res, research);
+  } catch (err: any) {
+    errorResponse(res, 400, err.message);
+  }
+};
 
-    try{
-        const research: Document = await ResearchModel.create({researchTitle, researchLeaders, researchMembers, researchStatus : 'Pending'});
-        res.status(200).json(research);
-    }catch(err){
-        res.status(400).json({err})
-    }
+export const updateResearch = async (req: Request, res: Response) => {
+  const { id, ...updateData } = req.body;
 
-}
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return errorResponse(res, 404, 'No such research');
+  }
 
-export const updateResearch = async (req : Request, res: Response) => {
-    const { id } = req.body
+  const research = await ResearchModel.findOneAndUpdate({ _id: id }, updateData, { new: true });
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({error: 'No such research'})
-    }
-  
-    const research = await ResearchModel.findOneAndUpdate({_id: id}, {
-      ...req.body
-    })
-  
-    if (!research) {
-      return res.status(400).json({error: 'No such research'})
-    }
-  
-    res.status(200).json(research)
+  if (!research) {
+    return errorResponse(res, 400, 'No such research');
+  }
 
-}
+  successResponse(res, research);
+};
 
-export const deleteResearch = async (req : Request, res: Response) => {
-    const { id } = req.body
+export const deleteResearch = async (req: Request, res: Response) => {
+  const { id } = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({error: 'No such research'})
-    }
-  
-    const research = await ResearchModel.findOneAndDelete({_id: id})
-  
-    if (!research) {
-      return res.status(400).json({error: 'No such research'})
-    }
-  
-    res.status(200).json(research)
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return errorResponse(res, 404, 'No such research');
+  }
 
-}
+  const research = await ResearchModel.findOneAndDelete({ _id: id });
+
+  if (!research) {
+    return errorResponse(res, 400, 'No such research');
+  }
+
+  successResponse(res, research);
+};

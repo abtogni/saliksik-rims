@@ -29,7 +29,7 @@
     function clearError() {
       setTimeout(function () {
         showError = false;
-      }, 3000);
+      }, 2000);
     }
   
     function submit(e: Event) {

@@ -1,99 +1,79 @@
 import { Request, Response } from 'express';
 import { CNModel } from '../../models/proposalModel';
-import mongoose, { Document } from "mongoose";
+import mongoose, { Document } from 'mongoose';
 
+// Common response function
+const sendResponse = (res: Response, status: number, data?: any, error?: string) => {
+  res.status(status).json(data ? { data } : { error });
+};
 
-export const getProposals = async (req : Request, res: Response): Promise<void> => {
-    const { researchID } = req.body;
+// Data validation function
+const isValidObjectId = (id: string) => mongoose.Types.ObjectId.isValid(id);
 
-    try{
-        const researches = await CNModel.find({researchID}).sort({createdAt: -1});
-        res.status(200).json(researches);
-    }catch (err) {
-        res.status(400).json({err: err});
-    }
-    
+export const getProposals = async (req: Request, res: Response) => {
+  const { researchID } = req.body;
 
-}
+  try {
+    const proposals = await CNModel.find({ researchID }).sort({ createdAt: -1 });
+    sendResponse(res, 200, proposals);
+  } catch (err: any) {
+    sendResponse(res, 400, null, err.message);
+  }
+};
 
-export const getProposal = async (req : Request, res: Response) => {
-    const { id } = req.body;
+export const getProposal = async (req: Request, res: Response) => {
+  const { id } = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'Proposal not found'});
-      }
+  if (!isValidObjectId(id)) {
+    return sendResponse(res, 404, null, 'Proposal not found');
+  }
 
-  const proposal = await CNModel.findById(id)
+  const proposal = await CNModel.findById(id);
 
   if (!proposal) {
-    return res.status(404).json({error: 'Proposal not found'})
+    return sendResponse(res, 404, null, 'Proposal not found');
   }
-  
-  res.status(200).json(proposal)
 
-}
+  sendResponse(res, 200, proposal);
+};
 
-export const createProposal = async (req : Request, res: Response) => {
-    const { 
-      researchID, 
-      implementingDept,
-      coopAgency,
-      siteImplementation, 
-      projectDuration,
-      totalCost,
-      description,
-      significance,
-      objectives,
-      methodology,
-      technologyRoadmap,
-      expectedOutput,
-      workPlan,
-      proposalStatus
-      } = req.body
-      
+export const createProposal = async (req: Request, res: Response) => {
+  try {
+    const proposal: Document = await CNModel.create(req.body);
+    sendResponse(res, 200, proposal);
+  } catch (err: any) {
+    sendResponse(res, 400, null, err.message);
+  }
+};
 
+export const updateProposal = async (req: Request, res: Response) => {
+  const { id } = req.body;
 
-    try{
-        const proposal: Document = await CNModel.create({researchID, implementingDept, coopAgency, siteImplementation, projectDuration, totalCost, description, significance, objectives, methodology,technologyRoadmap,expectedOutput,workPlan,proposalStatus});
-        res.status(200).json(proposal);
-    }catch(err){
-        res.status(400).json({err})
-    }
+  if (!isValidObjectId(id)) {
+    return sendResponse(res, 404, null, 'No such proposal');
+  }
 
-}
+  const updatedProposal = await CNModel.findOneAndUpdate({ _id: id }, req.body, { new: true });
 
-export const updateProposal = async (req : Request, res: Response) => {
-    const { id } = req.body
+  if (!updatedProposal) {
+    return sendResponse(res, 400, null, 'No such proposal');
+  }
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({error: 'No such research'})
-    }
-  
-    const proposal = await CNModel.findOneAndUpdate({_id: id}, {
-      ...req.body
-    })
-  
-    if (!proposal) {
-      return res.status(400).json({error: 'No such proposal'})
-    }
-  
-    res.status(200).json(proposal)
+  sendResponse(res, 200, updatedProposal);
+};
 
-}
+export const deleteProposal = async (req: Request, res: Response) => {
+  const { id } = req.body;
 
-export const deleteProposal = async (req : Request, res: Response) => {
-    const { id } = req.body
+  if (!isValidObjectId(id)) {
+    return sendResponse(res, 404, null, 'No such proposal');
+  }
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({error: 'No such proposal'})
-    }
-  
-    const proposal = await CNModel.findOneAndDelete({_id: id})
-  
-    if (!proposal) {
-      return res.status(400).json({error: 'No such proposal'})
-    }
-  
-    res.status(200).json(proposal)
+  const deletedProposal = await CNModel.findOneAndDelete({ _id: id });
 
-}
+  if (!deletedProposal) {
+    return sendResponse(res, 400, null, 'No such proposal');
+  }
+
+  sendResponse(res, 200, deletedProposal);
+};

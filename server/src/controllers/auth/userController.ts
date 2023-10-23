@@ -1,57 +1,72 @@
-// userController.ts
-
 import { Request, Response } from 'express';
-import * as userHandler from '../../services/userHandler'; // Import all functions
+import * as userHandler from '../../services/userHandler';
+
+const successResponse = (res: Response, data: any, status = 200) => {
+  res.status(status).json(data);
+};
+
+const errorResponse = (res: Response, message: string, status = 500) => {
+  res.status(status).json({ error: message });
+};
 
 export const getUsers = async (req: Request, res: Response) => {
-  // Use userHandler.getUsers
   try {
     const users = await userHandler.getUsers(req.body.researchID);
-    res.status(200).json(users);
+    successResponse(res, users);
   } catch (err: any) {
-    res.status(500).json({ error: err.message });
+    errorResponse(res, err.message);
   }
 };
 
 export const getUser = async (req: Request, res: Response) => {
   const userId = req.query.id as string | undefined;
 
-if (userId) {
+  if (!userId) {
+    return errorResponse(res, 'User ID is missing in the request', 400);
+  }
+
   const user = await userHandler.getUserByID(userId);
+
   if (user) {
-    res.status(200).json(user);
+    successResponse(res, user);
   } else {
-    res.status(404).json({ error: 'User not found' });
+    errorResponse(res, 'User not found', 404);
   }
-} else {
-  res.status(400).json({ error: 'User ID is missing in the request' });
-}
-
 };
 
+export const createUser = async (req: Request, res: Response) => {
+  const {
+    userID,
+    email,
+    password,
+    firstName,
+    middleName,
+    lastName,
+    suffix,
+    userType,
+  } = req.body;
 
-export const createUser = async (req: Request, res: Response): Promise<void> => {
-  // Use userHandler.createUser
   try {
-    const user = await userHandler.createUser(req.body.userID, req.body.email, req.body.password, req.body.firstName, req.body.middleName, req.body.lastName, req.body.suffix, req.body.userType);
-    res.status(201).json({ message: 'User Successfully Created an Account', user: user._id });
+    const user = await userHandler.createUser(userID, email, password, firstName, middleName, lastName, suffix, userType);
+    successResponse(res, { message: 'User Successfully Created an Account', user: user._id }, 201);
   } catch (err: any) {
-    res.status(400).json({ error: err.message });
+    errorResponse(res, err.message, 400);
   }
 };
 
-export const userLogin = async (req: Request, res: Response): Promise<void> => {
-  // Use userHandler.userLogin
+export const userLogin = async (req: Request, res: Response) => {
+  const { userID, password, userType } = req.body;
+
   try {
-    const token = await userHandler.userLogin(req.body.userID, req.body.password, req.body.userType);
+    const token = await userHandler.userLogin(userID, password, userType);
     res.cookie('jwt', token, { httpOnly: true });
-    res.status(200).json({ message: 'Login successful' });
-  } catch (err: any) {
-    res.status(401).json({ error: err.message });
+    successResponse(res, { message: 'Login successful' });
+  } catch (err:any) {
+    errorResponse(res, err.message, 401);
   }
 };
 
-export const userLogout = async (req: Request, res: Response): Promise<void> => {
+export const userLogout = async (req: Request, res: Response) => {
   res.clearCookie('jwt');
-  res.status(200).json({ message: 'User logged out' });
+  successResponse(res, { message: 'User logged out' });
 };
