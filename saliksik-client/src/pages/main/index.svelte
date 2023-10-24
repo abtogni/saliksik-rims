@@ -31,7 +31,8 @@
   {#if researches}
     {#each researches as r}
         <div class="grid grid-cols-1">
-            <a href={`/main/${r._id}`}>{r.researchTitle} </a>
+            <a href={`/main/${r._id}`}>
+                {r.researchTitle}</a>
         </div>
         
     {/each}

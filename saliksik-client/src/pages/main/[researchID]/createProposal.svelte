@@ -1,35 +1,50 @@
 <script lang="ts">
-    let json = {};
+  const currentURL = window.location.href;
+  const urlParts = currentURL.split('/');
+  const researchID = urlParts[urlParts.length - 2];
   
-  function submit(e: Event) {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    json = Object.fromEntries(formData.entries());
 
-    // Make an HTTP POST request to the API
-    fetch('/api/research/createProposal', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(json),
-    })
-      .then((response) => {
-        if (response.ok) {
-          // Handle a successful response (e.g., redirect to a new page)
-          window.location.href = '/main/';
-        } else {
-          // Handle errors or authentication failures
-          console.error('Login failed');
-        }
-      })
-      .catch((error) => {
-        console.error('Network error:', error);
-      });
-  }
-    </script>
+  function serializeForm(form: HTMLFormElement): Record<string, string> {
+  const formData = new FormData(form);
+  const json: Record<string, string> = {};
+
+  formData.forEach((value, key) => {
+    if (typeof value === 'string') {
+      json[key] = value;
+    }
+  });
+
+  return json;
+}
+
+
+  async function submitForm(e: Event) {
+    e.preventDefault();
+    const form = e.target as HTMLFormElement;
     
-    <form on:submit={submit}>
+    try {
+      const jsonData = serializeForm(form);
+
+      const response = await fetch('/api/research/createProposal', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(jsonData),
+      });
+
+      if (response.ok) {
+        window.location.href = '/main/';
+      } else {
+        console.error('Request failed');
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+    }
+  }
+</script>
+    
+  <form on:submit={submitForm}> 
         <div class="mb-4">
           <label class="block text-white font-bold mb-2" for="researchID">
             Research ID
@@ -39,6 +54,8 @@
             type="text"
             id="researchID"
             name="researchID"
+            value={researchID}
+            readonly
           />
         </div>
         <div class="mb-4">
@@ -109,34 +126,35 @@
         </div>
         <div class="mb-4">
           <label class="block text-white font-bold mb-2" for="description">
-            Description
+              Description
           </label>
           <textarea
-            class="w-64 h-24 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
-            id="description"
-            name="description"
+              class="w-96 h-48 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
+              id="description"
+              name="description"
           ></textarea>
-        </div>
-        <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="significance">
+      </div>
+      <div class="mb-4">
+        <label class="block text-white font-bold mb-2" for="objectives">
             Significance
-          </label>
-          <textarea
-            class="w-64 h-24 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
+        </label>
+        <textarea
+            class="w-96 h-48 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
             id="significance"
             name="significance"
-          ></textarea>
-        </div>
-        <div class="mb-4">
+        ></textarea>
+    </div>
+  
+      <div class="mb-4">
           <label class="block text-white font-bold mb-2" for="objectives">
-            Objectives
+              Objectives
           </label>
           <textarea
-            class="w-64 h-24 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
-            id="objectives"
-            name="objectives"
+              class="w-96 h-48 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
+              id="objectives"
+              name="objectives"
           ></textarea>
-        </div>
+      </div>
         <div class="mb-4">
           <label class="block text-white font-bold mb-2" for="methodology">
             Methodology
@@ -197,12 +215,6 @@
         </button>
       </form>
       
-      
-    
-    <pre>
-      
-      {JSON.stringify(json, null, 2)}
-    </pre>
     
     <style>
       /* Your CSS styles go here */

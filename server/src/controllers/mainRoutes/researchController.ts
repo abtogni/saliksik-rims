@@ -19,7 +19,7 @@ export const getResearches = async (req: Request, res: Response) => {
       return errorResponse(res, 400, 'userID is required');
     }
 
-    const researches = await ResearchModel.find({ researchLeaders: userID }).sort({ createdAt: -1 });
+    const researches = await ResearchModel.find({ researchMembers: userID }).sort({ createdAt: -1 });
 
     if (researches.length === 0) {
       return successResponse(res, []);
@@ -32,31 +32,45 @@ export const getResearches = async (req: Request, res: Response) => {
 };
 
 
+
 export const getResearch = async (req: Request, res: Response) => {
   try {
     const researchID: any = req.query.researchID;
+
     if (!mongoose.Types.ObjectId.isValid(researchID)) {
-      return errorResponse(res, 404, 'Research not found');
+      return errorResponse(res, 404, 'Invalid research ID');
     }
-  
+
     const research = await ResearchModel.findById(researchID);
+
     if (!research) {
       return errorResponse(res, 404, 'Research not found');
     }
-  
-    successResponse(res, research);
-    
-  } catch (err: any) {
-    errorResponse(res, 400, err.message);
-  }
 
-}
+    successResponse(res, research);
+  } catch (err: any) {
+    errorResponse(res, 500, err.message);
+  }
+};
+
 
 export const createResearch = async (req: Request, res: Response) => {
   const { researchTitle, researchLeaders, researchMembers } = req.body;
 
+  const updatedResearchMembers = Array.isArray(researchMembers)
+    ? researchMembers
+    : [researchMembers];
+
+ 
+  updatedResearchMembers.push(researchLeaders);
+
   try {
-    const research = await ResearchModel.create({ researchTitle, researchLeaders, researchMembers, researchStatus: 'Pending' });
+    const research = await ResearchModel.create({
+      researchTitle,
+      researchLeaders,
+      researchMembers: updatedResearchMembers,
+      researchStatus: 'Pending',
+    });
     successResponse(res, research);
   } catch (err: any) {
     errorResponse(res, 400, err.message);
