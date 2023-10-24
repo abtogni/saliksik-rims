@@ -7,7 +7,7 @@ import presentation from './mainRoutes/presentationRoutes';
 const router = express.Router();
 
 router.use('/user', auth);
-router.use('/proposal',proposal);
+router.use('/research',proposal);
 router.use('/research',research);
 router.use('/presentation',presentation);
 

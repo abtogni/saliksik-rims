@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-
+  import userIcon from '/userIcon.svg';
   export let userID: any;
 
   let userData: any;
@@ -32,7 +32,9 @@
   });
 </script>
 
-
+<div class="avatar">
+  <img src={userIcon} alt="userIcon">
+</div>
 
 <p>
   {#if userData}

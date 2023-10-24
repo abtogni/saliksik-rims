@@ -4,39 +4,48 @@
     
     $: ({userID} = scoped)
 
-
     var researches: any;
+    let loading = true; // Initialize loading to true
+    let error: string | null = null; // Initialize error as null
 
-    async function fetchResearches(){
-        fetch(`/api/research/getUserResearches?userID=${userID}`)
-    .then(async (response) => {
-        if (response.ok) {
-            researches = await response.json();
-        } else {
-            console.error('Failed to fetch researches');
+    async function fetchResearches() {
+        try {
+            const response = await fetch(`/api/research/getUserResearches?userID=${userID}`);
+
+            if (response.ok) {
+                researches = await response.json();
+            } else {
+                console.error('Failed to fetch researches');
+                // Set the error message when fetching fails
+                error = 'Failed to fetch researches';
+            }
+        } catch (err) {
+            console.error('Error fetching researches:', err);
+            // Set the error message in case of an error
+            error = 'Error fetching researches';
+        } finally {
+            // Set loading to false once the operation is completed
+            loading = false;
         }
-  })
-  .catch((error) => {
-    console.error('Error fetching researches:', error);
-  });
     }
 
     onMount(() => {
         fetchResearches();
     })
-
 </script>
 
 <main>
-  {#if researches}
-    {#each researches as r}
-        <div class="grid grid-cols-1">
-            <a href={`/main/${r._id}`}>
-                {r.researchTitle}</a>
-        </div>
-        
-    {/each}
-  {:else}
-     No researches found
-  {/if}
+    {#if loading}
+        <p>Loading...</p>
+    {:else if error}
+        <p>Error: {error}</p>
+    {:else if researches}
+        {#each researches as r}
+            <div class="grid grid-cols-1">
+                <a href={`/main/${r._id}`}>{r.researchTitle}</a>
+            </div>
+        {/each}
+    {:else}
+        <p>No researches found</p>
+    {/if}
 </main>

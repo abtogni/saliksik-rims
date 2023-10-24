@@ -22,10 +22,8 @@
       });
 
       if (response.ok) {
-        // Handle a successful response (e.g., redirect to a new page)
         window.location.href = '/main/';
       } else {
-        // Handle errors or authentication failures
         console.error('Submission failed');
         submissionError = 'Submission failed';
       }
@@ -39,7 +37,6 @@
 </script>
 
 <form on:submit={submitForm}>
-    <!-- ...other form fields... -->
     
     <div class="mb-4">
       <label class="block text-white font-bold mb-2" for="presentationDate">
@@ -67,7 +64,7 @@
     
     <div class="mb-4">
       <label class="block text-white font-bold mb-2" for="researchID">
-        Research ID (Number)
+        Research ID
       </label>
       <input
         class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus-border-black"
@@ -97,8 +94,4 @@
   
       
     
-    
-    <style>
-      /* Your CSS styles go here */
-    </style>
     

@@ -11,7 +11,7 @@ const sendResponse = (res: Response, status: number, data?: any, error?: string)
 const isValidObjectId = (id: string) => mongoose.Types.ObjectId.isValid(id);
 
 export const getProposals = async (req: Request, res: Response) => {
-  const { researchID } = req.body;
+  const researchID: any = req.query.researchID;
 
   try {
     const proposals = await CNModel.find({ researchID }).sort({ createdAt: -1 });
@@ -22,13 +22,13 @@ export const getProposals = async (req: Request, res: Response) => {
 };
 
 export const getProposal = async (req: Request, res: Response) => {
-  const { id } = req.body;
+  const proposalID: any = req.query.proposalID;
 
-  if (!isValidObjectId(id)) {
+  if (!isValidObjectId(proposalID)) {
     return sendResponse(res, 404, null, 'Proposal not found');
   }
 
-  const proposal = await CNModel.findById(id);
+  const proposal = await CNModel.findById(proposalID);
 
   if (!proposal) {
     return sendResponse(res, 404, null, 'Proposal not found');
@@ -37,14 +37,20 @@ export const getProposal = async (req: Request, res: Response) => {
   sendResponse(res, 200, proposal);
 };
 
+
 export const createProposal = async (req: Request, res: Response) => {
   try {
-    const proposal: Document = await CNModel.create(req.body);
+    const { researchID, implementingDept, coopAgency, siteImplementation, projectDuration, totalCost, fundingSource, description, significance, objectives, methodology, technologyRoadmap, expectedOutput, workPlan } = req.body;
+    const proposal = await CNModel.create({ researchID, implementingDept, coopAgency, siteImplementation, projectDuration, totalCost, fundingSource, description, significance, objectives, methodology, technologyRoadmap, expectedOutput, workPlan, proposalStatus: 'pending' });
+
+    // Send a success response with the created proposal
     sendResponse(res, 200, proposal);
   } catch (err: any) {
+    // Send an error response if there's an issue
     sendResponse(res, 400, null, err.message);
   }
 };
+
 
 export const updateProposal = async (req: Request, res: Response) => {
   const { id } = req.body;
