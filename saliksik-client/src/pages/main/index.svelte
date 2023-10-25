@@ -35,6 +35,7 @@
 </script>
 
 <main>
+    <a href="/main/createResearch" class="bg-button hover:bg-button-hover text-white font-bold py-2 mb-4 px-4 rounded">Create Research</a>
     {#if loading}
         <p>Loading...</p>
     {:else if error}
