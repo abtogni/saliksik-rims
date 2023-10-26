@@ -70,7 +70,7 @@
           <div></div>
         {/if}
         {#each menus as menu}
-          <SidebarItem href={menu.title} label={menu.title} {spanClass}>
+          <SidebarItem href={menu.href} label={menu.title} {spanClass}>
           </SidebarItem>
         {/each}
       </SidebarGroup>
