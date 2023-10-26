@@ -57,7 +57,10 @@
   }
 
   async function fetchNames(ids: any[], names: any[]) {
-    const promises = ids.map(async (id) => {
+  const validIds = ids.filter(id => id && typeof id === 'string' && id.trim() !== '');
+
+  const promises = validIds.map(async (id) => {
+    try {
       const response = await fetch(`/api/user/getUser?id=${id}`);
       if (response.ok) {
         const user = await response.json();
@@ -65,13 +68,21 @@
       } else {
         return 'Unknown Member';
       }
-    });
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      return 'Unknown Member';
+    }
+  });
 
-    return Promise.all(promises).then((resultNames) => {
-      names.length = 0; // Clear the array
-      names.push(...resultNames); // Add the fetched names
-    });
+  try {
+    const resultNames = await Promise.all(promises);
+    names.length = 0; // Clear the array
+    names.push(...resultNames); // Add the fetched names
+  } catch (error) {
+    console.error('Error processing user names:', error);
   }
+}
+
 
   onMount(async () => {
     await fetchResearch();

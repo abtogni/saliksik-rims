@@ -21,6 +21,7 @@ export const getUserByID = async (userID: string) => {
     }
     return user;
   } catch (err) {
+    console.error(err)
     throw new Error('An error occurred while fetching the user');
   }
 };
