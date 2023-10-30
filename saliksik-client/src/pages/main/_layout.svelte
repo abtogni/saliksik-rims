@@ -1,6 +1,6 @@
 <script lang="ts">
   import UNCLogo from '/login.png';
-  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup } from 'flowbite-svelte';
+  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem } from 'flowbite-svelte';
   import Menu from '../../assets/menu.svelte';
   import { goto } from '@roxi/routify';
   import { onMount } from 'svelte';
@@ -37,13 +37,6 @@
     }
   });
 
-  const menus = [
-  { title: "Home", href: '/' },
-  { title: "Researches", href: '/researches' },
-  { title: "Concept Notes", href: '/concept-notes' },
-  { title: "Presentations", href: '/presentations' },
-  ];
-
 
   let site = {
     name: 'Saliksik',
@@ -69,10 +62,11 @@
         {:else}
           <div></div>
         {/if}
-        {#each menus as menu}
-          <SidebarItem href={menu.href} label={menu.title} {spanClass}>
-          </SidebarItem>
-        {/each}
+        <SidebarDropdownWrapper label="Admin">
+          <SidebarDropdownItem label="Check Presentations" href='/main/admin/checkPresentations' />
+          <SidebarDropdownItem label="Check Proposals" href='/main/admin/checkProposals'/>
+          <SidebarDropdownItem label="Create User Accounts" href='/main/admin/createAccount' />
+        </SidebarDropdownWrapper>
       </SidebarGroup>
       <SidebarGroup border>
         {#if userData}
