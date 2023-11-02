@@ -11,6 +11,15 @@ const sendResponse = (res: Response, status: number, data?: any, error?: string)
 const isValidObjectId = (id: string) => mongoose.Types.ObjectId.isValid(id);
 
 export const getProposals = async (req: Request, res: Response) => {
+  try {
+    const proposals = await CNModel.find({}).sort({ createdAt: -1 });
+    sendResponse(res, 200, proposals);
+  } catch (err: any) {
+    sendResponse(res, 400, null, err.message);
+  }
+}
+
+export const getProposalsByID = async (req: Request, res: Response) => {
   const researchID: any = req.query.researchID;
 
   try {
