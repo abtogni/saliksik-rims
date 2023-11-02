@@ -3,7 +3,7 @@
     import moment from "moment";
     import { onMount } from "svelte";
 
-    let proposals: any[], researches: any[] = [], loading = true, error: any = null;;
+    let proposals: any[], researches: any[] = [], loading = true, error: any = null;
     
     async function getProposalList() {
     try {
@@ -24,6 +24,7 @@
         if (response.ok) {
             const data = await response.json();
             researches.push(data);
+            console.log(data);
         } else {
             // Handle non-OK responses here
             if (response.status === 404) {
@@ -43,13 +44,17 @@
     onMount(async () => {
     try {
         await getProposalList();
-        proposals.forEach((p) => fetchResearch(p.researchID));
+        const researchPromises = proposals.map((p) => fetchResearch(p.researchID));
+        await Promise.all(researchPromises);
+        researches = researches;
+        console.log(researches);
     } catch (error) {
         console.error('Network error:', error);
     } finally {
         loading = false;
     }
 });
+
 
 
 loading = false;
@@ -68,15 +73,23 @@ loading = false;
         </thead>
         <tbody>
             {#each proposals as proposal, i}
-              <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">{console.log(researches.at(0))}</th>
-                <td class="px-6 py-4">{moment(proposal.createdAt).format('lll')}</td>
-                <td class="px-6 py-4">{proposal.status}</td>
-                <td class="px-6 py-4">
-                  <!-- Add action buttons or links here -->
-                </td>
-              </tr>
-            {/each}
+  {#if i < researches.length}
+    <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+      <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+        {#if researches[i].researchTitle}{researches[i].researchTitle}{:else}N/A{/if}
+      </th>
+      <td class="px-6 py-4">
+        {#if researches[i].researchLeaders}{researches[i].researchLeaders.join(', ')}{:else}N/A{/if}
+      </td>
+      <td class="px-6 py-4">{moment(proposal.createdAt).format('lll')}</td>
+      <td class="px-6 py-4">{proposal.proposalStatus}</td>
+      <td class="px-6 py-4">
+        <!-- Add action buttons or links here -->
+      </td>
+    </tr>
+  {/if}
+{/each}
+
           
 
 
