@@ -84,7 +84,7 @@ loading = false;
       <td class="px-6 py-4">{moment(proposal.createdAt).format('lll')}</td>
       <td class="px-6 py-4">{proposal.proposalStatus}</td>
       <td class="px-6 py-4">
-        <!-- Add action buttons or links here -->
+        <a href={`/main/${proposal.researchID}/${proposal._id}`}>View Proposal</a>
       </td>
     </tr>
   {/if}
