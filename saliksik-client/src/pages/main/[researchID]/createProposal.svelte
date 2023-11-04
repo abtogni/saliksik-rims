@@ -1,4 +1,5 @@
 <script lang="ts">
+  import CircleQuestion from "../../../assets/circle-question.svelte";
   const currentURL = window.location.href;
   const urlParts = currentURL.split('/');
   const researchID = urlParts[urlParts.length - 2];

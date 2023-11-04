@@ -82,7 +82,7 @@
   </Sidebar>
 </div>
 
-<div class="translate-x-16 mt-10 lg:translate-x-1/4">
+<div>
   {#if userData}
     <slot scoped={{ userID: userData.user._id }}></slot>
   {:else}
