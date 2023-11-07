@@ -1,13 +1,11 @@
 <script lang="ts">
+    import { Label, MultiSelect } from 'flowbite-svelte';
     import { onMount } from "svelte";
 
-    let json = {}, memberCount = 0;;
+    let json = {}, researchMembers: any[] = [], researchLeaders: any[] = [];
     
-    function addMember() {
-		  memberCount++;
-	  }
 
-    var userData: any, userList: any;
+    var userData: any, users: any, userList: any;
 
   async function fetchUser() {
       const response = await fetch('/api/checkUser');
@@ -16,22 +14,30 @@
 
   async function fetchUserList() {
       const response = await fetch('/api/user/getUsers');
-      userList = await response.json();
+      users = await response.json();
   }
 
 
-  onMount(() => {
-    fetchUser();
-    fetchUserList();
-  });
+  onMount(async () => {
+  await Promise.all([fetchUser(), fetchUserList()]);
+  userList = users.map((user: any) => ({
+    value: user._id,
+    name: `${user.firstName} ${user.lastName}`
+  }));
+});
+
 
   
   function submit(e: Event) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     json = Object.fromEntries(formData.entries());
-
-    // Make an HTTP POST request to the API
+    json = {
+      ...json,
+      researchMembers,
+      researchLeaders,
+    };
+    
     fetch('/api/research/createResearch', {
       method: 'POST',
       headers: {
@@ -54,39 +60,13 @@
   }
     </script>
     
-<!-- svelte-ignore missing-declaration -->
 <main>
   <form on:submit={submit}>
     <div class="mb-4">
       <label class="block text-white font-bold mb-2" for="researchLeaders">
         Research Leader
       </label>
-      {#if userData}
-      <input
-        class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
-        type="text"
-        id="researchLeaders"
-        name="researchLeaders"
-        value={`${userData.user._id}`}
-        hidden
-      />
-      <input
-        class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
-        type="text"
-        id="researchLeader"
-        name="researchLeader"
-        value={`${userData.user.lastName}, ${userData.user.firstName}`}
-        disabled
-      />
-      {:else}
-      <input
-      class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
-      type="text"
-      id="researchLeader"
-      name="researchLeader"
-      value=''
-    />
-    {/if}
+      <MultiSelect items={userList} bind:value={researchLeaders} />
     </div>
     <div class="mb-4">
         <label class="block text-white font-bold mb-2" for="researchTitle">
@@ -100,42 +80,7 @@
         />
       </div>
 
-      <div class="mb-4">
-        <button 
-      type="button"
-      class="w-64 h-10  bg-red-800 hover:bg-red-900 shadow-lg text-white font-bold py-2 px-4 mb-6 border rounded"
-      on:click={addMember}>
-        Add Research Member
-      </button>
-      
-      {#if memberCount > 0}
-      <div class="mb-4 grid grid-cols-1 gap-4">
-          <label class="block text-white font-bold mb-2" for="researchMembers">
-            Research Members
-          </label>
-         {#each Array(memberCount) as _, index (index)}
-            <div>
-
-              <select id="researchMembers"
-              name="researchMembers">
-              
-                {#if userList}
-                  {#each userList as user}
-                    <option value={user._id}>{`${user.lastName}, ${user.firstName}`}</option>
-                  {/each}
-                {:else}
-                   <!-- else content here -->
-                {/if}
-              </select>
-             
-            </div>
-          
-         {/each}
-        </div>
-      {:else}
-         <!-- else content here -->
-      {/if}
-      </div>
+      <MultiSelect items={userList} bind:value={researchMembers} />
       
       <div class="mb-4">
         <button
