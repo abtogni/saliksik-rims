@@ -83,7 +83,7 @@
  loading = false;
 </script>
 
-<main class="pl-72 pr-12 pt-12">
+<main class="pt-12">
  <Tabs>
   <TabItem open title="All Research"></TabItem
   >

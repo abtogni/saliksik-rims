@@ -4,8 +4,11 @@
   import Menu from '../../assets/menu.svelte';
   import { goto } from '@roxi/routify';
   import { onMount } from 'svelte';
+  var researches: any;
+  let loading = true;
+  let error: string | null = null; 
 
-  // Define a type for userData
+
   type UserData = {
     user: {
       firstName: string;
@@ -23,19 +26,45 @@
       $goto('/');
     }
   }
+  async function fetchResearches(userID: string) {
+        try {
+            const response = await fetch(`/api/research/getUserResearches?userID=${userID}`);
 
-  onMount(async () => {
-    try {
-      const response = await fetch('/api/checkAuth');
-      if (response.status === 401) {
-        $goto('/login');
-      } else if (response.status === 200) {
-        await fetchUser();
-      }
-    } catch (error) {
-      console.error('Network error:', error);
+            if (response.ok) {
+                researches = await response.json();
+            } else {
+                console.error('Failed to fetch researches');
+                // Set the error message when fetching fails
+                error = 'Failed to fetch researches';
+            }
+        } catch (err) {
+            console.error('Error fetching researches:', err);
+            // Set the error message in case of an error
+            error = 'Error fetching researches';
+        } finally {
+            // Set loading to false once the operation is completed
+            loading = false;
+        }
     }
-  });
+
+    onMount(async () => {
+  try {
+    const response = await fetch('/api/checkAuth');
+    if (response.status === 401) {
+      $goto('/login');
+    } else if (response.status === 200) {
+      await fetchUser();
+      if (userData && userData.user) {
+        fetchResearches(userData.user._id);
+      } else {
+        console.error('Network error:', error);
+      }
+    }
+  } catch (error) {
+    console.error('Network error:', error);
+  }
+});
+
 
 
   let site = {
@@ -67,6 +96,19 @@
           <SidebarDropdownItem label="Check Proposals" href='/main/admin/checkProposals'/>
           <SidebarDropdownItem label="Create User Accounts" href='/main/admin/createAccount' />
         </SidebarDropdownWrapper>
+        {#if loading}
+        <SidebarItem label="Loading..."></SidebarItem>
+        {:else if researches}
+        <SidebarDropdownWrapper label="Researches">
+            <SidebarDropdownItem href="/main/createResearch" label="Create Research"></SidebarDropdownItem>
+        {#each researches as r}
+            <SidebarDropdownItem label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
+        {/each}
+        </SidebarDropdownWrapper>
+        {:else}
+        <SidebarItem href="/main/createResearch" label="Create Research"></SidebarItem>
+        {/if}
+
       </SidebarGroup>
       <SidebarGroup border>
         {#if userData}
@@ -82,7 +124,7 @@
   </Sidebar>
 </div>
 
-<div>
+<div class="pl-72 pr-12">
   {#if userData}
     <slot scoped={{ userID: userData.user._id }}></slot>
   {:else}
