@@ -2,22 +2,17 @@
     import { onMount } from 'svelte';
     import UNCLogo from '/saliksiklogo.png';
     import { goto } from '@roxi/routify';
+    import { isAuthenticated } from '../components/store';
   
     onMount(async () => {
-      try {
-        const response = await fetch('/api/checkAuth');
-        console.log('Response status:', response.status);
-  
-        if (response.status === 401) {
-          $goto('/login');
-        } else if (response.status === 200) {
-          $goto('/main');
-        }
-      } catch (error) {
-        console.error('Network error:', error);
+      console.log($isAuthenticated);
+      if (!$isAuthenticated) {
+        $goto('/login')
+      }else{
+        $goto('/main')
       }
     });
-  
+
     let showError = false;
     let errorMessage = "Change a few things up and try submitting again";
   
@@ -128,10 +123,6 @@
                   name="password"
                 />
               </div>
-              <label class="block text-white font-bold mb-2" for="userType">
-                User Type
-              </label>
-            
 
 
               <!-- Login Button -->

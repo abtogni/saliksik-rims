@@ -27,6 +27,7 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
+    "flowbite-svelte-icons": "^0.4.5",
     "moment": "^2.29.4"
   }
 }
