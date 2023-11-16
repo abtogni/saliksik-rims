@@ -124,9 +124,9 @@
   </Sidebar>
 </div>
 
-<div class="media pl-72 pr-10 pt-12">
-  {#if currentUser}
-    <slot scoped={{ userID: currentUser._id }}></slot>
+<div class="pl-0 pr-12">
+  {#if userData}
+    <slot scoped={{ userID: userData.user._id }}></slot>
   {:else}
     <slot></slot>
   {/if}
