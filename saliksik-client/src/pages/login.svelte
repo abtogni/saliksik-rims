@@ -4,14 +4,15 @@
     import { goto } from '@roxi/routify';
     import { isAuthenticated } from '../components/store';
   
-    onMount(async () => {
+
+    $: {
       console.log($isAuthenticated);
       if (!$isAuthenticated) {
-        $goto('/login')
-      }else{
-        $goto('/main')
+        $goto('/login');
+      } else {
+        $goto('/main');
       }
-    });
+    }
 
     let showError = false;
     let errorMessage = "Change a few things up and try submitting again";
@@ -41,6 +42,8 @@
       })
         .then(async (response) => {
           if (response.ok) {
+              isAuthenticated.set(true);
+              localStorage.setItem('isAuthenticated', JSON.stringify(true));
             $goto('/main');
           } else {
             const errorData = await response.json();

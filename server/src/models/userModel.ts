@@ -36,10 +36,7 @@ export class User{
     @prop({type: () => String})
     public suffix?: string;
 
-    @prop({type: () => String})
-    public researchIDs?: string[];
-
-    @prop({type: () => Array<number>})
+    @prop({type: () => Number})
     public publishedResearchCount?: number;
 
     public static async login (this: ReturnModelType<typeof User>,userID: string, password: string, userType: string){

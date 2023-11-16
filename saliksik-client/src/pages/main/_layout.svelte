@@ -4,30 +4,31 @@
   import Menu from '../../assets/menu.svelte';
   import { goto } from '@roxi/routify';
   import { onMount } from 'svelte';
-  import { user, isAuthenticated } from '../../components/store';
+  import { userData, isAuthenticated, updateUser } from '../../components/store';
 
   var researches: any;
   let loading = true;
   let error: string | null = null; 
 
-
-  type UserData = {
-    user: {
-      firstName: string;
-      _id: string;
-    };
-  };
-
-  let userData: UserData | undefined;
+  let currentUser: any;
 
   async function fetchUser() {
-    try {
-      const response = await fetch('/api/checkUser');
-      userData = await response.json();
-    } catch (e) {
-      $goto('/');
-    }
+  try {
+    const response = await fetch('/api/checkUser');
+    const user = await response.json();
+    updateUser({
+      _id: user.user._id,
+      userType: user.user.userType,
+      firstName: user.user.firstName,
+      lastName: user.user.lastName,
+      avatar: user.user.firstName.charAt(0) + user.user.lastName.charAt(0),
+      researches: user.user.researches
+    });
+  } catch (e) {
+    $goto('/');
   }
+}
+
   async function fetchResearches(userID: string) {
         try {
             const response = await fetch(`/api/research/getUserResearches?userID=${userID}`);
@@ -46,23 +47,21 @@
         }
     }
 
+
     onMount(async () => {
-  try {
-    const response = await fetch('/api/checkAuth');
-    if (response.status === 401) {
-      $goto('/login');
-    } else if (response.status === 200) {
-      await fetchUser();
-      if (userData && userData.user) {
-        fetchResearches(userData.user._id);
-      } else {
-        console.error('Network error:', error);
-      }
-    }
-  } catch (error) {
-    console.error('Network error:', error);
-  }
-});
+        if (!$isAuthenticated) {
+          $goto('/login');
+        } else if ($isAuthenticated) {
+          await fetchUser().then (async () => {
+            currentUser = $userData;
+          });
+          if (currentUser) {
+            fetchResearches(currentUser._id);
+          } else {
+            console.error('Network error:', error);
+          }
+        }
+    });
 
 
 
@@ -74,6 +73,8 @@
   let spanClass = 'flex-1 ml-3 whitespace-nowrap';
 </script>
 
+
+
 <div class="sidebar">
   <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover-bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover-bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
@@ -84,8 +85,8 @@
     <SidebarWrapper>
       <SidebarBrand {site} />
       <SidebarGroup>
-          {#if userData}
-          <SidebarItem label={`Hello, ${userData.user.firstName}`} {spanClass}>
+          {#if currentUser}
+          <SidebarItem label={`Hello, ${currentUser.firstName}`} {spanClass}>
           </SidebarItem>
         {:else}
           <div></div>
@@ -110,8 +111,8 @@
 
       </SidebarGroup>
       <SidebarGroup border>
-        {#if userData}
-          <SidebarItem href={`/main/profile/${userData.user._id}`} label="My Profile" {spanClass}>
+        {#if currentUser}
+          <SidebarItem href={`/main/profile/${currentUser._id}`} label="My Profile" {spanClass}>
           </SidebarItem>
           <SidebarItem href="/logout" label="Logout" {spanClass}>
           </SidebarItem>
@@ -123,9 +124,9 @@
   </Sidebar>
 </div>
 
-<div class="pl-72 pr-12">
-  {#if userData}
-    <slot scoped={{ userID: userData.user._id }}></slot>
+<div class="media pl-72 pr-10 pt-12">
+  {#if currentUser}
+    <slot scoped={{ userID: currentUser._id }}></slot>
   {:else}
     <slot></slot>
   {/if}

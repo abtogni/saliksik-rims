@@ -71,7 +71,7 @@
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-<main class="pl-72 pr-10 pt-12 h-full w-screen bg-white">
+<main class="h-full w-screen bg-white">
   <Heading tag="h1" class="mb-6 text-2xl">All Researches</Heading>
 
   <!--tabs and table-->

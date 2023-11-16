@@ -1,8 +1,7 @@
-import {writable} from "svelte/store";
+import { writable } from "svelte/store";
 
-export const user = writable({
+export const userData = writable({
     _id: '',
-    userID: '',
     email: '',
     userType: '',
     firstName: '',
@@ -13,4 +12,9 @@ export const user = writable({
     researchCount: 0,
 });
 
-export const isAuthenticated = writable(false);
+export const updateUser = (newUserData: any) => {
+    userData.set({ ...userData, ...newUserData });
+  };
+
+const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
+export const isAuthenticated = writable(storedIsAuthenticated ? JSON.parse(storedIsAuthenticated) : false);
