@@ -123,7 +123,7 @@
   </Sidebar>
 </div>
 
-<div class="pl-72 pr-12">
+<div class="pl-0 pr-12">
   {#if userData}
     <slot scoped={{ userID: userData.user._id }}></slot>
   {:else}
