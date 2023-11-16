@@ -1,7 +1,9 @@
-<script></script>
+<script> import { Tabs, TabItem } from 'flowbite-svelte';</script>
 
-<main>
-    <table>
-        <th>tEST</th>
-    </table>
+<main class="pl-72 pr-10 pt-12 bg-white>
+    
+
+    
+    
+
 </main>
