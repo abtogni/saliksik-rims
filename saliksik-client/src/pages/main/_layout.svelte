@@ -75,7 +75,7 @@
 
 
 
-<div class="sidebar">
+<div class="sidebar h-full">
   <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover-bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover-bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
     <Menu />
@@ -124,9 +124,9 @@
   </Sidebar>
 </div>
 
-<div class="pl-0 pr-12">
-  {#if userData}
-    <slot scoped={{ userID: userData.user._id }}></slot>
+<div class="pl-72 pr-10 pt-12">
+  {#if currentUser}
+    <slot scoped={{ userID: currentUser._id }}></slot>
   {:else}
     <slot></slot>
   {/if}
