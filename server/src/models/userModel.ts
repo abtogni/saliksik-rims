@@ -42,9 +42,6 @@ export class User{
     @prop({type: () => Array<number>})
     public publishedResearchCount?: number;
 
-    @prop({type: () => String})
-    public avatarLink?: string;
-
     public static async login (this: ReturnModelType<typeof User>,userID: string, password: string, userType: string){
         const user = await this.findOne({ userID });
         if (user){

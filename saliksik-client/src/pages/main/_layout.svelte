@@ -4,6 +4,8 @@
   import Menu from '../../assets/menu.svelte';
   import { goto } from '@roxi/routify';
   import { onMount } from 'svelte';
+  import { user, isAuthenticated } from '../../components/store';
+
   var researches: any;
   let loading = true;
   let error: string | null = null; 
@@ -34,15 +36,12 @@
                 researches = await response.json();
             } else {
                 console.error('Failed to fetch researches');
-                // Set the error message when fetching fails
                 error = 'Failed to fetch researches';
             }
         } catch (err) {
             console.error('Error fetching researches:', err);
-            // Set the error message in case of an error
             error = 'Error fetching researches';
         } finally {
-            // Set loading to false once the operation is completed
             loading = false;
         }
     }
