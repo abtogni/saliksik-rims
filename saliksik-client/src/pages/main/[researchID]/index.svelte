@@ -1,12 +1,26 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { updateResearch } from "../../../components/store";
+  import { researchData } from "../../../components/store";
+  import { Avatar, Card, Listgroup } from "flowbite-svelte";
+  import moment from "moment";
 
   const currentURL = window.location.href;
   const urlParts = currentURL.split('/');
   const researchID = urlParts[urlParts.length - 1];
 
-  let research: any = null, loading = true, error: any = null;
-  let memberNames: any[] = [], leaderNames: any[] = [], proposals: any[] = [];
+  let loading = true, error: any = null;
+  let memberNames = [{
+    firstName: '',
+    lastName: '',
+    avatar: '',
+  }]
+  let leaderNames = [{
+    firstName: '',
+    lastName: '',
+    avatar: '',
+  }]
+  let proposals: any[] = [];
 
   async function fetchResearch() {
     if (!isValidResearchID(researchID)) {
@@ -19,7 +33,17 @@
       const response = await fetch(`/api/research/getResearch?researchID=${researchID}`);
 
       if (response.ok) {
-        research = await response.json();
+        const research = await response.json();
+        updateResearch({
+            _id: research._id,
+          researchTitle: research.researchTitle,
+          conceptNotes: research.conceptNotes,
+          researchLeaders: research.researchLeaders,
+          researchMembers: research.researchMembers,
+          presentations: research.presentations,
+          researchStatus: research.researchStatus,
+          createdAt: research.createdAt,
+        });
       } else {
         // Handle non-OK responses here
         if (response.status === 404) {
@@ -64,7 +88,12 @@
       const response = await fetch(`/api/user/getUser?id=${id}`);
       if (response.ok) {
         const user = await response.json();
-        return `${user.firstName} ${user.lastName}`;
+        const names = {
+          firstName: user.firstName,
+          lastName: user.lastName,
+          avatar: user.firstName.charAt(0)+user.lastName.charAt(0)
+        }
+        return names
       } else {
         return 'Unknown Member';
       }
@@ -87,13 +116,13 @@
 
   onMount(async () => {
     await fetchResearch();
-    if (research && research.researchMembers) {
-      await fetchNames(research.researchMembers, memberNames);
+    if ($researchData) {
+      await fetchNames($researchData.researchMembers, memberNames);
       memberNames = memberNames;
     }
     
-    if (research && research.researchLeaders) {
-      await fetchNames(research.researchLeaders, leaderNames);
+    if ($researchData) {
+      await fetchNames($researchData.researchLeaders, leaderNames);
       leaderNames = leaderNames;
     }
 
@@ -114,10 +143,32 @@
     <p>Loading...</p>
   {:else if error}
     <p>Error: {error}</p>
-  {:else if research}
-    <h2>{research.researchTitle}</h2>
-    <p>Leaders: {leaderNames.join(', ')}</p>
-    <p>Members: {memberNames.join(', ')}</p>
+  {:else if $researchData}
+    <h2 class="p-5 text-2xl font-bold">{$researchData.researchTitle}</h2>
+    <h3>Created at: {moment($researchData.createdAt).format("MMMM Do YYYY")}</h3>
+    <Card size='sm'>
+      <div class="flex justify-between items-center mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Research Leaders</h5>
+      </div>
+      <Listgroup items={leaderNames} let:item class="border-0">
+          <div class="flex items-center space-x-4">
+            <Avatar>{item.avatar}</Avatar>
+            <div class="flex-1 min-w-0">{`${item.firstName} ${item.lastName}`}</div>
+          </div>
+      </Listgroup>
+    </Card>
+    <Card size='sm'>
+      <div class="flex justify-between items-center mb-4">
+        <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Research Members</h5>
+      </div>
+      <Listgroup items={memberNames} let:item class="border-0">
+          <div class="flex items-center space-x-4">
+            <div class="flex-1 min-w-0">{`${item.firstName} ${item.lastName}`}</div>
+          </div>
+      </Listgroup>
+    </Card>
+
+
     {#if proposals}
       <h1>Proposals</h1>
       {#each proposals as p, index}

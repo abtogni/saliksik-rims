@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { Button } from "flowbite-svelte";
+
   let json = {};
   let message: any;
 function submit(e: Event) {
@@ -30,14 +32,14 @@ function submit(e: Event) {
   
   <form on:submit={submit}>
     <div class="mb-1">
-        <label class="block text-white font-bold mb-2" for="userType">User Type</label>
+        <label class="block font-bold mb-2" for="userType">User Type</label>
         <select data-te-select-init id='userType' name='userType' class="font-['Space Grotesk'] mb-1 w-64 h-9 rounded-md">
             <option value="personnel">Personnel</option>
             <option value="Admin">Admin</option>
           </select>
     </div>
     <div class="mb-4">
-        <label class="block text-white font-bold mb-2" for="username">
+        <label class="block font-bold mb-2" for="username">
           Username
         </label>
         <input
@@ -48,7 +50,7 @@ function submit(e: Event) {
         />
       </div>
       <div class="mb-4">
-        <label class="block text-white font-bold mb-2" for="firstName">
+        <label class="block font-bold mb-2" for="firstName">
           First Name
         </label>
         <input
@@ -59,7 +61,7 @@ function submit(e: Event) {
         />
       </div>
       <div class="mb-4">
-        <label class="block text-white font-bold mb-2" for="middleName">
+        <label class="block font-bold mb-2" for="middleName">
           Middle Name
         </label>
         <input
@@ -70,7 +72,7 @@ function submit(e: Event) {
         />
       </div>
       <div class="mb-4">
-        <label class="block text-white font-bold mb-2" for="lastName">
+        <label class="block font-bold mb-2" for="lastName">
           Last Name
         </label>
         <input
@@ -81,7 +83,7 @@ function submit(e: Event) {
         />
       </div>
       <div class="mb-4">
-        <label class="block text-white font-bold mb-2" for="suffix">
+        <label class="block font-bold mb-2" for="suffix">
           Suffix
         </label>
         <input
@@ -92,7 +94,7 @@ function submit(e: Event) {
         />
       </div>
       <div class="mb-4">
-        <label class="block text-white font-bold mb-2" for="email">
+        <label class="block font-bold mb-2" for="email">
           Email
         </label>
         <input
@@ -103,7 +105,7 @@ function submit(e: Event) {
         />
       </div>
       <div class="mb-4">
-        <label class="block text-white font-bold mb-2" for="password">
+        <label class="block font-bold mb-2" for="password">
           Password
         </label>
         <input
@@ -114,12 +116,7 @@ function submit(e: Event) {
         />
       </div>
 
-      <button
-      class="w-64 h-10  bg-red-800 hover:bg-red-900 shadow-lg text-white font-bold py-2 px-4 mb-6 border rounded"
-      type="submit"
-    >
-      Register
-    </button>
+    <Button class='bg-red-800 hover:bg-red-900 font-bold text-base' type='submit'>Create Account</Button>
   </form>
   
   

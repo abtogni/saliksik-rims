@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { Label, MultiSelect } from 'flowbite-svelte';
+    import { Button, Label, MultiSelect } from 'flowbite-svelte';
     import { onMount } from "svelte";
 
     let json = {}, researchMembers: any[] = [], researchLeaders: any[] = [];
@@ -63,13 +63,13 @@
 <main>
   <form on:submit={submit}>
     <div class="mb-4">
-      <label class="block text-white font-bold mb-2" for="researchLeaders">
+      <label class="block font-bold mb-2" for="researchLeaders">
         Research Leader
       </label>
       <MultiSelect items={userList} bind:value={researchLeaders} />
     </div>
     <div class="mb-4">
-        <label class="block text-white font-bold mb-2" for="researchTitle">
+        <label class="block font-bold mb-2" for="researchTitle">
           Research Title
         </label>
         <input
@@ -83,18 +83,9 @@
       <MultiSelect items={userList} bind:value={researchMembers} />
       
       <div class="mb-4">
-        <button
-      class="w-64 h-10  bg-red-800 hover:bg-red-900 shadow-lg text-white font-bold py-2 px-4 mb-6 border rounded"
-      type="submit"
-    >
-      Create Research
-    </button>
+        <Button type='submit'>Update Profile</Button>
       </div>
   </form>
   
 </main>
-    
-    <style>
-      /* Your CSS styles go here */
-    </style>
     

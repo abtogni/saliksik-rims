@@ -685,3 +685,17 @@
     </div>
   </div>
 </main>
+
+
+<div>
+  {#if proposals}
+     {JSON.stringify(proposals)}
+     {#if researches}
+       JSON.stringify(researches);
+     {:else}
+       <!-- else content here -->
+     {/if}
+  {:else}
+     Nothing goes
+  {/if}
+</div>

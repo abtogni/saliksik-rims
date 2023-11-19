@@ -1,5 +1,6 @@
 <script lang="ts">
-  import CircleQuestion from "../../../assets/circle-question.svelte";
+    import { Button } from "flowbite-svelte";
+
   const currentURL = window.location.href;
   const urlParts = currentURL.split('/');
   const researchID = urlParts[urlParts.length - 2];
@@ -47,7 +48,7 @@
     
   <form on:submit={submitForm}> 
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="researchID">
+          <label class="block font-bold mb-2" for="researchID">
             Research ID
           </label>
           <input
@@ -60,7 +61,7 @@
           />
         </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="implementingDept">
+          <label class="block font-bold mb-2" for="implementingDept">
             Implementing Department
           </label>
           <input
@@ -71,7 +72,7 @@
           />
         </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="coopAgency">
+          <label class="block font-bold mb-2" for="coopAgency">
             Cooperative Agency
           </label>
           <input
@@ -82,7 +83,7 @@
           />
         </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="siteImplementation">
+          <label class="block font-bold mb-2" for="siteImplementation">
             Site of Implementation
           </label>
           <input
@@ -93,7 +94,7 @@
           />
         </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="projectDuration">
+          <label class="block font-bold mb-2" for="projectDuration">
             Project Duration
           </label>
           <input
@@ -104,7 +105,7 @@
           />
         </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="totalCost">
+          <label class="block font-bold mb-2" for="totalCost">
             Total Cost
           </label>
           <input
@@ -115,7 +116,7 @@
           />
         </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="fundingSource">
+          <label class="block font-bold mb-2" for="fundingSource">
             Funding Source
           </label>
           <input
@@ -126,7 +127,7 @@
           />
         </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="description">
+          <label class="block font-bold mb-2" for="description">
               Description
           </label>
           <textarea
@@ -136,7 +137,7 @@
           ></textarea>
       </div>
       <div class="mb-4">
-        <label class="block text-white font-bold mb-2" for="objectives">
+        <label class="block font-bold mb-2" for="objectives">
             Significance
         </label>
         <textarea
@@ -147,7 +148,7 @@
     </div>
   
       <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="objectives">
+          <label class="block font-bold mb-2" for="objectives">
               Objectives
           </label>
           <textarea
@@ -157,7 +158,7 @@
           ></textarea>
       </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="methodology">
+          <label class="block font-bold mb-2" for="methodology">
             Methodology
           </label>
           <textarea
@@ -167,7 +168,7 @@
           ></textarea>
         </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="technologyRoadmap">
+          <label class="block font-bold mb-2" for="technologyRoadmap">
             Technology Roadmap
           </label>
           <textarea
@@ -177,7 +178,7 @@
           ></textarea>
         </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="expectedOutput">
+          <label class="block font-bold mb-2" for="expectedOutput">
             Expected Output
           </label>
           <textarea
@@ -187,7 +188,7 @@
           ></textarea>
         </div>
         <div class="mb-4">
-          <label class="block text-white font-bold mb-2" for="workPlan">
+          <label class="block font-bold mb-2" for="workPlan">
             Work Plan
           </label>
           <textarea
@@ -196,13 +197,7 @@
             name="workPlan"
           ></textarea>
         </div>
-      
-        <button
-          class="w-64 h-10 bg-red-800 hover-bg-red-900 shadow-lg text-white font-bold py-2 px-4 mb-6 border rounded"
-          type="submit"
-        >
-         Submit
-        </button>
+        <Button type='submit'>Create Proposal</Button>
       </form>
       
     

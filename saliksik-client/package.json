@@ -17,6 +17,7 @@
     "autoprefixer": "^10.4.16",
     "flowbite": "^1.8.1",
     "flowbite-svelte": "^0.44.18",
+    "flowbite-svelte-icons": "^0.4.5",
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.31",
     "svelte": "^4.0.5",
@@ -27,7 +28,6 @@
     "vite": "^4.4.5"
   },
   "dependencies": {
-    "flowbite-svelte-icons": "^0.4.5",
     "moment": "^2.29.4"
   }
 }

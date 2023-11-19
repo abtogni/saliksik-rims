@@ -5,6 +5,7 @@
   import { goto } from '@roxi/routify';
   import { onMount } from 'svelte';
   import { userData, isAuthenticated, updateUser } from '../../components/store';
+  import { BookOutline, CogOutline, UserOutline } from 'flowbite-svelte-icons';
 
   var researches: any;
   let loading = true;
@@ -92,6 +93,9 @@
           <div></div>
         {/if}
         <SidebarDropdownWrapper label="Admin">
+          <svelte:fragment slot="icon">
+            <CogOutline />
+          </svelte:fragment>
           <SidebarDropdownItem label="Check Presentations" href='/main/admin/checkPresentations' />
           <SidebarDropdownItem label="Check Proposals" href='/main/admin/checkProposals'/>
           <SidebarDropdownItem label="Create User Accounts" href='/main/admin/createAccount' />
@@ -100,21 +104,29 @@
         <SidebarItem label="Loading..."></SidebarItem>
         {:else if researches}
         <SidebarDropdownWrapper label="Researches">
+          <svelte:fragment slot="icon">
+            <BookOutline />
+          </svelte:fragment>
             <SidebarDropdownItem href="/main/createResearch" label="Create Research"></SidebarDropdownItem>
         {#each researches as r}
             <SidebarDropdownItem label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
         {/each}
         </SidebarDropdownWrapper>
         {:else}
+        
         <SidebarItem href="/main/createResearch" label="Create Research"></SidebarItem>
         {/if}
 
       </SidebarGroup>
       <SidebarGroup border>
         {#if currentUser}
-          <SidebarItem href={`/main/profile/${currentUser._id}`} label="My Profile" {spanClass}>
+          <SidebarItem href={`/main/profile/myProfile`} label="My Profile" {spanClass}>
+            <svelte:fragment slot="icon">
+              <UserOutline />
+            </svelte:fragment>
           </SidebarItem>
           <SidebarItem href="/logout" label="Logout" {spanClass}>
+            
           </SidebarItem>
         {:else}
           <div></div>
