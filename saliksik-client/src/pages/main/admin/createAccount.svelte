@@ -34,7 +34,7 @@ function submit(e: Event) {
     <div class="mb-1">
         <label class="block font-bold mb-2" for="userType">User Type</label>
         <select data-te-select-init id='userType' name='userType' class="font-['Space Grotesk'] mb-1 w-64 h-9 rounded-md">
-            <option value="personnel">Personnel</option>
+            <option value="Personnel">Personnel</option>
             <option value="Admin">Admin</option>
           </select>
     </div>

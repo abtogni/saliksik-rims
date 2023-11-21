@@ -100,8 +100,8 @@
           
           
           <select id='userType' name='userType' data-te-select-init class="font-['Space Grotesk'] mb-1 w-64 h-9 rounded-md">
-            <option value="personnel">Personnel</option>
-            <option value="admin">Admin</option>
+            <option value="Personnel">Personnel</option>
+            <option value="Admin">Admin</option>
           </select>
      
               <div class="mb-1">
