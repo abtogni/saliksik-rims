@@ -83,7 +83,7 @@
       <MultiSelect items={userList} bind:value={researchMembers} />
       
       <div class="mb-4">
-        <Button type='submit'>Update Profile</Button>
+        <Button type='submit'>Create Research</Button>
       </div>
   </form>
   

@@ -109,7 +109,7 @@
           </svelte:fragment>
             <SidebarDropdownItem href="/main/createResearch" label="Create Research"></SidebarDropdownItem>
         {#each researches as r}
-            <SidebarDropdownItem label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
+            <SidebarDropdownItem class="truncate" label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
         {/each}
         </SidebarDropdownWrapper>
         {:else}

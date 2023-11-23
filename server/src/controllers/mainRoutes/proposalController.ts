@@ -50,7 +50,7 @@ export const getProposal = async (req: Request, res: Response) => {
 export const createProposal = async (req: Request, res: Response) => {
   try {
     const { researchID, implementingDept, coopAgency, siteImplementation, projectDuration, totalCost, fundingSource, description, significance, objectives, methodology, technologyRoadmap, expectedOutput, workPlan } = req.body;
-    const proposal = await CNModel.create({ researchID, implementingDept, coopAgency, siteImplementation, projectDuration, totalCost, fundingSource, description, significance, objectives, methodology, technologyRoadmap, expectedOutput, workPlan, proposalStatus: 'pending' });
+    const proposal = await CNModel.create({ researchID, implementingDept, coopAgency, siteImplementation, projectDuration, totalCost, fundingSource, description, significance, objectives, methodology, technologyRoadmap, expectedOutput, workPlan, proposalStatus: 'Pending Approval' });
 
     // Send a success response with the created proposal
     sendResponse(res, 200, proposal);

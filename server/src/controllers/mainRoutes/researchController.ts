@@ -63,7 +63,7 @@ export const createResearch = async (req: Request, res: Response) => {
       researchTitle,
       researchLeaders,
       researchMembers,
-      researchStatus: 'Pending',
+      researchStatus: 'Pending Concept Note',
     });
     successResponse(res, research);
   } catch (err: any) {

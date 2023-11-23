@@ -14,8 +14,8 @@ export class conceptNote{
     @prop({ type: () => String })
     public siteImplementation!: string;
 
-    @prop({ type: () => Date})
-    public projectDuration!: Date;
+    @prop({ type: () => String})
+    public projectDuration!: string;
 
     @prop({ type: () => Number})
     public totalCost!: number;
