@@ -8,7 +8,8 @@
   let proposals: any[],
     researches: any[] = [],
     loading = true,
-    error: any = null;
+    error: any = null,
+    v: any;
 
   async function getProposalList() {
     try {
@@ -27,7 +28,6 @@
       if (response.ok) {
         const data = await response.json();
         researches.push(data);
-        console.log(data);
       } else {
         // Handle non-OK responses here
         if (response.status === 404) {
@@ -50,13 +50,13 @@
       const researchPromises = proposals.map((p) => fetchResearch(p.researchID));
       await Promise.all(researchPromises);
       researches = researches;
-      console.log(researches);
     } catch (error) {
       console.error("Network error:", error);
     } finally {
       loading = false;
     }
   });
+
 
   loading = false;
 
@@ -99,6 +99,46 @@
 
           <!--table-rows-->
           <TableBody>
+            {#if proposals}
+            {#if researches}
+              {#each proposals as p}
+                {#if researches.find(x => x._id === p.researchID)}
+                  {#each researches.filter(x => x._id === p.researchID) as research}
+                    <TableBodyRow on:click={() => toggleRow(i)}>
+                      <TableBodyCell class="truncate">{research.researchTitle}</TableBodyCell>
+                      <TableBodyCell class="flex pl-10 ">
+                        <!-- to do -->
+                        <Avatar>AR</Avatar>
+                        <Avatar>JD</Avatar>
+                        <Avatar>DC</Avatar>
+                        <Avatar>DI</Avatar>
+                        <!-- to do -->
+                      </TableBodyCell>
+                      <!-- to do -->
+                      <TableBodyCell>College of Computer Studies</TableBodyCell>
+                      <!-- to do -->
+                      <TableBodyCell>{moment(p.createdAt).format('lll')}</TableBodyCell>
+                    </TableBodyRow>
+                    
+                  {/each}
+                {:else}
+                  <!-- Do something if no research is found for the current proposal -->
+                  <p>No research found for proposal with ID {p.researchID}</p>
+                {/if}
+              {/each}
+            {:else}
+              No researches found.
+            {/if}
+          {:else}
+            No proposals found.
+          {/if}
+          
+
+          
+
+
+
+
             {#each items as item, i}
               <TableBodyRow on:click={() => toggleRow(i)}>
                 <TableBodyCell class="truncate">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</TableBodyCell>
