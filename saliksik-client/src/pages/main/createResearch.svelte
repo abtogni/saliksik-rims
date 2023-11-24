@@ -79,6 +79,17 @@
           name="researchTitle"
         />
       </div>
+      <div class="mb-4">
+        <label class="block font-bold mb-2" for="researchTitle">
+          Research Agency
+        </label>
+        <input
+          class="w-64 h-9 border border-gray-300 rounded-md py-2 px-3 focus:outline-none focus:border-black"
+          type="text"
+          id="researchAgency"
+          name="researchAgency"
+        />
+      </div>
 
       <MultiSelect items={userList} bind:value={researchMembers} />
       

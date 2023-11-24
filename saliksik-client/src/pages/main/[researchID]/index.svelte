@@ -35,12 +35,11 @@
       if (response.ok) {
         const research = await response.json();
         updateResearch({
-            _id: research._id,
+           _id: research._id,
           researchTitle: research.researchTitle,
-          conceptNotes: research.conceptNotes,
           researchLeaders: research.researchLeaders,
           researchMembers: research.researchMembers,
-          presentations: research.presentations,
+          researchAgency: research.researchAgency,
           researchStatus: research.researchStatus,
           createdAt: research.createdAt,
         });
@@ -62,7 +61,7 @@
 
   async function fetchProposals() {
     try {
-      const response = await fetch(`/api/research/getProposals?researchID=${researchID}`);
+      const response = await fetch(`/api/research/getProposalsByID?researchID=${researchID}`);
 
       if (response.ok) {
         const data = await response.json();
@@ -145,6 +144,7 @@
     <p>Error: {error}</p>
   {:else if $researchData}
     <h2 class="p-5 text-2xl font-bold">{$researchData.researchTitle}</h2>
+    <h3>Research Agency: {$researchData.researchAgency}</h3>
     <h3>Created at: {moment($researchData.createdAt).format("MMMM Do YYYY")}</h3>
     <Card size='sm'>
       <div class="flex justify-between items-center mb-4">

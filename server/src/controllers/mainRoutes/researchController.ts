@@ -55,7 +55,7 @@ export const getResearch = async (req: Request, res: Response) => {
 
 
 export const createResearch = async (req: Request, res: Response) => {
-  const { researchTitle, researchLeaders, researchMembers } = req.body;
+  const { researchTitle, researchLeaders, researchMembers, researchAgency } = req.body;
 
 
   try {
@@ -63,6 +63,7 @@ export const createResearch = async (req: Request, res: Response) => {
       researchTitle,
       researchLeaders,
       researchMembers,
+      researchAgency,
       researchStatus: 'Pending Concept Note',
     });
     successResponse(res, research);

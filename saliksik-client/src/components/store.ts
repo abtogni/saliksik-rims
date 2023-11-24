@@ -15,10 +15,9 @@ export const userData = writable({
 export const researchData = writable({
   _id: '',
   researchTitle: '',
-  conceptNotes:[],
   researchLeaders:[],
   researchMembers: [],
-  presentations:[],
+  researchAgency: '',
   researchStatus: '',
   createdAt: '',
 });
