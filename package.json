@@ -15,5 +15,8 @@
   "dependencies": {
     "concurrently": "^8.2.1",
     "lucide-react": "^0.287.0"
+  },
+  "devDependencies": {
+    "flowbite-svelte-icons": "^0.4.5"
   }
 }
