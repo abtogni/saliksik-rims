@@ -77,7 +77,6 @@
     <span class="sr-only">Open sidebar</span>
     <Menu />
   </button>
-
   <Sidebar id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 flex items-stretch min-h-screen" aria-label="Sidebar">
     <SidebarWrapper class="rounded-none w-full">
       <SidebarBrand {site} />
