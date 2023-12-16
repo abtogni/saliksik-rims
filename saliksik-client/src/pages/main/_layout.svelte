@@ -63,6 +63,7 @@
     }
   });
 
+  //sidebar
   let site = {
     name: "Saliksik",
     href: "/",
@@ -77,8 +78,8 @@
     <Menu />
   </button>
 
-  <Sidebar id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-    <SidebarWrapper>
+  <Sidebar id="separator-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 flex items-stretch min-h-screen" aria-label="Sidebar">
+    <SidebarWrapper class="rounded-none w-full">
       <SidebarBrand {site} />
       <SidebarGroup>
         {#if currentUser}
@@ -86,23 +87,26 @@
         {:else}
           <div></div>
         {/if}
-        <SidebarDropdownWrapper label="Admin">
+        <SidebarDropdownWrapper label="Admin" isOpen>
           <svelte:fragment slot="icon">
             <CogOutline />
           </svelte:fragment>
           <SidebarDropdownItem label="Check Presentations" href="/main/admin/checkPresentations" />
           <SidebarDropdownItem label="Check Proposals" href="/main/admin/checkProposals" />
           <SidebarDropdownItem label="Create User Accounts" href="/main/admin/createAccount" />
-          <SidebarDropdownItem label="Dashboard" href="/main/dashboard" />
+          <SidebarDropdownItem label="Dashboard" href="/main/admin/userDashboard" />
+          <SidebarDropdownItem label="Personnel Dashboard" href="/main/personnel/personnelDashboard" />
+          <SidebarDropdownItem label="Personnel Home" href="/main/personnel/personnelHome" />
+          
         </SidebarDropdownWrapper>
         {#if loading}
           <SidebarItem label="Loading..."></SidebarItem>
         {:else if researches}
-          <SidebarDropdownWrapper label="Dashboard">
+          <SidebarDropdownWrapper label="Dashboard" isOpen>
             <svelte:fragment slot="icon">
               <BookOutline />
             </svelte:fragment>
-            
+
             <SidebarDropdownItem href="/main/createResearch" label="Create Research"></SidebarDropdownItem>
             {#each researches as r}
               <SidebarDropdownItem class="truncate" label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
@@ -128,7 +132,7 @@
   </Sidebar>
 </div>
 
-<div class="pl-72 pr-10 pt-6">
+<div class="ml-64 pl-4 pr-4 pt-4 bg-white">
   {#if currentUser}
     <slot scoped={{ userID: currentUser._id }} />
   {:else}
