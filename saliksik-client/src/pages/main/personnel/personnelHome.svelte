@@ -42,7 +42,7 @@
           </div>
         </div>
         <div class="flex justify-self-end">
-          <span class="material-symbols-outlined rounded-full p-2 "> download_2 </span>
+          <span class="material-symbols-outlined rounded-full p-2 text"> download_2 </span>
           <span class="material-symbols-outlined rounded-full p-2"> visibility </span>
           <span class="material-symbols-outlined rounded-full p-2"> bookmark_add </span>
         </div>
