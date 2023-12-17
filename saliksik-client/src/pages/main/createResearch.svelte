@@ -63,7 +63,7 @@
   let submitResearchProposal = false;
 
   //date picker
-  let date = new Date()
+  let date = new Date();
 </script>
 
 <main>
@@ -310,7 +310,6 @@
 
       <Card class="mb-6">
         <div class="mb-4">
-          
           <Button on:click={() => (saveAsDraft = true)} class="w-full">Save As Draft</Button>
 
           <Modal bind:open={saveAsDraft} size="xs" autoclose outsideclose>
@@ -320,12 +319,9 @@
               <Button color="alternative">No, cancel</Button>
             </div>
           </Modal>
-
-
         </div>
 
         <div class="mb-4">
-
           <Button on:click={() => (submitResearchProposal = true)} class="w-full">Submit Research Proposal</Button>
 
           <Modal bind:open={submitResearchProposal} size="xs" autoclose outsideclose>
@@ -339,7 +335,6 @@
       </Card>
     </Card>
   </form>
-  
 </main>
 
 <!--
