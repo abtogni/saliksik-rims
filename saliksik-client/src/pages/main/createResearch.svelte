@@ -1,7 +1,6 @@
 <script lang="ts">
   import { Button, Card, Datepicker, FloatingLabelInput, Heading, Helper, Input, Label, Modal, MultiSelect, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Textarea, Toolbar, ToolbarButton, ToolbarGroup } from "flowbite-svelte";
   import { BookOutline, CodeOutline, ExclamationCircleOutline, FaceGrinOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline } from "flowbite-svelte-icons";
-  import { DateInput } from 'date-picker-svelte'
   import { onMount } from "svelte";
 
   let json = {},
@@ -305,7 +304,6 @@
           <!--nawawara ang menu, may kulang gayud
           <Datepicker datepickerFormat="dd/mm/yyyy" range required/>
         -->
-        <DateInput bind:value={date} />
           <Helper class="pt-2 text-orange-500">Specific dates that the project will be undertaken (month/year); ideally to be completed minimum 1 year/ depending on the approved grant</Helper>
         </div>
       </Card>
@@ -337,7 +335,6 @@
               <Button color="alternative">No, cancel</Button>
             </div>
           </Modal>
-
         </div>
       </Card>
     </Card>
