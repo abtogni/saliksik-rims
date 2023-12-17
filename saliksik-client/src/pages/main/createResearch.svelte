@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Button, Card, Datepicker, FloatingLabelInput, Heading, Helper, Input, Label, Modal, MultiSelect, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Textarea, Toolbar, ToolbarButton, ToolbarGroup } from "flowbite-svelte";
   import { BookOutline, CodeOutline, ExclamationCircleOutline, FaceGrinOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline } from "flowbite-svelte-icons";
+  import { DateInput } from 'date-picker-svelte'
   import { onMount } from "svelte";
 
   let json = {},
@@ -61,11 +62,12 @@
   //for pop-up admin-buttons
   let saveAsDraft = false;
   let submitResearchProposal = false;
+
+  //date picker
+  let date = new Date()
 </script>
 
 <main>
-  
-
   <Heading tag="h1" class="mb-4 text-xl">Create Research Proposal</Heading>
 
   <!--old research proposal form
@@ -91,7 +93,7 @@
   </form>
   -->
 
-  <form on:submit={submit} class=" grid gap-6 md:grid-cols-4 w-full items-start mb-6">
+  <form on:submit={submit} class=" grid gap-6 md:grid-cols-4 w-full items-start">
     <!--First Column-->
     <Card size="xl" class="col-span-3">
       <!--First Row-->
@@ -303,6 +305,7 @@
           <!--nawawara ang menu, may kulang gayud
           <Datepicker datepickerFormat="dd/mm/yyyy" range required/>
         -->
+        <DateInput bind:value={date} />
           <Helper class="pt-2 text-orange-500">Specific dates that the project will be undertaken (month/year); ideally to be completed minimum 1 year/ depending on the approved grant</Helper>
         </div>
       </Card>

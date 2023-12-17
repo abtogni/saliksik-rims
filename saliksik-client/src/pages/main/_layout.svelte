@@ -132,7 +132,7 @@
   </Sidebar>
 </div>
 
-<div class="ml-64 pl-4 pr-4 pt-4 bg-white">
+<div class="ml-64 pl-4 pt-4 pr-4 pb-4 bg-white">
   {#if currentUser}
     <slot scoped={{ userID: currentUser._id }} />
   {:else}
