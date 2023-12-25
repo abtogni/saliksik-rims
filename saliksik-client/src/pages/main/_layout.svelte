@@ -1,11 +1,12 @@
 <script lang="ts">
   import UNCLogo from "/login.png";
-  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Drawer, CloseButton, Button, NavHamburger, Navbar, NavBrand, NavUl, NavLi, DarkMode, Badge, Indicator, Input, Avatar, Tooltip, Dropdown, DropdownItem } from "flowbite-svelte";
+  import { Section, TableHeader } from 'flowbite-svelte-blocks';
+  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Drawer, CloseButton, Button, NavHamburger, Navbar, NavBrand, NavUl, NavLi, DarkMode, Badge, Indicator, Input, Avatar, Tooltip, Dropdown, DropdownItem, Search, DropdownDivider, Checkbox, Table, TableBodyCell, TableHead, Heading, TableHeadCell, TableBody, TableBodyRow, TableSearch, P } from "flowbite-svelte";
   import Menu from "../../assets/menu.svelte";
   import { goto } from "@roxi/routify";
   import { onMount } from "svelte";
   import { userData, isAuthenticated, updateUser } from "../../components/store";
-  import { BookOutline, CogOutline, UserOutline, CirclePlusOutline, InfoCircleSolid, ArrowRightOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline } from "flowbite-svelte-icons";
+  import { BookOutline, CogOutline, UserOutline, CirclePlusOutline, InfoCircleSolid, ArrowRightOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline, ChevronDownOutline, DotsVerticalOutline, EyeOutline, EditOutline, ClipboardOutline, FilterOutline, SortOutline, ChevronLeftOutline } from "flowbite-svelte-icons";
   import { sineIn } from "svelte/easing";
 
   var researches: any;
@@ -72,7 +73,8 @@
   };
   let spanClass = "flex-1 ml-3 whitespace-nowrap";
 
-  let hidden1 = true;
+  //drawer for all researches
+  let hidden1 = false;
   let transitionParams = {
     x: -320,
     duration: 200,
@@ -87,19 +89,24 @@
     <Input class="w-5/6 truncate ..." type="text" id="researchProjectTitle" placeholder="Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness"></Input>
     <StarOutline />
     <Tooltip>Not Starred</Tooltip>
-    <Badge class="pt-2 pr-4 pb-2" rounded><Indicator color="orange" size="md" class="me-1.5" />No Status</Badge>
+    <Badge class="pt-2 pr-4 pb-2 " rounded><Indicator color="orange" size="md" class="me-1.5" />No Status</Badge>
   </form>
 
   <div class="flex items-center gap-4">
     <ClockOutline />
     <Tooltip>Last edit was 00 hours ago</Tooltip>
-    <DotsHorizontalOutline />
-    <Dropdown class="p-2">
-      <DropdownItem class="flex items-center gap-2"><LinkOutline />Copy research link</DropdownItem>
-
-      <DropdownItem class="flex items-center gap-2"><ArchiveOutline />Archive research</DropdownItem>
-      <DropdownItem class="flex items-center gap-2"><TrashBinOutline />Delete research</DropdownItem>
-    </Dropdown>
+    <div>
+      <DotsHorizontalOutline />
+      <Dropdown class="">
+        <DropdownItem class="flex items-center gap-2"><LinkOutline />Copy research link</DropdownItem>
+  
+        <DropdownItem class="flex items-center gap-2"><ArchiveOutline />Archive research</DropdownItem>
+        <DropdownItem class="flex items-center gap-2"><TrashBinOutline />Delete research</DropdownItem>
+      </Dropdown>
+      
+    </div>
+    <Tooltip>More</Tooltip>
+    
   </div>
 </nav>
 
@@ -127,7 +134,11 @@
           <svelte:fragment slot="icon">
             <CogOutline />
           </svelte:fragment>
-
+          <SidebarItem class="" label="All researches" on:click={() => (hidden1 = false)}>
+            <svelte:fragment slot="icon">
+              <FolderOutline />
+            </svelte:fragment>
+          </SidebarItem>
           <SidebarDropdownItem label="Check Presentations" href="/main/admin/checkPresentations" />
           <SidebarDropdownItem label="Check Proposals" href="/main/admin/checkProposals" />
           <SidebarDropdownItem label="Create User Accounts" href="/main/admin/createAccount" />
@@ -168,21 +179,56 @@
 </div>
 
 <!--drawer for creating new research-->
-<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden1} id="sidebar1">
-  <div class="flex items-center">
-    <h5 id="drawer-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
-      <InfoCircleSolid class="w-4 h-4 me-2.5" />Info
-    </h5>
-    <CloseButton on:click={() => (hidden1 = true)} class="mb-4 dark:text-white" />
+<Drawer transitionType="fly" {transitionParams} bind:hidden={hidden1} id="sidebar1" class="flex flex-col w-1/2 p-4 gap-2">
+  <div class="flex justify-between items-center gap-2">
+    <ChevronLeftOutline on:click={() => (hidden1 = true)} class="w-4 h-4 mr-4 mb-2 dark:text-white" />
+    <Heading tag="h6" class="flex gap-2"><FolderOutline/>All researches</Heading>
+    <Button size="md" outline class="w-60 sm:w-72"><CirclePlusOutline class="w-4 h-4 me-2"/>Create new research</Button>
+    
   </div>
-  <p class="mb-6 text-sm text-gray-500 dark:text-gray-400">
-    Supercharge your hiring by taking advantage of our <a href="/" class="text-primary-600 underline dark:text-primary-500 hover:no-underline"> limited-time sale </a>
-    for Flowbite Docs + Job Board. Unlimited access to over 190K top-ranked candidates and the #1 design job board.
-  </p>
-  <div class="grid grid-cols-2 gap-4">
-    <Button color="light" href="/">Learn more</Button>
-    <Button href="/" class="px-4">Get access <ArrowRightOutline class="w-3.5 h-3.5 ms-2" /></Button>
+  
+  <div class="flex items-center gap-2">
+    <Search></Search>
+    <Button size="md" class="w-40 md:w-52"><FilterOutline class="w-4 h-4 me-2"/>Filter by</Button>
+    <Dropdown>
+      <DropdownItem>Title</DropdownItem>
+      <DropdownItem>Status</DropdownItem>
+    </Dropdown>
   </div>
+  
+  <Table hoverable={true} class="table-fixed">
+    
+    <TableHead class="">
+      <TableHeadCell class="w-3/5"><div class="flex items-center gap-2"><SortOutline class="w-4 h-4 me-2"/>Title</div></TableHeadCell>
+      <TableHeadCell><div class="flex items-center gap-2"><SortOutline class="w-4 h-4 me-2"/>Status</div></TableHeadCell>
+      <TableHeadCell><div class="flex items-center gap-2"><SortOutline class="w-4 h-4 me-2"/>Recent</div></TableHeadCell>
+    </TableHead>
+    <TableBody>
+        <TableBodyRow>
+          <TableBodyCell class="">
+            <div class="flex items-center gap-2 p-0">
+              <StarOutline class="w-4 h-4 p-0"/>
+              <P size="sm" weight="medium" class="line-clamp-1">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
+            </div>
+            <Tooltip>Insert full title</Tooltip>
+          </TableBodyCell>
+          
+          <TableBodyCell class="">
+            No status
+          </TableBodyCell>
+          <TableBodyCell class="">
+            <div class="flex items-center gap-2">
+              <P size="sm" weight="medium" class="line-clamp-1">01/01/2023</P>
+              <DotsHorizontalOutline/>
+
+            </div>
+            
+          </TableBodyCell>
+        </TableBodyRow>
+      
+    </TableBody>
+  </Table>
+  
 </Drawer>
 
 <!--content-->
@@ -193,7 +239,8 @@
     <slot />
   {/if}
 </div>
-<!--
+
+<!--old layout
 <div class="sidebar h-full">
   <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover-bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover-bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>

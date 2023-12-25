@@ -19,6 +19,7 @@
     "lucide-react": "^0.287.0"
   },
   "devDependencies": {
+    "flowbite-svelte-blocks": "^0.5.1",
     "flowbite-svelte-icons": "^0.4.5"
   }
 }
