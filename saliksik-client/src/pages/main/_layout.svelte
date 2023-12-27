@@ -8,6 +8,7 @@
   import { userData, isAuthenticated, updateUser } from "../../components/store";
   import { BookOutline, CogOutline, UserOutline, CirclePlusOutline, InfoCircleSolid, ArrowRightOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline, ChevronDownOutline, DotsVerticalOutline, EyeOutline, EditOutline, ClipboardOutline, FilterOutline, SortOutline, ChevronLeftOutline } from "flowbite-svelte-icons";
   import { sineIn } from "svelte/easing";
+    import moment from "moment";
 
   var researches: any;
   let loading = true;
@@ -204,27 +205,37 @@
       <TableHeadCell><div class="flex items-center gap-2"><SortOutline class="w-4 h-4 me-2"/>Recent</div></TableHeadCell>
     </TableHead>
     <TableBody>
-        <TableBodyRow>
-          <TableBodyCell class="">
-            <div class="flex items-center gap-2 p-0">
-              <StarOutline class="w-4 h-4 p-0"/>
-              <P size="sm" weight="medium" class="line-clamp-1">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
-            </div>
-            <Tooltip>Insert full title</Tooltip>
-          </TableBodyCell>
-          
-          <TableBodyCell class="">
-            No status
-          </TableBodyCell>
-          <TableBodyCell class="">
-            <div class="flex items-center gap-2">
-              <P size="sm" weight="medium" class="line-clamp-1">01/01/2023</P>
-              <DotsHorizontalOutline/>
 
-            </div>
+        {#if loading}
+          <div>Loading...</div>
+        {:else if researches}
+            {#each researches as r}
+            <TableBodyRow>
+              <TableBodyCell class="">
+              <div class="flex items-center gap-2 p-0">
+                <StarOutline class="w-4 h-4 p-0"/>
+                <P size="sm" weight="medium" class="line-clamp-1"><a href={`/main/${r._id}`}>{r.researchTitle}</a></P>
+              </div>
+              <Tooltip>{r.researchTitle}</Tooltip>
+            </TableBodyCell>
             
-          </TableBodyCell>
-        </TableBodyRow>
+            <TableBodyCell class="">
+              {r.researchStatus}
+            </TableBodyCell>
+            <TableBodyCell class="">
+              <div class="flex items-center gap-2">
+                <P size="sm" weight="medium" class="line-clamp-1">{moment(r.createdAt).calendar()}</P>
+                <DotsHorizontalOutline/>
+  
+              </div>
+              
+            </TableBodyCell>
+          </TableBodyRow>
+            {/each}
+        {/if}
+            
+            
+
       
     </TableBody>
   </Table>
