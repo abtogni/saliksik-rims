@@ -1,6 +1,6 @@
 <script>
   import { Avatar, Breadcrumb, BreadcrumbItem, Button, Card, Gallery, Heading, Hr, P, Tooltip } from "flowbite-svelte";
-  import { DotsHorizontalOutline, DownloadOutline, BookmarkOutline, EyeOutline, ClipboardOutline, QuoteOutline, HomeOutline, ChevronDoubleRightOutline } from "flowbite-svelte-icons";
+  import { DotsHorizontalOutline, DownloadOutline, BookmarkOutline, EyeOutline, ClipboardOutline, QuoteOutline, HomeOutline, ChevronDoubleRightOutline, GridOutline, SearchOutline } from "flowbite-svelte-icons";
 
   const images = [
     { alt: "technology roadmap", src: "https://i.pinimg.com/564x/6a/38/c4/6a38c4ac733795a6b8312d0c4d800177.jpg" },
@@ -11,15 +11,7 @@
 </script>
 
 <main>
-  <div class="mb-3">
-    <Breadcrumb class="">
-      <BreadcrumbItem href="/main/personnel/personnelHome" home>
-        <svelte:fragment slot="icon">
-          <HomeOutline class="w-4 h-4 me-2" />
-        </svelte:fragment>Home
-      </BreadcrumbItem>
-    </Breadcrumb>
-  </div>
+  <div class="flex items-center gap-2 pb-2"><SearchOutline size="sm"  /><P weight="semibold" size="2xl" class="">Browse Researches</P></div>
   
   <div class="grid grid-cols-3 gap-2 items-start">
     
