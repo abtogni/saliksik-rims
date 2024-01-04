@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Card, Dropdown, DropdownItem, FloatingLabelInput, Helper, Hr, Indicator, Input, Modal, P, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Tabs, Tooltip } from "flowbite-svelte";
-  import { BookOutline, BookmarkOutline, CalendarMonthOutline, CalendarWeekOutline, ClipboardOutline, ClockOutline, DotsHorizontalOutline, EditOutline, EyeOutline, FileCirclePlusOutline, FileLinesOutline, GridOutline, QuestionCircleOutline, TrashBinOutline } from "flowbite-svelte-icons";
+  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Card, Dropdown, DropdownItem, FloatingLabelInput, Helper, Hr, Indicator, Input, Listgroup, Modal, P, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Tabs, Tooltip } from "flowbite-svelte";
+  import { BookOutline, BookmarkOutline, CalendarMonthOutline, CalendarWeekOutline, ClipboardOutline, ClockOutline, DotsHorizontalOutline, EditOutline, EyeOutline, FileCirclePlusOutline, FileLinesOutline, GridOutline, MessagesOutline, QuestionCircleOutline, TrashBinOutline } from "flowbite-svelte-icons";
   import { goto } from "@roxi/routify";
   import moment from "moment";
   import { onMount } from "svelte";
@@ -74,12 +74,31 @@
 
   //modal for creating concept note
   let createConceptNote = false;
+
+  let list = [
+    {
+      name: "Nora Elizabeth F. Maniquiz",
+      college: "College Of Computer Studies",
+      href: '/',
+      class: 'hover:bg-orange-100'
+    },
+    {
+      name: "Kristine Idda P. Del Rosario",
+      college: "College Of Nursing",
+      class: 'hover:bg-orange-100'
+    },
+    {
+      name: "Engr. Christine C. Bautista",
+      college: "College Of Engineering And Architecture",
+      class: 'hover:bg-orange-100'
+    },
+  ];
 </script>
 
 <main class="bg-white">
   <Tabs style="underline" class="">
-    <TabItem open title="">
-      <div slot="title" class="flex items-center gap-2"><FileLinesOutline size="sm" />Concept note</div>
+    <TabItem title="">
+      <div slot="title" class="flex items-center gap-2"><FileLinesOutline size="sm" />Concept Note</div>
 
       <div class="grid grid-flow-row justify-items-start gap-2">
         <Alert dismissable color="blue" class="border-l-8">
@@ -89,7 +108,11 @@
           </div>
           <p class="mt-2 text-sm">In this section, you are required to submit a concept note of your research. Click the create concept note button and fill out all necessary fields. You can have multiple draft and only one submission. Once submitted, a notice to proceed will be sent on your notification.</p>
         </Alert>
-        <Button on:click={() => (createConceptNote = true)} class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Create concept note</Button>
+        <div class="flex items-center gap-2">
+          <Button on:click={() => (createConceptNote = true)} class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Create Concept Note</Button>
+          <Button on:click={() => (createConceptNote = true)} class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Submit Existing Research</Button>
+        </div>
+
         <Table hoverable={true} noborder={true} class="">
           <TableHead>
             <TableHeadCell class="w-3/4">Concept Note Name</TableHeadCell>
@@ -245,8 +268,8 @@
       </div>
     </TabItem>
 
-    <TabItem title="">
-      <div slot="title" class="flex items-center gap-2"><CalendarMonthOutline size="sm" />Research presentation</div>
+    <TabItem open title="">
+      <div slot="title" class="flex items-center gap-2"><CalendarMonthOutline size="sm" />Initial Presentation</div>
       <div class="grid grid-flow-row justify-items-start gap-2">
         <Alert dismissable color="blue" class="border-l-8">
           <div class="flex items-center gap-2">
@@ -255,16 +278,68 @@
           </div>
           <p class="mt-2 text-sm">In this section, you are required to submit a concept note of your research. Click the create concept note button and fill out all necessary fields. You can have multiple draft and only one submission. Once submitted, a notice to proceed will be sent on your notification.</p>
         </Alert>
+        <div class="flex items-center gap-2">
+          <div class="">
+            <Button on:click={() => (createConceptNote = true)} class="flex flex-nowrap items-center gap-2"><FileCirclePlusOutline size="sm" /> Set Schedule</Button>
+          </div>
+
+          <Badge border large color="red" class="flex items-center gap-2"><Indicator color="red" class="" />No Schedule</Badge>
+          <Badge border large class="flex items-center gap-2"><Indicator color="orange" class="" />Waiting For Approval</Badge>
+          <Badge border large color="blue" class="flex items-center gap-2"><Indicator color="blue" class="" />January 6, 2024 13:00</Badge>
+          <Tooltip>Schedule Is Set</Tooltip>
+        </div>
+
+        <div class="grid grid-flow-col-dense gap-2">
+          <div class="">
+            <P weight="semibold" size="xl" class="">List Of Panelist</P>
+            <Card size="sm">
+              <Listgroup active items={list} let:item  class="border-0 dark:!bg-transparent">
+                <div class="flex justify-start items-center gap-4 w-full ">
+                  <div class="">
+                    <P size="base" weight="medium" class=" text-gray-900 truncate dark:text-white">{item.name}</P>
+                    <P size="sm" weight="normal" class=" text-gray-500 truncate dark:text-gray-400">{item.college}</P>
+                  </div>
+                </div>
+              </Listgroup>
+            </Card>
+          </div>
+
+          <div class="">
+            <P weight="semibold" size="xl" class="">Panelist Comments</P>
+            <Card size="xl">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</Card>
+          </div>
+        </div>
       </div>
+    </TabItem>
+    <TabItem title="Bookmarks">
+      <div slot="title" class="flex items-center gap-2"><BookmarkOutline size="sm" />Final Presentation</div>
     </TabItem>
     <TabItem title="Bookmarks">
       <div slot="title" class="flex items-center gap-2"><BookmarkOutline size="sm" />Bookmarks</div>
     </TabItem>
-    <TabItem title="Bookmarks">
+    <TabItem title="">
       <div slot="title" class="flex items-center gap-2"><GridOutline size="sm" />Dashboard</div>
+      <Alert dismissable color="blue" class="border-l-8">
+        <div class="flex items-center gap-2">
+          <QuestionCircleOutline slot="icon" size="sm" />
+          <span class="text-lg font-medium">Dashboard</span>
+        </div>
+        <p class="mt-2 text-sm">Check and manage your activities and other things that may require your attention.</p>
+      </Alert>
+      <div class="grid grid-flow-row justify-items-start gap-2 pt-2">
+        <Card size="md">
+          <P weight="semibold" size="lg">Concept Note</P>
+          <Hr classHr="my-1" />
+        </Card>
+        <Card size="md">
+          <P weight="semibold" size="lg">Initial Presentation</P>
+          <Hr classHr="my-1" />
+        </Card>
+      </div>
     </TabItem>
   </Tabs>
 
+  <!--modal for create concept note-->
   <Modal title="Enter Concept Note Name" bind:open={createConceptNote} size="xs" autoclose class="w-full">
     <form class="grid grid-flow-row grid-rows-1 items-start gap-2">
       <FloatingLabelInput type="text" style="outlined" id="floating_filled" name="floating_filled" label="Concept Note Name" required class="w-full">Concept Note Name</FloatingLabelInput>
@@ -274,7 +349,6 @@
         <Button href="/main/personnel/createConceptNote" class="w-full">Continue</Button>
         <Button class="w-full">Cancel</Button>
       </div>
-      
     </form>
   </Modal>
 
