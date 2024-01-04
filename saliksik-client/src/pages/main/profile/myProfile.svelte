@@ -26,7 +26,6 @@ function changeComponent(event) {
       </div>
     </Card>
     {/if} 
-   </div>
    <div>
 <!-- Include Bootstrap CSS-->
 <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'>
@@ -52,4 +51,3 @@ function changeComponent(event) {
 </div>
 </div>
   </main>
-  
