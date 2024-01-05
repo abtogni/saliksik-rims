@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import * as userHandler from '../../services/userHandler';
-import mongoose, { Document } from "mongoose";
 import { UserModel } from '../../models/userModel';
 
 const successResponse = (res: Response, data: any, status = 200) => {
@@ -59,21 +58,21 @@ export const createUser = async (req: Request, res: Response) => {
 export const updateUser = async (req: Request, res: Response) => {
   const { id } = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: 'No such user' });
+  if (!id) {
+    return errorResponse(res, 'User ID is missing in the request', 400);
   }
 
   try {
     const user = await UserModel.findOneAndUpdate({ _id: id }, { ...req.body }, { new: true });
 
     if (!user) {
-      return res.status(404).json({ error: 'No such user' });
+      return errorResponse(res, 'User not found', 404);
     }
 
-    res.status(200).json(user);
+    successResponse(res, user);
   } catch (error) {
     console.error('Error updating user:', error);
-    res.status(500).json({ error: 'Internal server error' });
+    errorResponse(res, 'Internal server error', 500);
   }
 };
 
@@ -84,7 +83,7 @@ export const userLogin = async (req: Request, res: Response) => {
     const token = await userHandler.userLogin(userID, password, userType);
     res.cookie('jwt', token, { httpOnly: true });
     successResponse(res, { message: 'Login successful' });
-  } catch (err:any) {
+  } catch (err: any) {
     errorResponse(res, err.message, 401);
   }
 };

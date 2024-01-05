@@ -1,16 +1,13 @@
 import jwt from 'jsonwebtoken';
-import dotenv from 'dotenv';
 import { NextFunction, Request, Response } from 'express';
 import { UserModel } from '../models/userModel';
 
-dotenv.config();
-
 const secretKey = process.env.JWT_SECRET || 'unc research office';
 
-export const requireAuth = async(req: Request, res: Response, next: NextFunction) => {
+export const requireAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.jwt;
 
-  jwt.verify(token, secretKey, (err: any, decodedToken: any) => {
+  jwt.verify(token, secretKey, (err: jwt.VerifyErrors | null, decodedToken: any) => {
     if (err) {
       console.error(err.message);
       return res.status(401).json({ error: 'Authentication failed' });
@@ -23,13 +20,11 @@ export const requireAuth = async(req: Request, res: Response, next: NextFunction
   });
 };
 
-
-
-export const checkUser = async (req: Request, res: Response, next: NextFunction) => {
+export const checkUser = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.jwt;
 
   if (token) {
-    jwt.verify(token, secretKey, async (err: any, decodedToken: any) => {
+    jwt.verify(token, secretKey, async (err: jwt.VerifyErrors | null, decodedToken: any) => {
       if (err) {
         console.error(err.message);
         res.locals.user = null;

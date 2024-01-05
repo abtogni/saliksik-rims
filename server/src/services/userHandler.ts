@@ -9,6 +9,7 @@ export const getUsers = async (researchID: string) => {
     const users = await UserModel.find({ researchID }).sort({ createdAt: -1 });
     return users;
   } catch (err) {
+    console.error(err);
     throw new Error('An error occurred while fetching users');
   }
 };
@@ -21,7 +22,7 @@ export const getUserByID = async (userID: string) => {
     }
     return user;
   } catch (err) {
-    console.error(err)
+    console.error(err);
     throw new Error('An error occurred while fetching the user');
   }
 };
@@ -49,6 +50,7 @@ export const createUser = async (
     });
     return user;
   } catch (err) {
+    console.error(err);
     throw new Error('An error occurred while creating the user');
   }
 };
@@ -62,6 +64,7 @@ export const userLogin = async (userID: string, password: string, userType: stri
     const token: string = createToken(user._id);
     return token;
   } catch (err: any) {
+    console.error(err);
     throw new Error(err.message);
   }
 };
