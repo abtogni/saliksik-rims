@@ -72,7 +72,7 @@
     <Card size="xl" class="gap-2 w-full">
       <div class="flex justify-between items-start gap-2">
         <P weight="semibold" size="base" class="w-11/12">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
-        <a href="#" class="text-blue-700 text-sm font-medium w-52 text-right hover:underline">Edit Concept Note Name</a>
+        <a href="/" class="text-blue-700 text-sm font-medium w-52 text-right hover:underline">Edit Concept Note Name</a>
       </div>
       <div class="flex justify-start items-center gap-2">
         <div><P weight="normal" class="flex items-center gap-2"><ClockOutline size="sm" /></P></div>
@@ -80,6 +80,7 @@
         <Badge border large class="flex items-center gap-2"><Indicator color="yellow" class="" />No Status</Badge>
       </div>
     </Card>
+
     <Card size="xl" padding="none" class="gap-2 pt-6 w-full border-none shadow-none">
       <div class="flex justify-between items-start gap-2">
         <P weight="semibold" size="xl" class="">Create Concept Note</P>
@@ -90,6 +91,7 @@
         </div>
       </div>
     </Card>
+
     <Card size="xl" class="gap-2 w-full">
       <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Research Title" required class="w-full">Research Title</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
@@ -99,7 +101,6 @@
       <Helper class=" text-blue-700">State the name of agency to be tapped for funding/ co-implementing the project.</Helper>
       <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Site/s of Implementation" required class="w-full">Site/s of Implementation</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
-
       <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Total Project Cost" required class="w-full">Total Project Cost</FloatingLabelInput>
       <Helper class=" text-blue-700">Include the specific budget allocations for personnel service, maintenance and operations, equipment, trainings/workshops, and administrative costs.</Helper>
       <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Funding Source" required class="w-full">Funding Source</FloatingLabelInput>
@@ -115,6 +116,7 @@
         <Helper class="pt-2 text-orange-500"></Helper>
       </div>
     </Card>
+
     <Card size="xl" class="gap-2 w-full">
       <P weight="semibold" size="lg">Project Description</P>
       <Textarea id="editor" rows="15" class="mb-0 p-0">
@@ -133,6 +135,7 @@
       </Textarea>
       <Helper class=" text-blue-700">Formally written declaration of the project and its idea and context to explain the goals and objectives to be reached and other relevant information that explains the need for the project and aims to describe the amount of work planned for implementation; refers to a simple explanation or depiction of the project that can be used as communication material.</Helper>
     </Card>
+
     <Card size="xl" class="gap-2 w-full">
       <P weight="semibold" size="xl">Significance</P><Textarea id="editor" rows="15" class="mb-0 p-0">
         <Toolbar slot="header" embedded class="m-0 p-0">
