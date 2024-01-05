@@ -1,6 +1,7 @@
 <script lang="ts">
   import { goto } from "@roxi/routify";
-  import { Heading, TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, TableSearch, Avatar, Popover, Card, Button, Modal, Accordion, AccordionItem, Listgroup, ListgroupItem, ImagePlaceholder } from "flowbite-svelte";
+  import { Heading, TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, TableSearch, Avatar, Popover, Card, Button, Modal, Accordion, AccordionItem, Listgroup, ListgroupItem, ImagePlaceholder, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, FloatingLabelInput } from "flowbite-svelte";
+  import { ClipboardOutline, ClockOutline, DotsHorizontalOutline, EditOutline, FileLinesOutline, FileOutline, FilterOutline, GridOutline, InfoCircleOutline, SortOutline, StarOutline, TrashBinOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
@@ -71,311 +72,580 @@
   const toggleRow = (i: any) => {
     openRow = openRow === i ? null : i;
   };
+
+  //modal for concept note approval
+  let approveConceptNote = false;
+
+  //modal for concept note rejection
+  let rejectConceptNote = false;
 </script>
 
-<main class="h-full w-screen bg-white">
-  <Heading tag="h1" class="mb-6 text-2xl">All Researches</Heading>
+<main>
+  <div class="flex items-center gap-2"><GridOutline size="sm" /><P weight="semibold" size="2xl" class="">Research Dashboard</P></div>
 
-  <!--tabs and table-->
-  <Tabs style="underline" class="grid grid-flow-col justify-stretch w-full">
-    <div class="grid grid-flow-col justify-start">
-      <!--tab-approval-->
-      <TabItem open title="Approval">
-        <TableSearch hoverable={true} class="table-fixed w-full" placeholder="Search by maker name" bind:inputValue={searchTerm}>
-          <!--table-head-->
-          <TableHead class="capitalize">
-            <TableHeadCell class="w-6/12">Research Title</TableHeadCell>
-            <TableHeadCell>Proponents</TableHeadCell>
-            <TableHeadCell>Agency/Dept.</TableHeadCell>
-            <TableHeadCell>Date Submitted</TableHeadCell>
-          </TableHead>
+  <!--all researches-->
+  <Tabs style="underline" class="">
+    <TabItem open>
+      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>All Researches</div>
+      <div class="flex items-center gap-2">
+        <Search></Search>
+        <div class="flex items-center gap-2">
+          <Button class="gap-2"><FilterOutline size="sm" />Status</Button>
+          <Dropdown>
+            <DropdownItem>For Concept Note Approval</DropdownItem>
+            <DropdownItem>Initial Presentation Approval</DropdownItem>
+            <DropdownItem>Final Presentation Approval</DropdownItem>
+            <DropdownItem>For Incentive Approval</DropdownItem>
+            <DropdownItem>Published</DropdownItem>
+            <DropdownItem>Rejected</DropdownItem>
+          </Dropdown>
+        </div>
+      </div>
 
-          <!--table-rows-->
-          <TableBody>
-            {#if proposals}
-              {#if researches}
-                {#each proposals as p, i}
-                  {#if researches.find((x) => x._id === p.researchID)}
-                    {#each researches.filter((x) => x._id === p.researchID) as research}
-                      <TableBodyRow on:click={() => toggleRow(i)}>
-                        <TableBodyCell class="truncate">{research.researchTitle}</TableBodyCell>
-                        <TableBodyCell class="flex pl-10 ">
-                          <!-- to do -->
-                          <Avatar>AR</Avatar>
-                          <Avatar>JD</Avatar>
-                          <Avatar>DC</Avatar>
-                          <Avatar>DI</Avatar>
-                          <!-- to do -->
+      <Table hoverable={true} noborder={true}>
+        <TableHead class="">
+          <TableHeadCell>
+            <div class="flex items-center gap-2">
+              <Indicator color="dark"></Indicator>
+            </div>
+            <Tooltip arrow={false}>Status</Tooltip>
+          </TableHeadCell>
+          <TableHeadCell class="p-0 w-3/4"><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Title</div></TableHeadCell>
+          <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Leaders</div></TableHeadCell>
+          <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Agency/Department</div></TableHeadCell>
+          <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Date Submitted</div></TableHeadCell>
+        </TableHead>
+        <TableBody>
+          {#if proposals}
+            {#if researches}
+              {#each proposals as p, i}
+                {#if researches.find((x) => x._id === p.researchID)}
+                  {#each researches.filter((x) => x._id === p.researchID) as research}
+                    <TableBodyRow on:click={() => toggleRow(i)}>
+                      <TableBodyCell class="">
+                        <div class="flex justify-start items-center gap-2 p-0">
+                          <Indicator color="orange"></Indicator>
+                          <Tooltip arrow={false}>For Concept Note Approval</Tooltip>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="p-0">
+                        <div class="flex justify-start items-center gap-2">
+                          <P size="sm" weight="normal" class="line-clamp-1 text-black">{research.researchTitle}</P>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="">
+                        <div class="flex items-center gap-1.5">
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar>
+                          <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar>
+                          <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar>
+                          <Tooltip arrow={false}>Danny Casimero</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar>
+                          <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="">
+                        <div class="flex justify-start items-start gap-2">
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">College of Computer Studies</Badge>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="">
+                        <div class="flex justify-start items-start gap-2">
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">{moment(p.createdAt).format("lll")}</Badge>
+                        </div>
+                      </TableBodyCell>
+                    </TableBodyRow>
+                    {#if openRow === i}
+                      <TableBodyRow on:dblclick={() => p} class="">
+                        <TableBodyCell colspan="5" class="">
+                          <div class="flex flex-wrap justify-center gap-2">
+                            <Card size="xl" padding="none" class="gap-2 w-full border-none shadow-none">
+                              <div class="flex justify-between items-start gap-2">
+                                <P weight="semibold" size="xl" class="">Concept Note Overview</P>
+                                <div class="flex items-center gap-2">
+                                  <Button on:click={() => (approveConceptNote = true)} class="gap-2"><EditOutline size="sm" />Approve</Button>
+                                  <Button on:click={() => (rejectConceptNote = true)} class="gap-2"><ClipboardOutline size="sm" />Reject</Button>
+                                </div>
+                              </div>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="xl">{research.researchTitle}</P>
+
+                              <div class="flex items-center gap-2 pt-2">
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar><P weight="normal" size="base">Agnes Reyes</P>
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar><P weight="normal" size="base">June Arreb Danila</P>
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar><P weight="normal" size="base">Danny Casimero</P>
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar><P weight="normal" size="base">Dennis Ignacio</P>
+                              </div>
+                              <div class="flex justify-start gap-2 pt-2">
+                                <div class="w-1/2 gap-2">
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Implementing Agency/Department:</P>
+                                    <P></P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Cooperating Agency:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Site/s of Implementation:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                </div>
+                                <div class="w-1/2 gap-2">
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Project Duration:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Total Project Cost:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Funding Source:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                </div>
+                              </div>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Project Description</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.description}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="xl">Significance</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.significance}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Objectives</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.objectives}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Methodology</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.methodolog}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Technology Roadmap</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal"></P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Expected Outputs (6Ps)</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal"></P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Work Plan</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal"></P>
+                            </Card>
+                          </div>
                         </TableBodyCell>
-                        <!-- to do -->
-                        <TableBodyCell>{research.researchAgency}</TableBodyCell>
-                        <!-- to do -->
-                        <TableBodyCell>{moment(p.createdAt).format("lll")}</TableBodyCell>
                       </TableBodyRow>
-
-                      {#if openRow === i}
-                        <TableBodyRow on:dblclick={() => p} class="table-fixed">
-                          <TableBodyCell colspan="4" class="p-0 ">
-                            <!--research overview-->
-                            <div class="flex justify-between w-full px-2 py-3" transition:slide={{ duration: 300, axis: "y" }}>
-                              <!--left-card-->
-                              <div class="w-8/12 whitespace-normal">
-                                <Card class="mb-5 " size="xl">
-                                  <Heading tag="h1" class="text-xl mb-2  ">{research.researchTitle}</Heading>
-                                  <div>
-                                    <p class="text-sm mb-2">{moment(p.createdAt).format("lll")}</p>
-                                  </div>
-
-                                  <div class="flex justify-start items-center pl-5 mb-2">
-                                    <div class="flex justify-self-start gap-2 pt-1">
-                                      <Avatar stacked border size="xs" class="text-xs ring-orange-400">AR</Avatar>
-                                      <div class="flex justify-start items-center">
-                                        <p class="text-sm">Agnes Reyes</p>
-                                      </div>
-                                    </div>
-
-                                    <div class="flex justify-self-start gap-2 pl-7 pt-1">
-                                      <Avatar stacked border size="xs" class="text-xs ring-orange-400">JD</Avatar>
-                                      <div class="flex justify-start items-center">
-                                        <p class="text-sm">June Arreb Danila</p>
-                                      </div>
-                                    </div>
-
-                                    <div class="flex justify-self-start gap-2 pl-7 pt-1">
-                                      <Avatar stacked border size="xs" class="text-xs ring-orange-400">DC</Avatar>
-                                      <div class="flex justify-start items-center">
-                                        <p class="text-sm">Danny Casimero</p>
-                                      </div>
-                                    </div>
-
-                                    <div class="flex justify-self-start gap-2 pl-7 pt-1">
-                                      <Avatar stacked border size="xs" class="text-xs ring-orange-400">DI</Avatar>
-                                      <div class="flex justify-start items-center">
-                                        <p class="text-sm">Dennis Ignacio</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </Card>
-                                <Accordion activeClass="bg-white" multiple class="whitespace-normal ">
-                                  <AccordionItem open>
-                                    <Card slot="header" class="shadow-none border-none  bg-transparent" size="lg" padding="none">
-                                      <Heading tag="h1" class="text-lg divide-dashed">Project Description</Heading>
-                                    </Card>
-                                    <p class="mb-2">{p.description}</p>
-                                  </AccordionItem>
-
-                                  <AccordionItem open>
-                                    <Card slot="header" class="shadow-none border-none  bg-transparent" size="lg" padding="none">
-                                      <Heading tag="h1" class="text-lg divide-dashed">Significance</Heading>
-                                    </Card>
-                                    <p class="mb-2">{p.significance}</p>
-                                  </AccordionItem>
-
-                                  <AccordionItem open>
-                                    <Card slot="header" class="shadow-none border-none  bg-transparent" size="lg" padding="none">
-                                      <Heading tag="h1" class="text-lg divide-dashed">Objectives</Heading>
-                                    </Card>
-
-                                    <p class="mb-2">{p.objectives}</p>
-                                  </AccordionItem>
-
-                                  <AccordionItem open>
-                                    <Card slot="header" class="shadow-none border-none  bg-transparent " size="lg" padding="none">
-                                      <Heading tag="h1" class="text-lg divide-dashed">Methodology</Heading>
-                                    </Card>
-                                    <p class="mb-2">{p.methodolog}</p></AccordionItem>
-
-                                  <AccordionItem open>
-                                    <Card slot="header" class="shadow-none border-none  bg-transparent" size="lg" padding="none">
-                                      <Heading tag="h1" class="text-lg divide-dashed">Technology Roadmap</Heading>
-                                    </Card>
-                                    <p class="mb-2">To be followed...</p>
-                                  </AccordionItem>
-
-                                  <AccordionItem open>
-                                    <Card slot="header" class="shadow-none border-none  bg-transparent" size="lg" padding="none">
-                                      <Heading tag="h1" class="text-lg divide-dashed">Expected Outputs (6Ps)</Heading>
-                                    </Card>
-                                    <p class="mb-2">Publication, Intellectual Property, and Product</p>
-                                  </AccordionItem>
-
-                                  <AccordionItem open>
-                                    <Card slot="header" class="shadow-none border-none  bg-transparent" size="lg" padding="none">
-                                      <Heading tag="h1" class="text-lg divide-dashed">Work Plan</Heading>
-                                    </Card>
-                                    <p class="mb-2">To be followed...</p>
-                                  </AccordionItem>
-                                </Accordion>
-                              </div>
-
-                              <!--right-cards-->
-                              <div class=" justify-self-end pl-12 w-1/3">
-                                <!--Project Leaders-->
-                                <Listgroup active class="w-full pb-5 mb-5">
-                                  <Heading tag="h1" class="p-2 pl-4 text-left text-xl ">Project Leaders</Heading>
-                                  <ListgroupItem class="text-base font-semibold gap-2">
-                                    <Avatar border size="sm" class="text-sm ring-orange-400">AR</Avatar> Agnes Reyes
-                                  </ListgroupItem>
-                                  <ListgroupItem class="text-base font-semibold gap-2">
-                                    <Avatar border size="sm" class="text-sm ring-orange-400">JD</Avatar> June Arreb Danila
-                                  </ListgroupItem>
-                                  <ListgroupItem class="text-base font-semibold gap-2">
-                                    <Avatar border size="sm" class="text-sm ring-orange-400">DC</Avatar> Danny Casimero
-                                  </ListgroupItem>
-
-                                  <ListgroupItem class="text-base font-semibold gap-2">
-                                    <Avatar border size="sm" class="text-sm ring-orange-400">DI</Avatar> Dennis Ignacio
-                                  </ListgroupItem>
-                                </Listgroup>
-
-                                <Card class="pb-5 mb-5 whitespace-normal" size="lg" padding="none">
-                                  <Card class="shadow-none  border-none pl-5 pt-1 pr-5" size="lg" padding="none">
-                                    <div>
-                                      <Heading tag="h1" class="text-lg line-clamp-2  pr-5 pt-5 pb-1">Implenting Agency/Department</Heading>
-                                      <div class="flex justify-self-start gap-3 pt-1">
-                                        <div class="flex justify-start items-center">
-                                          <p class="text-base">College of Computer Studies</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Card>
-                                  <Card class="shadow-none  border-none pl-5 pt-1 pr-5" size="lg" padding="none">
-                                    <div>
-                                      <Heading tag="h1" class="text-lg line-clamp-2  pr-5 pt-5 pb-1">Cooperating Agency</Heading>
-                                      <div class="flex justify-self-start gap-3 pt-1">
-                                        <div class="flex justify-start items-center">
-                                          <p class="text-base">Research Center, College Department, VPAA</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Card>
-
-                                  <Card class="shadow-none  border-none pl-5 pt-1 pr-5" size="lg" padding="none">
-                                    <div>
-                                      <Heading tag="h1" class="text-lg line-clamp-2 pr-5 pt-5 pb-1">Site/s of implementation</Heading>
-                                      <div class="flex justify-self-start gap-3 pt-1">
-                                        <div class="flex justify-start items-center">
-                                          <p class="text-base">Collegiate Level in the University of Nueva Caceredasdasdasdsadas</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Card>
-                                  <Card class="shadow-none  border-none pl-5 pt-1 pr-5" size="lg" padding="none">
-                                    <div>
-                                      <Heading tag="h1" class="text-lg line-clamp-2  pr-5 pt-5 pb-1">Project Duration</Heading>
-                                      <div class="flex justify-self-start gap-3 pt-1">
-                                        <div class="flex justify-start items-center">
-                                          <p class="text-base">12 months</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Card>
-
-                                  <Card class="shadow-none  border-none pl-5 pt-1 pr-5" size="lg" padding="none">
-                                    <div>
-                                      <Heading tag="h1" class="text-lg line-clamp-2  pr-5 pt-5 pb-1">Total Project Cost</Heading>
-                                      <div class="flex justify-self-start gap-3 pt-1">
-                                        <div class="flex justify-start items-center">
-                                          <p class="text-base">430,000 Pesos</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Card>
-
-                                  <Card class="shadow-none  border-none pl-5 pt-1 pr-5" size="lg" padding="none">
-                                    <div>
-                                      <Heading tag="h1" class="text-lg line-clamp-2  pr-5 pt-5 pb-1">Funding Source</Heading>
-                                      <div class="flex justify-self-start gap-3 pt-1">
-                                        <div class="flex justify-start items-center">
-                                          <p class="text-base">University of Nueva Caceres</p>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </Card>
-                                </Card>
-
-                                <!--admin-buttons-->
-                                <Card class="pb-5 mb-5" size="lg" padding="none">
-                                  <Card class="shadow-none border-none pl-5 pr-5 pt-5 pb-1" size="lg" padding="none">
-                                    <Heading tag="h1" class="text-lg divide-dashed">Insert status</Heading>
-                                  </Card>
-
-                                  <Card class="shadow-none  border-none pl-5 pt-5 pr-5 " size="lg" padding="none">
-                                    <Button on:click={() => (approve = true)}>Approve</Button>
-
-                                    <Modal bind:open={approve} size="xs" autoclose>
-                                      <div class="text-center">
-                                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to approve this research?</h3>
-                                        <Button color="red" class="mr-2">Yes, I'm sure</Button>
-                                        <Button color="alternative">No, cancel</Button>
-                                      </div>
-                                    </Modal>
-                                  </Card>
-                                  <Card class="shadow-none  border-none pl-5 pt-3 pr-5" size="lg" padding="none">
-                                    <Button on:click={() => (reject = true)}>Reject</Button>
-
-                                    <Modal bind:open={reject} size="xs" autoclose>
-                                      <div class="text-center">
-                                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to reject this research?</h3>
-                                        <Button color="red" class="mr-2">Yes, I'm sure</Button>
-                                        <Button color="alternative">No, cancel</Button>
-                                      </div>
-                                    </Modal>
-                                  </Card>
-                                  <Card class="shadow-none  border-none pl-5 pt-3 pr-5 " size="lg" padding="none">
-                                    <Button>Back To All Researches</Button>
-                                  </Card>
-                                </Card>
-                              </div>
-                            </div>
-                          </TableBodyCell>
-                        </TableBodyRow>
-                      {/if}
-                    {/each}
-                  {:else}{/if}
-                {/each}
-              {:else}
-                No researches found.
-              {/if}
+                    {/if}
+                  {/each}
+                {:else}{/if}
+              {/each}
             {:else}
-              No proposals found.
+              No researches found.
             {/if}
-          </TableBody>
-        </TableSearch>
-      </TabItem>
+          {:else}
+            No proposals found.
+          {/if}
+        </TableBody>
+      </Table>
+    </TabItem>
 
-      <!--tab-initital presentation-->
-      <TabItem title="Initial Presentation"
-        ><Table hoverable={true} class="table-fixed w-full">
-          <TableSearch class="table-fixed w-full" placeholder="Search by maker name" bind:inputValue={searchTerm}
-            ><TableHead class="capitalize">
-              <TableHeadCell class="w-6/12">Research Title</TableHeadCell>
-              <TableHeadCell>Proponents</TableHeadCell>
-              <TableHeadCell>Agency/Dept.</TableHeadCell>
-              <TableHeadCell>Date Submitted</TableHeadCell>
-            </TableHead>
+    <!--concept note approval-->
+    <TabItem>
+      <div slot="title" class="flex items-center gap-2"><Indicator color="orange"></Indicator>Concept Note Approval</div>
+      <div class="flex items-center gap-2">
+        <Search></Search>
+        <div class="flex items-center gap-2">
+          <Button class="gap-2"><FilterOutline size="sm" />Agency/Department</Button>
+          <Dropdown>
+            <DropdownItem>College of Computer Studies</DropdownItem>
+          </Dropdown>
+        </div>
+      </div>
 
-            <TableBody>
-              <TableBodyRow>
-                <TableBodyCell class="truncate">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</TableBodyCell>
-                <TableBodyCell class="flex pl-10 ">
-                  <Avatar>AR</Avatar>
+      <Table hoverable={true} noborder={true}>
+        <TableHead class="">
+          <TableHeadCell>
+            <div class="flex items-center gap-2">
+              <Indicator color="dark"></Indicator>
+            </div>
+            <Tooltip arrow={false}>Status</Tooltip>
+          </TableHeadCell>
+          <TableHeadCell class="p-0 w-3/4"><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Title</div></TableHeadCell>
+          <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Leaders</div></TableHeadCell>
+          <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Agency/Department</div></TableHeadCell>
+          <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Date Submitted</div></TableHeadCell>
+        </TableHead>
+        <TableBody>
+          {#if proposals}
+            {#if researches}
+              {#each proposals as p, i}
+                {#if researches.find((x) => x._id === p.researchID)}
+                  {#each researches.filter((x) => x._id === p.researchID) as research}
+                    <TableBodyRow on:click={() => toggleRow(i)}>
+                      <TableBodyCell class="">
+                        <div class="flex justify-start items-center gap-2 p-0">
+                          <Indicator color="orange"></Indicator>
+                          <Tooltip arrow={false}>For Concept Note Approval</Tooltip>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="p-0">
+                        <div class="flex justify-start items-center gap-2">
+                          <P size="sm" weight="normal" class="line-clamp-1 text-black">{research.researchTitle}</P>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="">
+                        <div class="flex items-center gap-1.5">
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar>
+                          <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar>
+                          <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar>
+                          <Tooltip arrow={false}>Danny Casimero</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar>
+                          <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="">
+                        <div class="flex justify-start items-start gap-2">
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">College of Computer Studies</Badge>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="">
+                        <div class="flex justify-start items-start gap-2">
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">{moment(p.createdAt).format("lll")}</Badge>
+                        </div>
+                      </TableBodyCell>
+                    </TableBodyRow>
+                    {#if openRow === i}
+                      <TableBodyRow on:dblclick={() => p} class="">
+                        <TableBodyCell colspan="5" class="">
+                          <div class="flex flex-wrap justify-center gap-2">
+                            <Card size="xl" padding="none" class="gap-2 w-full border-none shadow-none">
+                              <div class="flex justify-between items-start gap-2">
+                                <P weight="semibold" size="xl" class="">Concept Note Overview</P>
+                                <div class="flex items-center gap-2">
+                                  <Button on:click={() => (approveConceptNote = true)} class="gap-2"><EditOutline size="sm" />Approve</Button>
+                                  <Button on:click={() => (rejectConceptNote = true)} class="gap-2"><ClipboardOutline size="sm" />Reject</Button>
+                                </div>
+                              </div>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="xl">{research.researchTitle}</P>
 
-                  <Avatar>JD</Avatar>
-                  <Avatar>DC</Avatar>
-                  <Avatar>DI</Avatar>
-                </TableBodyCell>
-                <TableBodyCell>College of Computer Studies</TableBodyCell>
-                <TableBodyCell>Oct. 21, 2023 11:00 AM</TableBodyCell>
-              </TableBodyRow>
-            </TableBody></TableSearch>
-        </Table>
-      </TabItem>
-    </div>
+                              <div class="flex items-center gap-2 pt-2">
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar><P weight="normal" size="base">Agnes Reyes</P>
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar><P weight="normal" size="base">June Arreb Danila</P>
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar><P weight="normal" size="base">Danny Casimero</P>
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar><P weight="normal" size="base">Dennis Ignacio</P>
+                              </div>
+                              <div class="flex justify-start gap-2 pt-2">
+                                <div class="w-1/2 gap-2">
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Implementing Agency/Department:</P>
+                                    <P></P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Cooperating Agency:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Site/s of Implementation:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                </div>
+                                <div class="w-1/2 gap-2">
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Project Duration:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Total Project Cost:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Funding Source:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                </div>
+                              </div>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Project Description</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.description}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="xl">Significance</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.significance}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Objectives</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.objectives}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Methodology</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.methodolog}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Technology Roadmap</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal"></P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Expected Outputs (6Ps)</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal"></P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Work Plan</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal"></P>
+                            </Card>
+                          </div>
+                        </TableBodyCell>
+                      </TableBodyRow>
+                    {/if}
+                  {/each}
+                {:else}{/if}
+              {/each}
+            {:else}
+              No researches found.
+            {/if}
+          {:else}
+            No proposals found.
+          {/if}
+        </TableBody>
+      </Table>
+    </TabItem>
+
+    <!--initial presentation-->
+    <TabItem>
+      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Initial Presentation</div>
+      <div class="flex items-center gap-2">
+        <Search></Search>
+        <div class="flex items-center gap-2">
+          <Button class="gap-2"><FilterOutline size="sm" />Date</Button>
+          <Dropdown>
+            <DropdownItem>Today</DropdownItem>
+            <DropdownItem>This Week</DropdownItem>
+            <DropdownItem>Insert Date</DropdownItem>
+          </Dropdown>
+        </div>
+      </div>
+
+      <Table hoverable={true} noborder={true}>
+        <TableHead class="">
+          <TableHeadCell>
+            <div class="flex items-center gap-2">
+              <Indicator color="dark"></Indicator>
+            </div>
+            <Tooltip arrow={false}>Status</Tooltip>
+          </TableHeadCell>
+          <TableHeadCell class="p-0 w-3/4"><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Title</div></TableHeadCell>
+          <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Leaders</div></TableHeadCell>
+          <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Agency/Department</div></TableHeadCell>
+          <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Date Submitted</div></TableHeadCell>
+        </TableHead>
+        <TableBody>
+          {#if proposals}
+            {#if researches}
+              {#each proposals as p, i}
+                {#if researches.find((x) => x._id === p.researchID)}
+                  {#each researches.filter((x) => x._id === p.researchID) as research}
+                    <TableBodyRow on:click={() => toggleRow(i)}>
+                      <TableBodyCell class="">
+                        <div class="flex justify-start items-center gap-2 p-0">
+                          <Indicator color="orange"></Indicator>
+                          <Tooltip arrow={false}>For Concept Note Approval</Tooltip>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="p-0">
+                        <div class="flex justify-start items-center gap-2">
+                          <P size="sm" weight="normal" class="line-clamp-1 text-black">{research.researchTitle}</P>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="">
+                        <div class="flex items-center gap-1.5">
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar>
+                          <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar>
+                          <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar>
+                          <Tooltip arrow={false}>Danny Casimero</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar>
+                          <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="">
+                        <div class="flex justify-start items-start gap-2">
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">College of Computer Studies</Badge>
+                        </div>
+                      </TableBodyCell>
+                      <TableBodyCell class="">
+                        <div class="flex justify-start items-start gap-2">
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">{moment(p.createdAt).format("lll")}</Badge>
+                        </div>
+                      </TableBodyCell>
+                    </TableBodyRow>
+                    {#if openRow === i}
+                      <TableBodyRow on:dblclick={() => p} class="">
+                        <TableBodyCell colspan="5" class="">
+                          <div class="flex flex-wrap justify-center gap-2">
+                            <Card size="xl" padding="none" class="gap-2 w-full border-none shadow-none">
+                              <div class="flex justify-between items-start gap-2">
+                                <P weight="semibold" size="xl" class="">Concept Note Overview</P>
+                                <div class="flex items-center gap-2">
+                                  <Button on:click={() => (approveConceptNote = true)} class="gap-2"><EditOutline size="sm" />Approve</Button>
+                                  <Button on:click={() => (rejectConceptNote = true)} class="gap-2"><ClipboardOutline size="sm" />Reject</Button>
+                                </div>
+                              </div>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="xl">{research.researchTitle}</P>
+
+                              <div class="flex items-center gap-2 pt-2">
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar><P weight="normal" size="base">Agnes Reyes</P>
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar><P weight="normal" size="base">June Arreb Danila</P>
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar><P weight="normal" size="base">Danny Casimero</P>
+                                <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar><P weight="normal" size="base">Dennis Ignacio</P>
+                              </div>
+                              <div class="flex justify-start gap-2 pt-2">
+                                <div class="w-1/2 gap-2">
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Implementing Agency/Department:</P>
+                                    <P></P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Cooperating Agency:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Site/s of Implementation:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                </div>
+                                <div class="w-1/2 gap-2">
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Project Duration:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Total Project Cost:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                  <div class="flex items-center gap-2">
+                                    <P weight="medium" size="base">Funding Source:</P>
+                                    <P>College of Computer Studies</P>
+                                  </div>
+                                </div>
+                              </div>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Project Description</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.description}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="xl">Significance</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.significance}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Objectives</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.objectives}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Methodology</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal">{p.methodolog}</P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Technology Roadmap</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal"></P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Expected Outputs (6Ps)</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal"></P>
+                            </Card>
+                            <Card size="xl" class="gap-2 w-full">
+                              <P weight="semibold" size="lg">Work Plan</P>
+                              <Hr classHr="my-1" />
+                              <P weight="normal"></P>
+                            </Card>
+                          </div>
+                        </TableBodyCell>
+                      </TableBodyRow>
+                    {/if}
+                  {/each}
+                {:else}{/if}
+              {/each}
+            {:else}
+              No researches found.
+            {/if}
+          {:else}
+            No proposals found.
+          {/if}
+        </TableBody>
+      </Table>
+    </TabItem>
+  
+    <!--final presentation-->
+    <TabItem>
+      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Final Presentation</div>
+    </TabItem>
+    <!--for incentive approval-->
+    <TabItem>
+      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>For Incentive Approval</div>
+    </TabItem>
+    <!--published-->
+    <TabItem>
+      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Published</div>
+    </TabItem>
+<!--rejected-->
+    <TabItem>
+      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Rejected</div>
+    </TabItem>
   </Tabs>
 
-  <!--research overview-->
-</main>
+  <Modal title="Approve Concept Note?" bind:open={approveConceptNote} size="xs" autoclose class="w-full">
+    <div class="flex justify-center items-center">
+      <InfoCircleOutline size="xl" />
+    </div>
+    <P weight="normal" size="base" class="text-center">Once, the Concept Note is approved. A Notice To Proceed will be sent to the owner.</P>
+    <div class="flex gap-2">
+      <Button class="w-full">Approve</Button>
+      <Button class="w-full">Cancel</Button>
+    </div>
+  </Modal>
 
-<div>
-</div>
+  <Modal title="Reject Concept Note?" bind:open={rejectConceptNote} size="xs" autoclose class="w-full">
+    <div class="flex justify-center items-center">
+      <InfoCircleOutline size="xl" />
+    </div>
+    <P weight="normal" size="base" class="text-center">Once, you click the reject button. You can find the Concept Note in the Reject tab of the Research Dashboard</P>
+    <div class="flex gap-2">
+      <Button class="w-full">Reject</Button>
+      <Button class="w-full">Cancel</Button>
+    </div>
+  </Modal>
+  <div class="h-96"></div>
+  <div class="h-96"></div>
+</main>
