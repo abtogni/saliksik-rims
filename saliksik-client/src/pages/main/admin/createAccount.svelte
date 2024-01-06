@@ -3,7 +3,7 @@
 
   let json = {};
   let message: any;
-function submit(e: Event) {
+  function submit(e: Event) {
   e.preventDefault();
   const formData = new FormData(e.target as HTMLFormElement);
   json = Object.fromEntries(formData.entries());

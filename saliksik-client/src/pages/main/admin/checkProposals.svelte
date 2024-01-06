@@ -84,26 +84,26 @@
   <div class="flex items-center gap-2"><GridOutline size="sm" /><P weight="semibold" size="2xl" class="">Research Dashboard</P></div>
 
   <!--all researches-->
-  <Tabs style="underline" class="">
+  <Tabs style="none" activeClasses="p-2 text-blue-700 border-b-2 border-b-blue-700 rounded-t-lg" inactiveClasses="p-2 text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300" contentClass="bg-white p-0 mt-2 rounded-md border-0 shadow-none" class="">
     <TabItem open>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>All Researches</div>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 mb-2">
         <Search></Search>
         <div class="flex items-center gap-2">
           <Button class="gap-2"><FilterOutline size="sm" />Status</Button>
           <Dropdown>
-            <DropdownItem>For Concept Note Approval</DropdownItem>
+            <DropdownItem>Concept Note Approval</DropdownItem>
             <DropdownItem>Initial Presentation Approval</DropdownItem>
             <DropdownItem>Final Presentation Approval</DropdownItem>
-            <DropdownItem>For Incentive Approval</DropdownItem>
+            <DropdownItem>Incentive Approval</DropdownItem>
             <DropdownItem>Published</DropdownItem>
             <DropdownItem>Rejected</DropdownItem>
           </Dropdown>
         </div>
       </div>
 
-      <Table hoverable={true} noborder={true}>
-        <TableHead class="">
+      <Table hoverable={true} noborder={false} shadow={true} class="">
+        <TableHead class="bg-blue-200">
           <TableHeadCell>
             <div class="flex items-center gap-2">
               <Indicator color="dark"></Indicator>
@@ -264,7 +264,7 @@
     <!--concept note approval-->
     <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="orange"></Indicator>Concept Note Approval</div>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 mb-2">
         <Search></Search>
         <div class="flex items-center gap-2">
           <Button class="gap-2"><FilterOutline size="sm" />Agency/Department</Button>
@@ -274,8 +274,8 @@
         </div>
       </div>
 
-      <Table hoverable={true} noborder={true}>
-        <TableHead class="">
+      <Table hoverable={true} noborder={false} shadow={true} class="">
+        <TableHead theadClass="text-xs uppercase" class="bg-blue-200">
           <TableHeadCell>
             <div class="flex items-center gap-2">
               <Indicator color="dark"></Indicator>
@@ -436,7 +436,7 @@
     <!--initial presentation-->
     <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Initial Presentation</div>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 mb-2">
         <Search></Search>
         <div class="flex items-center gap-2">
           <Button class="gap-2"><FilterOutline size="sm" />Date</Button>
@@ -448,8 +448,8 @@
         </div>
       </div>
 
-      <Table hoverable={true} noborder={true}>
-        <TableHead class="">
+      <Table hoverable={true} noborder={false} shadow={true} class="">
+        <TableHead theadClass="text-xs uppercase" class="bg-blue-200">
           <TableHeadCell>
             <div class="flex items-center gap-2">
               <Indicator color="dark"></Indicator>
@@ -471,7 +471,7 @@
                       <TableBodyCell class="">
                         <div class="flex justify-start items-center gap-2 p-0">
                           <Indicator color="orange"></Indicator>
-                          <Tooltip arrow={false}>For Concept Note Approval</Tooltip>
+                          <Tooltip arrow={false}>Concept Note Approval</Tooltip>
                         </div>
                       </TableBodyCell>
                       <TableBodyCell class="p-0">
@@ -613,13 +613,13 @@
     </TabItem>
     <!--for incentive approval-->
     <TabItem>
-      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>For Incentive Approval</div>
+      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Incentive Approval</div>
     </TabItem>
     <!--published-->
     <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Published</div>
     </TabItem>
-<!--rejected-->
+    <!--rejected-->
     <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Rejected</div>
     </TabItem>

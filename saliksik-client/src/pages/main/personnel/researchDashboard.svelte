@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Card, Dropdown, DropdownItem, FloatingLabelInput, Helper, Hr, Indicator, Input, Listgroup, Modal, P, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Tabs, Tooltip } from "flowbite-svelte";
-  import { BookOutline, BookmarkOutline, CalendarMonthOutline, CalendarWeekOutline, ClipboardOutline, ClockOutline, DotsHorizontalOutline, EditOutline, EyeOutline, FileCirclePlusOutline, FileLinesOutline, GridOutline, MessagesOutline, QuestionCircleOutline, TrashBinOutline } from "flowbite-svelte-icons";
+  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Card, Checkbox, Dropdown, DropdownItem, FloatingLabelInput, Helper, Hr, Indicator, Input, Listgroup, Modal, P, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Tabs, Tooltip } from "flowbite-svelte";
+  import { AdjustmentsVerticalSolid, BookOutline, BookmarkOutline, CalendarMonthOutline, CalendarWeekOutline, ClipboardOutline, ClipboardSolid, ClockOutline, DotsHorizontalOutline, EditOutline, EyeOutline, FileCirclePlusOutline, FileLinesOutline, GridOutline, GridSolid, MessagesOutline, QuestionCircleOutline, TrashBinOutline, UserCircleSolid, UserOutline } from "flowbite-svelte-icons";
   import { goto } from "@roxi/routify";
   import moment from "moment";
   import { onMount } from "svelte";
+  import { DateInput } from "date-picker-svelte";
 
   let proposals: any[],
     researches: any[] = [],
@@ -79,24 +80,33 @@
     {
       name: "Nora Elizabeth F. Maniquiz",
       college: "College Of Computer Studies",
-      href: '/',
-      class: 'hover:bg-orange-100'
+      href: "/",
+      class: "hover:bg-orange-100",
     },
     {
       name: "Kristine Idda P. Del Rosario",
       college: "College Of Nursing",
-      class: 'hover:bg-orange-100'
+      class: "hover:bg-orange-100",
     },
     {
       name: "Engr. Christine C. Bautista",
       college: "College Of Engineering And Architecture",
-      class: 'hover:bg-orange-100'
+      class: "hover:bg-orange-100",
     },
   ];
+
+  //date picker
+  let date = new Date();
+
+  //check panelist comment
+  let checkComment = false;
+
+  //check panelist comment
+  let setInitialPresentation = false;
 </script>
 
-<main class="bg-white">
-  <Tabs style="underline" class="">
+<main class="">
+  <Tabs style="none" activeClasses="p-2 text-blue-700 border-b-2 border-b-blue-700 rounded-t-lg" inactiveClasses="p-2 text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300" contentClass="bg-white p-0 mt-2 rounded-md border-0 shadow-none" class="">
     <TabItem title="">
       <div slot="title" class="flex items-center gap-2"><FileLinesOutline size="sm" />Concept Note</div>
 
@@ -107,14 +117,15 @@
             <span class="text-lg font-medium">Submission and Approval of Concept Note</span>
           </div>
           <p class="mt-2 text-sm">In this section, you are required to submit a concept note of your research. Click the create concept note button and fill out all necessary fields. You can have multiple draft and only one submission. Once submitted, a notice to proceed will be sent on your notification.</p>
+          <p class="mt-2 text-sm">Or you can submit an already existing/published (owned) research. An incentive will be given based on the following:</p>
         </Alert>
         <div class="flex items-center gap-2">
           <Button on:click={() => (createConceptNote = true)} class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Create Concept Note</Button>
           <Button on:click={() => (createConceptNote = true)} class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Submit Existing Research</Button>
         </div>
 
-        <Table hoverable={true} noborder={true} class="">
-          <TableHead>
+        <Table hoverable={true} noborder={false} shadow={true} class="">
+          <TableHead theadClass="text-xs uppercase" class="bg-blue-200">
             <TableHeadCell class="w-3/4">Concept Note Name</TableHeadCell>
             <TableHeadCell>Last Update</TableHeadCell>
             <TableHeadCell>Tools</TableHeadCell>
@@ -280,7 +291,7 @@
         </Alert>
         <div class="flex items-center gap-2">
           <div class="">
-            <Button on:click={() => (createConceptNote = true)} class="flex flex-nowrap items-center gap-2"><FileCirclePlusOutline size="sm" /> Set Schedule</Button>
+            <Button on:click={() => (setInitialPresentation = true)} class="flex flex-nowrap items-center gap-2"><FileCirclePlusOutline size="sm" /> Set Schedule</Button>
           </div>
 
           <Badge border large color="red" class="flex items-center gap-2"><Indicator color="red" class="" />No Schedule</Badge>
@@ -288,55 +299,51 @@
           <Badge border large color="blue" class="flex items-center gap-2"><Indicator color="blue" class="" />January 6, 2024 13:00</Badge>
           <Tooltip>Schedule Is Set</Tooltip>
         </div>
-
-        <div class="grid grid-flow-col-dense gap-2">
-          <div class="">
-            <P weight="semibold" size="xl" class="">List Of Panelist</P>
-            <Card size="sm">
-              <Listgroup active items={list} let:item  class="border-0 dark:!bg-transparent">
-                <div class="flex justify-start items-center gap-4 w-full ">
-                  <div class="">
-                    <P size="base" weight="medium" class=" text-gray-900 truncate dark:text-white">{item.name}</P>
-                    <P size="sm" weight="normal" class=" text-gray-500 truncate dark:text-gray-400">{item.college}</P>
-                  </div>
-                </div>
-              </Listgroup>
-            </Card>
-          </div>
-
-          <div class="">
-            <P weight="semibold" size="xl" class="">Panelist Comments</P>
-            <Card size="xl">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</Card>
-          </div>
-        </div>
       </div>
+
+      <div class="gap-2 mt-4 mb-2">
+        <P weight="semibold" size="lg">Panelist Comments</P>
+        <P weight="normal" size="sm" class="text-gray-500">See panelist comments to make changes on your research.</P>
+      </div>
+      <Tabs style="none" activeClasses="p-2 text-blue-700 border-b-2 border-b-blue-700 rounded-t-lg" inactiveClasses="p-2 text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300" contentClass="bg-white p-0 mt-2 rounded-md border-0 shadow-none" class="">
+        <TabItem open title="">
+          <div slot="title" class="flex items-center gap-2"><UserOutline size="sm" />Panelist Name 1</div>
+          <div class="flex items-center gap-2">
+            <A href="/" class="text-lg font-semibold text-black">Panelist Name 1</A>
+            <Badge border large color="none" class="flex items-center gap-2">College Of Computer Studies</Badge>
+          </div>
+          <div class="grid grid-flow-row justify-start gap-1 mt-2 w-full">
+            <P weight="normal" size="base" class="flex items-center gap-0 text-gray-600"><Checkbox on:click={(checkComment) => true} />Make a detail of your proposed budget.</P>
+            <P weight="normal" size="base" class="flex items-center gap-0 text-gray-600"><Checkbox />Collaborate with sister schools, like Mapua if ever this will not be approved by the UNC admin.</P>
+          </div>
+        </TabItem>
+        <TabItem title="">
+          <div slot="title" class="flex items-center gap-2"><UserOutline size="sm" />Panelist Name 2</div>
+        </TabItem>
+        <TabItem title="">
+          <div slot="title" class="flex items-center gap-2"><UserOutline size="sm" />Panelist Name 3</div>
+        </TabItem>
+        <TabItem title="">
+          <div slot="title" class="flex items-center gap-2"><UserOutline size="sm" />Panelist Name 4</div>
+        </TabItem>
+        <TabItem title="">
+          <div slot="title" class="flex items-center gap-2"><UserOutline size="sm" />Panelist Name 5</div>
+        </TabItem>
+      </Tabs>
     </TabItem>
-    <TabItem title="Bookmarks">
+
+    <TabItem title="">
       <div slot="title" class="flex items-center gap-2"><BookmarkOutline size="sm" />Final Presentation</div>
     </TabItem>
-    <TabItem title="Bookmarks">
+    <TabItem title="" class="">
       <div slot="title" class="flex items-center gap-2"><BookmarkOutline size="sm" />Bookmarks</div>
+      
     </TabItem>
+
     <TabItem title="">
-      <div slot="title" class="flex items-center gap-2"><GridOutline size="sm" />Dashboard</div>
-      <Alert dismissable color="blue" class="border-l-8">
-        <div class="flex items-center gap-2">
-          <QuestionCircleOutline slot="icon" size="sm" />
-          <span class="text-lg font-medium">Dashboard</span>
-        </div>
-        <p class="mt-2 text-sm">Check and manage your activities and other things that may require your attention.</p>
-      </Alert>
-      <div class="grid grid-flow-row justify-items-start gap-2 pt-2">
-        <Card size="md">
-          <P weight="semibold" size="lg">Concept Note</P>
-          <Hr classHr="my-1" />
-        </Card>
-        <Card size="md">
-          <P weight="semibold" size="lg">Initial Presentation</P>
-          <Hr classHr="my-1" />
-        </Card>
-      </div>
+      <div slot="title" class="flex items-center gap-2"><GridOutline size="sm" /></div>
     </TabItem>
+
   </Tabs>
 
   <!--modal for create concept note-->
@@ -352,6 +359,18 @@
     </form>
   </Modal>
 
-  <div class="h-96"></div>
-  <div class="h-96"></div>
+  <!--modal for setting schedule for -->
+  <Modal title="Set Date And Time" bind:open={setInitialPresentation} size="xs" autoclose class="w-full">
+    <form class="grid grid-flow-row grid-rows-1 items-start gap-2">
+      <div class="gap-2">
+        <P weight="medium" size="base" for="researchLeaders"></P>
+        <DateInput bind:value={date} format="yyyy-MM-dd" required class=""/>
+      </div>
+      <div class="flex gap-2">
+        <!--on continue, dapat ma save ang concept note name at magdisplay sa table-->
+        <Button href="/main/personnel/createConceptNote" class="w-full">Continue</Button>
+        <Button class="w-full">Cancel</Button>
+      </div>
+    </form>
+  </Modal>
 </main>
