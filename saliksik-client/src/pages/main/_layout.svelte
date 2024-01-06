@@ -35,7 +35,7 @@
 
   async function fetchResearches(userID: string) {
     try {
-      const response = await fetch(`/api/research/getUserResearches?userID=${userID}`);
+      const response = await fetch(`/api/research/getResearches?userID=${userID}`);
 
       if (response.ok) {
         researches = await response.json();
