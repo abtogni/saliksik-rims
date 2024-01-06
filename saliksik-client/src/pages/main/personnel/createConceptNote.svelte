@@ -72,7 +72,7 @@
   <form on:submit={submit} class="flex flex-wrap justify-center gap-2">
     <Card size="xl" class="gap-2 w-full">
       <div class="flex justify-between items-start gap-2">
-        <P weight="semibold" size="base" class="">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
+        <P weight="semibold" size="base" class="">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
         <a href="/" class="text-blue-700 text-sm font-medium w-44 text-right hover:underline">Edit Name</a>
       </div>
       <div class="flex justify-start items-center gap-2">
