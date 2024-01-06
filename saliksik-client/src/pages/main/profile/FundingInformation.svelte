@@ -1,1 +1,0 @@
-<div>funding information</div>
