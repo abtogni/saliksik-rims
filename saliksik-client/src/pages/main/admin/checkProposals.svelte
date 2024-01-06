@@ -55,6 +55,8 @@
     } finally {
       loading = false;
     }
+
+    console.log(proposals);
   });
 
   loading = false;

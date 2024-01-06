@@ -1,12 +1,12 @@
 <script lang="ts">
+  import NewResearchModal from "../../modals/NewResearchModal.svelte";
   import UNCLogo from "/login.png";
-  import { Section, TableHeader } from "flowbite-svelte-blocks";
   import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Drawer, CloseButton, Button, NavHamburger, Navbar, NavBrand, NavUl, NavLi, DarkMode, Badge, Indicator, Input, Avatar, Tooltip, Dropdown, DropdownItem, Search, DropdownDivider, Checkbox, Table, TableBodyCell, TableHead, Heading, TableHeadCell, TableBody, TableBodyRow, TableSearch, P, Modal, Label, MultiSelect, Textarea, Group, GroupItem, Timeline, TimelineItem, Helper } from "flowbite-svelte";
   import Menu from "../../assets/menu.svelte";
   import { goto } from "@roxi/routify";
   import { onMount } from "svelte";
   import { userData, isAuthenticated, updateUser } from "../../components/store";
-  import { BookOutline, CogOutline, UserOutline, CirclePlusOutline, InfoCircleSolid, ArrowRightOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline, ChevronDownOutline, DotsVerticalOutline, EyeOutline, EditOutline, ClipboardOutline, FilterOutline, SortOutline, ChevronLeftOutline, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, MessagesSolid, EnvelopeOpenOutline, CalendarWeekSolid } from "flowbite-svelte-icons";
+  import { UserOutline, CirclePlusOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline, ChevronDownOutline, DotsVerticalOutline, EyeOutline, EditOutline, ClipboardOutline, FilterOutline, SortOutline, ChevronLeftOutline, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, MessagesSolid, EnvelopeOpenOutline, CalendarWeekSolid } from "flowbite-svelte-icons";
   import { sineIn } from "svelte/easing";
   import moment from "moment";
 
@@ -66,24 +66,6 @@
     }
   });
 
-  //modal for create new research
-  let json = {},
-    researchLeaders: any[] = [];
-
-  var users: any, userList: any;
-
-  async function fetchUserList() {
-    const response = await fetch("/api/user/getUsers");
-    users = await response.json();
-  }
-
-  onMount(async () => {
-    await Promise.all([fetchUser(), fetchUserList()]);
-    userList = users.map((user: any) => ({
-      value: user._id,
-      name: `${user.firstName} ${user.lastName}`,
-    }));
-  });
 
   //notification this month
   //sidebar
@@ -274,23 +256,10 @@
 
 <!--modal for create new research-->
 <Modal title="" bind:open={formModal} size="xs" autoclose={false} outsideclose class="w-full">
-  <form class="flex flex-col gap-2" action="#">
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create New Research</h3>
-
-    <div class="gap-2">
-      <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
-      <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
-
-      <Helper class="pt-2 text-orange-500"></Helper>
-    </div>
-    <Label class="font-medium text-base ">
-      <span>Research Title</span>
-      <Textarea rows="5" id="researchTitle" for="researchTitle" required />
-    </Label>
-    
-    <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
-  </form>
+  <NewResearchModal  />
 </Modal>
+
+
 
 <!--content-->
 <div class="ml-64 pl-4 pt-4 pr-4 pb-4 grid items-start bg-white">
