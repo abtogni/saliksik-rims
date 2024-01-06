@@ -110,7 +110,7 @@
             <div class="flex items-center gap-2">
               <Indicator color="dark"></Indicator>
             </div>
-            <Tooltip arrow={false}>Status</Tooltip>
+            <Tooltip arrow={false} class="capitalize">Status</Tooltip>
           </TableHeadCell>
           <TableHeadCell class="p-0 w-3/4"><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Title</div></TableHeadCell>
           <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Leaders</div></TableHeadCell>
@@ -136,7 +136,7 @@
                         </div>
                       </TableBodyCell>
                       <TableBodyCell class="">
-                        <div class="flex items-center gap-1.5">
+                        <div class="flex items-center gap-0">
                           <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar>
                           <Tooltip arrow={false}>Agnes Reyes</Tooltip>
                           <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar>
@@ -149,12 +149,12 @@
                       </TableBodyCell>
                       <TableBodyCell class="">
                         <div class="flex justify-start items-start gap-2">
-                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">College of Computer Studies</Badge>
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black bg-transparent">College of Computer Studies</Badge>
                         </div>
                       </TableBodyCell>
                       <TableBodyCell class="">
                         <div class="flex justify-start items-start gap-2">
-                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">{moment(p.createdAt).format("lll")}</Badge>
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black bg-transparent">{moment(p.createdAt).format("lll")}</Badge>
                         </div>
                       </TableBodyCell>
                     </TableBodyRow>
