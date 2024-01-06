@@ -5,9 +5,7 @@
   import { DateInput } from "date-picker-svelte";
   import moment from "moment";
 
-  let json = {},
-    researchMembers: any[] = [],
-    researchLeaders: any[] = [];
+  let json = {},researchLeaders: any[] = [];
 
   var userData: any, users: any, userList: any;
 
@@ -35,7 +33,7 @@
     json = Object.fromEntries(formData.entries());
     json = {
       ...json,
-      researchMembers,
+      projectDuration,
       researchLeaders,
     };
 
@@ -65,7 +63,7 @@
   let submitResearchProposal = false;
 
   //date picker
-  let date = new Date();
+  let projectDuration = new Date();
 </script>
 
 <main>
@@ -88,28 +86,28 @@
         <P weight="semibold" size="xl" class="">Create Concept Note</P>
         <div class="flex items-center gap-2">
           <Button type="submit" class="gap-2"><EditOutline size="sm" />Save As Draft</Button>
-          <Button type="submit" class="gap-2"><UploadOutline size="sm" />Submit</Button>
+          <Button type="submit" class="gap-2" on:click={submit}><UploadOutline size="sm" />Submit</Button>
           <Button type="submit" class="gap-2"><TrashBinOutline size="sm" />Delete</Button>
         </div>
       </div>
     </Card>
 
     <Card size="xl" class="gap-2 w-full">
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Research Title" required class="w-full">Research Title</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="researchTitle" name="researchTitle" label="Research Title" required class="w-full">Research Title</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Implementing Agency/Department" required class="w-full">Implementing Agency/Department</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" required class="w-full">Implementing Agency/Department</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Cooperating Agency" required class="w-full">Cooperating Agency</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="coopAgency" name="coopAgency" label="Cooperating Agency" required class="w-full">Cooperating Agency</FloatingLabelInput>
       <Helper class=" text-blue-700">State the name of agency to be tapped for funding/ co-implementing the project.</Helper>
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Site/s of Implementation" required class="w-full">Site/s of Implementation</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="siteImplementation" name="siteImplementation" label="Site/s of Implementation" required class="w-full">Site/s of Implementation</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Total Project Cost" required class="w-full">Total Project Cost</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="totalCost" name="totalCost" label="Total Project Cost" required class="w-full">Total Project Cost</FloatingLabelInput>
       <Helper class=" text-blue-700">Include the specific budget allocations for personnel service, maintenance and operations, equipment, trainings/workshops, and administrative costs.</Helper>
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Funding Source" required class="w-full">Funding Source</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="fundingSource" name="fundingSource" label="Funding Source" required class="w-full">Funding Source</FloatingLabelInput>
       <Helper class=" text-blue-700">Specific funding source, including counterpart funds.</Helper>
       <div class="gap-2">
         <P weight="medium" size="base" for="researchLeaders">Project Duration</P>
-        <DateInput bind:value={date} format="yyyy-MM-dd" required class=""/>
+        <DateInput bind:value={projectDuration} format="yyyy-MM-dd" required class=""/>
         <Helper class="pt-1 text-blue-700">Specific dates that the project will be undertaken (month/year); ideally to be completed minimum 1 year/ depending on the approved grant.</Helper>
       </div>
       <div class="gap-2">
