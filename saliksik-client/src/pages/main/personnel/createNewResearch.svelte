@@ -88,14 +88,12 @@
       </Label>
       <div class="gap-2">
         <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
-  
+
         <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
-  
+
         <Helper class="pt-2 text-orange-500"></Helper>
       </div>
       <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
     </form>
   </Modal>
-  </main>
-
-
+</main>

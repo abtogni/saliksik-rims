@@ -107,7 +107,7 @@
 
 <main class="">
   <Tabs style="none" activeClasses="p-2 text-blue-700 border-b-2 border-b-blue-700 rounded-t-lg" inactiveClasses="p-2 text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300" contentClass="bg-white p-0 mt-2 rounded-md border-0 shadow-none" class="">
-    <TabItem title="">
+    <TabItem open title="">
       <div slot="title" class="flex items-center gap-2"><FileLinesOutline size="sm" />Concept Note</div>
 
       <div class="grid grid-flow-row justify-items-start gap-2">
@@ -279,7 +279,7 @@
       </div>
     </TabItem>
 
-    <TabItem open title="">
+    <TabItem title="">
       <div slot="title" class="flex items-center gap-2"><CalendarMonthOutline size="sm" />Initial Presentation</div>
       <div class="grid grid-flow-row justify-items-start gap-2">
         <Alert dismissable color="blue" class="border-l-8">

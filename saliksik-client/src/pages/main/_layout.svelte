@@ -66,6 +66,24 @@
     }
   });
 
+  //modal for create new research
+  let json = {},
+    researchLeaders: any[] = [];
+
+  var users: any, userList: any;
+
+  async function fetchUserList() {
+    const response = await fetch("/api/user/getUsers");
+    users = await response.json();
+  }
+
+  onMount(async () => {
+    await Promise.all([fetchUser(), fetchUserList()]);
+    userList = users.map((user: any) => ({
+      value: user._id,
+      name: `${user.firstName} ${user.lastName}`,
+    }));
+  });
 
   //notification this month
   //sidebar
@@ -86,8 +104,6 @@
     easing: sineIn,
   };
 
-  
-
   //modal for create new research
   let formModal = false;
 </script>
@@ -96,7 +112,7 @@
 <nav class="bg-white flex justify-between z-50 gap-2 ml-64 pl-4 pt-2 pr-4 pb-2 border-b">
   <form class="flex items-center w-full gap-2">
     <FolderOutline />
-    <P weight="semibold" size=""></P>
+    <P weight="semibold" size="base"></P>
     <StarOutline />
     <Tooltip>Not Starred</Tooltip>
     <Badge class="pt-2 pr-4 pb-2 " rounded><Indicator color="orange" size="md" class="me-1.5" />No Status</Badge>
@@ -135,7 +151,7 @@
           <div></div>
         {/if}
         <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create New Research" on:click={() => (formModal = true)}><svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment></SidebarItem>
-        <SidebarItem label="All Researches" on:click={() => (allResearches = false)} class="" ><svelte:fragment slot="icon"><FolderOutline /></svelte:fragment></SidebarItem>
+        <SidebarItem label="All Researches" on:click={() => (allResearches = false)} class=""><svelte:fragment slot="icon"><FolderOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="Browse Researches" href="/main/personnel/browseResearches"><svelte:fragment slot="icon"><SearchOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="Bookmarks" href="/main/personnel/bookmarks" class=""><svelte:fragment slot="icon"><BookmarkOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="Notifications" on:click={() => (notification = false)} href=""><svelte:fragment slot="icon"><BellOutline /></svelte:fragment></SidebarItem>
@@ -152,7 +168,8 @@
         {#if loading}
           <SidebarItem label="Loading..."></SidebarItem>
         {:else if researches}
-          <SidebarDropdownWrapper label="Starred" isOpen><svelte:fragment slot="icon"><StarSolid color="orange" /></svelte:fragment>
+          <SidebarDropdownWrapper label="Starred" isOpen
+            ><svelte:fragment slot="icon"><StarSolid color="orange" /></svelte:fragment>
             {#each researches as r}
               <SidebarDropdownItem class="" label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
             {/each}
@@ -182,7 +199,7 @@
   <div class="flex justify-between items-center gap-2">
     <ChevronLeftOutline on:click={() => (allResearches = true)} class="w-4 h-4 mr-4 mb-2 dark:text-white" />
     <Heading tag="h6" class="flex gap-2"><FolderOutline />All researches</Heading>
-    <Button on:click={() => (allResearches = true)} href="/main/personnel/createNewResearch" size="md" outline class="w-60 sm:w-72"><CirclePlusOutline class="w-4 h-4 me-2" />Create New Research</Button>
+    <Button on:click={() => ((formModal = true), (allResearches = true))} href="/main/personnel/createNewResearch" size="md" outline class="w-60 sm:w-72"><CirclePlusOutline class="w-4 h-4 me-2" />Create New Research</Button>
   </div>
 
   <div class="flex items-center gap-2">
@@ -201,38 +218,31 @@
       <TableHeadCell><div class="flex items-center gap-2"><SortOutline class="w-4 h-4 me-2" />Recent</div></TableHeadCell>
     </TableHead>
     <TableBody>
-
-        {#if loading}
-          <div>Loading...</div>
-        {:else if researches}
-            {#each researches as r}
-            <TableBodyRow>
-              <TableBodyCell class="">
+      {#if loading}
+        <div>Loading...</div>
+      {:else if researches}
+        {#each researches as r}
+          <TableBodyRow>
+            <TableBodyCell class="">
               <div class="flex items-center gap-2 p-0">
-                <StarOutline class="w-4 h-4 p-0"/>
+                <StarOutline class="w-4 h-4 p-0" />
                 <P size="sm" weight="medium" class="line-clamp-1"><a href={`/main/${r._id}`}>{r.researchTitle}</a></P>
               </div>
               <Tooltip>{r.researchTitle}</Tooltip>
             </TableBodyCell>
-            
+
             <TableBodyCell class="">
               {r.researchStatus}
             </TableBodyCell>
             <TableBodyCell class="">
               <div class="flex items-center gap-2">
                 <P size="sm" weight="medium" class="line-clamp-1">{moment(r.createdAt).calendar()}</P>
-                <DotsHorizontalOutline/>
-  
+                <DotsHorizontalOutline />
               </div>
-              
             </TableBodyCell>
           </TableBodyRow>
-            {/each}
-        {/if}
-            
-            
-
-      
+        {/each}
+      {/if}
     </TableBody>
   </Table>
 </Drawer>
@@ -242,9 +252,9 @@
   <div class="flex justify-between items-center gap-2">
     <div class="flex items-center gap-2">
       <ChevronLeftOutline on:click={() => (notification = true)} size="md" class="" />
-        <div class="flex items-center gap-1"><BellOutline size="md" /><P weight="semibold" size="2xl" class="">Notifications</P></div>
+      <div class="flex items-center gap-1"><BellOutline size="md" /><P weight="semibold" size="2xl" class="">Notifications</P></div>
     </div>
-    
+
     <Button size="md" outline class=""><EnvelopeOpenOutline class="w-4 h-4 me-2" />Mark All As Read</Button>
   </div>
 
@@ -255,31 +265,29 @@
           <CalendarWeekSolid class="w-3 h-3 text-primary-600 dark:text-primary-400" />
         </span>
       </svelte:fragment>
-      
+
       <P weight="normal" size="base">The Concept Note titled <span class="font-medium text-base">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness </span>has been approved. You may now set a schedule for the <span class="font-medium text-base">Initial Presentation.</span></P>
       <Button color="alternative" class="mt-2">I Have Recieved The Notice<CheckOutline class="ms-2 w-3 h-3" /></Button>
     </TimelineItem>
-
   </Timeline>
 </Drawer>
 
 <!--modal for create new research-->
-<Modal bind:open={formModal} size="xs" autoclose={false} outsideclose class="w-full">
-  <form class="flex flex-col space-y-6" action="#">
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create new research</h3>
-    <Label class="font-medium text-base space-y-2">
-      <span>Research Title</span>
-      <Textarea rows="5" id="researchTitle" for="researchTitle" required />
-    </Label>
+<Modal title="" bind:open={formModal} size="xs" autoclose={false} outsideclose class="w-full">
+  <form class="flex flex-col gap-2" action="#">
+    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create New Research</h3>
+
     <div class="gap-2">
       <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
-  <!--
-<MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
-  -->
-      
+      <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
 
       <Helper class="pt-2 text-orange-500"></Helper>
     </div>
+    <Label class="font-medium text-base ">
+      <span>Research Title</span>
+      <Textarea rows="5" id="researchTitle" for="researchTitle" required />
+    </Label>
+    
     <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
   </form>
 </Modal>
@@ -291,8 +299,8 @@
   {:else}
     <slot />
   {/if}
-  <div class="h-96"> </div>
-  <div class="h-96"> </div>
+  <div class="h-96"></div>
+  <div class="h-96"></div>
 </div>
 
 <!--old layout
