@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Card, Helper, Input, Label, MultiSelect } from "flowbite-svelte";
+  import { Button, Card, Helper, Input, Label, Modal, MultiSelect, P, Textarea } from "flowbite-svelte";
   import { onMount } from "svelte";
 
   let json = {},
@@ -58,6 +58,7 @@
   }
 </script>
 
+<!--
 <main>
   <div class="flex justify-center items-center">
     <Card size="lg">
@@ -73,4 +74,26 @@
     </div>
     
       
+</main>
+
+-->
+
+<main>
+  <Modal size="xs" autoclose={false} outsideclose class="w-full">
+    <form class="flex flex-col space-y-6" action="#">
+      <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create new research</h3>
+      <Label class="font-medium text-base space-y-2">
+        <span>Research Title</span>
+        <Textarea rows="5" id="researchTitle" for="researchTitle" required />
+      </Label>
+      <div class="gap-2">
+        <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
+
+        <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
+
+        <Helper class="pt-2 text-orange-500"></Helper>
+      </div>
+      <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
+    </form>
+  </Modal>
 </main>

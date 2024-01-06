@@ -1,14 +1,14 @@
 <script lang="ts">
   import UNCLogo from "/login.png";
   import { Section, TableHeader } from "flowbite-svelte-blocks";
-  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Drawer, CloseButton, Button, NavHamburger, Navbar, NavBrand, NavUl, NavLi, DarkMode, Badge, Indicator, Input, Avatar, Tooltip, Dropdown, DropdownItem, Search, DropdownDivider, Checkbox, Table, TableBodyCell, TableHead, Heading, TableHeadCell, TableBody, TableBodyRow, TableSearch, P, Modal, Label, MultiSelect, Textarea, Group, GroupItem, Timeline, TimelineItem } from "flowbite-svelte";
+  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Drawer, CloseButton, Button, NavHamburger, Navbar, NavBrand, NavUl, NavLi, DarkMode, Badge, Indicator, Input, Avatar, Tooltip, Dropdown, DropdownItem, Search, DropdownDivider, Checkbox, Table, TableBodyCell, TableHead, Heading, TableHeadCell, TableBody, TableBodyRow, TableSearch, P, Modal, Label, MultiSelect, Textarea, Group, GroupItem, Timeline, TimelineItem, Helper } from "flowbite-svelte";
   import Menu from "../../assets/menu.svelte";
   import { goto } from "@roxi/routify";
   import { onMount } from "svelte";
   import { userData, isAuthenticated, updateUser } from "../../components/store";
   import { BookOutline, CogOutline, UserOutline, CirclePlusOutline, InfoCircleSolid, ArrowRightOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline, ChevronDownOutline, DotsVerticalOutline, EyeOutline, EditOutline, ClipboardOutline, FilterOutline, SortOutline, ChevronLeftOutline, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, MessagesSolid, EnvelopeOpenOutline, CalendarWeekSolid } from "flowbite-svelte-icons";
   import { sineIn } from "svelte/easing";
-    import moment from "moment";
+  import moment from "moment";
 
   var researches: any;
   let loading = true;
@@ -66,6 +66,24 @@
     }
   });
 
+  //modal for create new research
+  let json = {},
+    researchLeaders: any[] = [];
+
+  var users: any, userList: any;
+
+  async function fetchUserList() {
+    const response = await fetch("/api/user/getUsers");
+    users = await response.json();
+  }
+
+  onMount(async () => {
+    await Promise.all([fetchUser(), fetchUserList()]);
+    userList = users.map((user: any) => ({
+      value: user._id,
+      name: `${user.firstName} ${user.lastName}`,
+    }));
+  });
 
   //notification this month
   //sidebar
@@ -86,8 +104,6 @@
     easing: sineIn,
   };
 
-  
-
   //modal for create new research
   let formModal = false;
 </script>
@@ -96,7 +112,7 @@
 <nav class="bg-white flex justify-between z-50 gap-2 ml-64 pl-4 pt-2 pr-4 pb-2 border-b">
   <form class="flex items-center w-full gap-2">
     <FolderOutline />
-    <Input class="w-5/6 truncate ..." type="text" id="researchProjectTitle" placeholder="Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness"></Input>
+    <P weight="semibold" size="base"></P>
     <StarOutline />
     <Tooltip>Not Starred</Tooltip>
     <Badge class="pt-2 pr-4 pb-2 " rounded><Indicator color="orange" size="md" class="me-1.5" />No Status</Badge>
@@ -134,17 +150,17 @@
         {:else}
           <div></div>
         {/if}
-        <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create new research" on:click={() => (formModal = true)}><svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment></SidebarItem>
-        <SidebarItem label="All researches" on:click={() => (allResearches = false)} class="" ><svelte:fragment slot="icon"><FolderOutline /></svelte:fragment></SidebarItem>
-        <SidebarItem label="Browse researches" href="/main/personnel/browseResearches"><svelte:fragment slot="icon"><SearchOutline /></svelte:fragment></SidebarItem>
-        <SidebarItem label="Bookmark researches" href="" class=""><svelte:fragment slot="icon"><BookmarkOutline /></svelte:fragment></SidebarItem>
+        <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create New Research" on:click={() => (formModal = true)}><svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment></SidebarItem>
+        <SidebarItem label="All Researches" on:click={() => (allResearches = false)} class=""><svelte:fragment slot="icon"><FolderOutline /></svelte:fragment></SidebarItem>
+        <SidebarItem label="Browse Researches" href="/main/personnel/browseResearches"><svelte:fragment slot="icon"><SearchOutline /></svelte:fragment></SidebarItem>
+        <SidebarItem label="Bookmarks" href="/main/personnel/bookmarks" class=""><svelte:fragment slot="icon"><BookmarkOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="Notifications" on:click={() => (notification = false)} href=""><svelte:fragment slot="icon"><BellOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="Library" href=""><svelte:fragment slot="icon"><LandmarkOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="Check Presentations" href="/main/admin/checkPresentations" />
         <SidebarItem label="Check Proposals" href="/main/admin/checkProposals" />
         <SidebarItem label="Create User Accounts" href="/main/admin/createAccount" />
         <SidebarItem label="Personnel Dashboard" href="/main/personnel/personnelDashboard" />
-        <SidebarItem label="Create concept note" href="/main/personnel/createConceptNote" />
+        <SidebarItem label="Create Concept Note" href="/main/personnel/createConceptNote" />
         <SidebarItem label="Research Dashboard" href="/main/personnel/researchDashboard" />
       </SidebarGroup>
       <!---->
@@ -152,7 +168,8 @@
         {#if loading}
           <SidebarItem label="Loading..."></SidebarItem>
         {:else if researches}
-          <SidebarDropdownWrapper label="Starred" isOpen><svelte:fragment slot="icon"><StarSolid color="orange" /></svelte:fragment>
+          <SidebarDropdownWrapper label="Starred" isOpen
+            ><svelte:fragment slot="icon"><StarSolid color="orange" /></svelte:fragment>
             {#each researches as r}
               <SidebarDropdownItem class="" label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
             {/each}
@@ -187,7 +204,7 @@
 
   <div class="flex items-center gap-2">
     <Search></Search>
-    <Button size="md" class="w-40 md:w-52"><FilterOutline class="w-4 h-4 me-2" />Filter by</Button>
+    <Button size="md" class="w-40 md:w-52"><FilterOutline class="w-4 h-4 me-2" />Filter By</Button>
     <Dropdown>
       <DropdownItem>Title</DropdownItem>
       <DropdownItem>Status</DropdownItem>
@@ -201,38 +218,31 @@
       <TableHeadCell><div class="flex items-center gap-2"><SortOutline class="w-4 h-4 me-2" />Recent</div></TableHeadCell>
     </TableHead>
     <TableBody>
-
-        {#if loading}
-          <div>Loading...</div>
-        {:else if researches}
-            {#each researches as r}
-            <TableBodyRow>
-              <TableBodyCell class="">
+      {#if loading}
+        <div>Loading...</div>
+      {:else if researches}
+        {#each researches as r}
+          <TableBodyRow>
+            <TableBodyCell class="">
               <div class="flex items-center gap-2 p-0">
-                <StarOutline class="w-4 h-4 p-0"/>
+                <StarOutline class="w-4 h-4 p-0" />
                 <P size="sm" weight="medium" class="line-clamp-1"><a href={`/main/${r._id}`}>{r.researchTitle}</a></P>
               </div>
               <Tooltip>{r.researchTitle}</Tooltip>
             </TableBodyCell>
-            
+
             <TableBodyCell class="">
               {r.researchStatus}
             </TableBodyCell>
             <TableBodyCell class="">
               <div class="flex items-center gap-2">
                 <P size="sm" weight="medium" class="line-clamp-1">{moment(r.createdAt).calendar()}</P>
-                <DotsHorizontalOutline/>
-  
+                <DotsHorizontalOutline />
               </div>
-              
             </TableBodyCell>
           </TableBodyRow>
-            {/each}
-        {/if}
-            
-            
-
-      
+        {/each}
+      {/if}
     </TableBody>
   </Table>
 </Drawer>
@@ -242,9 +252,9 @@
   <div class="flex justify-between items-center gap-2">
     <div class="flex items-center gap-2">
       <ChevronLeftOutline on:click={() => (notification = true)} size="md" class="" />
-        <div class="flex items-center gap-1"><BellOutline size="md" /><P weight="semibold" size="2xl" class="">Notifications</P></div>
+      <div class="flex items-center gap-1"><BellOutline size="md" /><P weight="semibold" size="2xl" class="">Notifications</P></div>
     </div>
-    
+
     <Button size="md" outline class=""><EnvelopeOpenOutline class="w-4 h-4 me-2" />Mark All As Read</Button>
   </div>
 
@@ -255,41 +265,42 @@
           <CalendarWeekSolid class="w-3 h-3 text-primary-600 dark:text-primary-400" />
         </span>
       </svelte:fragment>
-      
+
       <P weight="normal" size="base">The Concept Note titled <span class="font-medium text-base">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness </span>has been approved. You may now set a schedule for the <span class="font-medium text-base">Initial Presentation.</span></P>
       <Button color="alternative" class="mt-2">I Have Recieved The Notice<CheckOutline class="ms-2 w-3 h-3" /></Button>
     </TimelineItem>
-
   </Timeline>
 </Drawer>
 
 <!--modal for create new research-->
+<Modal title="" bind:open={formModal} size="xs" autoclose={false} outsideclose class="w-full">
+  <form class="flex flex-col gap-2" action="#">
+    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create New Research</h3>
 
-<Modal bind:open={formModal} size="xs" autoclose={false} outsideclose class="w-full">
-  <form class="flex flex-col space-y-6" action="#">
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create new research</h3>
-    <Label class="space-y-2">
-      <span>Research title</span>
-      <Textarea rows="5" id="researchTitle" required />
+    <div class="gap-2">
+      <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
+      <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
+
+      <Helper class="pt-2 text-orange-500"></Helper>
+    </div>
+    <Label class="font-medium text-base ">
+      <span>Research Title</span>
+      <Textarea rows="5" id="researchTitle" for="researchTitle" required />
     </Label>
-    <Label class="space-y-2">
-      <span>Project leader</span>
-      <!--
-<MultiSelect size="lg" items={userList} bind:value={researchLeaders} required />
-      -->
-      <label class="block font-bold mb-2" for="researchLeaders"> Research Leader </label>
-    </Label>
-    <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create new research</Button>
+    
+    <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
   </form>
 </Modal>
 
 <!--content-->
-<div class="ml-64 pl-2 pt-4 pr-2 pb-4 grid items-center bg-white">
+<div class="ml-64 pl-4 pt-4 pr-4 pb-4 grid items-start bg-white">
   {#if currentUser}
     <slot scoped={{ userID: currentUser._id }} />
   {:else}
     <slot />
   {/if}
+  <div class="h-96"></div>
+  <div class="h-96"></div>
 </div>
 
 <!--old layout

@@ -3,9 +3,9 @@
   let json = {};
   let message: any;
   function submit(e: Event) {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    json = Object.fromEntries(formData.entries());
+  e.preventDefault();
+  const formData = new FormData(e.target as HTMLFormElement);
+  json = Object.fromEntries(formData.entries());
 
     // Make an HTTP POST request to the API
     fetch('/api/user/createAccount', {

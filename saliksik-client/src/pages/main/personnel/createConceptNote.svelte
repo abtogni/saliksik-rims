@@ -3,6 +3,7 @@
   import { BookOutline, ClipboardOutline, ClockOutline, CodeOutline, EditOutline, ExclamationCircleOutline, FaceGrinOutline, FileLinesOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, TrashBinOutline, UploadOutline } from "flowbite-svelte-icons";
   import { onMount } from "svelte";
   import { DateInput } from "date-picker-svelte";
+  import moment from "moment";
 
   let json = {},
     researchMembers: any[] = [],
@@ -75,7 +76,8 @@
         <a href="/" class="text-blue-700 text-sm font-medium w-52 text-right hover:underline">Edit Concept Note Name</a>
       </div>
       <div class="flex justify-start items-center gap-2">
-        <div><P weight="normal" class="flex items-center gap-2"><ClockOutline size="sm" /></P></div>
+        <div><P weight="normal" class="flex items-center gap-2"><ClockOutline size="sm" /><!--{moment(p.createdAt).format("lll")}-->
+          </P></div>
         <Tooltip arrow={false}>Last update</Tooltip>
         <Badge border large class="flex items-center gap-2"><Indicator color="yellow" class="" />No Status</Badge>
       </div>
@@ -85,9 +87,9 @@
       <div class="flex justify-between items-start gap-2">
         <P weight="semibold" size="xl" class="">Create Concept Note</P>
         <div class="flex items-center gap-2">
-          <Button href="/" class="gap-2"><EditOutline size="sm" />Save As Draft</Button>        
-          <Button href="/" class="gap-2"><UploadOutline size="sm" />Submit</Button>
-          <Button href="/" class="gap-2"><TrashBinOutline size="sm" />Delete</Button>
+          <Button type="submit" class="gap-2"><EditOutline size="sm" />Save As Draft</Button>
+          <Button type="submit" class="gap-2"><UploadOutline size="sm" />Submit</Button>
+          <Button type="submit" class="gap-2"><TrashBinOutline size="sm" />Delete</Button>
         </div>
       </div>
     </Card>
