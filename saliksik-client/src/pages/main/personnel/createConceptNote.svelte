@@ -48,7 +48,7 @@
       .then((response) => {
         if (response.ok) {
           // Handle a successful response (e.g., redirect to a new page)
-          window.location.href = "/main/";
+          // window.location.href = "/main/";
         } else {
           // Handle errors or authentication failures
           console.error("Login failed");
@@ -85,7 +85,7 @@
       <div class="flex justify-between items-start gap-2">
         <P weight="semibold" size="xl" class="">Create Concept Note</P>
         <div class="flex items-center gap-2">
-          <Button href="/" class="gap-2"><EditOutline size="sm" />Save As Draft</Button>
+          <Button href="/" class="gap-2"><EditOutline size="sm" />Save As Draft</Button>        
           <Button href="/" class="gap-2"><UploadOutline size="sm" />Submit</Button>
           <Button href="/" class="gap-2"><TrashBinOutline size="sm" />Delete</Button>
         </div>

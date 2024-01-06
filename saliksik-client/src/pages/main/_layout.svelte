@@ -182,7 +182,7 @@
   <div class="flex justify-between items-center gap-2">
     <ChevronLeftOutline on:click={() => (allResearches = true)} class="w-4 h-4 mr-4 mb-2 dark:text-white" />
     <Heading tag="h6" class="flex gap-2"><FolderOutline />All researches</Heading>
-    <Button on:click={() => (formModal = true)} size="md" outline class="w-60 sm:w-72"><CirclePlusOutline class="w-4 h-4 me-2" />Create new research</Button>
+    <Button on:click={() => (formModal=true, allResearches=true)} size="md" outline class="w-60 sm:w-72"><CirclePlusOutline class="w-4 h-4 me-2" />Create new research</Button>
   </div>
 
   <div class="flex items-center gap-2">
