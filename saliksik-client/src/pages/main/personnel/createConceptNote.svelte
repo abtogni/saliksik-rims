@@ -1,31 +1,10 @@
 <script lang="ts">
-  import { A, Avatar, Badge, Button, Card, Datepicker, FloatingLabelInput, Heading, Helper, Hr, Indicator, Input, Label, Modal, MultiSelect, P, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip } from "flowbite-svelte";
-  import { BookOutline, ClipboardOutline, ClockOutline, CodeOutline, EditOutline, ExclamationCircleOutline, FaceGrinOutline, FileLinesOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, TrashBinOutline, UploadOutline } from "flowbite-svelte-icons";
-  import { onMount } from "svelte";
+  import { Badge, Button, Card, FloatingLabelInput, Helper, Indicator, MultiSelect, P, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip } from "flowbite-svelte";
+  import { ClockOutline, CodeOutline, EditOutline, FaceGrinOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, TrashBinOutline, UploadOutline } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
-  import moment from "moment";
 
-  let json = {},researchLeaders: any[] = [];
+  let json = {};
 
-  var userData: any, users: any, userList: any;
-
-  async function fetchUser() {
-    const response = await fetch("/api/checkUser");
-    userData = await response.json();
-  }
-
-  async function fetchUserList() {
-    const response = await fetch("/api/user/getUsers");
-    users = await response.json();
-  }
-
-  onMount(async () => {
-    await Promise.all([fetchUser(), fetchUserList()]);
-    userList = users.map((user: any) => ({
-      value: user._id,
-      name: `${user.firstName} ${user.lastName}`,
-    }));
-  });
 
   function submit(e: Event) {
     e.preventDefault();
@@ -34,10 +13,9 @@
     json = {
       ...json,
       projectDuration,
-      researchLeaders,
     };
 
-    fetch("/api/research/createResearch", {
+    fetch("/api/research/createProposal", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -109,11 +87,6 @@
         <P weight="medium" size="base" for="researchLeaders">Project Duration</P>
         <DateInput bind:value={projectDuration} format="yyyy-MM-dd" required class=""/>
         <Helper class="pt-1 text-blue-700">Specific dates that the project will be undertaken (month/year); ideally to be completed minimum 1 year/ depending on the approved grant.</Helper>
-      </div>
-      <div class="gap-2">
-        <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
-        <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
-        <Helper class="pt-2 text-orange-500"></Helper>
       </div>
     </Card>
 
