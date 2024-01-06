@@ -1,6 +1,5 @@
 <script lang="ts">
-    import { Button } from "flowbite-svelte";
-
+   import { Button } from "flowbite-svelte";
   let json = {};
   let message: any;
   function submit(e: Event) {
@@ -8,25 +7,25 @@
   const formData = new FormData(e.target as HTMLFormElement);
   json = Object.fromEntries(formData.entries());
 
-  // Make an HTTP POST request to the API
-  fetch('/api/user/createAccount', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(json),
-  })
-    .then((response) => {
-      if (response.ok) {
-        message = 'Created an account!';
-      } else {
-        // Handle errors or authentication failures
-        console.error('Registration failed');
-      }
+    // Make an HTTP POST request to the API
+    fetch('/api/user/createAccount', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(json),
     })
-    .catch((error) => {
-      console.error('Network error:', error);
-    });
+        .then((response) => {
+            if (response.ok) {
+                message = 'Created an account!';
+            } else {
+                // Handle errors or authentication failures
+                console.error('Registration failed');
+            }
+        })
+        .catch((error) => {
+            console.error('Network error:', error);
+        });
 }
   </script>
   
