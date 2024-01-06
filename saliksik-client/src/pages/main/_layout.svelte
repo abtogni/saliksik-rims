@@ -1,8 +1,7 @@
 <script lang="ts">
   import NewResearchModal from "../../modals/NewResearchModal.svelte";
   import UNCLogo from "/login.png";
-  import { Section, TableHeader } from "flowbite-svelte-blocks";
-  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Drawer, CloseButton, Button, NavHamburger, Navbar, NavBrand, NavUl, NavLi, DarkMode, Badge, Indicator, Input, Avatar, Tooltip, Dropdown, DropdownItem, Search, DropdownDivider, Checkbox, Table, TableBodyCell, TableHead, Heading, TableHeadCell, TableBody, TableBodyRow, TableSearch, P, Modal, Label, MultiSelect, Textarea, Group, GroupItem, Timeline, TimelineItem, Helper, Popover } from "flowbite-svelte";
+  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Drawer, Button, Badge, Indicator, Tooltip, Dropdown, DropdownItem, Search, Table, TableBodyCell, TableHead, Heading, TableHeadCell, TableBody, TableBodyRow, TableSearch, P, Modal, Label, MultiSelect, Textarea, Group, GroupItem, Timeline, TimelineItem, Helper } from "flowbite-svelte";
   import Menu from "../../assets/menu.svelte";
   import { goto } from "@roxi/routify";
   import { onMount } from "svelte";
@@ -92,17 +91,15 @@
 </script>
 
 <!--navbar-->
-<nav class="bg-white grid grid-flow-col justify-items-stretch z-50 gap-2 ml-64 pl-4 pt-2 pr-4 pb-2 border-b">
-  <div class="flex items-center gap-2">
+<nav class="bg-white flex justify-between z-50 gap-2 ml-64 pl-4 pt-2 pr-4 pb-2 border-b">
+  <form class="flex items-center w-full gap-2">
     <FolderOutline />
-    <P weight="semibold" size="base" class="line-clamp-1">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
-  </div>
-
-  <div class="flex items-center gap-2">
+    <P weight="semibold" size="base"></P>
     <StarOutline />
-    <Tooltip arrow={false}>Not Starred</Tooltip>
+    <Tooltip>Not Starred</Tooltip>
     <Badge class="pt-2 pr-4 pb-2 " rounded><Indicator color="orange" size="md" class="me-1.5" />No Status</Badge>
-  </div>
+  </form>
+
   <div class="flex items-center gap-4">
     <ClockOutline />
     <Tooltip>Last edit was 00 hours ago</Tooltip>
@@ -135,7 +132,7 @@
         {:else}
           <div></div>
         {/if}
-        <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create New Project" on:click={() => (formModal = true)}><svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment></SidebarItem>
+        <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create New Research" on:click={() => (formModal = true)}><svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="All Researches" on:click={() => (allResearches = false)} class=""><svelte:fragment slot="icon"><FolderOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="Browse Researches" href="/main/personnel/browseResearches"><svelte:fragment slot="icon"><SearchOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="Bookmarks" href="/main/personnel/bookmarks" class=""><svelte:fragment slot="icon"><BookmarkOutline /></svelte:fragment></SidebarItem>
@@ -146,6 +143,7 @@
         <SidebarItem label="Create User Accounts" href="/main/admin/createAccount" />
         <SidebarItem label="Personnel Dashboard" href="/main/personnel/personnelDashboard" />
         <SidebarItem label="Create Concept Note" href="/main/personnel/createConceptNote" />
+        <SidebarItem label="Research Dashboard" href="/main/personnel/researchDashboard" />
       </SidebarGroup>
       <!---->
       <SidebarGroup border class="truncate ...">
@@ -183,7 +181,7 @@
   <div class="flex justify-between items-center gap-2">
     <ChevronLeftOutline on:click={() => (allResearches = true)} class="w-4 h-4 mr-4 mb-2 dark:text-white" />
     <Heading tag="h6" class="flex gap-2"><FolderOutline />All researches</Heading>
-    <Button on:click={() => ((formModal = true), (allResearches = true))} size="md" outline class="w-60 sm:w-72"><CirclePlusOutline class="w-4 h-4 me-2" />Create new research</Button>
+    <Button on:click={() => (formModal=true, allResearches=true)} size="md" outline class="w-60 sm:w-72"><CirclePlusOutline class="w-4 h-4 me-2" />Create new research</Button>
   </div>
 
   <div class="flex items-center gap-2">
@@ -212,7 +210,7 @@
                 <StarOutline class="w-4 h-4 p-0" />
                 <P size="sm" weight="medium" class="line-clamp-1"><a href={`/main/${r._id}`}>{r.researchTitle}</a></P>
               </div>
-              <Popover arrow={false} class="w-3/4 bg-black"><P weight="semibold" size="sm" class="text-white">{r.researchTitle}</P></Popover>
+              <Tooltip>{r.researchTitle}</Tooltip>
             </TableBodyCell>
 
             <TableBodyCell class="">
@@ -258,22 +256,7 @@
 
 <!--modal for create new research-->
 <Modal title="" bind:open={formModal} size="xs" autoclose={false} outsideclose class="w-full">
-  <form class="flex flex-col gap-2" action="#">
-    <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create New Research</h3>
-
-    <div class="gap-2">
-      <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
-      <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
-
-      <Helper class="pt-2 text-orange-500"></Helper>
-    </div>
-    <Label class="font-medium text-base ">
-      <span>Research Title</span>
-      <Textarea rows="5" id="researchTitle" for="researchTitle" required />
-    </Label>
-    
-    <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
-  </form>
+  <NewResearchModal  />
 </Modal>
 
 

@@ -10,12 +10,12 @@
     }
 
     onMount(async () => {
-    await fetchUserList();
-    userList = users.map((user: any) => ({
-      value: user._id,
-      name: `${user.firstName} ${user.lastName}`,
-    }));
-  }); 
+      await fetchUserList();
+      userList = users.map((user: any) => ({
+        value: user._id,
+        name: `${user.firstName} ${user.lastName}`,
+      }));
+    }); 
 
   function submit(e: Event) {
     e.preventDefault();
