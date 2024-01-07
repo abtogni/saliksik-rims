@@ -1,6 +1,6 @@
 <script>
-  import { Avatar, Breadcrumb, BreadcrumbItem, Button, Card, Gallery, Heading, Hr, P, Tooltip } from "flowbite-svelte";
-  import { DotsHorizontalOutline, DownloadOutline, BookmarkOutline, EyeOutline, ClipboardOutline, QuoteOutline, HomeOutline, ChevronDoubleRightOutline, GridOutline, SearchOutline } from "flowbite-svelte-icons";
+  import { Alert, Avatar, Breadcrumb, BreadcrumbItem, Button, Card, Gallery, Heading, Hr, P, Tooltip } from "flowbite-svelte";
+  import { DotsHorizontalOutline, DownloadOutline, BookmarkOutline, EyeOutline, ClipboardOutline, QuoteOutline, HomeOutline, ChevronDoubleRightOutline, GridOutline, SearchOutline, QuestionCircleOutline } from "flowbite-svelte-icons";
 
   const images = [
     { alt: "technology roadmap", src: "https://i.pinimg.com/564x/6a/38/c4/6a38c4ac733795a6b8312d0c4d800177.jpg" },
@@ -11,8 +11,17 @@
 </script>
 
 <main>
-  <div class="flex items-center gap-2 pb-2"><SearchOutline size="sm"  /><P weight="semibold" size="2xl" class="">Browse Researches</P></div>
+
+  <div class="flex items-center gap-2 pb-2"><P weight="semibold" size="2xl" class="">Browse Researches</P></div>
   
+  <Alert dismissable color="blue" class="border-l-8 w-full mb-2">
+  <div class="flex items-center gap-2">
+    <QuestionCircleOutline slot="icon" size="sm" />
+    <span class="text-lg font-medium">Browser Researches</span>
+  </div>
+  <p class="mt-2 text-sm">Insert helper text</p>
+</Alert>
+
   <div class="grid grid-cols-3 gap-2 items-start">
     
     <!--left column-->

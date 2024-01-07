@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Card, Checkbox, Dropdown, DropdownItem, FloatingLabelInput, Helper, Hr, Indicator, Input, Listgroup, Modal, P, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Tabs, Tooltip } from "flowbite-svelte";
+  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Card, Checkbox, Dropdown, DropdownItem, Fileupload, FloatingLabelInput, Helper, Hr, Indicator, Input, Label, Listgroup, Modal, P, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Tabs, Tooltip } from "flowbite-svelte";
   import { AdjustmentsVerticalSolid, BookOutline, BookmarkOutline, CalendarMonthOutline, CalendarWeekOutline, ClipboardOutline, ClipboardSolid, ClockOutline, DotsHorizontalOutline, EditOutline, EyeOutline, FileCirclePlusOutline, FileLinesOutline, GridOutline, GridSolid, MessagesOutline, QuestionCircleOutline, TrashBinOutline, UserCircleSolid, UserOutline } from "flowbite-svelte-icons";
   import { goto } from "@roxi/routify";
   import moment from "moment";
@@ -76,6 +76,8 @@
   //modal for creating concept note
   let createConceptNote = false;
 
+  //modal for submit existing research
+  let submitExistingResearch = false;
   let list = [
     {
       name: "Nora Elizabeth F. Maniquiz",
@@ -103,6 +105,10 @@
 
   //check panelist comment
   let setInitialPresentation = false;
+
+  //submit existing research
+  let existingResearch;
+  
 </script>
 
 <main class="">
@@ -120,15 +126,15 @@
           <p class="mt-2 text-sm">Or you can submit an already existing/published (owned) research. An incentive will be given based on the following:</p>
         </Alert>
         <div class="flex items-center gap-2">
-          <Button on:click={() => (createConceptNote = true)} class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Create Concept Note</Button>
-          <Button on:click={() => (createConceptNote = true)} class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Submit Existing Research</Button>
+          <Button on:click={() => (createConceptNote = true)} color="blue" size="sm" class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Create Concept Note</Button>
+          <Button on:click={() => (submitExistingResearch = true)} outline color="blue" size="sm" class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Submit Existing Research</Button>
         </div>
 
         <Table hoverable={true} noborder={false} shadow={true} class="">
           <TableHead theadClass="text-xs uppercase" class="bg-blue-200">
             <TableHeadCell class="w-3/4">Concept Note Name</TableHeadCell>
             <TableHeadCell>Last Update</TableHeadCell>
-            <TableHeadCell>Tools</TableHeadCell>
+            <TableHeadCell></TableHeadCell>
           </TableHead>
 
           <TableBody>
@@ -137,26 +143,22 @@
                 {#each proposals as p, i}
                   {#if researches.find((x) => x._id === p.researchID)}
                     {#each researches.filter((x) => x._id === p.researchID) as research}
-                      <TableBodyRow>
+                      <TableBodyRow on:click={() => toggleRow(i)} >
                         <TableBodyCell class="">
                           <div class="flex justify-start items-center gap-2">
                             <Indicator color="dark"></Indicator>
-                            <Tooltip arrow={false}>Saved as draft</Tooltip>
-                            <P size="sm" weight="medium" class="line-clamp-1">{research.researchTitle}</P>
+                            <Tooltip arrow={false}>Saved As Draft</Tooltip>
+                            <P size="sm" weight="medium" class="line-clamp-1 font-normal">{research.researchTitle}</P>
                           </div>
                         </TableBodyCell>
-                        <TableBodyRow class="">
-                          <TableBodyCell class="">{moment(p.createdAt).format("lll")}</TableBodyCell>
-                        </TableBodyRow>
+                        <TableBodyCell class="font-normal bg-transparent">{moment(p.createdAt).format("lll")}</TableBodyCell>
                         <TableBodyCell>
-                          <div class="flex justify-start items-center gap-2">
-                            <EyeOutline on:click={() => toggleRow(i)} size="sm" />
-                            <Tooltip arrow={false} class="">View</Tooltip>
-                            <EditOutline size="sm" />
+                          <div class="flex justify-start items-center gap-.5">
+                            <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-1.5"><EditOutline size="sm" /></Button>
                             <Tooltip arrow={false}>Edit</Tooltip>
-                            <ClipboardOutline size="sm" />
-                            <Tooltip arrow={false}>Copy link to clipboard</Tooltip>
-                            <TrashBinOutline size="sm" />
+                            <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-1.5"><ClipboardOutline size="sm" /></Button>
+                            <Tooltip arrow={false}>Copy Link To Clipboard</Tooltip>
+                            <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-1.5"><TrashBinOutline size="sm" /></Button>
                             <Tooltip arrow={false}>Delete</Tooltip>
                           </div>
                         </TableBodyCell>
@@ -167,8 +169,8 @@
                             <div class="flex flex-wrap justify-center gap-2">
                               <Card size="xl" class="gap-2 w-full">
                                 <div class="flex justify-between items-start gap-2">
-                                  <P weight="semibold" size="base" class="">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
-                                  <a href="#" class="text-blue-700 text-sm font-medium w-60 text-right hover:underline">Edit Concept Note Name</a>
+                                  <P weight="semibold" size="base" class="">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
+                                  <a href="#" class="text-blue-700 text-sm font-medium w-24 text-right hover:underline">Edit Name</a>
                                 </div>
                                 <div class="flex justify-start items-center gap-2">
                                   <div><P weight="normal" class="flex items-center gap-2"><ClockOutline size="sm" />{moment(p.createdAt).format("lll")}</P></div>
@@ -180,9 +182,12 @@
                                 <div class="flex justify-between items-start gap-2">
                                   <P weight="semibold" size="xl" class="">Concept Note Overview</P>
                                   <div class="flex items-center gap-2">
-                                    <Button href="/" class="gap-2"><EditOutline size="sm" />Edit concept note</Button>
-                                    <Button href="/" class="gap-2"><ClipboardOutline size="sm" />Copy link to clipboard</Button>
-                                    <Button href="/" class="gap-2"><TrashBinOutline size="sm" />Delete</Button>
+                                    <Button color="blue" size="sm" class="gap-2"><EditOutline size="sm" />Edit Concept Note</Button>
+                                    <Button outline color="blue" size="sm" class="gap-2"><ClipboardOutline size="sm" />Copy Link To Clipboard</Button>
+                                    <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2"><DotsHorizontalOutline size="sm" /></Button>
+                                    <Dropdown class="">
+                                      <DropdownItem class="flex justify-start items-center gap-2"><TrashBinOutline size="sm" class="text-blue-700" />Delete Concept Note</DropdownItem>
+                                    </Dropdown>
                                   </div>
                                 </div>
                               </Card>
@@ -279,19 +284,45 @@
       </div>
     </TabItem>
 
+    <!--modal for create concept note-->
+  <Modal title="Enter Concept Note Name" bind:open={createConceptNote} size="xs" autoclose class="w-full">
+    <form class="grid grid-flow-row grid-rows-1 items-start gap-2">
+      <FloatingLabelInput type="text" style="outlined" id="floating_filled" name="floating_filled" label="Concept Note Name" required class="w-full">Concept Note Name</FloatingLabelInput>
+      <Helper></Helper>
+      <div class="flex gap-2">
+        <!--on continue, dapat ma save ang concept note name at magdisplay sa table-->
+        <Button href="/main/personnel/createConceptNote" class="w-full">Continue</Button>
+        <Button class="w-full">Cancel</Button>
+      </div>
+    </form>
+  </Modal>
+
+  <!--modal for submit existing research-->
+  <Modal title="Upload Existing Research" bind:open={submitExistingResearch} size="xs" autoclose class="w-full">
+    <form class="grid grid-flow-row items-start gap-0">
+      <Label for="" class="font-medium text-base space-y-2">
+        <span >Upload file</span>
+        <Fileupload  bind:existingResearch />
+      </Label>
+      <Label class="font-medium text-sm">File: {existingResearch}</Label>
+    </form>
+  </Modal>
+
+    <!--initial presentation-->
     <TabItem title="">
       <div slot="title" class="flex items-center gap-2"><CalendarMonthOutline size="sm" />Initial Presentation</div>
+      <Alert dismissable color="blue" class="border-l-8 w-full mt-2 mb-2">
+        <div class="flex items-center gap-2">
+          <QuestionCircleOutline slot="icon" size="sm" />
+          <span class="text-lg font-medium">Initial Presentation</span>
+        </div>
+        <p class="mt-2 text-sm">Insert helper text</p>
+      </Alert>
       <div class="grid grid-flow-row justify-items-start gap-2">
-        <Alert dismissable color="blue" class="border-l-8">
-          <div class="flex items-center gap-2">
-            <QuestionCircleOutline slot="icon" size="sm" />
-            <span class="text-lg font-medium">Initial Presentation and Final Presentation</span>
-          </div>
-          <p class="mt-2 text-sm">In this section, you are required to submit a concept note of your research. Click the create concept note button and fill out all necessary fields. You can have multiple draft and only one submission. Once submitted, a notice to proceed will be sent on your notification.</p>
-        </Alert>
+        
         <div class="flex items-center gap-2">
           <div class="">
-            <Button on:click={() => (setInitialPresentation = true)} class="flex flex-nowrap items-center gap-2"><FileCirclePlusOutline size="sm" /> Set Schedule</Button>
+            <Button on:click={() => (setInitialPresentation = true)} color="blue" size="sm" class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Set Schedule</Button>
           </div>
 
           <Badge border large color="red" class="flex items-center gap-2"><Indicator color="red" class="" />No Schedule</Badge>
@@ -332,39 +363,19 @@
       </Tabs>
     </TabItem>
 
+    <!--final presentation-->
     <TabItem title="">
-      <div slot="title" class="flex items-center gap-2"><BookmarkOutline size="sm" />Final Presentation</div>
-    </TabItem>
-    <TabItem title="" class="">
-      <div slot="title" class="flex items-center gap-2"><BookmarkOutline size="sm" />Bookmarks</div>
-      
-    </TabItem>
-
-    <TabItem title="">
-      <div slot="title" class="flex items-center gap-2"><GridOutline size="sm" /></div>
+      <div slot="title" class="flex items-center gap-2"><CalendarMonthOutline size="sm" />Final Presentation</div>
     </TabItem>
 
   </Tabs>
-
-  <!--modal for create concept note-->
-  <Modal title="Enter Concept Note Name" bind:open={createConceptNote} size="xs" autoclose class="w-full">
-    <form class="grid grid-flow-row grid-rows-1 items-start gap-2">
-      <FloatingLabelInput type="text" style="outlined" id="floating_filled" name="floating_filled" label="Concept Note Name" required class="w-full">Concept Note Name</FloatingLabelInput>
-      <Helper></Helper>
-      <div class="flex gap-2">
-        <!--on continue, dapat ma save ang concept note name at magdisplay sa table-->
-        <Button href="/main/personnel/createConceptNote" class="w-full">Continue</Button>
-        <Button class="w-full">Cancel</Button>
-      </div>
-    </form>
-  </Modal>
 
   <!--modal for setting schedule for -->
   <Modal title="Set Date And Time" bind:open={setInitialPresentation} size="xs" autoclose class="w-full">
     <form class="grid grid-flow-row grid-rows-1 items-start gap-2">
       <div class="gap-2">
         <P weight="medium" size="base" for="researchLeaders"></P>
-        <DateInput bind:value={date} format="yyyy-MM-dd" required class=""/>
+        <DateInput bind:value={date} format="yyyy-MM-dd" required class="" />
       </div>
       <div class="flex gap-2">
         <!--on continue, dapat ma save ang concept note name at magdisplay sa table-->

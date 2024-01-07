@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from "@roxi/routify";
-  import { Heading, TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, TableSearch, Avatar, Popover, Card, Button, Modal, Accordion, AccordionItem, Listgroup, ListgroupItem, ImagePlaceholder, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, FloatingLabelInput } from "flowbite-svelte";
-  import { ClipboardOutline, ClockOutline, DotsHorizontalOutline, EditOutline, FileLinesOutline, FileOutline, FilterOutline, GridOutline, InfoCircleOutline, SortOutline, StarOutline, TrashBinOutline } from "flowbite-svelte-icons";
+  import { Heading, TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, TableSearch, Avatar, Popover, Card, Button, Modal, Accordion, AccordionItem, Listgroup, ListgroupItem, ImagePlaceholder, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, FloatingLabelInput, Alert } from "flowbite-svelte";
+  import { ClipboardOutline, ClockOutline, DotsHorizontalOutline, EditOutline, FileLinesOutline, FileOutline, FilterOutline, GridOutline, InfoCircleOutline, QuestionCircleOutline, SortOutline, StarOutline, TrashBinOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
@@ -83,7 +83,14 @@
 </script>
 
 <main>
-  <div class="flex items-center gap-2"><GridOutline size="sm" /><P weight="semibold" size="2xl" class="">Research Dashboard</P></div>
+  <Alert dismissable color="blue" class="border-l-8 w-full mb-2">
+    <div class="flex items-center gap-2">
+      <QuestionCircleOutline slot="icon" size="sm" />
+      <span class="text-lg font-medium">Admin Dashboard</span>
+    </div>
+    <p class="mt-2 text-sm">Insert helper text</p>
+  </Alert>
+  <div class="flex items-center gap-2"><P weight="semibold" size="2xl" class="">Admin Dashboard</P></div>
 
   <!--all researches-->
   <Tabs style="none" activeClasses="p-2 text-blue-700 border-b-2 border-b-blue-700 rounded-t-lg" inactiveClasses="p-2 text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300" contentClass="bg-white p-0 mt-2 rounded-md border-0 shadow-none" class="">

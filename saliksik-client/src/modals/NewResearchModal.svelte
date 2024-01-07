@@ -1,21 +1,22 @@
 <script lang="ts">
-    import { Button, Helper, Label, MultiSelect, P, Textarea } from 'flowbite-svelte';
-    import { onMount } from 'svelte';
-    let json = {}, researchLeaders: any[] = [];
-    var users: any, userList: any;
+  import { Button, Helper, Label, MultiSelect, P, Textarea } from "flowbite-svelte";
+  import { onMount } from "svelte";
+  let json = {},
+    researchLeaders: any[] = [];
+  var users: any, userList: any;
 
-    async function fetchUserList() {
-        const response = await fetch("/api/user/getUsers");
-        users = await response.json();
-    }
+  async function fetchUserList() {
+    const response = await fetch("/api/user/getUsers");
+    users = await response.json();
+  }
 
-    onMount(async () => {
-      await fetchUserList();
-      userList = users.map((user: any) => ({
-        value: user._id,
-        name: `${user.firstName} ${user.lastName}`,
-      }));
-    }); 
+  onMount(async () => {
+    await fetchUserList();
+    userList = users.map((user: any) => ({
+      value: user._id,
+      name: `${user.firstName} ${user.lastName}`,
+    }));
+  });
 
   function submit(e: Event) {
     e.preventDefault();
@@ -48,20 +49,19 @@
   }
 </script>
 
+<form class="flex flex-col gap-2" on:submit={submit}>
+  <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create New Research</h3>
 
+  <div class="gap-2">
+    <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
+    <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
+    <Helper class="pt-2 text-orange-500"></Helper>
+  </div>
 
-    <form class="flex flex-col gap-2" on:submit={submit}>
-      <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create New Research</h3>
-  
-      <div class="gap-2">
-        <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
-        <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
-  
-        <Helper class="pt-2 text-orange-500"></Helper>
-      </div>
-      <Label class="font-medium text-base " for="researchTitle"><span>Research Title</span></Label>
-        <Textarea rows="5" id="researchTitle" name="researchTitle" required />
-      
-      
-      <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
-    </form>
+  <div class="gap-2">
+    <Label class="font-medium text-base " for="researchTitle"><span>Research Title</span></Label>
+    <Textarea rows="5" id="researchTitle" name="researchTitle" required />
+  </div>
+
+  <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
+</form>

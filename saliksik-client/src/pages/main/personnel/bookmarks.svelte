@@ -1,13 +1,26 @@
 <script>
-  import { Button, Dropdown, DropdownItem, Input, Modal, P, Tooltip } from "flowbite-svelte";
-  import { BookSolid, BookmarkOutline, BookmarkSolid, CheckOutline, ClipboardOutline, CloseOutline, DotsHorizontalOutline, DownloadOutline, EditOutline, EyeOutline, FilePdfOutline, FilterOutline, LabelOutline, LabelSolid, PenOutline, QuoteOutline, TrashBinOutline } from "flowbite-svelte-icons";
+  import { Alert, Button, Dropdown, DropdownItem, Input, Modal, P, Tooltip } from "flowbite-svelte";
+  import { BookSolid, BookmarkOutline, BookmarkSolid, CheckOutline, ClipboardOutline, CloseOutline, DotsHorizontalOutline, DownloadOutline, EditOutline, EyeOutline, FilePdfOutline, FilterOutline, LabelOutline, LabelSolid, PenOutline, QuestionCircleOutline, QuoteOutline, TrashBinOutline } from "flowbite-svelte-icons";
 
   //modal for editLabel
   let editLabels = false;
+
+  function close_banner(event) {
+		document.querySelector('.banner').remove();
+		document.documentElement.style.setProperty('--banner-footer-height', '0px')
+	}
 </script>
 
 <main class="flex justify-center gap-2">
+  
   <div class="grid grid-flow-row items-center gap-2 w-1/2">
+    <Alert dismissable color="blue" class="banner border-l-8 w-full mb-2" on:click={close_banner}>
+      <div class="flex items-center gap-2">
+        <QuestionCircleOutline slot="icon" size="sm" />
+        <span class="text-lg font-medium">Create Concept Note</span>
+      </div>
+      <p class="mt-2 text-sm">Insert helper text</p>
+    </Alert>
     <div class="flex justify-between items-center w-full">
       <P weight="bold" size="xl">All</P>
       <div class="flex items-center gap-2">

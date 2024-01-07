@@ -93,7 +93,7 @@
 
         <Helper class="pt-2 text-orange-500"></Helper>
       </div>
-      <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
+      <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full">Create New Research</Button>
     </form>
   </Modal>
 </main>

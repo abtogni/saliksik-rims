@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { Badge, Button, Card, FloatingLabelInput, Helper, Indicator, MultiSelect, P, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip } from "flowbite-svelte";
-  import { ClockOutline, CodeOutline, EditOutline, FaceGrinOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, TrashBinOutline, UploadOutline } from "flowbite-svelte-icons";
+  import { Alert, Badge, Button, Card, FloatingLabelInput, Helper, Indicator, MultiSelect, P, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip } from "flowbite-svelte";
+  import { ClockOutline, CodeOutline, EditOutline, FaceGrinOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, TrashBinOutline, UploadOutline } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
 
   let json = {};
@@ -45,11 +45,19 @@
 </script>
 
 <main>
+  <Alert dismissable color="blue" class="border-l-8 w-full mb-2">
+    <div class="flex items-center gap-2">
+      <QuestionCircleOutline slot="icon" size="sm" />
+      <span class="text-lg font-medium">Create Concept Note</span>
+    </div>
+    <p class="mt-2 text-sm">Insert helper text</p>
+  </Alert>
+  
   <form on:submit={submit} class="flex flex-wrap justify-center gap-2">
     <Card size="xl" class="gap-2 w-full">
       <div class="flex justify-between items-start gap-2">
         <P weight="semibold" size="base" class="">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
-        <a href="/" class="text-blue-700 text-sm font-medium w-44 text-right hover:underline">Edit Name</a>
+        <a href="/" class="text-blue-700 text-sm font-medium w-24 text-right hover:underline ">Edit Name</a>
       </div>
       <div class="flex justify-start items-center gap-2">
         <div><P weight="normal" class="flex items-center gap-2"><ClockOutline size="sm" /><!--{moment(p.createdAt).format("lll")}-->
