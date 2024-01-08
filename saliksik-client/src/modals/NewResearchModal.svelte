@@ -1,17 +1,9 @@
 <script lang="ts">
-  import { Card, Helper, Input, Label, MultiSelect } from "flowbite-svelte";
+  import { Button, Helper, Label, MultiSelect, P, Textarea } from "flowbite-svelte";
   import { onMount } from "svelte";
-
   let json = {},
-    researchMembers: any[] = [],
     researchLeaders: any[] = [];
-
-  var userData: any, users: any, userList: any;
-
-  async function fetchUser() {
-    const response = await fetch("/api/checkUser");
-    userData = await response.json();
-  }
+  var users: any, userList: any;
 
   async function fetchUserList() {
     const response = await fetch("/api/user/getUsers");
@@ -19,7 +11,7 @@
   }
 
   onMount(async () => {
-    await Promise.all([fetchUser(), fetchUserList()]);
+    await fetchUserList();
     userList = users.map((user: any) => ({
       value: user._id,
       name: `${user.firstName} ${user.lastName}`,
@@ -32,7 +24,6 @@
     json = Object.fromEntries(formData.entries());
     json = {
       ...json,
-      researchMembers,
       researchLeaders,
     };
 
@@ -58,19 +49,19 @@
   }
 </script>
 
-<main>
-  <div class="flex justify-center items-center">
-    <Card size="lg">
-      <form class="">
-        <Label for="researchTitle">Research Title</Label>
-          <Input type="text" id="researchTitle"/>
-          <label class="block font-bold mb-2" for="researchLeaders"> Research Leader </label>
-          <MultiSelect size="lg" items={userList} bind:value={researchLeaders} required />
-          <Helper class="pt-2 text-orange-500"></Helper>
-          <Label>Project Duration</Label>
-        </form>
-    </Card>
-    </div>
-    
-      
-</main>
+<form class="flex flex-col gap-2" on:submit={submit}>
+  <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create New Research</h3>
+
+  <div class="gap-2">
+    <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
+    <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
+    <Helper class="pt-2 text-orange-500"></Helper>
+  </div>
+
+  <div class="gap-2">
+    <Label class="font-medium text-base " for="researchTitle"><span>Research Title</span></Label>
+    <Textarea rows="5" id="researchTitle" name="researchTitle" required />
+  </div>
+
+  <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
+</form>

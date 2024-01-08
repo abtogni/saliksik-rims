@@ -1,32 +1,10 @@
 <script lang="ts">
-  import { A, Avatar, Badge, Button, Card, Datepicker, FloatingLabelInput, Heading, Helper, Hr, Indicator, Input, Label, Modal, MultiSelect, P, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip } from "flowbite-svelte";
-  import { BookOutline, ClipboardOutline, ClockOutline, CodeOutline, EditOutline, ExclamationCircleOutline, FaceGrinOutline, FileLinesOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, TrashBinOutline, UploadOutline } from "flowbite-svelte-icons";
-  import { onMount } from "svelte";
+  import { Alert, Badge, Button, Card, FloatingLabelInput, Helper, Indicator, MultiSelect, P, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip } from "flowbite-svelte";
+  import { ClockOutline, CodeOutline, EditOutline, FaceGrinOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, TrashBinOutline, UploadOutline } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
 
-  let json = {},
-    researchMembers: any[] = [],
-    researchLeaders: any[] = [];
+  let json = {};
 
-  var userData: any, users: any, userList: any;
-
-  async function fetchUser() {
-    const response = await fetch("/api/checkUser");
-    userData = await response.json();
-  }
-
-  async function fetchUserList() {
-    const response = await fetch("/api/user/getUsers");
-    users = await response.json();
-  }
-
-  onMount(async () => {
-    await Promise.all([fetchUser(), fetchUserList()]);
-    userList = users.map((user: any) => ({
-      value: user._id,
-      name: `${user.firstName} ${user.lastName}`,
-    }));
-  });
 
   function submit(e: Event) {
     e.preventDefault();
@@ -34,11 +12,10 @@
     json = Object.fromEntries(formData.entries());
     json = {
       ...json,
-      researchMembers,
-      researchLeaders,
+      projectDuration,
     };
 
-    fetch("/api/research/createResearch", {
+    fetch("/api/research/createProposal", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +25,7 @@
       .then((response) => {
         if (response.ok) {
           // Handle a successful response (e.g., redirect to a new page)
-          window.location.href = "/main/";
+          // window.location.href = "/main/";
         } else {
           // Handle errors or authentication failures
           console.error("Login failed");
@@ -64,18 +41,27 @@
   let submitResearchProposal = false;
 
   //date picker
-  let date = new Date();
+  let projectDuration = new Date();
 </script>
 
 <main>
+  <Alert dismissable color="blue" class="border-l-8 w-full mb-2">
+    <div class="flex items-center gap-2">
+      <QuestionCircleOutline slot="icon" size="sm" />
+      <span class="text-lg font-medium">Create Concept Note</span>
+    </div>
+    <p class="mt-2 text-sm">Insert helper text</p>
+  </Alert>
+  
   <form on:submit={submit} class="flex flex-wrap justify-center gap-2">
     <Card size="xl" class="gap-2 w-full">
       <div class="flex justify-between items-start gap-2">
-        <P weight="semibold" size="base" class="w-11/12">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
-        <a href="/" class="text-blue-700 text-sm font-medium w-52 text-right hover:underline">Edit Concept Note Name</a>
+        <P weight="semibold" size="base" class="">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
+        <a href="/" class="text-blue-700 text-sm font-medium w-24 text-right hover:underline ">Edit Name</a>
       </div>
       <div class="flex justify-start items-center gap-2">
-        <div><P weight="normal" class="flex items-center gap-2"><ClockOutline size="sm" /></P></div>
+        <div><P weight="normal" class="flex items-center gap-2"><ClockOutline size="sm" /><!--{moment(p.createdAt).format("lll")}-->
+          </P></div>
         <Tooltip arrow={false}>Last update</Tooltip>
         <Badge border large class="flex items-center gap-2"><Indicator color="yellow" class="" />No Status</Badge>
       </div>
@@ -85,35 +71,30 @@
       <div class="flex justify-between items-start gap-2">
         <P weight="semibold" size="xl" class="">Create Concept Note</P>
         <div class="flex items-center gap-2">
-          <Button href="/" class="gap-2"><EditOutline size="sm" />Save As Draft</Button>
-          <Button href="/" class="gap-2"><UploadOutline size="sm" />Submit</Button>
-          <Button href="/" class="gap-2"><TrashBinOutline size="sm" />Delete</Button>
+          <Button type="submit" class="gap-2"><EditOutline size="sm" />Save As Draft</Button>
+          <Button type="submit" class="gap-2" on:click={submit}><UploadOutline size="sm" />Submit</Button>
+          <Button type="submit" class="gap-2"><TrashBinOutline size="sm" />Delete</Button>
         </div>
       </div>
     </Card>
 
     <Card size="xl" class="gap-2 w-full">
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Research Title" required class="w-full">Research Title</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="researchTitle" name="researchTitle" label="Research Title" required class="w-full">Research Title</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Implementing Agency/Department" required class="w-full">Implementing Agency/Department</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" required class="w-full">Implementing Agency/Department</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Cooperating Agency" required class="w-full">Cooperating Agency</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="coopAgency" name="coopAgency" label="Cooperating Agency" required class="w-full">Cooperating Agency</FloatingLabelInput>
       <Helper class=" text-blue-700">State the name of agency to be tapped for funding/ co-implementing the project.</Helper>
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Site/s of Implementation" required class="w-full">Site/s of Implementation</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="siteImplementation" name="siteImplementation" label="Site/s of Implementation" required class="w-full">Site/s of Implementation</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Total Project Cost" required class="w-full">Total Project Cost</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="totalCost" name="totalCost" label="Total Project Cost" required class="w-full">Total Project Cost</FloatingLabelInput>
       <Helper class=" text-blue-700">Include the specific budget allocations for personnel service, maintenance and operations, equipment, trainings/workshops, and administrative costs.</Helper>
-      <FloatingLabelInput type="text" size="small" style="outlined" id="floating_filled" name="floating_filled" label="Funding Source" required class="w-full">Funding Source</FloatingLabelInput>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="fundingSource" name="fundingSource" label="Funding Source" required class="w-full">Funding Source</FloatingLabelInput>
       <Helper class=" text-blue-700">Specific funding source, including counterpart funds.</Helper>
       <div class="gap-2">
         <P weight="medium" size="base" for="researchLeaders">Project Duration</P>
-        <DateInput bind:value={date} format="yyyy-MM-dd" required class=""/>
+        <DateInput bind:value={projectDuration} format="yyyy-MM-dd" required class=""/>
         <Helper class="pt-1 text-blue-700">Specific dates that the project will be undertaken (month/year); ideally to be completed minimum 1 year/ depending on the approved grant.</Helper>
-      </div>
-      <div class="gap-2">
-        <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
-        <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
-        <Helper class="pt-2 text-orange-500"></Helper>
       </div>
     </Card>
 

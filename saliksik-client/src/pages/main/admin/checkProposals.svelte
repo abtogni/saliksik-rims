@@ -1,7 +1,7 @@
 <script lang="ts">
   import { goto } from "@roxi/routify";
-  import { Heading, TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, TableSearch, Avatar, Popover, Card, Button, Modal, Accordion, AccordionItem, Listgroup, ListgroupItem, ImagePlaceholder, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, FloatingLabelInput } from "flowbite-svelte";
-  import { ClipboardOutline, ClockOutline, DotsHorizontalOutline, EditOutline, FileLinesOutline, FileOutline, FilterOutline, GridOutline, InfoCircleOutline, SortOutline, StarOutline, TrashBinOutline } from "flowbite-svelte-icons";
+  import { Heading, TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, TableSearch, Avatar, Popover, Card, Button, Modal, Accordion, AccordionItem, Listgroup, ListgroupItem, ImagePlaceholder, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, FloatingLabelInput, Alert } from "flowbite-svelte";
+  import { ClipboardOutline, ClockOutline, DotsHorizontalOutline, EditOutline, FileLinesOutline, FileOutline, FilterOutline, GridOutline, InfoCircleOutline, QuestionCircleOutline, SortOutline, StarOutline, TrashBinOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
@@ -55,6 +55,8 @@
     } finally {
       loading = false;
     }
+
+    console.log(proposals);
   });
 
   loading = false;
@@ -81,34 +83,41 @@
 </script>
 
 <main>
-  <div class="flex items-center gap-2"><GridOutline size="sm" /><P weight="semibold" size="2xl" class="">Research Dashboard</P></div>
+  <Alert dismissable color="blue" class="border-l-8 w-full mb-2">
+    <div class="flex items-center gap-2">
+      <QuestionCircleOutline slot="icon" size="sm" />
+      <span class="text-lg font-medium">Admin Dashboard</span>
+    </div>
+    <p class="mt-2 text-sm">Insert helper text</p>
+  </Alert>
+  <div class="flex items-center gap-2"><P weight="semibold" size="2xl" class="">Admin Dashboard</P></div>
 
   <!--all researches-->
-  <Tabs style="underline" class="">
+  <Tabs style="none" activeClasses="p-2 text-blue-700 border-b-2 border-b-blue-700 rounded-t-lg" inactiveClasses="p-2 text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300" contentClass="bg-white p-0 mt-2 rounded-md border-0 shadow-none" class="">
     <TabItem open>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>All Researches</div>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 mb-2">
         <Search></Search>
         <div class="flex items-center gap-2">
           <Button class="gap-2"><FilterOutline size="sm" />Status</Button>
           <Dropdown>
-            <DropdownItem>For Concept Note Approval</DropdownItem>
+            <DropdownItem>Concept Note Approval</DropdownItem>
             <DropdownItem>Initial Presentation Approval</DropdownItem>
             <DropdownItem>Final Presentation Approval</DropdownItem>
-            <DropdownItem>For Incentive Approval</DropdownItem>
+            <DropdownItem>Incentive Approval</DropdownItem>
             <DropdownItem>Published</DropdownItem>
             <DropdownItem>Rejected</DropdownItem>
           </Dropdown>
         </div>
       </div>
 
-      <Table hoverable={true} noborder={true}>
-        <TableHead class="">
+      <Table hoverable={true} noborder={false} shadow={true} class="">
+        <TableHead class="bg-blue-200">
           <TableHeadCell>
             <div class="flex items-center gap-2">
               <Indicator color="dark"></Indicator>
             </div>
-            <Tooltip arrow={false}>Status</Tooltip>
+            <Tooltip arrow={false} class="capitalize">Status</Tooltip>
           </TableHeadCell>
           <TableHeadCell class="p-0 w-3/4"><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Title</div></TableHeadCell>
           <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Leaders</div></TableHeadCell>
@@ -134,7 +143,7 @@
                         </div>
                       </TableBodyCell>
                       <TableBodyCell class="">
-                        <div class="flex items-center gap-1.5">
+                        <div class="flex items-center gap-0">
                           <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar>
                           <Tooltip arrow={false}>Agnes Reyes</Tooltip>
                           <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar>
@@ -147,12 +156,12 @@
                       </TableBodyCell>
                       <TableBodyCell class="">
                         <div class="flex justify-start items-start gap-2">
-                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">College of Computer Studies</Badge>
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black bg-transparent">College of Computer Studies</Badge>
                         </div>
                       </TableBodyCell>
                       <TableBodyCell class="">
                         <div class="flex justify-start items-start gap-2">
-                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">{moment(p.createdAt).format("lll")}</Badge>
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black bg-transparent">{moment(p.createdAt).format("lll")}</Badge>
                         </div>
                       </TableBodyCell>
                     </TableBodyRow>
@@ -264,7 +273,7 @@
     <!--concept note approval-->
     <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="orange"></Indicator>Concept Note Approval</div>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 mb-2">
         <Search></Search>
         <div class="flex items-center gap-2">
           <Button class="gap-2"><FilterOutline size="sm" />Agency/Department</Button>
@@ -274,8 +283,8 @@
         </div>
       </div>
 
-      <Table hoverable={true} noborder={true}>
-        <TableHead class="">
+      <Table hoverable={true} noborder={false} shadow={true} class="">
+        <TableHead theadClass="text-xs uppercase" class="bg-blue-200">
           <TableHeadCell>
             <div class="flex items-center gap-2">
               <Indicator color="dark"></Indicator>
@@ -436,7 +445,7 @@
     <!--initial presentation-->
     <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Initial Presentation</div>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-2 mb-2">
         <Search></Search>
         <div class="flex items-center gap-2">
           <Button class="gap-2"><FilterOutline size="sm" />Date</Button>
@@ -448,8 +457,8 @@
         </div>
       </div>
 
-      <Table hoverable={true} noborder={true}>
-        <TableHead class="">
+      <Table hoverable={true} noborder={false} shadow={true} class="">
+        <TableHead theadClass="text-xs uppercase" class="bg-blue-200">
           <TableHeadCell>
             <div class="flex items-center gap-2">
               <Indicator color="dark"></Indicator>
@@ -471,7 +480,7 @@
                       <TableBodyCell class="">
                         <div class="flex justify-start items-center gap-2 p-0">
                           <Indicator color="orange"></Indicator>
-                          <Tooltip arrow={false}>For Concept Note Approval</Tooltip>
+                          <Tooltip arrow={false}>Concept Note Approval</Tooltip>
                         </div>
                       </TableBodyCell>
                       <TableBodyCell class="p-0">
@@ -613,13 +622,13 @@
     </TabItem>
     <!--for incentive approval-->
     <TabItem>
-      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>For Incentive Approval</div>
+      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Incentive Approval</div>
     </TabItem>
     <!--published-->
     <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Published</div>
     </TabItem>
-<!--rejected-->
+    <!--rejected-->
     <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Rejected</div>
     </TabItem>

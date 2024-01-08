@@ -4,7 +4,7 @@ import { createResearch, getResearches, getResearch, updateResearch, deleteResea
 const router = Router();
 
 
-router.get('/getUserResearches', getResearches);
+router.get('/getResearches', getResearches);
 
 router.get('/getResearch', getResearch);
 

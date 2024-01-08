@@ -19,7 +19,7 @@ export const getResearches = async (req: Request, res: Response) => {
       return errorResponse(res, 400, 'userID is required');
     }
 
-    const researches = await ResearchModel.find({ researchMembers: userID }).sort({ createdAt: -1 });
+    const researches = await ResearchModel.find({ researchLeaders: userID }).sort({ createdAt: -1 });
 
     if (researches.length === 0) {
       return successResponse(res, []);
