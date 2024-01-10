@@ -5,16 +5,13 @@
   //modal for editLabel
   let editLabels = false;
 
-  function close_banner(event) {
-		document.querySelector('.banner').remove();
-		document.documentElement.style.setProperty('--banner-footer-height', '0px')
-	}
+
 </script>
 
 <main class="flex justify-center gap-2">
   
   <div class="grid grid-flow-row items-center gap-2 w-1/2">
-    <Alert dismissable color="blue" class="banner border-l-8 w-full mb-2" on:click={close_banner}>
+    <Alert dismissable color="blue" class="border-l-8 w-full mb-2">
       <div class="flex items-center gap-2">
         <QuestionCircleOutline slot="icon" size="sm" />
         <span class="text-lg font-medium">Create Concept Note</span>
