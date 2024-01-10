@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from 'svelte';
-    import UNCLogo from '/saliksiklogo.png';
+    import UNCLogo from '/login.png';
     import { goto } from '@roxi/routify';
     import { isAuthenticated } from '../components/store';
   
@@ -76,10 +76,10 @@
         <!-- Updated class -->
         <div class="min-h-screen flex flex-col justify-between">
            <!-- Flex Container -->
-          <div class="flex justify-between mt-36 ml-36 mr-36"> 
+          <div class="flex flex-row justify-between mt-36 ml-40 mr-36"> 
           
           <!--  Logo  -->
-          <div class="hidden lg:block w-[300px] h-[300px] mt-20">
+          <div class="hidden lg:block w-[300px] h-[300px] mt-4">
           <img 
           src={UNCLogo}
           alt="University Logo" 
@@ -92,9 +92,9 @@
           <form class="w-full" on:submit={submit}>
     
           
-          <p class=" text-white text-6xl sm:text-4xl md:text-3xl lg:text-6xl text-left  font-bold font-['Space Grotesk']">Welcome back</p>
-          <p class="text-white underline underline-offset-1 sm:text-4xl md:text-3xl lg:text-5xl text-[50.52px] text-left font-medium font-['Space Grotesk']">Login Your Account.</p>
-          <p class="text-white sm:text-xl md:text-lg lg:text-xl text-[28.43px] text-left font-normal font-['Space Grotesk']">Enter your username and password to continue.</p>
+          <p class=" text-white text-6xl sm:text-4xl md:text-2xl lg:text-5xl text-left  font-bold font-['Space Grotesk']">Welcome back</p>
+          <p class="text-white underline underline-offset-1 sm:text-3xl md:text-2xl lg:text-4xl text-left font-medium font-['Space Grotesk']">Login Your Account.</p>
+          <p class="text-white sm:text-base md:text-base lg:text-xl text-left font-normal font-['Space Grotesk']">Enter your username and password to continue.</p>
           
           <p class="font-['Space Grotesk'] font-bold text-left text-white">Login as</p>
           

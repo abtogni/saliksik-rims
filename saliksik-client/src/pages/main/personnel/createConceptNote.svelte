@@ -1,9 +1,14 @@
 <script lang="ts">
-  import { Alert, Badge, Button, Card, FloatingLabelInput, Helper, Indicator, MultiSelect, P, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip } from "flowbite-svelte";
+  import { Alert, Badge, Button, Card, FloatingLabelInput, Helper, Indicator, Label, MultiSelect, P, Select, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip } from "flowbite-svelte";
   import { ClockOutline, CodeOutline, EditOutline, FaceGrinOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, TrashBinOutline, UploadOutline } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
+  import { researchData } from "../../../components/store";
 
   let json = {};
+  let researchID : any;
+  let researches = $researchData.map((r) => {
+    return {value: r._id, name: r.researchTitle}
+  });
 
 
   function submit(e: Event) {
@@ -12,6 +17,7 @@
     json = Object.fromEntries(formData.entries());
     json = {
       ...json,
+      researchID,
       projectDuration,
     };
 
@@ -24,8 +30,7 @@
     })
       .then((response) => {
         if (response.ok) {
-          // Handle a successful response (e.g., redirect to a new page)
-          // window.location.href = "/main/";
+          window.location.href = "/main/";
         } else {
           // Handle errors or authentication failures
           console.error("Login failed");
@@ -72,14 +77,14 @@
         <P weight="semibold" size="xl" class="">Create Concept Note</P>
         <div class="flex items-center gap-2">
           <Button type="submit" class="gap-2"><EditOutline size="sm" />Save As Draft</Button>
-          <Button type="submit" class="gap-2" on:click={submit}><UploadOutline size="sm" />Submit</Button>
+          <Button type="submit" class="gap-2"><UploadOutline size="sm" />Submit</Button>
           <Button type="submit" class="gap-2"><TrashBinOutline size="sm" />Delete</Button>
         </div>
       </div>
     </Card>
 
     <Card size="xl" class="gap-2 w-full">
-      <FloatingLabelInput type="text" size="small" style="outlined" id="researchTitle" name="researchTitle" label="Research Title" required class="w-full">Research Title</FloatingLabelInput>
+      <Select class="mt-2" items={researches} bind:value={researchID} />
       <Helper class=" text-blue-700"></Helper>
       <FloatingLabelInput type="text" size="small" style="outlined" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" required class="w-full">Implementing Agency/Department</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
