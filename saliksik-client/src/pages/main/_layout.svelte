@@ -5,12 +5,12 @@
   import Menu from "../../assets/menu.svelte";
   import { goto } from "@roxi/routify";
   import { onMount } from "svelte";
-  import { userData, isAuthenticated, updateUser } from "../../components/store";
+  import { userData, researchData, isAuthenticated, updateUser, updateResearch } from "../../components/store";
   import { UserOutline, CirclePlusOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline, ChevronDownOutline, DotsVerticalOutline, EyeOutline, EditOutline, ClipboardOutline, FilterOutline, SortOutline, ChevronLeftOutline, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, MessagesSolid, EnvelopeOpenOutline, CalendarWeekSolid, CheckCircleOutline, InfoCircleOutline, QuestionCircleOutline, UserSettingsOutline } from "flowbite-svelte-icons";
   import { sineIn } from "svelte/easing";
   import moment from "moment";
 
-  var researches: any;
+  let researches: any;
   let loading = true;
   let error: string | null = null;
 
@@ -34,22 +34,24 @@
   }
 
   async function fetchResearches(userID: string) {
-    try {
-      const response = await fetch(`/api/research/getResearches?userID=${userID}`);
+  try {
+    const response = await fetch(`/api/research/getResearches?userID=${userID}`);
 
-      if (response.ok) {
-        researches = await response.json();
-      } else {
-        console.error("Failed to fetch researches");
-        error = "Failed to fetch researches";
-      }
-    } catch (err) {
-      console.error("Error fetching researches:", err);
-      error = "Error fetching researches";
-    } finally {
-      loading = false;
+    if (response.ok) {
+      const newResearches = await response.json();
+      updateResearch(newResearches);
+    } else {
+      console.error("Failed to fetch researches");
+      error = "Failed to fetch researches";
     }
+  } catch (err) {
+    console.error("Error fetching researches:", err);
+    error = "Error fetching researches";
+  } finally {
+    loading = false;
   }
+}
+
 
   onMount(async () => {
     if (!$isAuthenticated) {
@@ -60,6 +62,9 @@
       });
       if (currentUser) {
         fetchResearches(currentUser._id);
+        researches = $researchData;
+
+        console.log(researches)
       } else {
         console.error("Network error:", error);
       }
