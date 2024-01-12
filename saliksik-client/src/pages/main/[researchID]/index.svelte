@@ -5,11 +5,15 @@
   import moment from "moment";
   import { onMount } from "svelte";
   import { DateInput } from "date-picker-svelte";
-
+  import { chosenResearchData, updateChosenResearch } from '../../../components/store'
   let proposals: any[],
     researches: any[] = [],
     loading = true,
     error: any = null;
+
+  const currentURL = window.location.href;
+  const urlParts = currentURL.split('/');
+  const urlID = urlParts[urlParts.length - 1];
 
   async function getProposalList() {
     try {
@@ -46,10 +50,13 @@
 
   onMount(async () => {
     try {
+      await updateChosenResearch(fetchResearch(urlID));
       await getProposalList();
       const researchPromises = proposals.map((p) => fetchResearch(p.researchID));
       await Promise.all(researchPromises);
       researches = researches;
+
+      console.log($chosenResearchData);
     } catch (error) {
       console.error("Network error:", error);
     } finally {
@@ -107,7 +114,7 @@
   let setInitialPresentation = false;
 
   //submit existing research
-  let existingResearch;
+  let existingResearch: any;
   
 </script>
 
