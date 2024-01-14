@@ -70,7 +70,6 @@ const ResearchModel = currentResearchStored ? JSON.parse(currentResearchStored) 
     technologyRoadmap: '',
     expectedOutput: '',
     workPlan: '',
-    proposalStatus: '', 
   },
   updatedAt: '',
   createdAt: '',

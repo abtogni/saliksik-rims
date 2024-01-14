@@ -5,50 +5,24 @@
   import moment from "moment";
   import { DateInput } from "date-picker-svelte";
   import { selectedResearchInfo, updateResearch } from '../../../components/store'
-  let proposals: any[],
-    researches: any[] = [],
-    loading = true,
-    error: any = null;
+  import { getResearchInfo } from "../../../components/fetch";
+  import { onMount } from "svelte";
 
-  const currentURL = window.location.href;
-  const urlParts = currentURL.split('/');
-  const urlID = urlParts[urlParts.length - 1];
 
-  async function getProposalList() {
-    try {
-      const response = await fetch("/api/research/getProposals");
-      const responseData = await response.json();
-      proposals = responseData.data;
-    } catch (e) {
-      $goto("/404");
-    }
+  const currentURL = window.location.href.split('/');
+  const researchID = currentURL[currentURL.length - 1];
+
+
+  onMount(async () => {
+  try {
+    await updateResearch(getResearchInfo(researchID));
+  } catch (error) {
+    console.error("Network error:", error);
   }
-
-  async function fetchResearch(researchID: any) {
-    try {
-      const response = await fetch(`/api/research/getResearch?researchID=${researchID}`);
-
-      if (response.ok) {
-        const data = await response.json();
-        researches.push(data);
-      } else {
-        // Handle non-OK responses here
-        if (response.status === 404) {
-          error = "Research not found";
-        } else {
-          error = "Failed to fetch research";
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching research:", error);
-      error = "Error fetching research";
-    } finally {
-      loading = false;
-    }
-  }
+  });
 
 
-  loading = false;
+
 
   //For search bar
   let searchTerm = "";
@@ -116,7 +90,7 @@
           <p class="mt-2 text-sm">Or you can submit an already existing/published (owned) research. An incentive will be given based on the following:</p>
         </Alert>
         <div class="flex items-center gap-2">
-          <Button href="/main/personnel/createConceptNote" color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileCirclePlusOutline size="sm" /> Create Concept Note</Button>
+          <Button href={`/main/${researchID}/createConceptNote`} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileCirclePlusOutline size="sm" /> Create Concept Note</Button>
           <Button on:click={() => (submitExistingResearch = true)} outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileCirclePlusOutline size="sm" /> Submit Existing Research</Button>
         </div>
 

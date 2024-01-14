@@ -1,27 +1,12 @@
 <script lang="ts">
     import { Button, Tooltip, Dropdown, DropdownItem, P, Avatar} from "flowbite-svelte";
     import { onMount } from "svelte";
-    import { updateResearch, selectedResearchInfo } from "../../../components/store";
+    import { selectedResearchInfo } from "../../../components/store";
     import { UserOutline, FolderOutline, StarOutline, ArchiveOutline, TrashBinOutline, DotsHorizontalOutline, ClockOutline } from "flowbite-svelte-icons";
     import moment from "moment";
     import ConceptNote from "../../../assets/status/concept-note.svelte";
     import NoStatus from "../../../assets/status/no-status.svelte"
-    import { getResearchInfo } from "../../../components/fetch";
 
-
-    const currentURL = window.location.href.split('/');
-    const researchID = currentURL[currentURL.length - 1];
-
-    console.log(researchID);
-
-    onMount(async () => {
-    try {
-      await updateResearch(getResearchInfo(researchID));
-      console.log($selectedResearchInfo);
-    } catch (error) {
-      console.error("Network error:", error);
-    }
-  });
 
 
 </script>

@@ -10,7 +10,7 @@ router.get('/getResearchData', getResearchData);
 
 router.post('/createResearch', createResearch);
 
-router.patch('/updateResearch', updateResearch);
+router.post('/updateResearch', updateResearch);
 
 router.delete('/deleteResearch', deleteResearch);
 

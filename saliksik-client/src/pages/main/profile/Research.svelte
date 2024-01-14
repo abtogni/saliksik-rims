@@ -247,7 +247,7 @@
                         </TableBodyRow>
                       {/if}
                     {/each}
-                  {:else}{/if}
+                  {/if}
                 {/each}
               {:else}
                 No researches found.
@@ -419,7 +419,7 @@
                         </TableBodyRow>
                       {/if}
                     {/each}
-                  {:else}{/if}
+                  {/if}
                 {/each}
               {:else}
                 No researches found.

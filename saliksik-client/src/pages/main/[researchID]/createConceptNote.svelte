@@ -1,26 +1,21 @@
 <script lang="ts">
-  import { Alert, Badge, Button, Card, FloatingLabelInput, Helper, Indicator, Label, MultiSelect, P, Select, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip, Dropdown, DropdownItem } from "flowbite-svelte";
-  import { ClockOutline, CodeOutline, EditOutline, FaceGrinOutline, FileCirclePlusOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, TrashBinOutline, UploadOutline, UserAddOutline, UserOutline, DotsHorizontalOutline } from "flowbite-svelte-icons";
+  import { Alert, Button, Card, FloatingLabelInput, Helper, P, Textarea, Toolbar, ToolbarButton, ToolbarGroup } from "flowbite-svelte";
+  import { CodeOutline, FaceGrinOutline, FileCirclePlusOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, UserAddOutline, } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
-  import { researches } from "../../../components/store";
+  import { selectedResearchInfo } from "../../../components/store";
 
-  let json = {};
-  let researchID : any;
-  let researches = $researchData.map((r) => {
-    return {value: r._id, name: r.researchTitle}
-  });
+  let data = {conceptNote: {}};
 
   function submit(e: Event) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    json = Object.fromEntries(formData.entries());
-    json = {
+    let json = Object.fromEntries(formData.entries());
+    data.conceptNote = {
       ...json,
-      researchID,
       projectDuration,
     };
 
-    fetch("/api/research/createProposal", {
+    fetch(`/api/research/updateResearch?researchID=${$selectedResearchInfo._id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -29,7 +24,7 @@
     })
       .then((response) => {
         if (response.ok) {
-          window.location.href = "/main/";
+          console.log('It worked');
         } else {
           // Handle errors or authentication failures
           console.error("Login failed");
@@ -57,9 +52,12 @@
     <p class="mt-2 text-sm">Insert helper text</p>
   </Alert>
 
+  
   <div class="flex justify-center gap-2 mb-10">
     <div class="grid grid-flow-row col-start-2 col-span-3 items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-3/4">
       <!---->
+
+      <form on:submit={submit}>
       <div class="flex justify-between items-center w-full">
         <div class="flex items-center gap-2">
           <FileCirclePlusOutline size="md" class="text-blue-700" />
@@ -68,13 +66,12 @@
 
         <div class="flex items-center gap-2">
           <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md"><UserAddOutline size="sm" />Save as Draft</Button>
-          <Button outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><UserAddOutline size="sm" />Submit</Button>
+          <Button outline color="blue" type='submit' size="sm" class="flex items-center gap-2 rounded-md"><UserAddOutline size="sm" />Submit</Button>
         </div>
       </div>
-
+    
     <Card size="xl" class="gap-2 w-full">
-      <Select class="mt-2" items={researches} bind:value={researchID} />
-      <Helper class=" text-blue-700"></Helper>
+      
       <FloatingLabelInput type="text" size="small" style="outlined" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" required class="w-full">Implementing Agency/Department</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
       <FloatingLabelInput type="text" size="small" style="outlined" id="coopAgency" name="coopAgency" label="Cooperating Agency" required class="w-full">Cooperating Agency</FloatingLabelInput>
@@ -95,7 +92,7 @@
         <!--project description-->
         <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 bg-white">
           <P weight="semibold" size="lg">Project Description</P>
-          <Textarea id="editor" rows="15" class="mb-0 p-0">
+          <Textarea id="description" name="description" rows="15" class="mb-0 p-0">
             <Toolbar slot="header" embedded class="m-0 p-0">
               <ToolbarGroup>
                 <ToolbarButton name="Attach file"><PaperClipOutline size="sm" /></ToolbarButton>
@@ -114,7 +111,8 @@
 
         <!--significance-->
         <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 bg-white">
-          <P weight="semibold" size="xl">Significance</P><Textarea id="editor" rows="15" class="mb-0 p-0">
+          <P weight="semibold" size="xl">Significance</P>
+          <Textarea id="significance" name="significance" rows="15" class="mb-0 p-0">
             <Toolbar slot="header" embedded class="m-0 p-0">
               <ToolbarGroup>
                 <ToolbarButton name="Attach file"><PaperClipOutline size="sm" /></ToolbarButton>
@@ -134,7 +132,7 @@
         <!--objectives-->
         <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 bg-white">
           <P weight="semibold" size="lg">Objectives</P>
-          <Textarea id="editor" rows="15" class="mb-0 p-0">
+          <Textarea id="objectives" name="objectives" rows="15" class="mb-0 p-0">
             <Toolbar slot="header" embedded class="m-0 p-0">
               <ToolbarGroup>
                 <ToolbarButton name="Attach file"><PaperClipOutline size="sm" /></ToolbarButton>
@@ -154,7 +152,7 @@
         <!--methodology-->
         <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 bg-white">
           <P weight="semibold" size="lg">Methodology</P>
-          <Textarea id="editor" rows="15" class="mb-0 p-0">
+          <Textarea id="methodology" name="methodology" rows="15" class="mb-0 p-0">
             <Toolbar slot="header" embedded class="m-0 p-0">
               <ToolbarGroup>
                 <ToolbarButton name="Attach file"><PaperClipOutline size="sm" /></ToolbarButton>
@@ -174,7 +172,7 @@
         <!--technology roadmap-->
         <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 bg-white">
           <P weight="semibold" size="lg">Technology Roadmap</P>
-          <Textarea id="editor" rows="15" class="mb-0 p-0">
+          <Textarea id="technologyRoadmap" name="technologyRoadmap" rows="15" class="mb-0 p-0">
             <Toolbar slot="header" embedded class="m-0 p-0">
               <ToolbarGroup>
                 <ToolbarButton name="Attach file"><PaperClipOutline size="sm" /></ToolbarButton>
@@ -194,7 +192,7 @@
         <!--expected outputs-->
         <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 bg-white">
           <P weight="semibold" size="lg">Expected Outputs (6Ps)</P>
-          <Textarea id="editor" rows="15" class="mb-0 p-0">
+          <Textarea id="expectedOutput" name="expectedOutput" rows="15" class="mb-0 p-0">
             <Toolbar slot="header" embedded class="m-0 p-0">
               <ToolbarGroup>
                 <ToolbarButton name="Attach file"><PaperClipOutline size="sm" /></ToolbarButton>
@@ -214,7 +212,7 @@
         <!--work plan-->
         <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 bg-white">
           <P weight="semibold" size="lg">Work Plan</P>
-          <Textarea id="editor" rows="15" class="mb-0 p-0">
+          <Textarea id="workPlan" name="workPlan" rows="15" class="mb-0 p-0">
             <Toolbar slot="header" embedded class="m-0 p-0">
               <ToolbarGroup>
                 <ToolbarButton name="Attach file"><PaperClipOutline size="sm" /></ToolbarButton>

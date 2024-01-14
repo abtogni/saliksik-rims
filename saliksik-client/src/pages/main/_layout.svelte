@@ -71,7 +71,6 @@
             <SidebarDropdownItem label="Admin Dashboard" href="/main/admin/checkProposals" />
             <SidebarDropdownItem label="Presentations" href="/main/admin/presentations" />
             <SidebarDropdownItem label="Create User Accounts" href="/main/admin/createAccount" />
-            <SidebarDropdownItem label="Create Concept Note" href="/main/personnel/createConceptNote" />
           </SidebarDropdownWrapper>
         </SidebarGroup>
         <!---->

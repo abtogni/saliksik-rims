@@ -71,19 +71,32 @@ export const createResearch = async (req: Request, res: Response) => {
 };
 
 export const updateResearch = async (req: Request, res: Response) => {
-  const { id, ...updateData } = req.body;
+  const updateData = req.body;
+  const { researchID } = req.query;
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return errorResponse(res, 404, 'No such research');
+  if (!mongoose.Types.ObjectId.isValid(researchID as string)) {
+    return errorResponse(res, 404, 'Invalid research ID');
   }
 
-  const research = await ResearchModel.findOneAndUpdate({ _id: id }, updateData, { new: true });
+  try {
+    const research = await ResearchModel.findByIdAndUpdate(
+      researchID as string,
+      updateData,
+      { new: true, runValidators: true }
+    );
 
-  if (!research) {
-    return errorResponse(res, 400, 'No such research');
+    if (!research) {
+      return errorResponse(res, 404, 'Research not found');
+    }
+
+    successResponse(res, research);
+  } catch (err: any) {
+    if (err.name === 'ValidationError') {
+      return errorResponse(res, 400, err.message);
+    }
+
+    errorResponse(res, 500, err.message);
   }
-
-  successResponse(res, research);
 };
 
 export const deleteResearch = async (req: Request, res: Response) => {
