@@ -151,9 +151,9 @@
                             <P size="sm" weight="medium" class="line-clamp-1 font-normal">{research.researchTitle}</P>
                           </div>
                         </TableBodyCell>
-                        <TableBodyCell class="font-normal bg-transparent">{moment(p.createdAt).format("lll")}</TableBodyCell>
+                        <TableBodyCell class="bg-transparent"><P size="sm" weight="medium" class="line-clamp-1 font-normal">{moment(p.createdAt).format("lll")}</P></TableBodyCell>
                         <TableBodyCell>
-                          <div class="flex justify-start items-center gap-.5">
+                          <div class="flex justify-start items-center gap-0.5">
                             <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-1.5"><EditOutline size="sm" /></Button>
                             <Tooltip arrow={false}>Edit</Tooltip>
                             <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-1.5"><ClipboardOutline size="sm" /></Button>

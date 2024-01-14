@@ -1,12 +1,12 @@
 <script lang="ts">
   import NewResearchModal from "../../modals/NewResearchModal.svelte";
   import UNCLogo from "/login.png";
-  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Drawer, Button, Badge, Indicator, Tooltip, Dropdown, DropdownItem, Search, Table, TableBodyCell, TableHead, Heading, TableHeadCell, TableBody, TableBodyRow, TableSearch, P, Modal, Label, MultiSelect, Textarea, Group, GroupItem, Timeline, TimelineItem, Helper, Avatar, Popover, Alert } from "flowbite-svelte";
+  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Drawer, Button, Badge, Indicator, Tooltip, Dropdown, DropdownItem, Search, Table, TableBodyCell, TableHead, Heading, TableHeadCell, TableBody, TableBodyRow, TableSearch, P, Modal, Label, MultiSelect, Textarea, Group, GroupItem, Timeline, TimelineItem, Helper, Avatar, Popover, Alert, Navbar, NavHamburger, NavBrand, NavUl, NavLi, CloseButton } from "flowbite-svelte";
   import Menu from "../../assets/menu.svelte";
   import { goto } from "@roxi/routify";
   import { onMount } from "svelte";
   import { userData, researchData, isAuthenticated, updateUser, updateResearch } from "../../components/store";
-  import { UserOutline, CirclePlusOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline, ChevronDownOutline, DotsVerticalOutline, EyeOutline, EditOutline, ClipboardOutline, FilterOutline, SortOutline, ChevronLeftOutline, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, MessagesSolid, EnvelopeOpenOutline, CalendarWeekSolid, CheckCircleOutline, InfoCircleOutline, QuestionCircleOutline, UserSettingsOutline } from "flowbite-svelte-icons";
+  import { UserOutline, CirclePlusOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline, ChevronDownOutline, DotsVerticalOutline, EyeOutline, EditOutline, ClipboardOutline, FilterOutline, SortOutline, ChevronLeftOutline, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, MessagesSolid, EnvelopeOpenOutline, CalendarWeekSolid, CheckCircleOutline, InfoCircleOutline, QuestionCircleOutline, UserSettingsOutline, AddressCardSolid, ChartPieSolid, GridSolid, InfoCircleSolid, ArrowRightOutline, MailBoxSolid, UserSolid, ArrowRightToBracketSolid, FileEditSolid } from "flowbite-svelte-icons";
   import { sineIn } from "svelte/easing";
   import moment from "moment";
 
@@ -34,24 +34,23 @@
   }
 
   async function fetchResearches(userID: string) {
-  try {
-    const response = await fetch(`/api/research/getResearches?userID=${userID}`);
+    try {
+      const response = await fetch(`/api/research/getResearches?userID=${userID}`);
 
-    if (response.ok) {
-      const newResearches = await response.json();
-      updateResearch(newResearches);
-    } else {
-      console.error("Failed to fetch researches");
-      error = "Failed to fetch researches";
+      if (response.ok) {
+        const newResearches = await response.json();
+        updateResearch(newResearches);
+      } else {
+        console.error("Failed to fetch researches");
+        error = "Failed to fetch researches";
+      }
+    } catch (err) {
+      console.error("Error fetching researches:", err);
+      error = "Error fetching researches";
+    } finally {
+      loading = false;
     }
-  } catch (err) {
-    console.error("Error fetching researches:", err);
-    error = "Error fetching researches";
-  } finally {
-    loading = false;
   }
-}
-
 
   onMount(async () => {
     if (!$isAuthenticated) {
@@ -64,7 +63,7 @@
         fetchResearches(currentUser._id);
         researches = $researchData;
 
-        console.log(researches)
+        console.log(researches);
       } else {
         console.error("Network error:", error);
       }
@@ -84,17 +83,164 @@
   let notification = true;
   //drawer for all researches
   let allResearches = true;
-  let transitionParams = {
-    x: -320,
-    duration: 200,
-    easing: sineIn,
-  };
 
   //modal for create new research
   let formModal = false;
 </script>
 
-<!--navbar-->
+<div class="bg-gray-50 flex h-full">
+  <div class="sidebar h-full">
+    <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover-bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover-bg-gray-700 dark:focus:ring-gray-600">
+      <span class="sr-only">Open sidebar</span>
+      <Menu />
+    </button>
+    <Sidebar class="text-clip fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 flex items-stretch min-h-screen">
+      <SidebarWrapper class="rounded-none w-64">
+        <SidebarBrand {site} />
+        <!---->
+        <SidebarGroup class="">
+          {#if currentUser}
+            <SidebarItem label={`Hello, ${currentUser.firstName}`} {spanClass}></SidebarItem>
+          {:else}
+            <div></div>
+          {/if}
+          <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create New Research" on:click={() => (formModal = true)}><svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment></SidebarItem>
+          <SidebarItem label="All Researches" on:click={() => (allResearches = false)} class=""><svelte:fragment slot="icon"><FolderOutline /></svelte:fragment></SidebarItem>
+          <SidebarItem label="Browse Researches" href="/main/personnel/browseResearches"><svelte:fragment slot="icon"><SearchOutline /></svelte:fragment></SidebarItem>
+          <SidebarItem label="Bookmarks" href="/main/personnel/bookmarks" class=""><svelte:fragment slot="icon"><BookmarkOutline /></svelte:fragment></SidebarItem>
+          <SidebarItem label="Notifications" on:click={() => (notification = false)} href=""><svelte:fragment slot="icon"><BellOutline /></svelte:fragment></SidebarItem>
+          <SidebarItem label="Library" href=""><svelte:fragment slot="icon"><LandmarkOutline /></svelte:fragment></SidebarItem>
+          <SidebarDropdownWrapper label="Admin Tools" isOpen>
+            <svelte:fragment slot="icon"><UserSettingsOutline color="black" /></svelte:fragment>
+            <SidebarDropdownItem label="Admin Dashboard" href="/main/admin/checkProposals" />
+            <SidebarDropdownItem label="Presentations" href="/main/admin/presentations" />
+            <SidebarDropdownItem label="Create User Accounts" href="/main/admin/createAccount" />
+            <SidebarDropdownItem label="Create Concept Note" href="/main/personnel/createConceptNote" />
+          </SidebarDropdownWrapper>
+        </SidebarGroup>
+        <!---->
+        <SidebarGroup border class="truncate ...">
+          {#if loading}
+            <SidebarItem label="Loading..."></SidebarItem>
+          {:else if researches}
+            <SidebarDropdownWrapper label="Starred" isOpen>
+              <svelte:fragment slot="icon"><StarSolid color="orange" /></svelte:fragment>
+              {#each researches as r}
+                <SidebarDropdownItem class="" label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
+              {/each}
+            </SidebarDropdownWrapper>
+          {:else}
+            <SidebarItem href="/main/createResearch" label="Create Research"></SidebarItem>
+          {/if}
+        </SidebarGroup>
+        <SidebarGroup border>
+          {#if currentUser}
+            <SidebarItem href={`/main/profile/myProfile`} label="My Profile" {spanClass}>
+              <svelte:fragment slot="icon">
+                <UserOutline />
+              </svelte:fragment>
+            </SidebarItem>
+            <SidebarItem href="/logout" label="Logout" {spanClass}><svelte:fragment slot="icon"><ArrowRightFromBracketSolid color="" /></svelte:fragment></SidebarItem>
+          {:else}
+            <div></div>
+          {/if}
+        </SidebarGroup>
+      </SidebarWrapper>
+    </Sidebar>
+  </div>
+
+  <div class="w-screen sm:ml-64">
+    <div class="w-full bg-white ">
+      <nav class="bg-white flex flex-wrap justify-between z-50 gap-2 pl-4 pt-2 pr-4 pb-2 border-b">
+        <div class="flex flex-wrap items-center w-10/12 gap-2">
+          <FolderOutline />
+          <P weight="semibold" size="base">Insert Research Title</P>
+          <StarOutline />
+          <Tooltip>Not Starred</Tooltip>
+
+          <Badge border large color="dark" class="flex items-center gap-2">
+            <Indicator color="dark" size="md" class="" />No Status
+            <InfoCircleOutline color="dark" size="sm" />
+            <Popover arrow={false} class="w-96">Create and submit a concept note to start. Or submit an already existing/published research paper.</Popover>
+            <CheckCircleOutline color="dark" size="sm" />
+            <Popover arrow={false} class="w-96">The concept note have been submitted. A notication will be sent, once it is approved.</Popover>
+          </Badge>
+
+          <Badge border large class="flex items-center gap-2"
+            ><Indicator color="orange" size="md" class="" />Concept Note
+            <InfoCircleOutline color="orange" size="sm" />
+            <Popover arrow={false} class="w-96">The concept note is in the approval process.</Popover>
+            <CheckCircleOutline color="orange" size="sm" />
+            <Popover arrow={false} class="w-96">The approval process is done. Please check your notification, to see the reseult.</Popover>
+          </Badge>
+
+          <Badge border large color="green" class="flex items-center gap-2">
+            <Indicator color="green" size="md" class="" />Initial Presentation
+            <InfoCircleOutline color="green" size="sm" />
+            <Popover arrow={false} class="w-96">Upload your research paper on the submit bin. Then, set a schedule for your initial presentation. Choose among the available dates.</Popover>
+            <CheckCircleOutline color="green" size="sm" />
+            <Popover arrow={false} class="w-96">Scheduled On <span class="font-bold">Insert Date and Time</span></Popover>
+          </Badge>
+
+          <Badge border large color="pink" class="flex items-center gap-2 ">
+            <Indicator color="teal" size="md" class="" />Final Presentation
+            <InfoCircleOutline color="teal" size="sm" />
+            <Popover arrow={false} class="w-96">Make changes on your research paper based on the panelist comments and others. Then, set a schedule for your final presentation. Choose among the available dates.</Popover>
+            <CheckCircleOutline color="teal" size="sm" />
+            <Popover arrow={false} class="w-96">Scheduled On <span class="font-bold">Insert Date and Time</span></Popover>
+          </Badge>
+
+          <Badge border large color="blue" class="flex items-center gap-2">
+            <Indicator color="blue" size="md" class="" />Published
+            <InfoCircleOutline color="blue" size="sm" />
+            <Popover arrow={false} class="w-96">Your research is being published. Once done, an incentive will be sent to your notification</Popover>
+            <CheckCircleOutline color="blue" size="sm" />
+            <Popover arrow={false} class="w-96">Congratulations! Your research paper have been published. You can look for your research on the browse research page, all research sidebar or on your profile page.</Popover>
+          </Badge>
+
+          <Badge border large color="red" class="flex items-center gap-2">
+            <Indicator color="red" size="md" class="" />Rejected
+            <InfoCircleOutline color="red" size="sm" />
+            <Popover arrow={false} class="w-96">Your concept note have been rejected. You can make changes and resubmit again.</Popover>
+          </Badge>
+        </div>
+
+        <div class="flex items-center gap-0 ">
+          <div class="flex items-center gap-0">
+            <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar>
+            <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+            <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar>
+            <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+            <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar>
+            <Tooltip arrow={false}>Danny Casimero</Tooltip>
+            <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar>
+            <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+          </div>
+          <div class="flex items-center gap-0">
+            <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2"><ClockOutline size="sm" /></Button>
+            <Tooltip arrow={false}>Last edit was 00 hours ago</Tooltip>
+            <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2"><DotsHorizontalOutline size="sm" /></Button>
+            <Dropdown class="">
+              <DropdownItem class="flex justify-start items-center gap-2"><UserOutline size="sm" class="text-blue-700" />Change Collaborators</DropdownItem>
+              <DropdownItem class="flex justify-start items-center gap-2"><ArchiveOutline size="sm" class="text-blue-700" />Archive Research</DropdownItem>
+              <DropdownItem class="flex justify-start items-center gap-2"><TrashBinOutline size="sm" class="text-blue-700" />Delete Research</DropdownItem>
+            </Dropdown>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <div class="w-full pl-4 pt-4 pr-4 pb-4">
+      {#if currentUser}
+        <slot scoped={{ userID: currentUser._id }} />
+      {:else}
+        <slot />
+      {/if}
+    </div>
+  </div>
+</div>
+
+<!--
+<!--navbar--
 <nav class="bg-white flex justify-between z-50 gap-2 ml-64 pl-4 pt-2 pr-4 pb-2 border-b">
   <form class="flex items-center w-full gap-2">
     <FolderOutline />
@@ -170,7 +316,7 @@
   </div>
 </nav>
 
-<!--sidebar-->
+<!--sidebar--
 <div class="sidebar h-full">
   <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover-bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover-bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
@@ -179,7 +325,7 @@
   <Sidebar id="separator-sidebar" class="text-clip fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 flex items-stretch min-h-screen" aria-label="Sidebar">
     <SidebarWrapper class="rounded-none w-64">
       <SidebarBrand {site} />
-      <!---->
+      <!----
       <SidebarGroup class="">
         {#if currentUser}
           <SidebarItem label={`Hello, ${currentUser.firstName}`} {spanClass}></SidebarItem>
@@ -200,7 +346,7 @@
         </SidebarDropdownWrapper>
         
       </SidebarGroup>
-      <!---->
+      <!----
       <SidebarGroup border class="truncate ...">
         {#if loading}
           <SidebarItem label="Loading..."></SidebarItem>
@@ -231,7 +377,7 @@
   </Sidebar>
 </div>
 
-<!--drawer for all researches-->
+<!--drawer for all researches--
 <Drawer transitionType="fly" {transitionParams} bind:hidden={allResearches} id="sidebar1" class="flex flex-col w-1/2 p-4 gap-2">
   <div class="flex justify-between items-center gap-2">
     <ChevronLeftOutline on:click={() => (allResearches = true)} class="w-4 h-4 mr-4 mb-2 dark:text-white" />
@@ -292,7 +438,7 @@
   </Table>
 </Drawer>
 
-<!--drawer for notification-->
+<!--drawer for notification--
 <Drawer transitionType="fly" {transitionParams} bind:hidden={notification} id="sidebar1" class="flex flex-col w-1/2 p-4 gap-2">
   <div class="flex justify-between items-center gap-2">
     <div class="flex items-center gap-2">
@@ -324,12 +470,12 @@
   </Timeline>
 </Drawer>
 
-<!--modal for create new research-->
+<!--modal for create new research--
 <Modal title="" bind:open={formModal} size="xs" autoclose={false} outsideclose class="w-full">
   <NewResearchModal />
 </Modal>
 
-<!--content-->
+<!--content--
 <div class="ml-64 pl-4 pt-4 pr-4 pb-4 grid items-start bg-white">
   {#if currentUser}
     <slot scoped={{ userID: currentUser._id }} />
@@ -339,6 +485,8 @@
   <div class="h-96"></div>
   <div class="h-96"></div>
 </div>
+
+-->
 
 <!--old layout
 <div class="sidebar h-full">

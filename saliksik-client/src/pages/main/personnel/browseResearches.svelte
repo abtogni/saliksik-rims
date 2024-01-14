@@ -11,19 +11,17 @@
 </script>
 
 <main>
-
   <div class="flex items-center gap-2 pb-2"><P weight="semibold" size="2xl" class="">Browse Researches</P></div>
-  
+
   <Alert dismissable color="blue" class="border-l-8 w-full mb-2">
-  <div class="flex items-center gap-2">
-    <QuestionCircleOutline slot="icon" size="sm" />
-    <span class="text-lg font-medium">Browser Researches</span>
-  </div>
-  <p class="mt-2 text-sm">Insert helper text</p>
-</Alert>
+    <div class="flex items-center gap-2">
+      <QuestionCircleOutline slot="icon" size="sm" />
+      <span class="text-lg font-medium">Browser Researches</span>
+    </div>
+    <p class="mt-2 text-sm">Insert helper text</p>
+  </Alert>
 
   <div class="grid grid-cols-3 gap-2 items-start">
-    
     <!--left column-->
     <div class=" grid col-span-3 md:col-span-2 gap-2">
       <Card padding="sm" size="xl" class="grid gap-2">
