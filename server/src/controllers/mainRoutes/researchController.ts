@@ -71,7 +71,7 @@ export const createResearch = async (req: Request, res: Response) => {
 };
 
 export const updateResearch = async (req: Request, res: Response) => {
-  const updateData = req.body;
+  const conceptNote = req.body;
   const { researchID } = req.query;
 
   if (!mongoose.Types.ObjectId.isValid(researchID as string)) {
@@ -81,10 +81,11 @@ export const updateResearch = async (req: Request, res: Response) => {
   try {
     const research = await ResearchModel.findByIdAndUpdate(
       researchID as string,
-      updateData,
+      conceptNote,
       { new: true, runValidators: true }
     );
 
+    console.log(research)
     if (!research) {
       return errorResponse(res, 404, 'Research not found');
     }

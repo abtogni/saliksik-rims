@@ -10,7 +10,7 @@ export class Research {
     @prop({ type: () => String })
     public researchStatus!: string;
 
-    @prop({ type: () => conceptNote })
+    @prop({ type: () => conceptNote})
     public conceptNote?: conceptNote;
 }
 

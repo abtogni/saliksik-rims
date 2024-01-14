@@ -2,7 +2,8 @@
   import { Alert, Button, Card, FloatingLabelInput, Helper, P, Textarea, Toolbar, ToolbarButton, ToolbarGroup } from "flowbite-svelte";
   import { CodeOutline, FaceGrinOutline, FileCirclePlusOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, UserAddOutline, } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
-  import { selectedResearchInfo } from "../../../components/store";
+  import { selectedResearchInfo, updateResearch } from "../../../components/store";
+    import { goto } from "@roxi/routify";
 
   let data = {conceptNote: {}};
 
@@ -20,13 +21,13 @@
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(json),
+      body: JSON.stringify(data),
     })
       .then((response) => {
         if (response.ok) {
-          console.log('It worked');
+          //To edit
+          $goto('/main/');
         } else {
-          // Handle errors or authentication failures
           console.error("Login failed");
         }
       })
