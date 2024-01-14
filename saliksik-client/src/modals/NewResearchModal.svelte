@@ -1,9 +1,8 @@
 <script lang="ts">
   import { Button, Helper, Label, MultiSelect, P, Textarea } from "flowbite-svelte";
   import { onMount } from "svelte";
-  let json = {},
-    researchLeaders: any[] = [];
-  var users: any, userList: any;
+  let json = {}, researchLeaders: any[] = [];
+  let users: any, userList: any;
 
   async function fetchUserList() {
     const response = await fetch("/api/user/getUsers");
@@ -13,10 +12,18 @@
   onMount(async () => {
     await fetchUserList();
     userList = users.map((user: any) => ({
-      value: user._id,
+      value: `${user._id}`,
       name: `${user.firstName} ${user.lastName}`,
     }));
   });
+
+  let countries = [
+    { value: 'us', name: 'United States' },
+    { value: 'ca', name: 'Canada' },
+    { value: 'fr', name: 'France' },
+    { value: 'jp', name: 'Japan' },
+    { value: 'en', name: 'England' }
+  ];
 
   function submit(e: Event) {
     e.preventDefault();
@@ -51,7 +58,6 @@
 
 <form class="flex flex-col gap-2" on:submit={submit}>
   <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create New Research</h3>
-
   <div class="gap-2">
     <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
     <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />

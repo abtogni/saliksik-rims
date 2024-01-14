@@ -7,17 +7,8 @@ export class Research {
     @prop({ type: () => Array<string> })
     public researchLeaders!: string[];
 
-    @prop({ type: () => Array<string> })
-    public researchMembers?: string[];
-
     @prop({ type: () => String })
     public researchStatus!: string;
-
-    @prop({ type: () => String })
-    public researchAgency!: string;
-
-    @prop({ type: () => String })
-    public incentiveProof!: string;
 
     @prop({ type: () => conceptNote })
     public conceptNote?: conceptNote;
@@ -63,8 +54,6 @@ class conceptNote {
     @prop({ type: () => String })
     public workPlan!: string;
 
-    @prop({ type: () => String })
-    public proposalStatus!: string;
 }
 
 export const ResearchModel = getModelForClass(Research, { schemaOptions: { timestamps: true } });

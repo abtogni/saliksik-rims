@@ -1,18 +1,17 @@
 <script lang="ts">
-  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Card, Checkbox, Dropdown, DropdownItem, Fileupload, FloatingLabelInput, Helper, Hr, Indicator, Input, Label, Listgroup, Modal, P, TabItem, Table, TableBody, TableBodyCell, TableBodyRow, TableHead, TableHeadCell, Tabs, Tooltip } from "flowbite-svelte";
-  import { AdjustmentsVerticalSolid, BookOutline, BookmarkOutline, CalendarMonthOutline, CalendarWeekOutline, ClipboardOutline, ClipboardSolid, ClockOutline, DotsHorizontalOutline, EditOutline, EyeOutline, FileCirclePlusOutline, FileLinesOutline, GridOutline, GridSolid, MessagesOutline, QuestionCircleOutline, TrashBinOutline, UserCircleSolid, UserOutline } from "flowbite-svelte-icons";
+  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Card, Checkbox, Fileupload, FloatingLabelInput, Helper, Indicator, Label, Modal, P, TabItem, Tabs, Tooltip } from "flowbite-svelte";
+  import { CalendarMonthOutline, FileCirclePlusOutline, FileLinesOutline, UserOutline, QuestionCircleOutline } from "flowbite-svelte-icons";
   import { goto } from "@roxi/routify";
   import moment from "moment";
-  import { onMount } from "svelte";
   import { DateInput } from "date-picker-svelte";
-  import { chosenResearchData, updateChosenResearch } from "../../../components/store";
+  import { chosenResearchData, updateChosenResearch } from '../../../components/store'
   let proposals: any[],
     researches: any[] = [],
     loading = true,
     error: any = null;
 
   const currentURL = window.location.href;
-  const urlParts = currentURL.split("/");
+  const urlParts = currentURL.split('/');
   const urlID = urlParts[urlParts.length - 1];
 
   async function getProposalList() {
@@ -117,7 +116,7 @@
   let existingResearch: any;
 </script>
 
-<main class="">
+<main class="p-4">
   <Tabs style="none" activeClasses="p-2 text-blue-700 border-b-2 border-b-blue-700 rounded-t-lg" inactiveClasses="p-2 text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300" contentClass="bg-white p-0 mt-2 rounded-md border-0 shadow-none" class="">
     <TabItem open title="">
       <div slot="title" class="flex items-center gap-2"><FileLinesOutline size="sm" />Concept Note</div>
@@ -136,7 +135,7 @@
           <Button on:click={() => (submitExistingResearch = true)} outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileCirclePlusOutline size="sm" /> Submit Existing Research</Button>
         </div>
 
-        <Table hoverable={true} noborder={false} shadow={true} class="">
+        <!-- <Table hoverable={true} noborder={false} shadow={true} class="">
           <TableHead theadClass="text-xs uppercase" class="bg-blue-200">
             <TableHeadCell class="w-3/4">Concept Note Name</TableHeadCell>
             <TableHeadCell>Last Update</TableHeadCell>
@@ -149,7 +148,7 @@
                 {#each proposals as p, i}
                   {#if researches.find((x) => x._id === p.researchID)}
                     {#each researches.filter((x) => x._id === p.researchID) as research}
-                      <TableBodyRow on:click={() => toggleRow(i)}>
+                      <TableBodyRow on:click={() => toggleRow(i)} >
                         <TableBodyCell class="">
                           <div class="flex justify-start items-center gap-2">
                             <Indicator color="dark"></Indicator>
@@ -200,93 +199,83 @@
                               <Card size="xl" class="gap-2 w-full">
                                 <P weight="semibold" size="xl">{research.researchTitle}</P>
 
-                                <div class="flex items-center gap-2 pt-2">
-                                  <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar><P weight="normal" size="base">Agnes Reyes</P>
-                                  <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar><P weight="normal" size="base">June Arreb Danila</P>
-                                  <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar><P weight="normal" size="base">Danny Casimero</P>
-                                  <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar><P weight="normal" size="base">Dennis Ignacio</P>
-                                </div>
-                                <div class="flex justify-start gap-2 pt-2">
-                                  <div class="w-1/2 gap-2">
-                                    <div class="flex items-center gap-2">
-                                      <P weight="medium" size="base">Implementing Agency/Department:</P>
-                                      <P></P>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                      <P weight="medium" size="base">Cooperating Agency:</P>
-                                      <P>College of Computer Studies</P>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                      <P weight="medium" size="base">Site/s of Implementation:</P>
-                                      <P>College of Computer Studies</P>
-                                    </div>
-                                  </div>
-                                  <div class="w-1/2 gap-2">
-                                    <div class="flex items-center gap-2">
-                                      <P weight="medium" size="base">Project Duration:</P>
-                                      <P>College of Computer Studies</P>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                      <P weight="medium" size="base">Total Project Cost:</P>
-                                      <P>College of Computer Studies</P>
-                                    </div>
-                                    <div class="flex items-center gap-2">
-                                      <P weight="medium" size="base">Funding Source:</P>
-                                      <P>College of Computer Studies</P>
-                                    </div>
-                                  </div>
-                                </div>
-                              </Card>
-                              <Card size="xl" class="gap-2 w-full">
-                                <P weight="semibold" size="lg">Project Description</P>
-                                <Hr classHr="my-1" />
-                                <P weight="normal">{p.description}</P>
-                              </Card>
-                              <Card size="xl" class="gap-2 w-full">
-                                <P weight="semibold" size="xl">Significance</P>
-                                <Hr classHr="my-1" />
-                                <P weight="normal">{p.significance}</P>
-                              </Card>
-                              <Card size="xl" class="gap-2 w-full">
-                                <P weight="semibold" size="lg">Objectives</P>
-                                <Hr classHr="my-1" />
-                                <P weight="normal">{p.objectives}</P>
-                              </Card>
-                              <Card size="xl" class="gap-2 w-full">
-                                <P weight="semibold" size="lg">Methodology</P>
-                                <Hr classHr="my-1" />
-                                <P weight="normal">{p.methodolog}</P>
-                              </Card>
-                              <Card size="xl" class="gap-2 w-full">
-                                <P weight="semibold" size="lg">Technology Roadmap</P>
-                                <Hr classHr="my-1" />
-                                <P weight="normal"></P>
-                              </Card>
-                              <Card size="xl" class="gap-2 w-full">
-                                <P weight="semibold" size="lg">Expected Outputs (6Ps)</P>
-                                <Hr classHr="my-1" />
-                                <P weight="normal"></P>
-                              </Card>
-                              <Card size="xl" class="gap-2 w-full">
-                                <P weight="semibold" size="lg">Work Plan</P>
-                                <Hr classHr="my-1" />
-                                <P weight="normal"></P>
-                              </Card>
-                            </div>
-                          </TableBodyCell>
-                        </TableBodyRow>
-                      {/if}
-                    {/each}
-                  {:else}{/if}
-                {/each}
-              {:else}
-                No researches found.
-              {/if}
-            {:else}
-              No proposals found.
-            {/if}
+                    <div class="flex items-center gap-2 pt-2">
+                      <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar><P weight="normal" size="base">Agnes Reyes</P>
+                      <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar><P weight="normal" size="base">June Arreb Danila</P>
+                      <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar><P weight="normal" size="base">Danny Casimero</P>
+                      <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar><P weight="normal" size="base">Dennis Ignacio</P>
+                    </div>
+                    <div class="flex justify-start gap-2 pt-2">
+                      <div class="w-1/2 gap-2">
+                        <div class="flex items-center gap-2">
+                          <P weight="medium" size="base">Implementing Agency/Department:</P>
+                          <P></P>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <P weight="medium" size="base">Cooperating Agency:</P>
+                          <P>College of Computer Studies</P>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <P weight="medium" size="base">Site/s of Implementation:</P>
+                          <P>College of Computer Studies</P>
+                        </div>
+                      </div>
+                      <div class="w-1/2 gap-2">
+                        <div class="flex items-center gap-2">
+                          <P weight="medium" size="base">Project Duration:</P>
+                          <P>College of Computer Studies</P>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <P weight="medium" size="base">Total Project Cost:</P>
+                          <P>College of Computer Studies</P>
+                        </div>
+                        <div class="flex items-center gap-2">
+                          <P weight="medium" size="base">Funding Source:</P>
+                          <P>College of Computer Studies</P>
+                        </div>
+                      </div>
+                    </div>
+                  </Card>
+                  <Card size="xl" class="gap-2 w-full">
+                    <P weight="semibold" size="lg">Project Description</P>
+                    <Hr classHr="my-1" />
+                    <P weight="normal">TEST</P>
+                  </Card>
+                  <Card size="xl" class="gap-2 w-full">
+                    <P weight="semibold" size="xl">Significance</P>
+                    <Hr classHr="my-1" />
+                    <P weight="normal">TEST</P>
+                  </Card>
+                  <Card size="xl" class="gap-2 w-full">
+                    <P weight="semibold" size="lg">Objectives</P>
+                    <Hr classHr="my-1" />
+                    <P weight="normal">TEST</P>
+                  </Card>
+                  <Card size="xl" class="gap-2 w-full">
+                    <P weight="semibold" size="lg">Methodology</P>
+                    <Hr classHr="my-1" />
+                    <P weight="normal">TEST</P>
+                  </Card>
+                  <Card size="xl" class="gap-2 w-full">
+                    <P weight="semibold" size="lg">Technology Roadmap</P>
+                    <Hr classHr="my-1" />
+                    <P weight="normal"></P>
+                  </Card>
+                  <Card size="xl" class="gap-2 w-full">
+                    <P weight="semibold" size="lg">Expected Outputs (6Ps)</P>
+                    <Hr classHr="my-1" />
+                    <P weight="normal"></P>
+                  </Card>
+                  <Card size="xl" class="gap-2 w-full">
+                    <P weight="semibold" size="lg">Work Plan</P>
+                    <Hr classHr="my-1" />
+                    <P weight="normal"></P>
+                  </Card>
+                </div>
+              </TableBodyCell>
+            </TableBodyRow>
           </TableBody>
-        </Table>
+        </Table> -->
       </div>
     </TabItem>
 

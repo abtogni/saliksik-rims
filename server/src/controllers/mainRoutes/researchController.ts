@@ -33,7 +33,7 @@ export const getResearches = async (req: Request, res: Response) => {
 
 
 
-export const getResearch = async (req: Request, res: Response) => {
+export const getResearchData = async (req: Request, res: Response) => {
   try {
     const researchID: any = req.query.researchID;
 
@@ -55,16 +55,14 @@ export const getResearch = async (req: Request, res: Response) => {
 
 
 export const createResearch = async (req: Request, res: Response) => {
-  const { researchTitle, researchLeaders, researchMembers, researchAgency } = req.body;
+  const { researchTitle, researchLeaders } = req.body;
 
 
   try {
     const research = await ResearchModel.create({
       researchTitle,
       researchLeaders,
-      researchMembers,
-      researchAgency,
-      researchStatus: 'Pending Concept Note',
+      researchStatus: 'No Status',
     });
     successResponse(res, research);
   } catch (err: any) {

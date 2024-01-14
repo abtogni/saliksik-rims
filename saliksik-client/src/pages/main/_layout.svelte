@@ -1,15 +1,13 @@
 <script lang="ts">
   import NewResearchModal from "../../modals/NewResearchModal.svelte";
   import UNCLogo from "/login.png";
-  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Drawer, Button, Badge, Indicator, Tooltip, Dropdown, DropdownItem, Search, Table, TableBodyCell, TableHead, Heading, TableHeadCell, TableBody, TableBodyRow, TableSearch, P, Modal, Label, MultiSelect, Textarea, Group, GroupItem, Timeline, TimelineItem, Helper, Avatar, Popover, Alert, Navbar, NavHamburger, NavBrand, NavUl, NavLi, CloseButton } from "flowbite-svelte";
+  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Modal} from "flowbite-svelte";
   import Menu from "../../assets/menu.svelte";
   import { goto } from "@roxi/routify";
   import { onMount } from "svelte";
-  import { userData, researchData, isAuthenticated, updateUser, updateResearch } from "../../components/store";
-  import { UserOutline, CirclePlusOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline, ChevronDownOutline, DotsVerticalOutline, EyeOutline, EditOutline, ClipboardOutline, FilterOutline, SortOutline, ChevronLeftOutline, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, MessagesSolid, EnvelopeOpenOutline, CalendarWeekSolid, CheckCircleOutline, InfoCircleOutline, QuestionCircleOutline, UserSettingsOutline } from "flowbite-svelte-icons";
+  import { userData, researches, isAuthenticated } from "../../components/store";
+  import { UserOutline, CirclePlusOutline, FolderOutline, StarSolid, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, UserSettingsOutline } from "flowbite-svelte-icons";
   import moment from "moment";
-  import ConceptNote from "../../assets/status/concept-note.svelte";
-  import NoStatus from "../../assets/status/no-status.svelte"
   import { fetchResearches, fetchUser } from "../../components/fetch";
 
   onMount(async () => {
@@ -38,7 +36,7 @@
   let allResearches = true;
 
   //modal for create new research
-  let formModal = false;
+  let createNewResearch = false;
 </script>
 
 <div class="bg-gray-50 flex h-full">
@@ -57,7 +55,12 @@
           {:else}
             <div></div>
           {/if}
-          <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create New Research" on:click={() => (formModal = true)}><svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment></SidebarItem>
+          <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create New Research" on:click={() => (createNewResearch = true)}>
+            <svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment>
+          </SidebarItem>
+
+        
+
           <SidebarItem label="All Researches" on:click={() => (allResearches = false)} class=""><svelte:fragment slot="icon"><FolderOutline /></svelte:fragment></SidebarItem>
           <SidebarItem label="Browse Researches" href="/main/personnel/browseResearches"><svelte:fragment slot="icon"><SearchOutline /></svelte:fragment></SidebarItem>
           <SidebarItem label="Bookmarks" href="/main/personnel/bookmarks" class=""><svelte:fragment slot="icon"><BookmarkOutline /></svelte:fragment></SidebarItem>
@@ -73,10 +76,10 @@
         </SidebarGroup>
         <!---->
         <SidebarGroup border class="truncate ...">
-          {#if $researchData}
+          {#if $researches}
             <SidebarDropdownWrapper label="Starred" isOpen>
               <svelte:fragment slot="icon"><StarSolid color="orange" /></svelte:fragment>
-              {#each $researchData as r}
+              {#each $researches as r}
                 <SidebarDropdownItem class="" label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
               {/each}
             </SidebarDropdownWrapper>
@@ -101,43 +104,8 @@
   </div>
 
   <div class="w-screen sm:ml-64">
-    <div class="w-full bg-white ">
-      <nav class="bg-white flex flex-wrap justify-between z-50 gap-2 pl-4 pt-2 pr-4 pb-2 border-b">
-        <div class="flex flex-wrap items-center w-10/12 gap-2">
-          <FolderOutline />
-          <P weight="semibold" size="base">Insert Research Title</P>
-          <StarOutline />
-          <Tooltip>Not Starred</Tooltip>
-
-          <ConceptNote />
-          <NoStatus />
-        </div>
-
-        <div class="flex items-center gap-0 ">
-          <div class="flex items-center gap-0">
-            <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar>
-            <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-            <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar>
-            <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-            <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar>
-            <Tooltip arrow={false}>Danny Casimero</Tooltip>
-            <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar>
-            <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
-          </div>
-          <div class="flex items-center gap-0">
-            <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2"><ClockOutline size="sm" /></Button>
-            <Tooltip arrow={false}>Last edit was 00 hours ago</Tooltip>
-            <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2"><DotsHorizontalOutline size="sm" /></Button>
-            <Dropdown class="">
-              <DropdownItem class="flex justify-start items-center gap-2"><UserOutline size="sm" class="text-blue-700" />Change Collaborators</DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2"><ArchiveOutline size="sm" class="text-blue-700" />Archive Research</DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2"><TrashBinOutline size="sm" class="text-blue-700" />Delete Research</DropdownItem>
-            </Dropdown>
-          </div>
-        </div>
-      </nav>
-    </div>
-    <div class="w-full pl-4 pt-4 pr-4 pb-4">
+    
+    <div class="w-full">
       {#if $userData}
         <slot scoped={{ userID: $userData._id }} />
       {:else}
@@ -146,6 +114,13 @@
     </div>
   </div>
 </div>
+
+<!-- modal for create new research -->
+<Modal title="" bind:open={createNewResearch} size="xs" autoclose={false} outsideclose class="w-full">
+  <NewResearchModal />
+</Modal>
+
+
 
 <!--
 <!--navbar--
@@ -199,7 +174,7 @@
         {:else}
           <div></div>
         {/if}
-        <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create New Research" on:click={() => (formModal = true)}><svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment></SidebarItem>
+        <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create New Research" on:click={() => (createNewResearch = true)}><svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="All Researches" on:click={() => (allResearches = false)} class=""><svelte:fragment slot="icon"><FolderOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="Browse Researches" href="/main/personnel/browseResearches"><svelte:fragment slot="icon"><SearchOutline /></svelte:fragment></SidebarItem>
         <SidebarItem label="Bookmarks" href="/main/personnel/bookmarks" class=""><svelte:fragment slot="icon"><BookmarkOutline /></svelte:fragment></SidebarItem>
@@ -249,7 +224,7 @@
   <div class="flex justify-between items-center gap-2">
     <ChevronLeftOutline on:click={() => (allResearches = true)} class="w-4 h-4 mr-4 mb-2 dark:text-white" />
     <Heading tag="h6" class="flex gap-2"><FolderOutline />All researches</Heading>
-    <Button on:click={() => ((formModal = true), (allResearches = true))} size="md" outline class="w-60 sm:w-72"><CirclePlusOutline class="w-4 h-4 me-2" />Create new research</Button>
+    <Button on:click={() => ((createNewResearch = true), (allResearches = true))} size="md" outline class="w-60 sm:w-72"><CirclePlusOutline class="w-4 h-4 me-2" />Create new research</Button>
   </div>
 
   <Alert dismissable color="blue" class="border-l-8 w-full mb-2">
@@ -337,10 +312,7 @@
   </Timeline>
 </Drawer>
 
-<!--modal for create new research--
-<Modal title="" bind:open={formModal} size="xs" autoclose={false} outsideclose class="w-full">
-  <NewResearchModal />
-</Modal>
+
 
 <!--content--
 <div class="ml-64 pl-4 pt-4 pr-4 pb-4 grid items-start bg-white">

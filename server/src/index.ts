@@ -47,7 +47,7 @@ app.get('/api/checkUser', checkUser, (req, res) => {
 app.get('/api/checkAuth', requireAuth);
 app.use('/api', appRoutes);
 
-app.get('/api', (req, res) => {
+app.get('/api', (_, res) => {
   res.json({ message: 'Backend is online' });
 });
 

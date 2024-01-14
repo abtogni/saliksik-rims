@@ -2,12 +2,12 @@
   import { Alert, Badge, Button, Card, FloatingLabelInput, Helper, Indicator, Label, MultiSelect, P, Select, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip, Dropdown, DropdownItem } from "flowbite-svelte";
   import { ClockOutline, CodeOutline, EditOutline, FaceGrinOutline, FileCirclePlusOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, TrashBinOutline, UploadOutline, UserAddOutline, UserOutline, DotsHorizontalOutline } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
-  import { researchData } from "../../../components/store";
+  import { researches } from "../../../components/store";
 
   let json = {};
-  let researchID: any;
+  let researchID : any;
   let researches = $researchData.map((r) => {
-    return { value: r._id, name: r.researchTitle };
+    return {value: r._id, name: r.researchTitle}
   });
 
   function submit(e: Event) {
@@ -72,26 +72,25 @@
         </div>
       </div>
 
-      <form on:submit={submit} class="grid grid-flow-row gap-2">
-        <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 bg-white">
-          <Select class="mt-2" items={researches} bind:value={researchID} />
-          <Helper class=" text-blue-700"></Helper>
-          <FloatingLabelInput type="text" size="small" style="outlined" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" required class="w-full">Implementing Agency/Department</FloatingLabelInput>
-          <Helper class=" text-blue-700"></Helper>
-          <FloatingLabelInput type="text" size="small" style="outlined" id="coopAgency" name="coopAgency" label="Cooperating Agency" required class="w-full">Cooperating Agency</FloatingLabelInput>
-          <Helper class=" text-blue-700">State the name of agency to be tapped for funding/ co-implementing the project.</Helper>
-          <FloatingLabelInput type="text" size="small" style="outlined" id="siteImplementation" name="siteImplementation" label="Site/s of Implementation" required class="w-full">Site/s of Implementation</FloatingLabelInput>
-          <Helper class=" text-blue-700"></Helper>
-          <FloatingLabelInput type="text" size="small" style="outlined" id="totalCost" name="totalCost" label="Total Project Cost" required class="w-full">Total Project Cost</FloatingLabelInput>
-          <Helper class=" text-blue-700">Include the specific budget allocations for personnel service, maintenance and operations, equipment, trainings/workshops, and administrative costs.</Helper>
-          <FloatingLabelInput type="text" size="small" style="outlined" id="fundingSource" name="fundingSource" label="Funding Source" required class="w-full">Funding Source</FloatingLabelInput>
-          <Helper class=" text-blue-700">Specific funding source, including counterpart funds.</Helper>
-          <div class="gap-2">
-            <P weight="medium" size="base" for="researchLeaders">Project Duration</P>
-            <DateInput bind:value={projectDuration} format="yyyy-MM-dd" required class="" />
-            <Helper class="pt-1 text-blue-700">Specific dates that the project will be undertaken (month/year); ideally to be completed minimum 1 year/ depending on the approved grant.</Helper>
-          </div>
-        </div>
+    <Card size="xl" class="gap-2 w-full">
+      <Select class="mt-2" items={researches} bind:value={researchID} />
+      <Helper class=" text-blue-700"></Helper>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" required class="w-full">Implementing Agency/Department</FloatingLabelInput>
+      <Helper class=" text-blue-700"></Helper>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="coopAgency" name="coopAgency" label="Cooperating Agency" required class="w-full">Cooperating Agency</FloatingLabelInput>
+      <Helper class=" text-blue-700">State the name of agency to be tapped for funding/ co-implementing the project.</Helper>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="siteImplementation" name="siteImplementation" label="Site/s of Implementation" required class="w-full">Site/s of Implementation</FloatingLabelInput>
+      <Helper class=" text-blue-700"></Helper>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="totalCost" name="totalCost" label="Total Project Cost" required class="w-full">Total Project Cost</FloatingLabelInput>
+      <Helper class=" text-blue-700">Include the specific budget allocations for personnel service, maintenance and operations, equipment, trainings/workshops, and administrative costs.</Helper>
+      <FloatingLabelInput type="text" size="small" style="outlined" id="fundingSource" name="fundingSource" label="Funding Source" required class="w-full">Funding Source</FloatingLabelInput>
+      <Helper class=" text-blue-700">Specific funding source, including counterpart funds.</Helper>
+      <div class="gap-2">
+        <P weight="medium" size="base" for="researchLeaders">Project Duration</P>
+        <DateInput bind:value={projectDuration} format="yyyy-MM-dd" required class=""/>
+        <Helper class="pt-1 text-blue-700">Specific dates that the project will be undertaken (month/year); ideally to be completed minimum 1 year/ depending on the approved grant.</Helper>
+      </div>
+    </Card>
 
         <!--project description-->
         <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 bg-white">
