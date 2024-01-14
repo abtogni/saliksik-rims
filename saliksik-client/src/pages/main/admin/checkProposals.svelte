@@ -87,6 +87,12 @@
 
   //modal for send notice to present
   let sendNoticeToPresent = false;
+
+  //modal for changing incentive status to processing
+  let changeIncentiveStatusToProcessing = false;
+
+  //modal for changing incentive status to released
+  let changeIncentiveStatusToReleased = false;
 </script>
 
 <main>
@@ -101,7 +107,7 @@
 
   <!--all researches-->
   <Tabs style="none" activeClasses="p-2 text-blue-700 border-b-2 border-b-blue-700 rounded-t-lg" inactiveClasses="p-2 text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300" contentClass="bg-white p-0 mt-2 rounded-md border-0 shadow-none" class="">
-    <TabItem >
+    <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>All Researches</div>
       <div class="flex items-center gap-2 mb-2">
         <Search></Search>
@@ -450,7 +456,7 @@
     </TabItem>
 
     <!--initial presentation-->
-    <TabItem open>
+    <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Initial Presentation</div>
       <div class="flex justify-center gap-2 bg-gray-50">
         <div class="grid grid-flow-row col-start-2 col-span-3 items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
@@ -474,10 +480,10 @@
             </div>
           </div>
 
-          <!--modal for add schedule-->
+          <!--modal for create schedule-->
           <Modal title="Create Schedule" bind:open={addSchedule} size="md" autoclose={false} outsideclose class="rounded-md w-full">
             <form class="grid grid-flow-row gap-6">
-              <!---->
+              <!--modal date and time-->
               <div class="grid grid-flow-row gap-2">
                 <div class="flex justify-start items-center gap-2">
                   <CalendarPlusSolid size="sm" class="text-blue-700" />
@@ -485,11 +491,11 @@
                 </div>
                 <div class="flex justify-start items-center gap-2 px-2 py-0">
                   <CalendarMonthOutline size="sm" class="text-blue-700" />
-                  <DateInput format="yyyy-MM-dd" required class="w-full p-2 rounded-md text-gray-500" />
+                  <DateInput format="yyyy-MM-dd" placeholder="yyyy-MM-dd" required --date-picker-highlight-border="#b43403" --date-picker-highlight-shadow="none" --date-input-width="100%" class="w-full rounded-md text-gray-500  " />
                 </div>
               </div>
 
-              <!--add presenter-->
+              <!--modal add presenter-->
               <div class="grid grid-flow-row gap-2">
                 <div class="flex justify-between items-center gap-2">
                   <div class="flex justify-start items-center gap-2">
@@ -501,20 +507,7 @@
                   </div>
                 </div>
                 <div class="">
-                  <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-orange-100">
-                    <Checkbox color="blue" class="w-full  text-gray-500 ">Insert Research Title</Checkbox>
-                    <div class="flex items-center gap-0">
-                      <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-                      <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-                      <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-                      <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-                      <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-                      <Tooltip arrow={false}>Danny Casimero</Tooltip>
-                      <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-                      <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
-                    </div>
-                  </div>
-                  <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-orange-100">
+                  <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-orange-50">
                     <Checkbox color="blue" class="w-full  text-gray-500 ">Insert Research Title</Checkbox>
                     <div class="flex items-center gap-0">
                       <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
@@ -530,7 +523,7 @@
                 </div>
               </div>
 
-              <!--add panelist-->
+              <!--modal add panelist-->
               <div class="grid grid-flow-row gap-2">
                 <div class="flex justify-between items-center gap-2">
                   <div class="flex justify-start items-center gap-2">
@@ -544,17 +537,7 @@
                 </div>
 
                 <div class="">
-                  <div class="flex justify-between items-center p-2 rounded-md hover:bg-orange-100">
-                    <div class="flex justify-start items-center gap-2">
-                      <MessageCaptionSolid size="sm" class="text-blue-700" />
-                      <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">Insert Panelist Name</P>
-                    </div>
-                    <div class="">
-                      <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-2"><CloseOutline size="xs" /></Button>
-                    </div>
-                  </div>
-
-                  <div class="flex justify-between items-center p-2 rounded-md hover:bg-orange-100">
+                  <div class="flex justify-between items-center p-2 rounded-md hover:bg-orange-50">
                     <div class="flex justify-start items-center gap-2">
                       <MessageCaptionSolid size="sm" class="text-blue-700" />
                       <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">Insert Panelist Name</P>
@@ -570,14 +553,14 @@
             </form>
           </Modal>
 
-          <!--presenter list-->
+          <!--card presenter list-->
           <div class="flex justify-center items-center gap-2 shadow-lg border rounded-md p-3">
             <P size="lg" weight="medium" class="text-gray-500">No set schedule</P>
           </div>
 
-          <!--schedule-->
+          <!--card schedule-->
           <div class="grid grid-flow-row gap-2 shadow-lg border rounded-md p-3">
-            <!--schedule header-->
+            <!--card schedule header-->
             <div class="grid grid-flow-row items-center gap-2 p-2">
               <div class="flex justify-between items-center gap-2">
                 <div class="flex justify-start items-center gap-2">
@@ -612,19 +595,33 @@
               <Button outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><CalendarEditOutline size="sm" />Change Schedule</Button>
             </div>
 
-            <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-orange-100">
+            <!--card presenter-->
+            <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-orange-50">
               <div class="flex justify-between items-center gap-2 w-full">
-                <div class="flex items-center gap-0">
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-                  <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-                  <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-                  <Tooltip arrow={false}>Danny Casimero</Tooltip>
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-                  <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                <div class="flex justify-start items-center gap-2">
+                  <div class="flex items-center gap-0">
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
+                    <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
+                    <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
+                    <Tooltip arrow={false}>Danny Casimero</Tooltip>
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
+                    <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                  </div>
+                  <P size="base" weight="bold" class="text-gray-500">·</P>
+                  <div class="flex justify-start items-center gap-2">
+                    <Badge border large class="flex items-center gap-2">
+                      <Indicator color="orange" size="md" class="" />Waiting for Reply
+                    </Badge>
+                    <Badge border large color="blue" class="flex items-center gap-2">
+                      <Indicator color="blue" size="md" class="" />Going
+                    </Badge>
+                    <Badge border large color="red" class="flex items-center gap-2">
+                      <Indicator color="red" size="md" class="" />Not Going
+                    </Badge>
+                  </div>
                 </div>
-
                 <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
                 <Dropdown>
                   <DropdownItem>
@@ -635,56 +632,13 @@
                 </Dropdown>
               </div>
               <P weight="semibold" size="base" class="line-clamp-3">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
-              <div class="flex justify-start items-center gap-2">
-                <Badge border large class="flex items-center gap-2">
-                  <Indicator color="orange" size="md" class="" />Waiting for Reply
-                </Badge>
-                <Badge border large color="blue" class="flex items-center gap-2">
-                  <Indicator color="blue" size="md" class="" />Going
-                </Badge>
-                <Badge border large color="red" class="flex items-center gap-2">
-                  <Indicator color="red" size="md" class="" />Not Going
-                </Badge>
-              </div>
-            </div>
-            <div class="flex flex-wrap gap-2 rounded-sm p-2 hover:bg-orange-100">
-              <div class="flex justify-between items-center gap-2 w-full">
-                <div class="flex items-center gap-0">
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-                  <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-                  <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-                  <Tooltip arrow={false}>Danny Casimero</Tooltip>
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-                  <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
-                </div>
-
-                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
-                <Dropdown>
-                  <DropdownItem>
-                    <div class="flex justify-start items-center gap-2">
-                      <TrashBinOutline size="sm" class="text-blue-700" />Delete Schedule
-                    </div>
-                  </DropdownItem>
-                </Dropdown>
-              </div>
-              <P weight="semibold" size="base" class="line-clamp-3">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
-              <div class="flex justify-start items-center gap-2">
-                <Badge border large class="flex items-center gap-2">
-                  <Indicator color="orange" size="md" class="" />Waiting for Reply
-                </Badge>
-                <Badge border large color="blue" class="flex items-center gap-2">
-                  <Indicator color="blue" size="md" class="" />Going
-                </Badge>
-                <Badge border large color="red" class="flex items-center gap-2">
-                  <Indicator color="red" size="md" class="" />Not Going
-                </Badge>
+              <div class="flex items-center gap-2">
+                <Button on:click={() => (addSchedule = true)} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><MessageCaptionOutline size="sm" />Add Panelist Comment</Button>
               </div>
             </div>
             <Button on:click={() => (sendNoticeToPresent = true)} color="blue" size="md" class="rounded-md w-full">Send Notice to Present</Button>
 
-            <!--send notice to present-->
+            <!--modal send notice to present-->
             <Modal title="Send Notice to Present" bind:open={sendNoticeToPresent} size="xs" autoclose class="w-full">
               <div class="flex justify-center items-center">
                 <InfoCircleOutline size="xl" class="text-blue-700" />
@@ -700,15 +654,129 @@
       </div>
     </TabItem>
 
-    <!--final presentation-->
+    <!--tabitem final presentation-->
     <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Final Presentation</div>
     </TabItem>
-    <!--for incentive approval-->
-    <TabItem>
-      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Incentive Approval</div>
+
+    <!--tabitem incentive status-->
+    <TabItem open>
+      <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Incentive Status</div>
+
+      <div class="grid grid-flow-row items-center gap-2 bg-gray-50">
+        <div class="flex items-center gap-2">
+          <Search size="md" />
+          <div class="flex items-center gap-2">
+            <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FilterOutline size="sm" />Status</Button>
+            <Dropdown>
+              <DropdownItem><Checkbox color="blue" class="text-gray-500">Not Starting</Checkbox></DropdownItem>
+              <DropdownItem><Checkbox color="blue" class="text-gray-500">Processing</Checkbox></DropdownItem>
+              <DropdownItem><Checkbox color="blue" class="text-gray-500">Released</Checkbox></DropdownItem>
+            </Dropdown>
+          </div>
+        </div>
+        <Table hoverable={true} noborder={false} shadow={true} class="hover:bg-orange-50 ">
+          <TableHead class="bg-blue-700 text-white">
+            <TableHeadCell class="w-32">
+              <div class="flex items-center gap-1">
+                Status<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
+              </div>
+            </TableHeadCell>
+            <TableHeadCell class="">
+              <div class="flex items-center gap-1">
+                Title<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
+              </div>
+            </TableHeadCell>
+            <TableHeadCell class="w-44">
+              <div class="flex items-center gap-1">
+                Leader<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
+              </div>
+            </TableHeadCell>
+            <TableHeadCell class="w-56">
+              <div class="flex items-center gap-1">
+                Timestamp<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
+              </div>
+            </TableHeadCell>
+          </TableHead>
+          <TableBody>
+            {#if proposals}
+              {#if researches}
+                {#each proposals as p, i}
+                  {#if researches.find((x) => x._id === p.researchID)}
+                    {#each researches.filter((x) => x._id === p.researchID) as research}
+                      <TableBodyRow on:click={() => toggleRow(i)} class="hover:bg-orange-50">
+                        <TableBodyCell class="">
+                          <!--not starting, processing or released-->
+                          <div class="flex items-center gap-2 cursor-pointer text-gray-500">
+                            <Indicator color="dark" size="md" class="" />Not Starting
+                          </div>
+
+                          <Dropdown>
+                            <DropdownItem class="flex items-center gap-2 "><Indicator color="dark" size="md" class="text-gray-500" />Not Starting</DropdownItem>
+                            <DropdownItem class="flex items-center gap-2 "><Indicator color="orange" size="md" class="text-gray-500" />Processing</DropdownItem>
+
+                            <!--modal change incentive status to  processing-->
+                            <Modal title="Change Incentive Status" bind:open={changeIncentiveStatusToProcessing} size="xs" autoclose class="w-full">
+                              <div class="flex justify-center items-center">
+                                <InfoCircleOutline size="xl" class="text-blue-700" />
+                              </div>
+                              <P weight="normal" size="base" class="text-center">Are you sure you want to proceed? This action will notify the researcher of the current incentive status.</P>
+                              <div class="flex gap-2">
+                                <Button color="blue" size="md" class="w-full">Yes</Button>
+                                <Button type="submit" outline color="blue" size="sm" class="w-full">No</Button>
+                              </div>
+                            </Modal>
+
+                            
+                            <DropdownItem class="flex items-center gap-2 "><Indicator color="blue" size="md" class="text-gray-500" />Released</DropdownItem>
+
+                            <!--modal change incentive status to released-->
+                            <Modal title="Change Incentive Status" bind:open={changeIncentiveStatusToReleased} size="xs" autoclose class="w-full">
+                              <div class="flex justify-center items-center">
+                                <InfoCircleOutline size="xl" class="text-blue-700" />
+                              </div>
+                              <P weight="normal" size="base" class="text-center">Are you sure you want to proceed? This action will notify the researcher of the current incentive status.</P>
+                              <div class="flex gap-2">
+                                <Button color="blue" size="md" class="w-full">Yes</Button>
+                                <Button type="submit" outline color="blue" size="sm" class="w-full">No</Button>
+                              </div>
+                            </Modal>
+                          </Dropdown>
+                        </TableBodyCell>
+                        <TableBodyCell class="">
+                          <P size="sm" weight="semibold" class="line-clamp-1 text-gray-500">{research.researchTitle}</P>
+                        </TableBodyCell>
+                        <TableBodyCell class="">
+                          <div class="flex items-center gap-0">
+                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
+                            <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
+                            <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
+                            <Tooltip arrow={false}>Danny Casimero</Tooltip>
+                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
+                            <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                          </div>
+                        </TableBodyCell>
+
+                        <TableBodyCell class="">
+                          <P size="sm" weight="semibold" class=" text-gray-500">{moment(p.createdAt).format("lll")}</P>
+                        </TableBodyCell>
+                      </TableBodyRow>
+                    {/each}
+                  {:else}{/if}
+                {/each}
+              {:else}
+                No researches found.
+              {/if}
+            {:else}
+              No proposals found.
+            {/if}
+          </TableBody>
+        </Table>
+      </div>
     </TabItem>
-    <!--published-->
+    <!--tabitem published-->
     <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Published</div>
     </TabItem>

@@ -96,12 +96,12 @@ let createPersonnelAccount = false;
 
           <div class="flex flex-wrap justify-start items-center gap-2">
             <P for="email" weight="bold" size="base" class="text-gray-700">Email</P>
-            <Input type="text" id="email" name="email" size="sm" class="rounded-md font-medium text-gray-500 border-orange-700"></Input>
+            <Input type="email" id="email" name="email" size="sm" class="rounded-md font-medium text-gray-500 border-orange-700"></Input>
           </div>
 
           <div class="flex flex-wrap justify-start items-center gap-2">
             <P for="password" weight="bold" size="base" class="text-gray-700">Password</P>
-            <Input type="text" id="password" name="password" size="sm" class="rounded-md font-medium text-gray-500 border-orange-700"></Input>
+            <Input type="password" id="password" name="password" size="sm" class="rounded-md font-medium text-gray-500 border-orange-700"></Input>
           </div>
 
           <Button on:click={() => alert('Handle "success"')} type="submit" color="blue" size="md" class="rounded-md w-full">Create Personnel Account</Button>
