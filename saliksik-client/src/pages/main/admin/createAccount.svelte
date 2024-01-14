@@ -108,7 +108,7 @@ let createPersonnelAccount = false;
         </form>
       </Modal>
 
-      <div class="flex justify-center items-center gap-2 shadow-lg border rounded-md p-3">
+      <div class="flex justify-center items-center gap-2 shadow-lg border rounded-md p-3 ">
         <P size="lg" weight="medium" class="text-gray-500">No accounts</P>
       </div>
 

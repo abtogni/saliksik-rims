@@ -12,11 +12,6 @@
   import NoStatus from "../../assets/status/no-status.svelte"
   import { fetchResearches, fetchUser } from "../../components/fetch";
 
-
-  
-
-  
-
   onMount(async () => {
     if (!$isAuthenticated) {
       $goto("/login");

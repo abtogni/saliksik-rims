@@ -5,14 +5,14 @@
   import moment from "moment";
   import { onMount } from "svelte";
   import { DateInput } from "date-picker-svelte";
-  import { chosenResearchData, updateChosenResearch } from '../../../components/store'
+  import { chosenResearchData, updateChosenResearch } from "../../../components/store";
   let proposals: any[],
     researches: any[] = [],
     loading = true,
     error: any = null;
 
   const currentURL = window.location.href;
-  const urlParts = currentURL.split('/');
+  const urlParts = currentURL.split("/");
   const urlID = urlParts[urlParts.length - 1];
 
   async function getProposalList() {
@@ -115,7 +115,6 @@
 
   //submit existing research
   let existingResearch: any;
-  
 </script>
 
 <main class="">
@@ -133,8 +132,8 @@
           <p class="mt-2 text-sm">Or you can submit an already existing/published (owned) research. An incentive will be given based on the following:</p>
         </Alert>
         <div class="flex items-center gap-2">
-          <Button on:click={() => (createConceptNote = true)} color="blue" size="sm" class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Create Concept Note</Button>
-          <Button on:click={() => (submitExistingResearch = true)} outline color="blue" size="sm" class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Submit Existing Research</Button>
+          <Button href="/main/personnel/createConceptNote" color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileCirclePlusOutline size="sm" /> Create Concept Note</Button>
+          <Button on:click={() => (submitExistingResearch = true)} outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileCirclePlusOutline size="sm" /> Submit Existing Research</Button>
         </div>
 
         <Table hoverable={true} noborder={false} shadow={true} class="">
@@ -150,7 +149,7 @@
                 {#each proposals as p, i}
                   {#if researches.find((x) => x._id === p.researchID)}
                     {#each researches.filter((x) => x._id === p.researchID) as research}
-                      <TableBodyRow on:click={() => toggleRow(i)} >
+                      <TableBodyRow on:click={() => toggleRow(i)}>
                         <TableBodyCell class="">
                           <div class="flex justify-start items-center gap-2">
                             <Indicator color="dark"></Indicator>
@@ -291,29 +290,30 @@
       </div>
     </TabItem>
 
-    <!--modal for create concept note-->
+    <!--modal for create concept note
   <Modal title="Enter Concept Note Name" bind:open={createConceptNote} size="xs" autoclose class="w-full">
     <form class="grid grid-flow-row grid-rows-1 items-start gap-2">
       <FloatingLabelInput type="text" style="outlined" id="floating_filled" name="floating_filled" label="Concept Note Name" required class="w-full">Concept Note Name</FloatingLabelInput>
       <Helper></Helper>
       <div class="flex gap-2">
-        <!--on continue, dapat ma save ang concept note name at magdisplay sa table-->
+        <!--on continue, dapat ma save ang concept note name at magdisplay sa table--
         <Button href="/main/personnel/createConceptNote" class="w-full">Continue</Button>
         <Button class="w-full">Cancel</Button>
       </div>
     </form>
   </Modal>
+-->
 
-  <!--modal for submit existing research-->
-  <Modal title="Upload Existing Research" bind:open={submitExistingResearch} size="xs" autoclose class="w-full">
-    <form class="grid grid-flow-row items-start gap-0">
-      <Label for="" class="font-medium text-base space-y-2">
-        <span >Upload file</span>
-        <Fileupload  bind:existingResearch />
-      </Label>
-      <Label class="font-medium text-sm">File: {existingResearch}</Label>
-    </form>
-  </Modal>
+    <!--modal for submit existing research-->
+    <Modal title="Upload Existing Research" bind:open={submitExistingResearch} size="xs" autoclose class="w-full">
+      <form class="grid grid-flow-row items-start gap-0">
+        <Label for="" class="font-medium text-base space-y-2">
+          <span>Upload file</span>
+          <Fileupload bind:existingResearch />
+        </Label>
+        <Label class="font-medium text-sm">File: {existingResearch}</Label>
+      </form>
+    </Modal>
 
     <!--initial presentation-->
     <TabItem title="">
@@ -326,7 +326,6 @@
         <p class="mt-2 text-sm">Insert helper text</p>
       </Alert>
       <div class="grid grid-flow-row justify-items-start gap-2">
-        
         <div class="flex items-center gap-2">
           <div class="">
             <Button on:click={() => (setInitialPresentation = true)} color="blue" size="sm" class="flex items-center gap-2"><FileCirclePlusOutline size="sm" /> Set Schedule</Button>
@@ -374,7 +373,6 @@
     <TabItem title="">
       <div slot="title" class="flex items-center gap-2"><CalendarMonthOutline size="sm" />Final Presentation</div>
     </TabItem>
-
   </Tabs>
 
   <!--modal for setting schedule for -->
