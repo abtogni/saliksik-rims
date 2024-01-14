@@ -59,7 +59,7 @@ let createPersonnelAccount = false;
 
       <!--modal for create personnel account-->
       <Modal title="Create Personnel Account" bind:open={createPersonnelAccount} size="xs" autoclose={false} outsideclose class="rounded-md w-full">
-        <form class="grid grid-flow-row gap-4">
+        <form class="grid grid-flow-row gap-4" on:submit={submit}>
           <!---->
           <div class="flex flex-wrap justify-start items-center gap-2">
             <P for="userType" weight="bold" size="base" class="text-gray-700">User Type</P>
@@ -101,7 +101,7 @@ let createPersonnelAccount = false;
 
           <div class="flex flex-wrap justify-start items-center gap-2">
             <P for="password" weight="bold" size="base" class="text-gray-700">Password</P>
-            <Input type="text" id="password" name="password" size="sm" class="rounded-md font-medium text-gray-500 border-orange-700"></Input>
+            <Input type="password" id="password" name="password" size="sm" class="rounded-md font-medium text-gray-500 border-orange-700"></Input>
           </div>
 
           <Button on:click={() => alert('Handle "success"')} type="submit" color="blue" size="md" class="rounded-md w-full">Create Personnel Account</Button>

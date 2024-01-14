@@ -10,6 +10,7 @@
   import { sineIn } from "svelte/easing";
   import moment from "moment";
   import ConceptNote from "../../assets/status/concept-note.svelte";
+  import NoStatus from "../../assets/status/no-status.svelte"
 
   let researches: any;
   let loading = true;
@@ -159,51 +160,8 @@
           <StarOutline />
           <Tooltip>Not Starred</Tooltip>
 
-          <Badge border large color="dark" class="flex items-center gap-2">
-            <Indicator color="dark" size="md" class="" />No Status
-            <InfoCircleOutline color="dark" size="sm" />
-            <Popover arrow={false} class="w-96">Create and submit a concept note to start. Or submit an already existing/published research paper.</Popover>
-            <CheckCircleOutline color="dark" size="sm" />
-            <Popover arrow={false} class="w-96">The concept note have been submitted. A notication will be sent, once it is approved.</Popover>
-          </Badge>
-
-          <Badge border large class="flex items-center gap-2"
-            ><Indicator color="orange" size="md" class="" />Concept Note
-            <InfoCircleOutline color="orange" size="sm" />
-            <Popover arrow={false} class="w-96">The concept note is in the approval process.</Popover>
-            <CheckCircleOutline color="orange" size="sm" />
-            <Popover arrow={false} class="w-96">The approval process is done. Please check your notification, to see the reseult.</Popover>
-          </Badge>
-
-          <Badge border large color="green" class="flex items-center gap-2">
-            <Indicator color="green" size="md" class="" />Initial Presentation
-            <InfoCircleOutline color="green" size="sm" />
-            <Popover arrow={false} class="w-96">Upload your research paper on the submit bin. Then, set a schedule for your initial presentation. Choose among the available dates.</Popover>
-            <CheckCircleOutline color="green" size="sm" />
-            <Popover arrow={false} class="w-96">Scheduled On <span class="font-bold">Insert Date and Time</span></Popover>
-          </Badge>
-
-          <Badge border large color="pink" class="flex items-center gap-2 ">
-            <Indicator color="teal" size="md" class="" />Final Presentation
-            <InfoCircleOutline color="teal" size="sm" />
-            <Popover arrow={false} class="w-96">Make changes on your research paper based on the panelist comments and others. Then, set a schedule for your final presentation. Choose among the available dates.</Popover>
-            <CheckCircleOutline color="teal" size="sm" />
-            <Popover arrow={false} class="w-96">Scheduled On <span class="font-bold">Insert Date and Time</span></Popover>
-          </Badge>
-
-          <Badge border large color="blue" class="flex items-center gap-2">
-            <Indicator color="blue" size="md" class="" />Published
-            <InfoCircleOutline color="blue" size="sm" />
-            <Popover arrow={false} class="w-96">Your research is being published. Once done, an incentive will be sent to your notification</Popover>
-            <CheckCircleOutline color="blue" size="sm" />
-            <Popover arrow={false} class="w-96">Congratulations! Your research paper have been published. You can look for your research on the browse research page, all research sidebar or on your profile page.</Popover>
-          </Badge>
-
-          <Badge border large color="red" class="flex items-center gap-2">
-            <Indicator color="red" size="md" class="" />Rejected
-            <InfoCircleOutline color="red" size="sm" />
-            <Popover arrow={false} class="w-96">Your concept note have been rejected. You can make changes and resubmit again.</Popover>
-          </Badge>
+          <ConceptNote />
+          <NoStatus />
         </div>
 
         <div class="flex items-center gap-0 ">
