@@ -1,8 +1,24 @@
+//Imports
 import { writable } from "svelte/store";
 
-// Retrieve the stored user data from localStorage
+
+//Research List
+const storedResearches = localStorage.getItem('researches');
+const storedResearchData = storedResearches ? JSON.parse(storedResearches) : [];
+export const researches = writable<any[]>(storedResearchData);
+
+researches.subscribe((value) => {
+  localStorage.setItem('researches', JSON.stringify(value));
+});
+
+export const updateResearchList = (newResearches: any[]) => {
+  researches.set(newResearches);
+};
+
+
+// User Data
 const storedUserData = localStorage.getItem('userData');
-const initialUserData = storedUserData ? JSON.parse(storedUserData) : {
+const UserModel = storedUserData ? JSON.parse(storedUserData) : {
   _id: '',
   email: '',
   userType: '',
@@ -12,57 +28,61 @@ const initialUserData = storedUserData ? JSON.parse(storedUserData) : {
   suffix: '',
   avatar: '',
   researchCount: 0,
+  createdAt: ''
 };
 
-const storedChosenResearchData = localStorage.getItem('chosenResearchData');
-const initialChosenResearchData = storedChosenResearchData ? JSON.parse(storedChosenResearchData) : {
-  _id: '',
-  researchTitle: '',
-  researchLeaders:[],
-  researchMembers: [],
-  researchAgency: '',
-  researchStatus: '',
-  createdAt: '',
-};
+export const userData = writable(UserModel);
 
-export const initialResearchChosen = writable(initialChosenResearchData);
-export const chosenResearchData = writable(initialChosenResearchData);
-export const userData = writable(initialUserData);
-
-// Update the stored user data in localStorage
 userData.subscribe((value) => {
   localStorage.setItem('userData', JSON.stringify(value));
 });
-
-// Update the stored chosen research data in localStorage
-chosenResearchData.subscribe((value) => {
-  localStorage.setItem('chosenResearchData', JSON.stringify(value));
-});
-
-export const updateChosenResearch = (chosenResearch: any) => {
-  chosenResearchData.update((prevChosenResearch) => ({ ...prevChosenResearch, ...chosenResearch}));
-};
 
 export const updateUser = (newUserData: any) => {
   userData.update((prevUserData) => ({ ...prevUserData, ...newUserData }));
 };
 
-const storedResearchData = localStorage.getItem('researchData');
-const initialResearchData = storedResearchData ? JSON.parse(storedResearchData) : [];
-export const researchData = writable<any[]>(initialResearchData);
-
-researchData.subscribe((value) => {
-  localStorage.setItem('researchData', JSON.stringify(value));
-});
-
-export const updateResearch = (newResearchData: any[]) => {
-  researchData.set(newResearchData);
-};
-
 const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
 export const isAuthenticated = writable(storedIsAuthenticated ? JSON.parse(storedIsAuthenticated) : false);
 
-// Update the stored isAuthenticated value in localStorage
 isAuthenticated.subscribe((value) => {
   localStorage.setItem('isAuthenticated', JSON.stringify(value));
 });
+
+
+//Current Research
+const currentResearchStored = localStorage.getItem('selectedResearchInfo');
+const ResearchModel = currentResearchStored ? JSON.parse(currentResearchStored) : {
+  _id: '',
+  researchTitle: '',
+  researchLeaders:[],
+  researchStatus: '',
+  conceptNote: {
+    implementingDept: '',
+    coopAgency: '',
+    siteImplementation: '',
+    projectDuration: '',
+    totalCost: 0,
+    fundingSource: '',
+    description: '',
+    significance: '',
+    objectives: '',
+    methodology: '',
+    technologyRoadmap: '',
+    expectedOutput: '',
+    workPlan: '',
+    proposalStatus: '', 
+  },
+  updatedAt: '',
+  createdAt: '',
+};
+
+export const selectedResearchInfo = writable(ResearchModel);
+
+
+selectedResearchInfo.subscribe((value) => {
+  localStorage.setItem('selectedResearchInfo', JSON.stringify(value));
+});
+
+export const updateResearch = (selectedResearch: any) => {
+  selectedResearchInfo.update((oldResearch) => ({ ...oldResearch, ...selectedResearch}));
+};

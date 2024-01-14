@@ -2,11 +2,11 @@
   import { Alert, Badge, Button, Card, FloatingLabelInput, Helper, Indicator, Label, MultiSelect, P, Select, Textarea, Toolbar, ToolbarButton, ToolbarGroup, Tooltip } from "flowbite-svelte";
   import { ClockOutline, CodeOutline, EditOutline, FaceGrinOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, TrashBinOutline, UploadOutline } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
-  import { researchData } from "../../../components/store";
+  import { researches } from "../../../components/store";
 
   let json = {};
   let researchID : any;
-  let researches = $researchData.map((r) => {
+  let researchList = $researches.map((r) => {
     return {value: r._id, name: r.researchTitle}
   });
 
@@ -84,7 +84,7 @@
     </Card>
 
     <Card size="xl" class="gap-2 w-full">
-      <Select class="mt-2" items={researches} bind:value={researchID} />
+      <Select class="mt-2" items={researchList} bind:value={researchID} />
       <Helper class=" text-blue-700"></Helper>
       <FloatingLabelInput type="text" size="small" style="outlined" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" required class="w-full">Implementing Agency/Department</FloatingLabelInput>
       <Helper class=" text-blue-700"></Helper>
