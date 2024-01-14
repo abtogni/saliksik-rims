@@ -7,67 +7,23 @@
   import { onMount } from "svelte";
   import { userData, researchData, isAuthenticated, updateUser, updateResearch } from "../../components/store";
   import { UserOutline, CirclePlusOutline, FolderOutline, StarOutline, LinkOutline, ArchiveOutline, TrashBinOutline, StarSolid, CheckOutline, CloseOutline, DotsHorizontalOutline, ClockOutline, ChevronDownOutline, DotsVerticalOutline, EyeOutline, EditOutline, ClipboardOutline, FilterOutline, SortOutline, ChevronLeftOutline, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, MessagesSolid, EnvelopeOpenOutline, CalendarWeekSolid, CheckCircleOutline, InfoCircleOutline, QuestionCircleOutline, UserSettingsOutline } from "flowbite-svelte-icons";
-  import { sineIn } from "svelte/easing";
   import moment from "moment";
   import ConceptNote from "../../assets/status/concept-note.svelte";
   import NoStatus from "../../assets/status/no-status.svelte"
+  import { fetchResearches, fetchUser } from "../../components/fetch";
 
-  let researches: any;
-  let loading = true;
-  let error: string | null = null;
 
-  let currentUser: any;
+  
 
-  async function fetchUser() {
-    try {
-      const response = await fetch("/api/checkUser");
-      const user = await response.json();
-      updateUser({
-        _id: user.user._id,
-        userType: user.user.userType,
-        firstName: user.user.firstName,
-        lastName: user.user.lastName,
-        avatar: user.user.firstName.charAt(0) + user.user.lastName.charAt(0),
-        researches: user.user.researches,
-      });
-    } catch (e) {
-      $goto("/");
-    }
-  }
-
-  async function fetchResearches(userID: string) {
-    try {
-      const response = await fetch(`/api/research/getResearches?userID=${userID}`);
-
-      if (response.ok) {
-        const newResearches = await response.json();
-        updateResearch(newResearches);
-      } else {
-        console.error("Failed to fetch researches");
-        error = "Failed to fetch researches";
-      }
-    } catch (err) {
-      console.error("Error fetching researches:", err);
-      error = "Error fetching researches";
-    } finally {
-      loading = false;
-    }
-  }
+  
 
   onMount(async () => {
     if (!$isAuthenticated) {
       $goto("/login");
     } else if ($isAuthenticated) {
-      await fetchUser().then(async () => {
-        currentUser = $userData;
-      });
-      if (currentUser) {
-        fetchResearches(currentUser._id);
-        researches = $researchData;
-
-        console.log(researches);
-      } else {
-        console.error("Network error:", error);
+      await fetchUser();
+      if ($userData) {
+        fetchResearches($userData._id);
       }
     }
   });
@@ -101,8 +57,8 @@
         <SidebarBrand {site} />
         <!---->
         <SidebarGroup class="">
-          {#if currentUser}
-            <SidebarItem label={`Hello, ${currentUser.firstName}`} {spanClass}></SidebarItem>
+          {#if $userData}
+            <SidebarItem label={`Hello, ${$userData.firstName}`} {spanClass}></SidebarItem>
           {:else}
             <div></div>
           {/if}
@@ -122,12 +78,10 @@
         </SidebarGroup>
         <!---->
         <SidebarGroup border class="truncate ...">
-          {#if loading}
-            <SidebarItem label="Loading..."></SidebarItem>
-          {:else if researches}
+          {#if $researchData}
             <SidebarDropdownWrapper label="Starred" isOpen>
               <svelte:fragment slot="icon"><StarSolid color="orange" /></svelte:fragment>
-              {#each researches as r}
+              {#each $researchData as r}
                 <SidebarDropdownItem class="" label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
               {/each}
             </SidebarDropdownWrapper>
@@ -136,7 +90,7 @@
           {/if}
         </SidebarGroup>
         <SidebarGroup border>
-          {#if currentUser}
+          {#if $userData}
             <SidebarItem href={`/main/profile/myProfile`} label="My Profile" {spanClass}>
               <svelte:fragment slot="icon">
                 <UserOutline />
@@ -189,8 +143,8 @@
       </nav>
     </div>
     <div class="w-full pl-4 pt-4 pr-4 pb-4">
-      {#if currentUser}
-        <slot scoped={{ userID: currentUser._id }} />
+      {#if $userData}
+        <slot scoped={{ userID: $userData._id }} />
       {:else}
         <slot />
       {/if}
@@ -245,8 +199,8 @@
       <SidebarBrand {site} />
       <!----
       <SidebarGroup class="">
-        {#if currentUser}
-          <SidebarItem label={`Hello, ${currentUser.firstName}`} {spanClass}></SidebarItem>
+        {#if $userData}
+          <SidebarItem label={`Hello, ${$userData.firstName}`} {spanClass}></SidebarItem>
         {:else}
           <div></div>
         {/if}
@@ -280,7 +234,7 @@
         {/if}
       </SidebarGroup>
       <SidebarGroup border>
-        {#if currentUser}
+        {#if $userData}
           <SidebarItem href={`/main/profile/myProfile`} label="My Profile" {spanClass}>
             <svelte:fragment slot="icon">
               <UserOutline />
@@ -395,8 +349,8 @@
 
 <!--content--
 <div class="ml-64 pl-4 pt-4 pr-4 pb-4 grid items-start bg-white">
-  {#if currentUser}
-    <slot scoped={{ userID: currentUser._id }} />
+  {#if $userData}
+    <slot scoped={{ userID: $userData._id }} />
   {:else}
     <slot />
   {/if}
@@ -416,8 +370,8 @@
     <SidebarWrapper class="rounded-none w-full">
       <SidebarBrand {site} />
       <SidebarGroup>
-        {#if currentUser}
-          <SidebarItem label={`Hello, ${currentUser.firstName}`} {spanClass}></SidebarItem>
+        {#if $userData}
+          <SidebarItem label={`Hello, ${$userData.firstName}`} {spanClass}></SidebarItem>
         {:else}
           <div></div>
         {/if}
@@ -455,7 +409,7 @@
         {/if}
       </SidebarGroup>
       <SidebarGroup border>
-        {#if currentUser}
+        {#if $userData}
           <SidebarItem href={`/main/profile/myProfile`} label="My Profile" {spanClass}>
             <svelte:fragment slot="icon">
               <UserOutline />
@@ -488,8 +442,8 @@
 </Drawer>
 
 <div class="ml-64 pl-4 pt-4 pr-4 pb-4 grid justify-items-center bg-white">
-  {#if currentUser}
-    <slot scoped={{ userID: currentUser._id }} />
+  {#if $userData}
+    <slot scoped={{ userID: $userData._id }} />
   {:else}
     <slot />
   {/if}
