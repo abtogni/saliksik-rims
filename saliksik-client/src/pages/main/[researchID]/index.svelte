@@ -14,11 +14,11 @@
 
 
   onMount(async () => {
-  try {
-    await updateResearch(getResearchInfo(researchID));
-  } catch (error) {
-    console.error("Network error:", error);
-  }
+    try {
+      await updateResearch(getResearchInfo(researchID));
+    } catch (error) {
+      console.error("Network error:", error);
+    }
   });
 
 
@@ -76,6 +76,13 @@
 </script>
 
 <main class="p-4">
+
+  {JSON.stringify($selectedResearchInfo)}
+
+  {#if $selectedResearchInfo}
+     <!-- content here -->
+  {/if}
+
   <Tabs style="none" activeClasses="p-2 text-blue-700 border-b-2 border-b-blue-700 rounded-t-lg" inactiveClasses="p-2 text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-gray-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300" contentClass="bg-white p-0 mt-2 rounded-md border-0 shadow-none" class="">
     <TabItem open title="">
       <div slot="title" class="flex items-center gap-2"><FileLinesOutline size="sm" />Concept Note</div>
