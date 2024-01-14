@@ -59,7 +59,7 @@ let createPersonnelAccount = false;
 
       <!--modal for create personnel account-->
       <Modal title="Create Personnel Account" bind:open={createPersonnelAccount} size="xs" autoclose={false} outsideclose class="rounded-md w-full">
-        <form class="grid grid-flow-row gap-4">
+        <form class="grid grid-flow-row gap-4" on:submit={submit}>
           <!---->
           <div class="flex flex-wrap justify-start items-center gap-2">
             <P for="userType" weight="bold" size="base" class="text-gray-700">User Type</P>
