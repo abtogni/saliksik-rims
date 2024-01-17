@@ -4,7 +4,7 @@
   import { goto } from "@roxi/routify";
   import moment from "moment";
   import { DateInput } from "date-picker-svelte";
-  import { selectedResearchInfo, updateResearch } from '../../../components/store'
+  import { selectedResearchInfo,  } from '../../../components/store'
   import { getResearchInfo } from "../../../components/fetch";
   import { onMount } from "svelte";
 
@@ -15,7 +15,7 @@
 
   onMount(async () => {
     try {
-      await updateResearch(getResearchInfo(researchID));
+      await getResearchInfo(researchID);
     } catch (error) {
       console.error("Network error:", error);
     }
