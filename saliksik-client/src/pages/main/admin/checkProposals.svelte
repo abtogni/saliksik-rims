@@ -609,7 +609,6 @@
                     <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
                     <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
                   </div>
-                  <P size="base" weight="bold" class="text-gray-500">·</P>
                   <div class="flex justify-start items-center gap-2">
                     <Badge border large class="flex items-center gap-2">
                       <Indicator color="orange" size="md" class="" />Waiting for Reply

@@ -45,8 +45,8 @@
       <span class="sr-only">Open sidebar</span>
       <Menu />
     </button>
-    <Sidebar class="text-clip fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 flex items-stretch min-h-screen">
-      <SidebarWrapper class="rounded-none w-64">
+    <Sidebar class="text-clip fixed top-0 left-0 z-40 w-64 shadow-lg border bg-white h-screen transition-transform -translate-x-full sm:translate-x-0 flex items-stretch min-h-screen">
+      <SidebarWrapper class="rounded-none w-64 ">
         <SidebarBrand {site} />
         <!---->
         <SidebarGroup class="">
@@ -55,43 +55,54 @@
           {:else}
             <div></div>
           {/if}
-          <SidebarItem class="text-center align-middle font-medium rounded-md bg-blue-700 hover:bg-blue-800 text-white" label="Create New Research" on:click={() => (createNewResearch = true)}>
-            <svelte:fragment slot="icon"><FolderPlusOutline /></svelte:fragment>
+          <SidebarItem class="text-center font-medium text-base rounded-md bg-blue-700 hover:bg-blue-800 text-white" label="Create New Research" on:click={() => (createNewResearch = true)}>
+            <svelte:fragment slot="icon"><FolderPlusOutline color="white"size="sm" /></svelte:fragment>
           </SidebarItem>
-
-          <SidebarItem label="All Researches" on:click={() => (allResearches = false)} class=""><svelte:fragment slot="icon"><FolderOutline /></svelte:fragment></SidebarItem>
-          <SidebarItem label="Browse Researches" href="/main/personnel/browseResearches"><svelte:fragment slot="icon"><SearchOutline /></svelte:fragment></SidebarItem>
-          <SidebarItem label="Bookmarks" href="/main/personnel/bookmarks" class=""><svelte:fragment slot="icon"><BookmarkOutline /></svelte:fragment></SidebarItem>
-          <SidebarItem label="Notifications" on:click={() => (notification = false)} href=""><svelte:fragment slot="icon"><BellOutline /></svelte:fragment></SidebarItem>
-          <SidebarItem label="Library" href=""><svelte:fragment slot="icon"><LandmarkOutline /></svelte:fragment></SidebarItem>
-          <SidebarDropdownWrapper label="Admin Tools" isOpen>
-            <svelte:fragment slot="icon"><UserSettingsOutline color="black" /></svelte:fragment>
-            <SidebarDropdownItem label="Admin Dashboard" href="/main/admin/checkProposals" />
-            <SidebarDropdownItem label="Sample" href="/main/admin/presentations" />
-            <SidebarDropdownItem label="Create User Accounts" href="/main/admin/createAccount" />
+          <SidebarItem label="All Researches" href="/main" class="font-normal text-base rounded-md hover:bg-blue-100">
+            <svelte:fragment slot="icon"><FolderOutline color="blue"size="sm" /></svelte:fragment>
+          </SidebarItem>
+          <SidebarItem label="Browse Researches" href="/main/personnel/browseResearches" class="font-normal text-base rounded-md hover:bg-blue-100">
+            <svelte:fragment slot="icon"><SearchOutline color="blue"size="sm" /></svelte:fragment>
+          </SidebarItem>
+          <SidebarItem label="Bookmarks" href="/main/personnel/bookmarks" class="font-normal text-base rounded-md hover:bg-blue-100">
+            <svelte:fragment slot="icon"><BookmarkOutline color="blue"size="sm" /></svelte:fragment>
+          </SidebarItem>
+          <SidebarItem label="Notifications" on:click={() => (notification = false)} href="" class="font-normal text-base rounded-md hover:bg-blue-100">
+            <svelte:fragment slot="icon"><BellOutline color="blue" size="sm" /></svelte:fragment>
+          </SidebarItem>
+          <SidebarItem label="Library" href="" class="font-normal text-base rounded-md hover:bg-blue-100">
+            <svelte:fragment slot="icon"><LandmarkOutline color="blue" size="sm" /></svelte:fragment>
+          </SidebarItem>
+          <SidebarDropdownWrapper label="Admin Tools" isOpen class="font-normal text-base rounded-md hover:bg-blue-100">
+            <svelte:fragment slot="icon"><UserSettingsOutline color="blue" /></svelte:fragment>
+            <SidebarDropdownItem label="Admin Dashboard" href="/main/admin/checkProposals" class="font-normal text-base rounded-md hover:bg-blue-100"/>
+            <SidebarDropdownItem label="Sample" href="/main/admin/presentations" class="font-normal text-base rounded-md hover:bg-blue-100"/>
+            <SidebarDropdownItem label="Create User Accounts" href="/main/admin/createAccount" class="font-normal text-base rounded-md hover:bg-blue-100"/>
           </SidebarDropdownWrapper>
         </SidebarGroup>
         <!---->
         <SidebarGroup border class="truncate ...">
           {#if $researches}
-            <SidebarDropdownWrapper label="Starred" isOpen>
-              <svelte:fragment slot="icon"><StarSolid color="orange" /></svelte:fragment>
+            <SidebarDropdownWrapper label="Starred" isOpen class="font-normal text-base rounded-md hover:bg-blue-100">
+              <svelte:fragment slot="icon"><StarSolid color="blue" size="sm"/></svelte:fragment>
               {#each $researches as r}
-                <SidebarDropdownItem class="" label={r.researchTitle} href={`/main/${r._id}`}></SidebarDropdownItem>
+                <SidebarDropdownItem label={r.researchTitle} href={`/main/${r._id}`} class="font-normal text-base rounded-md hover:bg-blue-100"></SidebarDropdownItem>
               {/each}
             </SidebarDropdownWrapper>
           {:else}
-            <SidebarItem href="/main/createResearch" label="Create Research"></SidebarItem>
+            <SidebarItem href="/main/createResearch" label="Create Research" class="font-normal text-base rounded-md hover:bg-blue-100"></SidebarItem>
           {/if}
         </SidebarGroup>
         <SidebarGroup border>
           {#if $userData}
-            <SidebarItem href={`/main/profile/myProfile`} label="My Profile" {spanClass}>
+            <SidebarItem href={`/main/profile/myProfile`} label="My Profile" {spanClass} class="font-normal text-base rounded-md hover:bg-blue-100">
               <svelte:fragment slot="icon">
-                <UserOutline />
+                <UserOutline color="blue" size="sm"/>
               </svelte:fragment>
             </SidebarItem>
-            <SidebarItem href="/logout" label="Logout" {spanClass}><svelte:fragment slot="icon"><ArrowRightFromBracketSolid color="" /></svelte:fragment></SidebarItem>
+            <SidebarItem href="/logout" label="Logout" {spanClass} class="font-normal text-base rounded-md hover:bg-blue-100">
+              <svelte:fragment slot="icon"><ArrowRightFromBracketSolid color="blue" size="sm"/></svelte:fragment>
+            </SidebarItem>
           {:else}
             <div></div>
           {/if}

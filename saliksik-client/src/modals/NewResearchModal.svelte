@@ -59,7 +59,6 @@
 </script>
 
 <form class="flex flex-col gap-2" on:submit={submit}>
-  <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">Create New Research</h3>
   <div class="gap-2">
     <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
     <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />

@@ -40,24 +40,6 @@
 
   //modal for submit existing research
   let submitExistingResearch = false;
-  let list = [
-    {
-      name: "Nora Elizabeth F. Maniquiz",
-      college: "College Of Computer Studies",
-      href: "/",
-      class: "hover:bg-orange-100",
-    },
-    {
-      name: "Kristine Idda P. Del Rosario",
-      college: "College Of Nursing",
-      class: "hover:bg-orange-100",
-    },
-    {
-      name: "Engr. Christine C. Bautista",
-      college: "College Of Engineering And Architecture",
-      class: "hover:bg-orange-100",
-    },
-  ];
 
   //date picker
   let date = new Date();
@@ -79,7 +61,7 @@
       <div slot="title" class="flex items-center gap-2"><FileLinesOutline size="sm" />Concept Note</div>
 
       <div class="flex justify-center gap-2 bg-gray-50">
-        <div class="grid grid-flow-row col-start-2 col-span-3 items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
+        <div class="grid grid-flow-row items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
           <!--helper card-->
           <Alert dismissable color="blue" class="border-l-8">
             <div class="flex items-center gap-2">

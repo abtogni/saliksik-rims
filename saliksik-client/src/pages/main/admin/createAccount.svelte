@@ -60,18 +60,22 @@
       </Alert>
 
       <!---->
-      <div class="flex justify-between items-center w-full">
-        <div class="flex items-center gap-2">
-          <UserOutline size="md" class="text-blue-700" />
-          <P weight="bold" size="xl" class="text-gray-900">{$userList.length} <span class="text-gray-500">User Accounts</span></P>
+      <div class="flex flex-wrap justify-start items-center w-full">
+        <div class="flex justify-between items-center w-full">
+          <div class="flex items-center gap-2">
+            <UserOutline size="md" class="text-blue-700" />
+            <P weight="bold" size="xl" class="text-gray-900">{$userList.length} <span class="text-gray-500">User Accounts</span></P>
+          </div>
+  
+          <div class="flex items-center gap-2">
+            <Button on:click={() => (createPersonnelAccount = true)} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><UserAddOutline size="sm" />Create Personnel Account</Button>
+          </div>
+          
         </div>
-
-        <div class="flex items-center gap-2">
-          <Button on:click={() => (createPersonnelAccount = true)} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><UserAddOutline size="sm" />Create Personnel Account</Button>
-        </div>
+        <P size="sm" weight="normal" class="text-gray-500">Create and organize user accounts.</P>
+        <!--modal for create personnel account-->
       </div>
-
-      <!--modal for create personnel account-->
+      
       <Modal title="Create Personnel Account" bind:open={createPersonnelAccount} size="xs" autoclose={false} outsideclose class="rounded-md w-full">
         <form class="grid grid-flow-row gap-4" on:submit={submit}>
           <!---->
