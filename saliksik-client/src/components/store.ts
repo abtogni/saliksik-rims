@@ -85,3 +85,29 @@ selectedResearchInfo.subscribe((value) => {
 export const updateResearch = (selectedResearch: any) => {
   selectedResearchInfo.update((oldResearch) => ({ ...oldResearch, ...selectedResearch}));
 };
+
+
+//User List
+
+const storedUsers = localStorage.getItem('userList');
+const storedUserList = storedUsers ? JSON.parse(storedUsers) : [];
+export const userList = writable<typeof UserModel[]>(storedUserList);
+
+userList.subscribe((value) => {
+  localStorage.setItem('userList', JSON.stringify(value));
+});
+
+export const updateUserList = (UserList: any[]) => {
+  userList.set(UserList.map((user) => ({
+    _id: user._id,
+    email: user.email,
+    userType: user.userType,
+    firstName: user.firstName,
+    middleName: user.middleName,
+    lastName: user.lastName,
+    suffix: user.suffix,
+    avatar: user.firstName.charAt(0) + user.lastName.charAt(0),
+    researchCount: user.researchCount,
+    createdAt: user.createdAt
+  })));
+};

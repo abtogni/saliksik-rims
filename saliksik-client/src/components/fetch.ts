@@ -1,9 +1,18 @@
-import { updateResearchList, updateUser, updateResearch } from "./store";
+import { updateResearchList, updateUser, updateResearch, updateUserList } from "./store";
 
 export async function fetchUser() {
   try {
     const response = await fetch("/api/checkUser");
     updateUser(await response.json());
+  } catch (e) {
+    console.error("Error fetching user:", e);
+  }
+}
+
+export async function getUserList() {
+  try {
+    const response = await fetch("/api/user/getUsers");
+    updateUserList(await response.json());
   } catch (e) {
     console.error("Error fetching user:", e);
   }

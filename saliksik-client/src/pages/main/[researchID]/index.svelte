@@ -15,7 +15,7 @@
 
   onMount(async () => {
     try {
-      await updateResearch(getResearchInfo(researchID));
+      await getResearchInfo(researchID);
     } catch (error) {
       console.error("Network error:", error);
     }

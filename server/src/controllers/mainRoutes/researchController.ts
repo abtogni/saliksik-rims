@@ -31,8 +31,6 @@ export const getResearches = async (req: Request, res: Response) => {
   }
 };
 
-
-
 export const getResearchData = async (req: Request, res: Response) => {
   try {
     const researchID: any = req.query.researchID;
@@ -52,7 +50,6 @@ export const getResearchData = async (req: Request, res: Response) => {
     errorResponse(res, 500, err.message);
   }
 };
-
 
 export const createResearch = async (req: Request, res: Response) => {
   const { researchTitle, researchLeaders } = req.body;

@@ -1,7 +1,20 @@
 <script lang="ts">
-  import { Alert, Button, Dropdown, DropdownItem, Input, Modal, P, Tooltip, Tabs, TabItem, Indicator, Popover, Card, Hr, Badge, Helper, Checkbox, Search, Avatar, Select } from "flowbite-svelte";
-  import { BookSolid, BookmarkOutline, BookmarkSolid, CalendarEditOutline, CheckOutline, ClipboardOutline, CloseOutline, DotsHorizontalOutline, DownloadOutline, EditOutline, EyeOutline, FilePdfOutline, FilterOutline, LabelOutline, LabelSolid, PenOutline, QuestionCircleOutline, QuoteOutline, TrashBinOutline, CalendarPlusSolid, InfoCircleOutline, FileCirclePlusOutline, MapLocationOutline, UserGroupSolid, UsersGroupOutline, CalendarEditSolid, CalendarMonthOutline, UserAddOutline, MessageCaptionOutline, MessageCaptionSolid, MinusOutline, FileLinesOutline, UserOutline, UserSettingsOutline } from "flowbite-svelte-icons";
-  import { DateInput } from "date-picker-svelte";
+   import { Alert, Button, Dropdown, DropdownItem, Input, Modal, P, Select } from "flowbite-svelte";
+  import { DotsHorizontalOutline, EyeOutline, QuestionCircleOutline, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
+  import { getUserList } from "../../../components/fetch";
+  import { userList } from "../../../components/store";
+    import { onMount } from "svelte";
+    import moment from "moment";
+
+
+    onMount(async () => {
+    try {
+      await getUserList();
+    } catch (error) {
+      console.error("Network error:", error);
+    }
+  });
+
 
   let json = {};
   let message: any;
@@ -50,7 +63,7 @@
       <div class="flex justify-between items-center w-full">
         <div class="flex items-center gap-2">
           <UserOutline size="md" class="text-blue-700" />
-          <P weight="bold" size="xl" class="text-gray-900">00 <span class="text-gray-500">User Accounts</span></P>
+          <P weight="bold" size="xl" class="text-gray-900">{$userList.length} <span class="text-gray-500">User Accounts</span></P>
         </div>
 
         <div class="flex items-center gap-2">
@@ -116,50 +129,34 @@
       <!--personnel accounts-->
       <div class="grid grid-flow-row gap-2 shadow-lg border rounded-md p-3 bg-white">
         <div class="grid grid-flow-row items-center gap-0">
-          <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-orange-100">
-            <div class="flex justify-start items-center gap-2">
-              <UserOutline size="sm" class="text-blue-700" />
-              <P size="base" weight="semibold" class="">Agnes T. Reyes</P>
-              <P size="base" weight="bold" class="text-gray-500">·</P>
-              <P weight="normal" size="sm" class="line-clamp-1 text-gray-500 w-96">Created in <span class="font-medium text-gray-500">January 21, 2023</span></P>
-            </div>
-            <div class="flex justify-start items-center gap-0">
-              <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><EyeOutline size="sm" /></Button>
-              <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
-              <Dropdown>
-                <DropdownItem>
-                  <div class="flex justify-start items-center gap-2">
-                    <TrashBinOutline size="sm" class="text-blue-700" />Delete Account
-                  </div>
-                </DropdownItem>
-              </Dropdown>
-            </div>
-          </div>
+           {#each $userList as user}
+              <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-orange-100">
+                <div class="flex justify-start items-center gap-2">
+                  <UserOutline size="sm" class="text-blue-700" />
+                  <P size="base" weight="semibold" class="">{user.firstName} {user.lastName}</P>
+                  <P size="base" weight="bold" class="text-gray-500">·</P>
+                  <P weight="normal" size="sm" class="line-clamp-1 text-gray-500 w-96">Created in <span class="font-medium text-gray-500">{moment(user.createdAt).format('LL')}</span></P>
+                </div>
+                <div class="flex justify-start items-center gap-0">
+                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><EyeOutline size="sm" /></Button>
+                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
+                  <Dropdown>
+                    <DropdownItem>
+                      <div class="flex justify-start items-center gap-2">
+                        <TrashBinOutline size="sm" class="text-blue-700" />Delete Account
+                      </div>
+                    </DropdownItem>
+                  </Dropdown>
+                </div>
+              </div>
+           {/each}
 
-          <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-orange-100">
-            <div class="flex justify-start items-center gap-2">
-              <UserOutline size="sm" class="text-blue-700" />
-              <P size="base" weight="semibold" class="">Agnes T. Reyes</P>
-              <P size="base" weight="bold" class="text-gray-500">·</P>
-              <P weight="normal" size="sm" class="line-clamp-1 text-gray-500 w-96">Created in <span class="font-medium text-gray-500">January 21, 2023</span></P>
-            </div>
-            <div class="flex justify-start items-center gap-0">
-              <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><EyeOutline size="sm" /></Button>
-              <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
-              <Dropdown>
-                <DropdownItem>
-                  <div class="flex justify-start items-center gap-2">
-                    <TrashBinOutline size="sm" class="text-blue-700" />Delete Account
-                  </div>
-                </DropdownItem>
-              </Dropdown>
-            </div>
-          </div>
+          
+
         </div>
       </div>
     </div>
   </div>
-
   <div class="h-96"></div>
   <div class="h-96"></div>
 </main>
