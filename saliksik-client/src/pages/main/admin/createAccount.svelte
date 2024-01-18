@@ -1,40 +1,41 @@
 <script lang="ts">
-   import { Alert, Button, Dropdown, DropdownItem, Input, Modal, P, Tooltip, Tabs, TabItem, Indicator, Popover, Card, Hr, Badge, Helper, Checkbox, Search, Avatar, Select } from "flowbite-svelte";
+  import { Alert, Button, Dropdown, DropdownItem, Input, Modal, P, Tooltip, Tabs, TabItem, Indicator, Popover, Card, Hr, Badge, Helper, Checkbox, Search, Avatar, Select } from "flowbite-svelte";
   import { BookSolid, BookmarkOutline, BookmarkSolid, CalendarEditOutline, CheckOutline, ClipboardOutline, CloseOutline, DotsHorizontalOutline, DownloadOutline, EditOutline, EyeOutline, FilePdfOutline, FilterOutline, LabelOutline, LabelSolid, PenOutline, QuestionCircleOutline, QuoteOutline, TrashBinOutline, CalendarPlusSolid, InfoCircleOutline, FileCirclePlusOutline, MapLocationOutline, UserGroupSolid, UsersGroupOutline, CalendarEditSolid, CalendarMonthOutline, UserAddOutline, MessageCaptionOutline, MessageCaptionSolid, MinusOutline, FileLinesOutline, UserOutline, UserSettingsOutline } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
 
   let json = {};
   let message: any;
   function submit(e: Event) {
-  e.preventDefault();
-  const formData = new FormData(e.target as HTMLFormElement);
-  json = Object.fromEntries(formData.entries());
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    json = Object.fromEntries(formData.entries());
 
     // Make an HTTP POST request to the API
-    fetch('/api/user/createAccount', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(json),
+    fetch("/api/user/createAccount", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(json),
     })
-        .then((response) => {
-            if (response.ok) {
-                message = 'Created an account!';
-            } else {
-                // Handle errors or authentication failures
-                console.error('Registration failed');
-            }
-        })
-        .catch((error) => {
-            console.error('Network error:', error);
-        });
-}
+      .then((response) => {
+        if (response.ok) {
+          message = "Created an account!";
+        } else {
+          // Handle errors or authentication failures
+          console.error("Registration failed");
+        }
+      })
+      .catch((error) => {
+        console.error("Network error:", error);
+      });
+  }
 
-//modal for create personnel account
-let createPersonnelAccount = false;
-  </script>
-  
+  //modal for create personnel account
+  let createPersonnelAccount = false;
+</script>
+
+<main class="p-4">
   <div class="flex justify-center gap-2">
     <div class="grid grid-flow-row col-start-2 col-span-3 items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
       <Alert dismissable color="blue" class="border-l-8 w-full  mb-2">
@@ -108,12 +109,12 @@ let createPersonnelAccount = false;
         </form>
       </Modal>
 
-      <div class="flex justify-center items-center gap-2 shadow-lg border rounded-md p-3 ">
-        <P size="lg" weight="medium" class="text-gray-500">No accounts</P>
+      <div class="grid grid-flow-row justify-center w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+        <P size="sm" weight="normal" class="text-gray-500">No existing account...<span></span></P>
       </div>
 
       <!--personnel accounts-->
-      <div class="grid grid-flow-row gap-2 shadow-lg border rounded-md p-3">
+      <div class="grid grid-flow-row gap-2 shadow-lg border rounded-md p-3 bg-white">
         <div class="grid grid-flow-row items-center gap-0">
           <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-orange-100">
             <div class="flex justify-start items-center gap-2">
@@ -154,9 +155,11 @@ let createPersonnelAccount = false;
               </Dropdown>
             </div>
           </div>
-
         </div>
       </div>
     </div>
   </div>
-  
+
+  <div class="h-96"></div>
+  <div class="h-96"></div>
+</main>

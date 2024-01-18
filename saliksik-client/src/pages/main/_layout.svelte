@@ -1,12 +1,12 @@
 <script lang="ts">
   import NewResearchModal from "../../modals/NewResearchModal.svelte";
   import UNCLogo from "/login.png";
-  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Modal} from "flowbite-svelte";
+  import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Modal } from "flowbite-svelte";
   import Menu from "../../assets/menu.svelte";
   import { goto } from "@roxi/routify";
   import { onMount } from "svelte";
   import { userData, researches, isAuthenticated } from "../../components/store";
-  import { UserOutline, CirclePlusOutline, FolderOutline, StarSolid, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, UserSettingsOutline } from "flowbite-svelte-icons";
+  import { UserOutline, CirclePlusOutline, FolderOutline, StarSolid, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, UserSettingsOutline, FolderPlusOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import { fetchResearches, fetchUser } from "../../components/fetch";
 
@@ -55,11 +55,9 @@
           {:else}
             <div></div>
           {/if}
-          <SidebarItem class="text-center align-middle font-medium bg-blue-600 hover:bg-orange-600 text-white" label="Create New Research" on:click={() => (createNewResearch = true)}>
-            <svelte:fragment slot="icon"><CirclePlusOutline /></svelte:fragment>
+          <SidebarItem class="text-center align-middle font-medium rounded-md bg-blue-700 hover:bg-blue-800 text-white" label="Create New Research" on:click={() => (createNewResearch = true)}>
+            <svelte:fragment slot="icon"><FolderPlusOutline /></svelte:fragment>
           </SidebarItem>
-
-        
 
           <SidebarItem label="All Researches" on:click={() => (allResearches = false)} class=""><svelte:fragment slot="icon"><FolderOutline /></svelte:fragment></SidebarItem>
           <SidebarItem label="Browse Researches" href="/main/personnel/browseResearches"><svelte:fragment slot="icon"><SearchOutline /></svelte:fragment></SidebarItem>
@@ -69,7 +67,7 @@
           <SidebarDropdownWrapper label="Admin Tools" isOpen>
             <svelte:fragment slot="icon"><UserSettingsOutline color="black" /></svelte:fragment>
             <SidebarDropdownItem label="Admin Dashboard" href="/main/admin/checkProposals" />
-            <SidebarDropdownItem label="Presentations" href="/main/admin/presentations" />
+            <SidebarDropdownItem label="Sample" href="/main/admin/presentations" />
             <SidebarDropdownItem label="Create User Accounts" href="/main/admin/createAccount" />
           </SidebarDropdownWrapper>
         </SidebarGroup>
@@ -103,7 +101,6 @@
   </div>
 
   <div class="w-screen sm:ml-64">
-    
     <div class="w-full">
       {#if $userData}
         <slot scoped={{ userID: $userData._id }} />
@@ -118,8 +115,6 @@
 <Modal title="" bind:open={createNewResearch} size="xs" autoclose={false} outsideclose class="w-full">
   <NewResearchModal />
 </Modal>
-
-
 
 <!--
 <!--navbar--

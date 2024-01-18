@@ -707,9 +707,7 @@
                       <TableBodyRow on:click={() => toggleRow(i)} class="hover:bg-orange-50">
                         <TableBodyCell class="">
                           <!--not starting, processing or released-->
-                          <div class="flex items-center gap-2 cursor-pointer text-gray-500">
-                            <Indicator color="dark" size="md" class="" />Not Starting
-                          </div>
+                          <div class="flex items-center gap-2 cursor-pointer text-gray-500"><Indicator color="dark" size="md" class="" />Not Starting</div>
 
                           <Dropdown>
                             <DropdownItem class="flex items-center gap-2 "><Indicator color="dark" size="md" class="text-gray-500" />Not Starting</DropdownItem>

@@ -1,7 +1,9 @@
 <script lang="ts">
-  import { Button, Helper, Label, MultiSelect, P, Textarea } from "flowbite-svelte";
+  import { Button, Helper, Label, MultiSelect, P, Textarea, Modal } from "flowbite-svelte";
+  import { FolderPlusOutline } from "flowbite-svelte-icons";
   import { onMount } from "svelte";
-  let json = {}, researchLeaders: any[] = [];
+  let json = {},
+    researchLeaders: any[] = [];
   let users: any, userList: any;
 
   async function fetchUserList() {
@@ -18,11 +20,11 @@
   });
 
   let countries = [
-    { value: 'us', name: 'United States' },
-    { value: 'ca', name: 'Canada' },
-    { value: 'fr', name: 'France' },
-    { value: 'jp', name: 'Japan' },
-    { value: 'en', name: 'England' }
+    { value: "us", name: "United States" },
+    { value: "ca", name: "Canada" },
+    { value: "fr", name: "France" },
+    { value: "jp", name: "Japan" },
+    { value: "en", name: "England" },
   ];
 
   function submit(e: Event) {
@@ -69,5 +71,5 @@
     <Textarea rows="5" id="researchTitle" name="researchTitle" required />
   </div>
 
-  <Button on:click={() => alert('Handle "success"')} type="submit" class="w-full1">Create New Research</Button>
+  <Button on:click={() => alert('Handle "success"')} type="submit" color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FolderPlusOutline size="sm" /> Create New Research</Button>
 </form>

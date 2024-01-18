@@ -11,10 +11,10 @@
 
 </script>
 
-<div class="w-full bg-white ">
-    <nav class="bg-white flex flex-wrap justify-between z-50 gap-2 pl-4 pt-2 pr-4 pb-2 border-b">
-      <div class="flex flex-wrap items-center w-10/12 gap-2">
-        <FolderOutline class="mr-2" />
+<div class="flex w-full bg-white ">
+    <nav class="bg-white flex justify-between z-50 gap-2 pl-4 pt-2 pr-4 pb-2 border-b">
+      <div class="flex justify-start whitespace-nowrap items-center gap-2">
+        <FolderOutline class="" />
         {#if $selectedResearchInfo}
             <P weight="semibold" class="line-clamp-1" size="base">{$selectedResearchInfo.researchTitle}</P>
         {/if}
@@ -29,15 +29,15 @@
 
       </div>
 
-      <div class="flex items-center gap-0 ">
+      <div class="flex items-center gap-2 ">
         <div class="flex items-center gap-0">
-          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar>
+          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
           <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar>
+          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
           <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar>
+          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
           <Tooltip arrow={false}>Danny Casimero</Tooltip>
-          <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar>
+          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
           <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
         </div>
         <div class="flex items-center gap-0">
