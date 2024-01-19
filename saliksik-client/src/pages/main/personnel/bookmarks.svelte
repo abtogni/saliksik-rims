@@ -17,7 +17,7 @@
         <p class="mt-2 text-sm">Insert helper text</p>
       </Alert>
       
-      <div class="flex justify-between items-center w-full">
+      <div class="flex justify-start items-center w-full">
         <P weight="bold" size="xl">All</P>
         <div class="flex items-center gap-2">
           <!--filter button-->

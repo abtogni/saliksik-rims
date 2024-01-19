@@ -64,7 +64,7 @@
         <div class="flex justify-between items-center w-full">
           <div class="flex items-center gap-2">
             <UserOutline size="md" class="text-blue-700" />
-            <P weight="bold" size="xl" class="text-gray-900">{$userList.length} <span class="text-gray-500">User Accounts</span></P>
+            <P size="xl" weight="bold" class="text-gray-900">{$userList.length} <span class="text-gray-500">User Accounts</span></P>
           </div>
   
           <div class="flex items-center gap-2">

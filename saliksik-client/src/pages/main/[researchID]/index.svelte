@@ -66,15 +66,15 @@
           <Alert dismissable color="blue" class="border-l-8">
             <div class="flex items-center gap-2">
               <QuestionCircleOutline slot="icon" size="sm" />
-              <span class="text-lg font-medium">Submission and Approval of Concept Note</span>
+              <span class="text-lg font-medium">Submission and Concept Note Approval</span>
             </div>
-            <p class="mt-2 text-sm">In this section, you are required to submit a concept note of your research. Click the create concept note button and fill out all necessary fields. You can have multiple draft and only one submission. Once submitted, a notice to proceed will be sent on your notification.</p>
-            <p class="mt-2 text-sm">Or you can submit an already existing/published (owned) research. An incentive will be given based on the following:</p>
+            <p class="mt-2 text-sm">You are required to submit a concept note of your research. Click the create concept note button and fill out all the fields. You can either save as draft for latter submission or submit for approval. Once submitted, a notice to proceed will be sent on your notification.</p>
+            <p class="mt-2 text-sm">On the other hand, you can submit an already existing/published (owned) research. An incentive will be given based on the following:</p>
           </Alert>
 
           <!--concept note overview header-->
           <div class="flex justify-between items-center gap-2 w-full">
-            <P size="xl" weight="semibold">Concept Note Overview</P>
+            <P size="xl" weight="bold">Concept Note Overview</P>
             <div class="flex items-center gap-2">
               <Button href={`/main/${researchID}/createConceptNote`} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileCirclePlusOutline size="sm" /> Create Concept Note</Button>
               <Button on:click={() => (submitExistingResearch = true)} outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileExportOutline size="sm" /> Submit Existing Research</Button>
