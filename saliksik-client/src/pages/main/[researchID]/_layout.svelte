@@ -10,7 +10,7 @@
 
 <nav class="flex justify-between z-50 gap-2 pl-4 pt-2 pr-4 pb-2 border-b bg-white">
   <div class="flex justify-start whitespace-nowrap items-center gap-2">
-    <FolderOutline class="" />
+    <FolderOutline color="blue" class="" />
     {#if $selectedResearchInfo}
       <P weight="semibold" class="line-clamp-1" size="base">{$selectedResearchInfo.researchTitle}</P>
     {/if}

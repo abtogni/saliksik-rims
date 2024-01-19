@@ -60,14 +60,14 @@
 
 <form class="flex flex-col gap-2" on:submit={submit}>
   <div class="gap-2">
-    <P weight="medium" size="base" for="researchLeaders">Research Leader</P>
-    <MultiSelect size="sm" items={userList} bind:value={researchLeaders} required />
+    <P weight="semibold" size="base" for="researchLeaders">Research Leader</P>
+    <MultiSelect items={userList} bind:value={researchLeaders} required size="sm" class=""/>
     <Helper class="pt-2 text-orange-500"></Helper>
   </div>
 
   <div class="gap-2">
-    <Label class="font-medium text-base " for="researchTitle"><span>Research Title</span></Label>
-    <Textarea rows="5" id="researchTitle" name="researchTitle" required />
+    <Label class="font-semibold text-base " for="researchTitle"><span>Research Title</span></Label>
+    <Textarea color="blue" rows="5" id="researchTitle" name="researchTitle" required class=""/>
   </div>
 
   <Button on:click={() => alert('Handle "success"')} type="submit" color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FolderPlusOutline size="sm" /> Create New Research</Button>

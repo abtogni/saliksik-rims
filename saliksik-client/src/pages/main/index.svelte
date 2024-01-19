@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { A, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Indicator, Modal, P, Search, Tooltip } from "flowbite-svelte";
-  import { ArchiveOutline, DotsHorizontalOutline, EyeOutline, FileCirclePlusOutline, FileExportOutline, FilePenOutline, FilterOutline, FolderOutline, FolderPlusOutline, MessageCaptionOutline, StarOutline, StarSolid, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
+  import { A, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Indicator, Modal, P, Search, Tooltip } from "flowbite-svelte";
+  import { ArchiveOutline, DotsHorizontalOutline, EyeOutline, FileCirclePlusOutline, FileExportOutline, FilePenOutline, FilterOutline, FolderOutline, FolderPlusOutline, MessageCaptionOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
   import NewResearchModal from "../../modals/NewResearchModal.svelte";
 
   //modal for create new research
@@ -10,6 +10,15 @@
 <main class="p-4">
   <div class="flex justify-center gap-2 bg-gray-50">
     <div class="grid grid-flow-row items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
+      <!--helper card-->
+      <Alert dismissable color="blue" class="border-l-8">
+        <div class="flex items-center gap-2">
+          <QuestionCircleOutline slot="icon" size="sm" />
+          <span class="text-lg font-medium">Welcome to Saliksik!</span>
+        </div>
+        <p class="mt-2 text-sm">Hi! I'm Deux the Prompt. Is it your first time here? If yes, don't worry. I'm here to be your guide on your research journey.</p>
+        <p class="mt-2 text-sm">To familiarize yourself. In every page of Saliksik, you will be welcomed by a prompt similar to this. The prompt will give you an idea on what is the page, what to do and how to effectively utilise the tools inside. By clicking the close button on the right, the prompt will never show up again in the future. But don't fret, on the sidebar on the left named "Help." You can read the previous prompts as well as view guides and others.</p>
+      </Alert>
       <div class="flex flex-wrap justify-start items-center gap-0 w-full">
         <div class="flex justify-between items-center gap-2 w-full">
           <div class="flex items-center gap-2">
@@ -34,41 +43,41 @@
           <div class="flex items-center gap-2">
             <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md"><Indicator class="text-white" />Status</Button>
             <Dropdown>
-              <DropdownItem class=" rounded-md hover:bg-blue-100">
+              <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">All</Checkbox>
               </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-100">
+              <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">No Status</Checkbox>
               </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-100">
+              <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Concept Note Approval</Checkbox>
               </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-100">
+              <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Initial Presentation</Checkbox>
               </DropdownItem>
-              <DropdownItem class="rounded-md hover:bg-blue-100">
+              <DropdownItem class="rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Final Presentation</Checkbox>
               </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-100">
+              <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Incentive Processing</Checkbox>
               </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-100">
+              <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Incentive Released</Checkbox>
               </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-100">
+              <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Published</Checkbox>
               </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-100">
+              <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Rejected</Checkbox>
               </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-100">
+              <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Archive</Checkbox>
               </DropdownItem>
             </Dropdown>
           </div>
         </div>
 
-        <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-blue-100">
+        <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-blue-50">
           <div class="flex justify-between items-center gap-2 w-full">
             <div class="flex justify-start items-center gap-2">
               <div class="flex items-center gap-0">
@@ -92,9 +101,6 @@
                 <Badge border large color="blue" class="flex items-center gap-2">
                   <Indicator color="blue" size="md" class="" />Concept Note Approval
                 </Badge>
-                <Badge border large color="red" class="flex items-center gap-2">
-                  <Indicator color="red" size="md" class="" />Initial Presentation
-                </Badge>
               </div>
               <div class="flex justify-start items-center gap-2">
                 <P size="base" weight="bold" class="text-gray-500">·</P>
@@ -111,17 +117,17 @@
             </Tooltip>
             <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
             <Dropdown>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-100">
+              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
                 <StarOutline size="sm" class="text-blue-700" />Star
                 <StarSolid size="sm" class="text-blue-700" />Starred
               </DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-100">
+              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
                 <EyeOutline size="sm" class="text-blue-700" />View Research
               </DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-100">
+              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
                 <ArchiveOutline size="sm" class="text-blue-700" />Archive Research
               </DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-100">
+              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
                 <TrashBinOutline size="sm" class="text-blue-700" />Delete Research
               </DropdownItem>
             </Dropdown>
@@ -129,7 +135,7 @@
           <P weight="semibold" size="sm" class="line-clamp-2"><A href="" class="text-black">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</A></P>
         </div>
 
-        <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-blue-100">
+        <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-blue-50">
           <div class="flex justify-between items-center gap-2 w-full">
             <div class="flex justify-start items-center gap-2">
               <div class="flex items-center gap-0">
@@ -153,9 +159,6 @@
                 <Badge border large color="blue" class="flex items-center gap-2">
                   <Indicator color="blue" size="md" class="" />Concept Note Approval
                 </Badge>
-                <Badge border large color="red" class="flex items-center gap-2">
-                  <Indicator color="red" size="md" class="" />Initial Presentation
-                </Badge>
               </div>
               <div class="flex justify-start items-center gap-2">
                 <P size="base" weight="bold" class="text-gray-500">·</P>
@@ -172,13 +175,13 @@
             </Tooltip>
             <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
             <Dropdown>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-100">
+              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
                 <EyeOutline size="sm" class="text-blue-700" />View Research
               </DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-100">
+              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
                 <ArchiveOutline size="sm" class="text-blue-700" />Archive Research
               </DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-100">
+              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
                 <TrashBinOutline size="sm" class="text-blue-700" />Delete Research
               </DropdownItem>
             </Dropdown>

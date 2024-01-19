@@ -61,18 +61,22 @@
           <SidebarItem label="All Researches" href="/main" class="font-normal text-base rounded-md hover:bg-blue-100">
             <svelte:fragment slot="icon"><FolderOutline color="blue"size="sm" /></svelte:fragment>
           </SidebarItem>
-          <SidebarItem label="Browse Researches" href="/main/personnel/browseResearches" class="font-normal text-base rounded-md hover:bg-blue-100">
+          <!--
+<SidebarItem label="Browse Researches" href="/main/personnel/browseResearches" class="font-normal text-base rounded-md hover:bg-blue-100">
             <svelte:fragment slot="icon"><SearchOutline color="blue"size="sm" /></svelte:fragment>
           </SidebarItem>
           <SidebarItem label="Bookmarks" href="/main/personnel/bookmarks" class="font-normal text-base rounded-md hover:bg-blue-100">
             <svelte:fragment slot="icon"><BookmarkOutline color="blue"size="sm" /></svelte:fragment>
           </SidebarItem>
-          <SidebarItem label="Notifications" on:click={() => (notification = false)} href="" class="font-normal text-base rounded-md hover:bg-blue-100">
-            <svelte:fragment slot="icon"><BellOutline color="blue" size="sm" /></svelte:fragment>
-          </SidebarItem>
-          <SidebarItem label="Library" href="" class="font-normal text-base rounded-md hover:bg-blue-100">
+<SidebarItem label="Library" href="" class="font-normal text-base rounded-md hover:bg-blue-100">
             <svelte:fragment slot="icon"><LandmarkOutline color="blue" size="sm" /></svelte:fragment>
           </SidebarItem>
+          -->
+          
+          <SidebarItem label="Notifications" href="/main/personnel/notifications" class="font-normal text-base rounded-md hover:bg-blue-100">
+            <svelte:fragment slot="icon"><BellOutline color="blue" size="sm" /></svelte:fragment>
+          </SidebarItem>
+          
           <SidebarDropdownWrapper label="Admin Tools" isOpen class="font-normal text-base rounded-md hover:bg-blue-100">
             <svelte:fragment slot="icon"><UserSettingsOutline color="blue" /></svelte:fragment>
             <SidebarDropdownItem label="Admin Dashboard" href="/main/admin/checkProposals" class="font-normal text-base rounded-md hover:bg-blue-100"/>
@@ -128,41 +132,6 @@
 </Modal>
 
 <!--
-<!--navbar--
-<nav class="bg-white flex justify-between z-50 gap-2 ml-64 pl-4 pt-2 pr-4 pb-2 border-b">
-  <form class="flex items-center w-full gap-2">
-    {#if $chosenResearchData}
-      <FolderOutline />
-      <P weight="semibold" size="base">{$chosenResearchData.researchTitle}</P>
-      <StarOutline />
-      <Tooltip>Not Starred</Tooltip>
-
-      
-    {/if}
-  </form>
-
-  <div class="flex items-center gap-0">
-    <Avatar border size="xs" class="text-xs font-medium ring-orange-400">AR</Avatar>
-    <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-    <Avatar border size="xs" class="text-xs font-medium ring-orange-400">JA</Avatar>
-    <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-    <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DC</Avatar>
-    <Tooltip arrow={false}>Danny Casimero</Tooltip>
-    <Avatar border size="xs" class="text-xs font-medium ring-orange-400">DI</Avatar>
-    <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
-  </div>
-  <div class="flex items-center gap-0">
-    <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2"><ClockOutline size="sm" /></Button>
-    <Tooltip arrow={false}>Last edit was 00 hours ago</Tooltip>
-    <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2"><DotsHorizontalOutline size="sm" /></Button>
-    <Dropdown class="">
-      <DropdownItem class="flex justify-start items-center gap-2"><UserOutline size="sm" class="text-blue-700" />Change Collaborators</DropdownItem>
-      <DropdownItem class="flex justify-start items-center gap-2"><ArchiveOutline size="sm" class="text-blue-700" />Archive Research</DropdownItem>
-      <DropdownItem class="flex justify-start items-center gap-2"><TrashBinOutline size="sm" class="text-blue-700" />Delete Research</DropdownItem>
-    </Dropdown>
-  </div>
-</nav>
-
 <!--sidebar--
 <div class="sidebar h-full">
   <button data-drawer-target="separator-sidebar" data-drawer-toggle="separator-sidebar" aria-controls="separator-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover-bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover-bg-gray-700 dark:focus:ring-gray-600">
@@ -223,67 +192,6 @@
     </SidebarWrapper>
   </Sidebar>
 </div>
-
-<!--drawer for all researches--
-<Drawer transitionType="fly" {transitionParams} bind:hidden={allResearches} id="sidebar1" class="flex flex-col w-1/2 p-4 gap-2">
-  <div class="flex justify-between items-center gap-2">
-    <ChevronLeftOutline on:click={() => (allResearches = true)} class="w-4 h-4 mr-4 mb-2 dark:text-white" />
-    <Heading tag="h6" class="flex gap-2"><FolderOutline />All researches</Heading>
-    <Button on:click={() => ((createNewResearch = true), (allResearches = true))} size="md" outline class="w-60 sm:w-72"><CirclePlusOutline class="w-4 h-4 me-2" />Create new research</Button>
-  </div>
-
-  <Alert dismissable color="blue" class="border-l-8 w-full mb-2">
-    <div class="flex items-center gap-2">
-      <QuestionCircleOutline slot="icon" size="sm" />
-      <span class="text-lg font-medium">All Researches</span>
-    </div>
-    <p class="mt-2 text-sm">Insert helper text</p>
-  </Alert>
-
-  <div class="flex items-center gap-2">
-    <Search></Search>
-    <Button size="md" class="w-40 md:w-52"><FilterOutline class="w-4 h-4 me-2" />Filter By</Button>
-    <Dropdown>
-      <DropdownItem>Title</DropdownItem>
-      <DropdownItem>Status</DropdownItem>
-    </Dropdown>
-  </div>
-
-  <Table hoverable={true} class="table-fixed">
-    <TableHead class="">
-      <TableHeadCell class="w-3/5"><div class="flex items-center gap-2"><SortOutline class="w-4 h-4 me-2" />Title</div></TableHeadCell>
-      <TableHeadCell><div class="flex items-center gap-2"><SortOutline class="w-4 h-4 me-2" />Status</div></TableHeadCell>
-      <TableHeadCell><div class="flex items-center gap-2"><SortOutline class="w-4 h-4 me-2" />Recent</div></TableHeadCell>
-    </TableHead>
-    <TableBody>
-      {#if loading}
-        <div>Loading...</div>
-      {:else if researches}
-        {#each researches as r}
-          <TableBodyRow>
-            <TableBodyCell class="">
-              <div class="flex items-center gap-2 p-0">
-                <StarOutline class="w-4 h-4 p-0" />
-                <P size="sm" weight="medium" class="line-clamp-1"><a href={`/main/${r._id}`}>{r.researchTitle}</a></P>
-              </div>
-              <Tooltip>{r.researchTitle}</Tooltip>
-            </TableBodyCell>
-
-            <TableBodyCell class="">
-              {r.researchStatus}
-            </TableBodyCell>
-            <TableBodyCell class="">
-              <div class="flex items-center gap-2">
-                <P size="sm" weight="medium" class="line-clamp-1">{moment(r.createdAt).calendar()}</P>
-                <DotsHorizontalOutline />
-              </div>
-            </TableBodyCell>
-          </TableBodyRow>
-        {/each}
-      {/if}
-    </TableBody>
-  </Table>
-</Drawer>
 
 <!--drawer for notification--
 <Drawer transitionType="fly" {transitionParams} bind:hidden={notification} id="sidebar1" class="flex flex-col w-1/2 p-4 gap-2">
