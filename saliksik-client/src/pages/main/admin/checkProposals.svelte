@@ -6,61 +6,7 @@
   import moment from "moment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
-
-  let proposals: any[],
-    researches: any[] = [],
-    loading = true,
-    error: any = null;
-
-  async function getProposalList() {
-    try {
-      const response = await fetch("/api/research/getProposals");
-      const responseData = await response.json();
-      proposals = responseData.data;
-    } catch (e) {
-      $goto("/404");
-    }
-  }
-
-  async function fetchResearch(researchID: any) {
-    try {
-      const response = await fetch(`/api/research/getResearch?researchID=${researchID}`);
-
-      if (response.ok) {
-        const data = await response.json();
-        researches.push(data);
-      } else {
-        // Handle non-OK responses here
-        if (response.status === 404) {
-          error = "Research not found";
-        } else {
-          error = "Failed to fetch research";
-        }
-      }
-    } catch (error) {
-      console.error("Error fetching research:", error);
-      error = "Error fetching research";
-    } finally {
-      loading = false;
-    }
-  }
-
-  onMount(async () => {
-    try {
-      await getProposalList();
-      const researchPromises = proposals.map((p) => fetchResearch(p.researchID));
-      await Promise.all(researchPromises);
-      researches = researches;
-    } catch (error) {
-      console.error("Network error:", error);
-    } finally {
-      loading = false;
-    }
-
-    console.log(proposals);
-  });
-
-  loading = false;
+    import { researches } from "../../../components/store";
 
   //For search bar
   let searchTerm = "";
@@ -138,11 +84,10 @@
           <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Date Submitted</div></TableHeadCell>
         </TableHead>
         <TableBody>
-          {#if proposals}
-            {#if researches}
-              {#each proposals as p, i}
-                {#if researches.find((x) => x._id === p.researchID)}
-                  {#each researches.filter((x) => x._id === p.researchID) as research}
+            {#if $researches}
+            {#each $researches as research, i}
+               <!-- content here -->
+            
                     <TableBodyRow on:click={() => toggleRow(i)}>
                       <TableBodyCell class="">
                         <div class="flex justify-start items-center gap-2 p-0">
@@ -174,12 +119,12 @@
                       </TableBodyCell>
                       <TableBodyCell class="">
                         <div class="flex justify-start items-start gap-2">
-                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black bg-transparent">{moment(p.createdAt).format("lll")}</Badge>
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black bg-transparent">{moment(research.updatedAt).format("lll")}</Badge>
                         </div>
                       </TableBodyCell>
                     </TableBodyRow>
                     {#if openRow === i}
-                      <TableBodyRow on:dblclick={() => p} class="">
+                      <TableBodyRow class="">
                         <TableBodyCell colspan="5" class="">
                           <div class="flex flex-wrap justify-center gap-2">
                             <Card size="xl" padding="none" class="gap-2 w-full border-none shadow-none">
@@ -234,51 +179,45 @@
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Project Description</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal">{p.description}</P>
+                              <P weight="normal">{research.conceptNote.description}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="xl">Significance</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal">{p.significance}</P>
+                              <P weight="normal">{research.conceptNote.significance}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Objectives</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal">{p.objectives}</P>
+                              <P weight="normal">{research.conceptNote.objectives}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Methodology</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal">{p.methodolog}</P>
+                              <P weight="normal">{research.conceptNote.methodology}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Technology Roadmap</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal"></P>
+                              <P weight="normal">{research.conceptNote.technologyRoadmap}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Expected Outputs (6Ps)</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal"></P>
+                              <P weight="normal">{research.conceptNote.expectedOutput}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Work Plan</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal"></P>
+                              <P weight="normal">{research.conceptNote.workPlan}</P>
                             </Card>
                           </div>
                         </TableBodyCell>
                       </TableBodyRow>
+                      
                     {/if}
-                  {/each}
-                {/if}
-              {/each}
-            {:else}
-              No researches found.
+                    {/each}
             {/if}
-          {:else}
-            No proposals found.
-          {/if}
         </TableBody>
       </Table>
     </TabItem>
@@ -310,11 +249,8 @@
           <TableHeadCell class=""><div class="flex items-center gap-2"><SortOutline size="sm" class="" />Date Submitted</div></TableHeadCell>
         </TableHead>
         <TableBody>
-          {#if proposals}
-            {#if researches}
-              {#each proposals as p, i}
-                {#if researches.find((x) => x._id === p.researchID)}
-                  {#each researches.filter((x) => x._id === p.researchID) as research}
+            {#if $researches}
+              {#each $researches as research, i}
                     <TableBodyRow on:click={() => toggleRow(i)}>
                       <TableBodyCell class="">
                         <div class="flex justify-start items-center gap-2 p-0">
@@ -346,12 +282,12 @@
                       </TableBodyCell>
                       <TableBodyCell class="">
                         <div class="flex justify-start items-start gap-2">
-                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">{moment(p.createdAt).format("lll")}</Badge>
+                          <Badge border large color="none" class="flex items-center gap-2 border-none font-normal text-black">{moment(research.createdAt).format("lll")}</Badge>
                         </div>
                       </TableBodyCell>
                     </TableBodyRow>
                     {#if openRow === i}
-                      <TableBodyRow on:dblclick={() => p} class="">
+                      <TableBodyRow on:dblclick={() => research} class="">
                         <TableBodyCell colspan="5" class="">
                           <div class="flex flex-wrap justify-center gap-2">
                             <Card size="xl" padding="none" class="gap-2 w-full border-none shadow-none">
@@ -376,29 +312,29 @@
                                 <div class="w-1/2 gap-2">
                                   <div class="flex items-center gap-2">
                                     <P weight="medium" size="base">Implementing Agency/Department:</P>
-                                    <P></P>
+                                    <P>{research.conceptNote.implementingDept}</P>
                                   </div>
                                   <div class="flex items-center gap-2">
                                     <P weight="medium" size="base">Cooperating Agency:</P>
-                                    <P>College of Computer Studies</P>
+                                    <P>{research.conceptNote.coopAgency}</P>
                                   </div>
                                   <div class="flex items-center gap-2">
                                     <P weight="medium" size="base">Site/s of Implementation:</P>
-                                    <P>College of Computer Studies</P>
+                                    <P>{research.conceptNote.siteImplementation}</P>
                                   </div>
                                 </div>
                                 <div class="w-1/2 gap-2">
                                   <div class="flex items-center gap-2">
                                     <P weight="medium" size="base">Project Duration:</P>
-                                    <P>College of Computer Studies</P>
+                                    <P>{research.conceptNote.projectDuration}</P>
                                   </div>
                                   <div class="flex items-center gap-2">
                                     <P weight="medium" size="base">Total Project Cost:</P>
-                                    <P>College of Computer Studies</P>
+                                    <P>{research.conceptNote.totalCost}</P>
                                   </div>
                                   <div class="flex items-center gap-2">
                                     <P weight="medium" size="base">Funding Source:</P>
-                                    <P>College of Computer Studies</P>
+                                    <P>{research.conceptNote.fundingSource}</P>
                                   </div>
                                 </div>
                               </div>
@@ -406,37 +342,37 @@
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Project Description</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal">{p.description}</P>
+                              <P weight="normal">{research.conceptNote.description}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="xl">Significance</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal">{p.significance}</P>
+                              <P weight="normal">{research.conceptNote.significance}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Objectives</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal">{p.objectives}</P>
+                              <P weight="normal">{research.conceptNote.objectives}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Methodology</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal">{p.methodolog}</P>
+                              <P weight="normal">{research.conceptNote.methodology}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Technology Roadmap</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal"></P>
+                              <P weight="normal">{research.conceptNote.technologyRoadmap}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Expected Outputs (6Ps)</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal"></P>
+                              <P weight="normal">{research.conceptNote.expectedOutput}</P>
                             </Card>
                             <Card size="xl" class="gap-2 w-full">
                               <P weight="semibold" size="lg">Work Plan</P>
                               <Hr classHr="my-1" />
-                              <P weight="normal"></P>
+                              <P weight="normal">{research.conceptNote.workPlan}</P>
                             </Card>
                           </div>
                         </TableBodyCell>
@@ -444,13 +380,6 @@
                     {/if}
                   {/each}
                 {/if}
-              {/each}
-            {:else}
-              No researches found.
-            {/if}
-          {:else}
-            No proposals found.
-          {/if}
         </TableBody>
       </Table>
     </TabItem>
@@ -697,79 +626,71 @@
               </div>
             </TableHeadCell>
           </TableHead>
-          <TableBody>
-            {#if proposals}
-              {#if researches}
-                {#each proposals as p, i}
-                  {#if researches.find((x) => x._id === p.researchID)}
-                    {#each researches.filter((x) => x._id === p.researchID) as research}
-                      <TableBodyRow on:click={() => toggleRow(i)} class="hover:bg-orange-50">
-                        <TableBodyCell class="">
-                          <!--not starting, processing or released-->
-                          <div class="flex items-center gap-2 cursor-pointer text-gray-500"><Indicator color="dark" size="md" class="" />Not Starting</div>
-
-                          <Dropdown>
-                            <DropdownItem class="flex items-center gap-2 "><Indicator color="dark" size="md" class="text-gray-500" />Not Starting</DropdownItem>
-                            <DropdownItem class="flex items-center gap-2 "><Indicator color="orange" size="md" class="text-gray-500" />Processing</DropdownItem>
-
-                            <!--modal change incentive status to  processing-->
-                            <Modal title="Change Incentive Status" bind:open={changeIncentiveStatusToProcessing} size="xs" autoclose class="w-full">
-                              <div class="flex justify-center items-center">
-                                <InfoCircleOutline size="xl" class="text-blue-700" />
-                              </div>
-                              <P weight="normal" size="base" class="text-center">Are you sure you want to proceed? This action will notify the researcher of the current incentive status.</P>
-                              <div class="flex gap-2">
-                                <Button color="blue" size="md" class="w-full">Yes</Button>
-                                <Button type="submit" outline color="blue" size="sm" class="w-full">No</Button>
-                              </div>
-                            </Modal>
-
-                            
-                            <DropdownItem class="flex items-center gap-2 "><Indicator color="blue" size="md" class="text-gray-500" />Released</DropdownItem>
-
-                            <!--modal change incentive status to released-->
-                            <Modal title="Change Incentive Status" bind:open={changeIncentiveStatusToReleased} size="xs" autoclose class="w-full">
-                              <div class="flex justify-center items-center">
-                                <InfoCircleOutline size="xl" class="text-blue-700" />
-                              </div>
-                              <P weight="normal" size="base" class="text-center">Are you sure you want to proceed? This action will notify the researcher of the current incentive status.</P>
-                              <div class="flex gap-2">
-                                <Button color="blue" size="md" class="w-full">Yes</Button>
-                                <Button type="submit" outline color="blue" size="sm" class="w-full">No</Button>
-                              </div>
-                            </Modal>
-                          </Dropdown>
-                        </TableBodyCell>
-                        <TableBodyCell class="">
-                          <P size="sm" weight="semibold" class="line-clamp-1 text-gray-500">{research.researchTitle}</P>
-                        </TableBodyCell>
-                        <TableBodyCell class="">
-                          <div class="flex items-center gap-0">
-                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-                            <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-                            <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-                            <Tooltip arrow={false}>Danny Casimero</Tooltip>
-                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-                            <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
-                          </div>
-                        </TableBodyCell>
-
-                        <TableBodyCell class="">
-                          <P size="sm" weight="semibold" class=" text-gray-500">{moment(p.createdAt).format("lll")}</P>
-                        </TableBodyCell>
-                      </TableBodyRow>
-                    {/each}
-                  {/if}
-                {/each}
-              {:else}
-                No researches found.
-              {/if}
-            {:else}
-              No proposals found.
-            {/if}
-          </TableBody>
+          {#if $researches}
+            {#each $researches as research, i}
+            <TableBody>
+              <TableBodyRow on:click={() => toggleRow(i)} class="hover:bg-orange-50">
+                <TableBodyCell class="">
+                  <!--not starting, processing or released-->
+                  <div class="flex items-center gap-2 cursor-pointer text-gray-500"><Indicator color="dark" size="md" class="" />Not Starting</div>
+  
+                  <Dropdown>
+                    <DropdownItem class="flex items-center gap-2 "><Indicator color="dark" size="md" class="text-gray-500" />Not Starting</DropdownItem>
+                    <DropdownItem class="flex items-center gap-2 "><Indicator color="orange" size="md" class="text-gray-500" />Processing</DropdownItem>
+  
+                    <!--modal change incentive status to  processing-->
+                    <Modal title="Change Incentive Status" bind:open={changeIncentiveStatusToProcessing} size="xs" autoclose class="w-full">
+                      <div class="flex justify-center items-center">
+                        <InfoCircleOutline size="xl" class="text-blue-700" />
+                      </div>
+                      <P weight="normal" size="base" class="text-center">Are you sure you want to proceed? This action will notify the researcher of the current incentive status.</P>
+                      <div class="flex gap-2">
+                        <Button color="blue" size="md" class="w-full">Yes</Button>
+                        <Button type="submit" outline color="blue" size="sm" class="w-full">No</Button>
+                      </div>
+                    </Modal>
+  
+                    
+                    <DropdownItem class="flex items-center gap-2 "><Indicator color="blue" size="md" class="text-gray-500" />Released</DropdownItem>
+  
+                    <!--modal change incentive status to released-->
+                    <Modal title="Change Incentive Status" bind:open={changeIncentiveStatusToReleased} size="xs" autoclose class="w-full">
+                      <div class="flex justify-center items-center">
+                        <InfoCircleOutline size="xl" class="text-blue-700" />
+                      </div>
+                      <P weight="normal" size="base" class="text-center">Are you sure you want to proceed? This action will notify the researcher of the current incentive status.</P>
+                      <div class="flex gap-2">
+                        <Button color="blue" size="md" class="w-full">Yes</Button>
+                        <Button type="submit" outline color="blue" size="sm" class="w-full">No</Button>
+                      </div>
+                    </Modal>
+                  </Dropdown>
+                </TableBodyCell>
+                <TableBodyCell class="">
+                  <P size="sm" weight="semibold" class="line-clamp-1 text-gray-500">{research.researchTitle}</P>
+                </TableBodyCell>
+                <TableBodyCell class="">
+                  <div class="flex items-center gap-0">
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
+                    <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
+                    <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
+                    <Tooltip arrow={false}>Danny Casimero</Tooltip>
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
+                    <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                  </div>
+                </TableBodyCell>
+  
+                <TableBodyCell class="">
+                  <P size="sm" weight="semibold" class=" text-gray-500">{moment(research.updatedAt).format("lll")}</P>
+                </TableBodyCell>
+              </TableBodyRow>
+  
+            </TableBody>
+            {/each}
+             
+          {/if}
         </Table>
       </div>
     </TabItem>
