@@ -1,20 +1,18 @@
 <script lang="ts">
-   import { Alert, Button, Dropdown, DropdownItem, Input, Modal, P, Select } from "flowbite-svelte";
-  import { DotsHorizontalOutline, EyeOutline, QuestionCircleOutline, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
+  import { A, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Indicator, Input, Modal, P, Search, Select, Tooltip } from "flowbite-svelte";
+  import { ArchiveOutline, BellActiveAltOutline, DotsHorizontalOutline, EyeOutline, FolderPlusOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
   import { getUserList } from "../../../components/fetch";
   import { userList } from "../../../components/store";
-    import { onMount } from "svelte";
-    import moment from "moment";
+  import { onMount } from "svelte";
+  import moment from "moment";
 
-
-    onMount(async () => {
+  onMount(async () => {
     try {
       await getUserList();
     } catch (error) {
       console.error("Network error:", error);
     }
   });
-
 
   let json = {};
   let message: any;
@@ -49,9 +47,9 @@
 </script>
 
 <main class="p-4">
-  <div class="flex justify-center gap-2">
-    <div class="grid grid-flow-row col-start-2 col-span-3 items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
-      <Alert dismissable color="blue" class="border-l-8 w-full  mb-2">
+  <div class="flex justify-center gap-2 bg-gray-50">
+    <div class="grid grid-flow-row items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
+      <Alert dismissable color="blue" class="border-l-8 mb-2">
         <div class="flex items-center gap-2">
           <QuestionCircleOutline slot="icon" size="sm" />
           <span class="text-lg font-medium">Personnel Accounts</span>
@@ -60,22 +58,52 @@
       </Alert>
 
       <!---->
-      <div class="flex flex-wrap justify-start items-center w-full">
-        <div class="flex justify-between items-center w-full">
+      <div class="flex flex-wrap justify-start items-center gap-0 w-full">
+        <div class="flex justify-between items-center gap-2 w-full">
           <div class="flex items-center gap-2">
             <UserOutline size="md" class="text-blue-700" />
             <P size="xl" weight="bold" class="text-gray-900">{$userList.length} <span class="text-gray-500">User Accounts</span></P>
           </div>
-  
+
           <div class="flex items-center gap-2">
             <Button on:click={() => (createPersonnelAccount = true)} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><UserAddOutline size="sm" />Create Personnel Account</Button>
           </div>
-          
         </div>
         <P size="sm" weight="normal" class="text-gray-500">Create and organize user accounts.</P>
-        <!--modal for create personnel account-->
       </div>
-      
+
+      <div class="grid grid-flow-row justify-center w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+        <P size="sm" weight="normal" class="text-gray-500">No existing account...<span></span></P>
+      </div>
+
+      <!--personnel accounts-->
+      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+        <div class="grid grid-flow-row items-center gap-0">
+          {#each $userList as user}
+            <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-blue-50">
+              <div class="flex justify-start items-center gap-2">
+                <UserOutline size="sm" class="text-blue-700" />
+                <P size="base" weight="semibold" class="whitespace-nowrap">{user.firstName} {user.lastName}</P>
+                <P size="base" weight="bold" class="text-gray-500">·</P>
+                <P weight="normal" size="sm" class="line-clamp-1 text-gray-500 w-96">Created in <span class="font-medium text-gray-500">{moment(user.createdAt).format("LL")}</span></P>
+              </div>
+              <div class="flex justify-start items-center gap-0">
+                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><EyeOutline size="sm" /></Button>
+                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
+                <Dropdown>
+                  <DropdownItem>
+                    <div class="flex justify-start items-center gap-2">
+                      <TrashBinOutline size="sm" class="text-blue-700" />Delete Account
+                    </div>
+                  </DropdownItem>
+                </Dropdown>
+              </div>
+            </div>
+          {/each}
+        </div>
+      </div>
+
+      <!--modal for create personnel account-->
       <Modal title="Create Personnel Account" bind:open={createPersonnelAccount} size="xs" autoclose={false} outsideclose class="rounded-md w-full">
         <form class="grid grid-flow-row gap-4" on:submit={submit}>
           <!---->
@@ -125,42 +153,7 @@
           <Button on:click={() => alert('Handle "success"')} type="submit" color="blue" size="md" class="rounded-md w-full">Create Personnel Account</Button>
         </form>
       </Modal>
-
-      <div class="grid grid-flow-row justify-center w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-        <P size="sm" weight="normal" class="text-gray-500">No existing account...<span></span></P>
-      </div>
-
-      <!--personnel accounts-->
-      <div class="grid grid-flow-row gap-2 shadow-lg border rounded-md p-3 bg-white">
-        <div class="grid grid-flow-row items-center gap-0">
-           {#each $userList as user}
-              <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-orange-100">
-                <div class="flex justify-start items-center gap-2">
-                  <UserOutline size="sm" class="text-blue-700" />
-                  <P size="base" weight="semibold" class="">{user.firstName} {user.lastName}</P>
-                  <P size="base" weight="bold" class="text-gray-500">·</P>
-                  <P weight="normal" size="sm" class="line-clamp-1 text-gray-500 w-96">Created in <span class="font-medium text-gray-500">{moment(user.createdAt).format('LL')}</span></P>
-                </div>
-                <div class="flex justify-start items-center gap-0">
-                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><EyeOutline size="sm" /></Button>
-                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
-                  <Dropdown>
-                    <DropdownItem>
-                      <div class="flex justify-start items-center gap-2">
-                        <TrashBinOutline size="sm" class="text-blue-700" />Delete Account
-                      </div>
-                    </DropdownItem>
-                  </Dropdown>
-                </div>
-              </div>
-           {/each}
-
-          
-
-        </div>
-      </div>
     </div>
   </div>
-  <div class="h-96"></div>
   <div class="h-96"></div>
 </main>

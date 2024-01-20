@@ -115,14 +115,12 @@
     </Sidebar>
   </div>
 
-  <div class="w-screen sm:ml-64">
-    <div class="w-full">
+  <div class="ml-64 grid grid-flow-row w-full items-start">
       {#if $userData}
         <slot scoped={{ userID: $userData._id }} />
       {:else}
         <slot />
       {/if}
-    </div>
   </div>
 </div>
 

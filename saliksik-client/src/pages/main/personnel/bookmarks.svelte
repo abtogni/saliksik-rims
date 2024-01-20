@@ -6,7 +6,7 @@
   let editLabels = false;
 </script>
 
-<main>
+<main class="p-4">
   <div class="flex justify-center gap-2">
     <div class="grid grid-flow-row col-start-2 col-span-3 items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
       <Alert dismissable color="blue" class="border-l-8 w-full  mb-2">
