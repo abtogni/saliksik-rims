@@ -16,7 +16,8 @@
     "concurrently": "^8.2.1",
     "date-picker-svelte": "^2.10.1",
     "flowbite": "^2.2.1",
-    "lucide-react": "^0.287.0"
+    "lucide-react": "^0.287.0",
+    "svelte-collapsible": "^0.3.0"
   },
   "devDependencies": {
     "flowbite-svelte-blocks": "^0.5.1",

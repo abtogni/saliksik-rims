@@ -66,33 +66,33 @@
         <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 mb-4 w-full bg-white">
           <div class="flex flex-wrap items-center gap-1">
             <P weight="medium" size="base">Implementing Agency/Department</P>
-            <Input type="text" size="sm" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" required class="rounded-md text-gray-500"></Input>
+            <Input type="text" size="sm" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" required class="rounded-md focus:ring-blue-700 focus:border-blue-700 text-gray-500"></Input>
             <Helper class=" text-gray-500"></Helper>
           </div>
           <div class="flex flex-wrap items-center gap-1">
             <P weight="medium" size="base">Cooperating Agency</P>
-            <Input type="text" size="sm" id="coopAgency" name="coopAgency" label="Cooperating Agency" required class="rounded-md text-gray-500"></Input>
+            <Input type="text" size="sm" id="coopAgency" name="coopAgency" label="Cooperating Agency" required class="rounded-md text-gray-500 focus:ring-blue-500 focus:border-blue-500"></Input>
             <Helper class=" text-gray-500">State the name of agency to be tapped for funding/ co-implementing the project.</Helper>
           </div>
           <div class="flex flex-wrap items-center gap-1">
             <P weight="medium" size="base">Site/s of Implementation</P>
-            <Input type="text" size="sm" id="siteImplementation" name="siteImplementation" label="Site/s of Implementation" required class="rounded-md text-gray-500"></Input>
+            <Input type="text" size="sm" id="siteImplementation" name="siteImplementation" label="Site/s of Implementation" required class="rounded-md text-gray-500 focus:ring-blue-500 focus:border-blue-500"></Input>
             <Helper class=" text-gray-500">Site/s of Implementation</Helper>
           </div>
           <div class="flex flex-wrap items-center gap-1">
             <P weight="medium" size="base">Total Project Cost</P>
-            <Input type="text" size="sm" id="totalCost" name="totalCost" label="Total Project Cost" required class="rounded-md text-gray-500"></Input>
+            <Input type="text" size="sm" id="totalCost" name="totalCost" label="Total Project Cost" required class="rounded-md text-gray-500 focus:ring-blue-500 focus:border-blue-500"></Input>
             <Helper class=" text-gray-500">Include the specific budget allocations for personnel service, maintenance and operations, equipment, trainings/workshops, and administrative costs.</Helper>
           </div>
           <div class="flex flex-wrap items-center gap-1">
             <P weight="medium" size="base">Funding Source</P>
-            <Input type="text" size="sm" id="fundingSource" name="fundingSource" label="Funding Source" required class="rounded-md text-gray-500"></Input>
+            <Input type="text" size="sm" id="fundingSource" name="fundingSource" label="Funding Source" required class="rounded-md text-gray-500 focus:ring-blue-500 focus:border-blue-500"></Input>
             <Helper class=" text-gray-500">Specific funding source, including counterpart funds.</Helper>
           </div>
 
           <div class="flex flex-wrap items-center gap-1">
             <P weight="medium" size="base" for="researchLeaders">Project Duration</P>
-            <DateInput bind:value={projectDuration} format="yyyy-MM-dd" placeholder="yyyy-MM-dd" required --date-picker-highlight-border="#b43403" --date-picker-highlight-shadow="none" --date-input-width="100%" class="w-full rounded-md text-gray-500" />
+            <DateInput bind:value={projectDuration} format="yyyy-MM-dd" placeholder="yyyy-MM-dd" required --date-picker-highlight-border="#1d4ed8" --date-picker-highlight-shadow="none" --date-input-width="100%" class="w-full rounded-md text-gray-500 " />
             <Helper class=" text-gray-500">Specific dates that the project will be undertaken (month/year); ideally to be completed minimum 1 year/ depending on the approved grant.</Helper>
           </div>
         </div>

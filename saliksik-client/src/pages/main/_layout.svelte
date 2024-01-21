@@ -1,5 +1,5 @@
 <script lang="ts">
-  import NewResearchModal from "../../modals/NewResearchModal.svelte";
+  import CreateNewResearchModal from "../../modals/CreateNewResearchModal.svelte";
   import UNCLogo from "/login.png";
   import { Sidebar, SidebarBrand, SidebarItem, SidebarWrapper, SidebarGroup, SidebarDropdownWrapper, SidebarDropdownItem, Modal } from "flowbite-svelte";
   import Menu from "../../assets/menu.svelte";
@@ -126,7 +126,7 @@
 
 <!-- modal for create new research -->
 <Modal title="" bind:open={createNewResearch} size="xs" autoclose={false} outsideclose class="w-full">
-  <NewResearchModal />
+  <CreateNewResearchModal />
 </Modal>
 
 <!--

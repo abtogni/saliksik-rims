@@ -1,7 +1,9 @@
 <script lang="ts">
-  import { A, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Indicator, Modal, P, Search, Tooltip } from "flowbite-svelte";
+  import { A, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Hr, Indicator, Modal, P, Search, Tooltip } from "flowbite-svelte";
   import { ArchiveOutline, DotsHorizontalOutline, EyeOutline, FileCirclePlusOutline, FileExportOutline, FilePenOutline, FilterOutline, FolderOutline, FolderPlusOutline, MessageCaptionOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
-  import NewResearchModal from "../../modals/NewResearchModal.svelte";
+  import CreateNewResearchModal from "../../modals/CreateNewResearchModal.svelte";
+  import { researches } from "../../components/store";
+  import moment from "moment";
 
   //modal for create new research
   let createNewResearch = false;
@@ -77,124 +79,76 @@
           </div>
         </div>
 
-        <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-blue-50">
-          <div class="flex justify-between items-center gap-2 w-full">
-            <div class="flex justify-start items-center gap-2">
-              <div class="flex items-center gap-0">
-                <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-                <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-                <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-                <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-                <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-                <Tooltip arrow={false}>Danny Casimero</Tooltip>
-                <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-                <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
-              </div>
+        <!--card research-->
+        {#if $researches}
+          {#each $researches as research}
+            <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-blue-50">
+              <div class="flex justify-between items-center gap-2 w-full">
+                <div class="flex justify-start items-center gap-2">
+                  <div class="flex items-center gap-0">
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
+                    <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
+                    <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
+                    <Tooltip arrow={false}>Danny Casimero</Tooltip>
+                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
+                    <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                  </div>
 
-              <div class="flex justify-start items-center gap-2">
-                <Badge border large class="flex items-center gap-2">
-                  <Indicator color="orange" size="md" class="" />No Status
-                </Badge>
+                  <div class="flex justify-start items-center gap-2">
+                    <Badge border large class="flex items-center gap-2">
+                      <Indicator color="orange" size="md" class="" />No Status
+                    </Badge>
+                    <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                      <P weight="normal" size="sm" class=" text-gray-500">Last Updated in <span class="font-medium text-gray-500">January 21, 2023</span></P>
+                    </Tooltip>
+                    <Badge border large color="blue" class="flex items-center gap-2">
+                      <Indicator color="blue" size="md" class="" />Concept Note Approval
+                    </Badge>
+                  </div>
+                  <div class="flex justify-start items-center gap-2">
+                    <P size="base" weight="bold" class="text-gray-500">·</P>
+                    <P weight="normal" size="sm" class=" text-gray-500">Created in <span class="font-medium text-gray-500">{moment(research.updatedAt).format("lll")}</span></P>
+                  </div>
+                </div>
+                <StarOutline size="sm" class="text-blue-700" />
                 <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-                  <P weight="normal" size="sm" class=" text-gray-500">Last Updated in <span class="font-medium text-gray-500">January 21, 2023</span></P>
+                  <P weight="normal" size="sm" class="font-medium text-gray-500">Not Starred</P>
                 </Tooltip>
-                <Badge border large color="blue" class="flex items-center gap-2">
-                  <Indicator color="blue" size="md" class="" />Concept Note Approval
-                </Badge>
-              </div>
-              <div class="flex justify-start items-center gap-2">
-                <P size="base" weight="bold" class="text-gray-500">·</P>
-                <P weight="normal" size="sm" class=" text-gray-500">Created in <span class="font-medium text-gray-500">January 21, 2023</span></P>
-              </div>
-            </div>
-            <StarOutline size="sm" class="text-blue-700" />
-            <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-              <P weight="normal" size="sm" class="font-medium text-gray-500">Not Starred</P>
-            </Tooltip>
-            <StarSolid size="sm" class="text-blue-700" />
-            <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-              <P weight="normal" size="sm" class="font-medium text-gray-500">Starred</P>
-            </Tooltip>
-            <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
-            <Dropdown>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                <StarOutline size="sm" class="text-blue-700" />Star
-                <StarSolid size="sm" class="text-blue-700" />Starred
-              </DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                <EyeOutline size="sm" class="text-blue-700" />View Research
-              </DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                <ArchiveOutline size="sm" class="text-blue-700" />Archive Research
-              </DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                <TrashBinOutline size="sm" class="text-blue-700" />Delete Research
-              </DropdownItem>
-            </Dropdown>
-          </div>
-          <P weight="semibold" size="sm" class="line-clamp-2"><A href="" class="text-black">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</A></P>
-        </div>
-
-        <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-blue-50">
-          <div class="flex justify-between items-center gap-2 w-full">
-            <div class="flex justify-start items-center gap-2">
-              <div class="flex items-center gap-0">
-                <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-                <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-                <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-                <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-                <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-                <Tooltip arrow={false}>Danny Casimero</Tooltip>
-                <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-                <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
-              </div>
-
-              <div class="flex justify-start items-center gap-2">
-                <Badge border large class="flex items-center gap-2">
-                  <Indicator color="orange" size="md" class="" />No Status
-                </Badge>
+                <StarSolid size="sm" class="text-blue-700" />
                 <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-                  <P weight="normal" size="sm" class=" text-gray-500">Last Updated in <span class="font-medium text-gray-500">January 21, 2023</span></P>
+                  <P weight="normal" size="sm" class="font-medium text-gray-500">Starred</P>
                 </Tooltip>
-                <Badge border large color="blue" class="flex items-center gap-2">
-                  <Indicator color="blue" size="md" class="" />Concept Note Approval
-                </Badge>
+                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
+                <Dropdown>
+                  <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                    <StarOutline size="sm" class="text-blue-700" />Star
+                    <StarSolid size="sm" class="text-blue-700" />Starred
+                  </DropdownItem>
+                  <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                    <EyeOutline size="sm" class="text-blue-700" />View Research
+                  </DropdownItem>
+                  <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                    <ArchiveOutline size="sm" class="text-blue-700" />Archive Research
+                  </DropdownItem>
+                  <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                    <TrashBinOutline size="sm" class="text-blue-700" />Delete Research
+                  </DropdownItem>
+                </Dropdown>
               </div>
-              <div class="flex justify-start items-center gap-2">
-                <P size="base" weight="bold" class="text-gray-500">·</P>
-                <P weight="normal" size="sm" class=" text-gray-500">Created in <span class="font-medium text-gray-500">January 21, 2023</span></P>
-              </div>
+              <P weight="semibold" size="sm" class="line-clamp-2"><A href="" class="text-black">{research.researchTitle}</A></P>
             </div>
-            <StarOutline size="sm" class="text-blue-700" />
-            <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-              <P weight="normal" size="sm" class="font-medium text-gray-500">Not Starred</P>
-            </Tooltip>
-            <StarSolid size="sm" class="text-blue-700" />
-            <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-              <P weight="normal" size="sm" class="font-medium text-gray-500">Starred</P>
-            </Tooltip>
-            <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
-            <Dropdown>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                <EyeOutline size="sm" class="text-blue-700" />View Research
-              </DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                <ArchiveOutline size="sm" class="text-blue-700" />Archive Research
-              </DropdownItem>
-              <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                <TrashBinOutline size="sm" class="text-blue-700" />Delete Research
-              </DropdownItem>
-            </Dropdown>
-          </div>
-          <P weight="semibold" size="sm" class="line-clamp-2"><A href="" class="text-black">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</A></P>
-        </div>
+            <Hr classHr="my-.5" />
+          {/each}
+        {/if}
       </div>
     </div>
   </div>
 
   <!-- modal for create new research -->
   <Modal title="Create New Research" bind:open={createNewResearch} size="xs" autoclose={false} outsideclose class="w-full">
-    <NewResearchModal />
+    <CreateNewResearchModal />
   </Modal>
   <div class="h-96"></div>
 </main>
