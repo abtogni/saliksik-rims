@@ -21,6 +21,14 @@
     }
   });
 
+  function dynamicReload(path: string, event?: MouseEvent): any{
+    if (event) {
+        event.preventDefault();
+    }
+    window.location.href = path;
+}
+  
+
   //notification this month
   //sidebar
   let site = {
@@ -37,6 +45,9 @@
 
   //modal for create new research
   let createNewResearch = false;
+
+
+   
 </script>
 
 <div class="bg-gray-50 flex h-full">
@@ -73,15 +84,15 @@
           </SidebarItem>
           -->
           
-          <SidebarItem label="Notifications" href="/main/personnel/notifications" class="font-normal text-base rounded-md hover:bg-blue-100">
+          <SidebarItem label="Notifications" on:click={$goto('main/personnel/notifications')} class="font-normal text-base rounded-md hover:bg-blue-100">
             <svelte:fragment slot="icon"><BellOutline color="blue" size="sm" /></svelte:fragment>
           </SidebarItem>
           
           <SidebarDropdownWrapper label="Admin Tools" isOpen class="font-normal text-base rounded-md hover:bg-blue-100">
             <svelte:fragment slot="icon"><UserSettingsOutline color="blue" /></svelte:fragment>
-            <SidebarDropdownItem label="Admin Dashboard" href="/main/admin/checkProposals" class="font-normal text-base rounded-md hover:bg-blue-100"/>
-            <SidebarDropdownItem label="Sample" href="/main/admin/presentations" class="font-normal text-base rounded-md hover:bg-blue-100"/>
-            <SidebarDropdownItem label="Create User Accounts" href="/main/admin/createAccount" class="font-normal text-base rounded-md hover:bg-blue-100"/>
+            <SidebarDropdownItem label="Admin Dashboard" on:click={$goto('/main/admin/checkProposals')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
+            <SidebarDropdownItem label="Sample" on:click={$goto('/main/admin/presentations')} href="/main/" class="font-normal text-base rounded-md hover:bg-blue-100"/>
+            <SidebarDropdownItem label="Create User Accounts" on:click={$goto('/main/admin/createAccount')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
           </SidebarDropdownWrapper>
         </SidebarGroup>
         <!---->
@@ -90,7 +101,7 @@
             <SidebarDropdownWrapper label="Starred" isOpen class="font-normal text-base rounded-md hover:bg-blue-100">
               <svelte:fragment slot="icon"><StarSolid color="blue" size="sm"/></svelte:fragment>
               {#each $researches as r}
-                <SidebarDropdownItem label={r.researchTitle} href={`/main/${r._id}`} class="font-normal text-base rounded-md hover:bg-blue-100"></SidebarDropdownItem>
+                <SidebarDropdownItem label={r.researchTitle} on:click={dynamicReload(`/main/${r._id}`)} class="font-normal text-base rounded-md hover:bg-blue-100"></SidebarDropdownItem>
               {/each}
             </SidebarDropdownWrapper>
           {:else}
