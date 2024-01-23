@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Indicator, Modal, P, Search, Tooltip } from "flowbite-svelte";
-  import { ArchiveOutline, CheckCircleOutline, ChevronDoubleDownOutline, ChevronDoubleUpOutline, DotsHorizontalOutline, EyeOutline, FileCirclePlusOutline, FileExportOutline, FileLinesOutline, FileOutline, FilePenOutline, FilterOutline, FolderOutline, FolderPlusOutline, MessageCaptionOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
+  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Indicator, Modal, P, Search, TabItem, Tabs, Tooltip } from "flowbite-svelte";
+  import { ArchiveOutline, CheckCircleOutline, ChevronDoubleDownOutline, ChevronDoubleUpOutline, ClockOutline, DotsHorizontalOutline, EyeOutline, FileCirclePlusOutline, FileExportOutline, FileLinesOutline, FileOutline, FilePenOutline, FilterOutline, FolderOutline, FolderPlusOutline, MessageCaptionOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import { onMount } from "svelte";
   import { researches, selectedResearchInfo } from "../../../components/store";
@@ -39,7 +39,7 @@
 
 <main class="p-4">
   <div class="flex justify-center gap-2 bg-gray-50">
-    <div class="grid grid-flow-row items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
+    <div class="grid grid-flow-row items-center gap-2 w-full sm:w-full md:w-full lg:w-full xl:w-full 2xl:w-full">
       <!--helper card-->
       <Alert dismissable color="blue" class="border-l-8">
         <div class="flex items-center gap-2">
@@ -60,62 +60,193 @@
             <Button on:click={() => (createNewResearch = true)} type="submit" color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FolderPlusOutline size="sm" /> Create New Research</Button>
           </div>
           -->
+          <div class="flex justify-start items-center gap-4">
+            <div class="flex items-center gap-2">
+              <CheckCircleOutline size="md" class="text-blue-700" />
+              <P size="xl" weight="bold" class="text-gray-900">00 <span class="text-blue-500">Approved</span></P>
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="#b91c1c" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+              <P size="xl" weight="bold" class="text-gray-900">00 <span class="text-red-500">Rejected</span></P>
+            </div>
+          </div>
         </div>
+
         <P size="sm" weight="normal" class="text-gray-500">Approve or reject submitted concept note.</P>
       </div>
 
       <!--card researches inactive-->
-      <div class="grid grid-flow-row justify-center w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+      <div class="grid grid-flow-row justify-center w-full shadow-lg border rounded-md gap-2 p-3 mb-4 bg-white">
         <P size="sm" weight="normal" class="text-gray-500">No existing researches...<span></span></P>
       </div>
       <!--card researches active-->
-      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+      <div class="grid grid-flow-row w-full shadow-lg border rounded-md gap-2 p-3 mb-4 bg-white">
         <div class="flex justify-between items-center gap-2 w-full">
           <Search color="blue" size="sm" placeholder="Search by title or status..." class="border rounded-md"></Search>
           <div class="flex items-center gap-2">
-            <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md"><Indicator class="text-white" />Status</Button>
-            <Dropdown>
-              <DropdownItem class=" rounded-md hover:bg-blue-50">
-                <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">All</Checkbox>
-              </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-50">
-                <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">No Status</Checkbox>
-              </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-50">
-                <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Concept Note Approval</Checkbox>
-              </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-50">
-                <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Initial Presentation</Checkbox>
-              </DropdownItem>
-              <DropdownItem class="rounded-md hover:bg-blue-50">
-                <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Final Presentation</Checkbox>
-              </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-50">
-                <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Incentive Processing</Checkbox>
-              </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-50">
-                <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Incentive Released</Checkbox>
-              </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-50">
-                <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Published</Checkbox>
-              </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-50">
-                <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Rejected</Checkbox>
-              </DropdownItem>
-              <DropdownItem class=" rounded-md hover:bg-blue-50">
-                <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Archive</Checkbox>
-              </DropdownItem>
-            </Dropdown>
+            <Button color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md whitespace-nowrap"><CheckCircleOutline size="sm" /> Waiting for Approval</Button>
+            <Button color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"><CheckCircleOutline size="sm" /> Approved</Button>
+            <Button outline color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md">
+              <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg> Rejected
+            </Button>
           </div>
         </div>
+        <div class="flex">
+          <Tabs activeClasses="bg-blue-100 shadow-lg border rounded-md border-blue-700" inactiveClasses="hover:bg-orange-50 shadow-lg border rounded-md " defaultClass="w-full " contentClass=" rounded-md ml-2">
+            {#if $researches}
+              {#each $researches as research, i}
+                <TabItem open class="w-1/4mb-3 ">
+                  <div slot="title" class="flex flex-wrap gap-1 rounded-md p-2 z-50">
+                    <div class="flex justify-between items-center gap-2 w-full">
+                      <div class="flex justify-start items-center gap-2">
+                        <div class="flex items-center gap-0">
+                          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
+                          <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
+                          <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
+                          <Tooltip arrow={false}>Danny Casimero</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
+                          <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                        </div>
 
+                        <div class="flex flex-wrap justify-start items-center gap-2">
+                          <Badge border large class="flex items-center gap-2 whitespace-nowrap">
+                            <Indicator color="orange" size="md" class="" />Waiting for Approval
+                          </Badge>
+                          <Badge border large color="blue" class="flex items-center gap-2 whitespace-nowrap">
+                            <CheckCircleOutline color="blue" size="sm" class="" />Approved
+                          </Badge>
+                          <Badge border large color="red" class="flex items-center gap-2 whitespace-nowrap">
+                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                            </svg>Rejected
+                          </Badge>
+                        </div>
+                      </div>
+                      <div class="flex justify-start items-center gap-2">
+                        <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-1.5"><ClockOutline size="sm" /></Button>
+                        <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                          <P weight="normal" size="sm" class=" text-gray-500">Submitted in <span class="font-medium text-gray-500">{moment(research.updatedAt).format("lll")}</span></P>
+                        </Tooltip>
+                      </div>
+                    </div>
+                    <P weight="semibold" size="sm" class="line-clamp-3">{research.researchTitle}</P>
+                  </div>
+
+                  <div class="flex flex-wrap justify-start items-center gap-2">
+                    <!--concept note overview card-->
+                    <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                      <P size="lg" weight="medium">{$selectedResearchInfo.researchTitle}</P>
+                      <div class="flex items-center gap-2">
+                        <div class="flex items-center gap-0">
+                          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
+                          <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
+                          <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
+                          <Tooltip arrow={false}>Danny Casimero</Tooltip>
+                          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
+                          <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                        </div>
+                      </div>
+                      <div class="flex items-start gap-2">
+                        <div class="grid grid-flow-row items-start gap-2">
+                          <div class="grid grid-flow-row justify-start items-start gap-1">
+                            <P size="sm" weight="medium">Implementing Agency/Department</P>
+                            <div class="flex justify-start items-center gap-2">
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{research.conceptNote.implementingDept}</Badge>
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{research.conceptNote.implementingDept}</Badge>
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{research.conceptNote.implementingDept}</Badge>
+                            </div>
+                          </div>
+
+                          <div class="grid grid-flow-row justify-start items-start gap-1">
+                            <P size="sm" weight="medium">Cooperating Agency</P>
+                            <div class="flex justify-start items-center gap-2">
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">Vice-President for Academic Affairs</Badge>
+                            </div>
+                          </div>
+                          <div class="grid grid-flow-row justify-start items-start gap-1">
+                            <P size="sm" weight="medium">Site/s of Implementation</P>
+                            <div class="flex justify-start items-center gap-2">
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.siteImplementation}</Badge>
+                            </div>
+                          </div>
+                          <div class="grid grid-flow-row justify-start items-start gap-1">
+                            <P size="sm" weight="medium">Project Duration</P>
+                            <div class="flex justify-start items-center gap-2">
+                              <P size="sm" weight="normal" class="text-gray-500">{moment($selectedResearchInfo.conceptNote.projectDuration).format("LL")}</P>
+                            </div>
+                          </div>
+                          <div class="grid grid-flow-row justify-start items-start gap-1">
+                            <P size="sm" weight="medium">Total Project Cost</P>
+                            <div class="flex justify-start items-center gap-2">
+                              <P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.totalCost}</P>
+                            </div>
+                          </div>
+                          <div class="grid grid-flow-row justify-start items-start gap-1">
+                            <P size="sm" weight="medium">Funding Source</P>
+                            <div class="flex justify-start items-center gap-2">
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.fundingSource}</Badge>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <P size="lg" weight="medium">Project Description</P>
+                    <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                      <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.description}</P>
+                    </div>
+                    <P size="lg" weight="medium">Significance</P>
+                    <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                      <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.significance}</P>
+                    </div>
+                    <P size="lg" weight="medium">Objectives</P>
+                    <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                      <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.objectives}</P>
+                    </div>
+                    <P size="lg" weight="medium">Methodology</P>
+                    <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                      <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.methodology}</P>
+                    </div>
+                    <P size="lg" weight="medium">Technology Roadmap</P>
+                    <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                      <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.technologyRoadmap}</P>
+                    </div>
+                    <P size="lg" weight="medium">Expected Outputs (6Ps)</P>
+                    <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                      <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.expectedOutput}</P>
+                    </div>
+                    <P size="lg" weight="medium">Work Plan</P>
+                    <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-2 bg-white">
+                      <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.workPlan}</P>
+                    </div>
+                    <div class="flex justify-between items-center gap-2 w-full">
+                      <Button on:click={() => (approveConceptNote = true)} color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"><CheckCircleOutline size="sm" /> Approve</Button>
+                      <Button on:click={() => (rejectConceptNote = true)} outline color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"
+                        ><svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg> Reject</Button>
+                    </div>
+                  </div>
+                </TabItem>
+              {/each}
+            {/if}
+          </Tabs>
+        </div>
         <!--card research-->
-
-        <Accordion flush >
+        <!--
+  <Accordion flush >
           {#if $researches}
             {#each $researches as research, i}
-              <AccordionItem paddingFlush="py-2">
-                <div slot="header" class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-blue-50">
+              <AccordionItem paddingFlush="py-1">
+                <div slot="header" class="flex flex-wrap gap-1 rounded-md p-1 hover:bg-blue-50">
                   <div class="flex justify-between items-center gap-2 w-full">
                     <div class="flex justify-start items-center gap-2">
                       <div class="flex items-center gap-0">
@@ -145,37 +276,45 @@
                         <P weight="normal" size="sm" class=" text-gray-500">Created in <span class="font-medium text-gray-500">{moment(research.updatedAt).format("lll")}</span></P>
                       </div>
                     </div>
-                    <StarOutline size="sm" class="text-blue-700" />
-                    <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-                      <P weight="normal" size="sm" class="font-medium text-gray-500">Not Starred</P>
-                    </Tooltip>
-                    <StarSolid size="sm" class="text-blue-700" />
-                    <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-                      <P weight="normal" size="sm" class="font-medium text-gray-500">Starred</P>
-                    </Tooltip>
-                    <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
-                    <Dropdown>
-                      <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                        <StarOutline size="sm" class="text-blue-700" />Star
-                        <StarSolid size="sm" class="text-blue-700" />Starred
-                      </DropdownItem>
-                      <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                        <EyeOutline size="sm" class="text-blue-700" />View Research
-                      </DropdownItem>
-                      <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                        <ArchiveOutline size="sm" class="text-blue-700" />Archive Research
-                      </DropdownItem>
-                      <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                        <TrashBinOutline size="sm" class="text-blue-700" />Delete Research
-                      </DropdownItem>
-                    </Dropdown>
+                    <div class="flex justify-end items-center gap-1">
+                      <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><EyeOutline size="sm" /></Button>
+                      <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                        <P weight="normal" size="sm" class="font-medium text-gray-500">Full View</P>
+                      </Tooltip>
+                      <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><StarOutline size="sm" class=""/></Button>
+                      <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                        <P weight="normal" size="sm" class="font-medium text-gray-500">Not Starred</P>
+                      </Tooltip>
+                      <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><StarSolid size="sm" class=""/></Button>
+                      <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                        <P weight="normal" size="sm" class="font-medium text-gray-500">Starred</P>
+                      </Tooltip>
+                      
+                      <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
+                      <Dropdown>
+                        <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                          <StarOutline size="sm" class="text-blue-700" />Star
+                          <StarSolid size="sm" class="text-blue-700" />Starred
+                        </DropdownItem>
+                        <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                          <EyeOutline size="sm" class="text-blue-700" />View Research
+                        </DropdownItem>
+                        <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                          <ArchiveOutline size="sm" class="text-blue-700" />Archive Research
+                        </DropdownItem>
+                        <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                          <TrashBinOutline size="sm" class="text-blue-700" />Delete Research
+                        </DropdownItem>
+                      </Dropdown>
+                    </div>
+                    
                   </div>
                   <P weight="semibold" size="sm" class="line-clamp-2">{research.researchTitle}</P>
                 </div>
                 <div slot="arrowup"></div>
                 <span slot="arrowdown"> </span>
                 <div class="flex flex-wrap justify-start items-center gap-2 w-full">
-                  <!--concept note overview card-->
+                  <!--concept note overview card--
                   <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
                     <div class="flex items-start gap-2">
                       <div class="grid grid-flow-row items-start gap-2">
@@ -248,6 +387,7 @@
             {/each}
           {/if}
         </Accordion>
+-->
       </div>
     </div>
   </div>
@@ -259,9 +399,8 @@
 
   <!-- modal for reject concept note-->
   <Modal title="Reject Concept Note" bind:open={rejectConceptNote} size="xs" autoclose={false} outsideclose class="w-full">
-    <CreateNewResearchModal/>
+    <CreateNewResearchModal />
   </Modal>
 
-  <div class="h-96"></div>
   <div class="h-96"></div>
 </main>
