@@ -161,14 +161,30 @@
             </div>
 
             <P size="lg" weight="medium">Project Description</P>
-            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white"><P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.description}</P></div>
+            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+              {#each $selectedResearchInfo.conceptNote.description.split('\n') as paragraph}
+              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {/each}
+            </div>
 
             <P size="lg" weight="medium">Significance</P>
-            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white"><P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.significance}</P></div>
+            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+              {#each $selectedResearchInfo.conceptNote.significance.split('\n') as paragraph}
+              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {/each}
+            </div>
             <P size="lg" weight="medium">Objectives</P>
-            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white"><P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.objectives}</P></div>
+            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+              {#each $selectedResearchInfo.conceptNote.objectives.split('\n') as paragraph}
+              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {/each}
+            </div>
             <P size="lg" weight="medium">Methodology</P>
-            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white"><P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.methodology}</P></div>
+            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+              {#each $selectedResearchInfo.conceptNote.methodology.split('\n') as paragraph}
+              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {/each}
+            </div>
             <P size="lg" weight="medium">Technology Roadmap</P>
             <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white"><P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.technologyRoadmap}</P></div>
             <P size="lg" weight="medium">Expected Outputs (6Ps)</P>
