@@ -36,9 +36,6 @@ export class User{
     @prop({type: () => String})
     public suffix?: string;
 
-    @prop({type: () => Number})
-    public publishedResearchCount?: number;
-
     public static async login (this: ReturnModelType<typeof User>,userID: string, password: string, userType: string){
         const user = await this.findOne({ userID });
         if (user){
