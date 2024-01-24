@@ -84,14 +84,14 @@
           </SidebarItem>
           -->
           
-          <SidebarItem label="Notifications" on:click={$goto('main/personnel/notifications')} class="font-normal text-base rounded-md hover:bg-blue-100">
+          <SidebarItem label="Notifications" on:click={$goto('/main/personnel/notifications')} class="font-normal text-base rounded-md hover:bg-blue-100">
             <svelte:fragment slot="icon"><BellOutline color="blue" size="sm" /></svelte:fragment>
           </SidebarItem>
           
           <SidebarDropdownWrapper label="Admin Tools" isOpen class="font-normal text-base rounded-md hover:bg-blue-100">
             <svelte:fragment slot="icon"><UserSettingsOutline color="blue" /></svelte:fragment>
             <SidebarDropdownItem label="Admin Dashboard" on:click={$goto('/main/admin/checkProposals')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
-            <SidebarDropdownItem label="Sample" on:click={$goto('/main/admin/presentations')} href="/main/" class="font-normal text-base rounded-md hover:bg-blue-100"/>
+            <SidebarDropdownItem label="Sample" on:click={$goto('/main/admin/presentations')}  class="font-normal text-base rounded-md hover:bg-blue-100"/>
             <SidebarDropdownItem label="Create User Accounts" on:click={$goto('/main/admin/createAccount')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
           </SidebarDropdownWrapper>
         </SidebarGroup>
@@ -136,7 +136,7 @@
 </div>
 
 <!-- modal for create new research -->
-<Modal title="" bind:open={createNewResearch} size="xs" autoclose={false} outsideclose class="w-full">
+<Modal title="Create New Research" bind:open={createNewResearch} size="xs" autoclose={false} outsideclose class="w-full">
   <CreateNewResearchModal />
 </Modal>
 
