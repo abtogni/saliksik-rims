@@ -2,15 +2,14 @@ import { prop, getModelForClass } from "@typegoose/typegoose";
 
 
 export class Log{
+    @prop({ type: () => String})
+    public logName!: string;
 
     @prop({ type: () => String})
-    public logType?: string;
-
-    @prop({ type: () => String})
-    public logDescription?: string;
+    public logDescription!: string;
 
     @prop({ type: () => Array<string>})
-    public userIDs?: string[];
+    public userIDs!: string[];
 
 }
 
