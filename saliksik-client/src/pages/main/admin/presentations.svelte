@@ -99,7 +99,7 @@
           <Tabs activeClasses="bg-blue-100 shadow-lg border rounded-md border-blue-700" inactiveClasses="hover:bg-orange-50 shadow-lg border rounded-md " defaultClass="w-full " contentClass=" rounded-md ml-2">
             {#if $researches}
               {#each $researches as research, i}
-                <TabItem open class="w-1/4mb-3 ">
+                <TabItem open class="w-1/4 mb-3 ">
                   <div slot="title" class="flex flex-wrap gap-1 rounded-md p-2 z-50">
                     <div class="flex justify-between items-center gap-2 w-full">
                       <div class="flex justify-start items-center gap-2">
