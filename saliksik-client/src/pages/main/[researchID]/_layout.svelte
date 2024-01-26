@@ -19,7 +19,7 @@
       <NoStatus />
     {:else if $selectedResearchInfo.researchStatus === "Concept Note"}
       <ConceptNote />
-    {:else}{/if}
+    {/if}
   </div>
 
   <div class="flex items-center gap-2">
