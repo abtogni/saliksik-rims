@@ -19,14 +19,6 @@
     }));
   });
 
-  let countries = [
-    { value: "us", name: "United States" },
-    { value: "ca", name: "Canada" },
-    { value: "fr", name: "France" },
-    { value: "jp", name: "Japan" },
-    { value: "en", name: "England" },
-  ];
-
   function submit(e: Event) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -59,13 +51,13 @@
 <form class="flex flex-col gap-2" on:submit={submit}>
   <div class="gap-2">
     <P weight="semibold" size="base" for="researchLeaders">Research Leader</P>
-    <MultiSelect items={userList} bind:value={researchLeaders} required size="sm" class=""/>
+    <MultiSelect items={userList} bind:value={researchLeaders} required size="sm" class="rounded-md focus:ring-blue-700 focus:border-blue-700 text-gray-500"/>
     <Helper class="pt-2 text-orange-500"></Helper>
   </div>
 
-  <div class="gap-2">
-    <Label class="font-semibold text-base " for="researchTitle"><span>Research Title</span></Label>
-    <Textarea color="blue" rows="5" id="researchTitle" name="researchTitle" required class=""/>
+  <div class="gap-2 ">
+    <Label class="font-semibold text-base" for="researchTitle"><span>Research Title</span></Label>
+    <Textarea color="blue" rows="5" id="researchTitle" name="researchTitle" required unWrappedClass="rounded-md focus:ring-blue-700 focus:border-blue-700 text-gray-500"/>
   </div>
 
   <Button on:click={() => alert('Handle "success"')} type="submit" color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FolderPlusOutline size="sm" /> Create New Research</Button>
