@@ -2,6 +2,19 @@
   import { DateInput } from "date-picker-svelte";
   import { Modal, P, Checkbox, Avatar, Tooltip, Button, MultiSelect } from "flowbite-svelte";
   import { CalendarPlusSolid, CalendarMonthOutline, UserAddOutline, MessageCaptionOutline, FileCirclePlusOutline, CalendarEditOutline, MessageCaptionSolid, CloseOutline, MinusOutline, CirclePlusOutline, FileLinesOutline } from "flowbite-svelte-icons";
+  import { researches } from "../components/store";
+  import { onMount } from "svelte";
+  
+  $researches
+
+  var researchTitle: any[] = [], researchList:any;
+
+  onMount(async () => {
+     researchList = $researches.map((research: any) => ({
+      value: `${research._id}`,
+      name: `${research.researchTitle} `,
+    }));
+  });
 
   function submit(e: Event) {
     e.preventDefault();
@@ -53,7 +66,7 @@
     </div>
     <div class="flex justify-start items-center gap-2 p-2 rounded-md w-full">
       <div class="gap-2 w-full">
-        <MultiSelect required size="sm" class="" />
+        <MultiSelect required items={$researches} bind:value={researchTitle} size="sm" class="" />
       </div>
       <div class="flex items-center gap-2">
         <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap"><CirclePlusOutline size="sm" />Add</Button>
@@ -72,7 +85,7 @@
           <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
           <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
         </div>
-        <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">Insert Research Title</P>
+        <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">{$researches}</P>
       </div>
       <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><MinusOutline size="sm" /></Button>
     </div>
