@@ -1,4 +1,4 @@
-import { updateResearchList, updateUser, updateResearch, updateUserList } from "./store";
+import { updateResearchList, updateUser, updateResearch, updateUserList, updatePanelist } from "./store";
 
 
 //user fetching
@@ -49,4 +49,14 @@ export async function getResearchInfo(researchID: any) {
   }
 }
 
+
+//panelist fetching
+export async function getPanelists(){
+  try {
+    const response = await fetch("/api/research/getPanelists");
+    updatePanelist(await response.json());
+  } catch (e) {
+    console.error("Error fetching user:", e);
+  }
+}
 

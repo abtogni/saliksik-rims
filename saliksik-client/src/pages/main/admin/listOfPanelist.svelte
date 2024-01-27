@@ -1,47 +1,19 @@
 <script lang="ts">
   import { A, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Indicator, Input, Modal, P, Search, Select, Tooltip } from "flowbite-svelte";
   import { ArchiveOutline, BellActiveAltOutline, DotsHorizontalOutline, EyeOutline, FolderPlusOutline, MessageCaptionOutline, MessageDotsOutline, MessagesOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
-  import { getUserList } from "../../../components/fetch";
-  import { userList } from "../../../components/store";
+  import { getPanelists, getUserList } from "../../../components/fetch";
+  import { panelist } from "../../../components/store";
   import { onMount } from "svelte";
   import moment from "moment";
   import CreateNewPanelistModal from "../../../modals/CreateNewPanelistModal.svelte";
 
   onMount(async () => {
     try {
-      await getUserList();
+      await getPanelists();
     } catch (error) {
       console.error("Network error:", error);
     }
   });
-
-  let json = {};
-  let message: any;
-  function submit(e: Event) {
-    e.preventDefault();
-    const formData = new FormData(e.target as HTMLFormElement);
-    json = Object.fromEntries(formData.entries());
-
-    // Make an HTTP POST request to the API
-    fetch("/api/user/createAccount", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(json),
-    })
-      .then((response) => {
-        if (response.ok) {
-          message = "Created an account!";
-        } else {
-          // Handle errors or authentication failures
-          console.error("Registration failed");
-        }
-      })
-      .catch((error) => {
-        console.error("Network error:", error);
-      });
-  }
 
   //modal for create personnel account
   let createPanelist = false;
@@ -63,7 +35,7 @@
         <div class="flex justify-between items-center gap-2 w-full">
           <div class="flex items-center gap-2">
             <MessageCaptionOutline size="md" class="text-blue-700" />
-            <P size="xl" weight="bold" class="text-gray-900">00 <span class="text-gray-500">Panelist</span></P>
+            <P size="xl" weight="bold" class="text-gray-900">{$panelist.length} <span class="text-gray-500">Panelist</span></P>
           </div>
 
           <div class="flex items-center gap-2">
@@ -81,24 +53,27 @@
       <!--list of panelist-->
       <div class="grid grid-flow-row w-full shadow-lg border rounded-lg bg-white">
         <div class="grid grid-flow-row items-center gap-0">
-            <div class="flex justify-between items-center gap-2 px-4 py-3 border-b hover:bg-blue-50">
-              <div class="flex justify-start items-center gap-2">
-                <MessagesOutline size="sm" class="text-blue-700" />
-                <P size="base" weight="semibold" class="whitespace-nowrap">Insert Panelist Name</P>
-                <P size="base" weight="bold" class="text-gray-500">·</P>
-                <P weight="normal" size="sm" class="line-clamp-1 text-gray-500 w-96">Created in <span class="font-medium text-gray-500">when created</span></P>
-              </div>
-              <div class="flex justify-start items-center gap-0">
-                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
-                <Dropdown>
-                  <DropdownItem>
-                    <div class="flex justify-start items-center gap-2">
-                      <TrashBinOutline size="sm" class="text-blue-700" />Delete Panelist
-                    </div>
-                  </DropdownItem>
-                </Dropdown>
-              </div>
+          {#each $panelist as p}
+          <div class="flex justify-between items-center gap-2 px-4 py-3 border-b hover:bg-blue-50">
+            <div class="flex justify-start items-center gap-2">
+              <MessagesOutline size="sm" class="text-blue-700" />
+              <P size="base" weight="semibold" class="whitespace-nowrap">{`${p.firstName} ${p.lastName}`}</P>
+              <P size="base" weight="bold" class="text-gray-500">·</P>
+              <P weight="normal" size="sm" class="line-clamp-1 text-gray-500 w-96">Created in <span class="font-medium text-gray-500">{moment(p.createdAt).format('LL')}</span></P>
             </div>
+            <div class="flex justify-start items-center gap-0">
+              <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
+              <Dropdown>
+                <DropdownItem>
+                  <div class="flex justify-start items-center gap-2">
+                    <TrashBinOutline size="sm" class="text-blue-700" />Delete Panelist
+                  </div>
+                </DropdownItem>
+              </Dropdown>
+            </div>
+          </div>
+          {/each}
+            
         </div>
       </div>
 

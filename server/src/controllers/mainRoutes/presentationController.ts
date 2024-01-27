@@ -34,10 +34,10 @@ export const getPresentation = async (req : Request, res: Response) => {
 }
 
 export const createPresentation = async (req : Request, res: Response) => {
-    const { presentationDate, presentationTime, researchID, panelistID, comments, minutes } = req.body
+    const { presentationDate, researchIDs, panelistNames } = req.body
       
     try{
-        const presentation: Document = await PresentationModel.create({presentationDate, presentationTime, researchID, panelistID, comments, minutes, presentationStatus : 'Pending'});
+        const presentation: Document = await PresentationModel.create({presentationDate, researchIDs, panelistNames});
         res.status(200).json(presentation);
     }catch(err){
         res.status(400).json({err})
