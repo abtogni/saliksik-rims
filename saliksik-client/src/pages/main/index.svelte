@@ -2,8 +2,19 @@
   import { A, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Hr, Indicator, Modal, P, Search, Tooltip } from "flowbite-svelte";
   import { ArchiveOutline, DotsHorizontalOutline, EyeOutline, FolderOutline, FolderPlusOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline } from "flowbite-svelte-icons";
   import CreateNewResearchModal from "../../modals/CreateNewResearchModal.svelte";
-  import { researches } from "../../components/store";
+  import { researches, userList } from "../../components/store";
   import moment from "moment";
+    import { onMount } from "svelte";
+
+  let newUserList: any[];
+
+  onMount(async () => {
+     newUserList = $userList.map((user: any) => ({
+      id: `${user._id}`,
+      name: `${user.firstName} ${user.lastName}`,
+      avatar: user.avatar
+    }));
+  });
 
   //modal for create new research
   let createNewResearch = false;
@@ -90,14 +101,19 @@
               <div class="flex justify-between items-center gap-2 w-full">
                 <div class="flex justify-start items-center gap-2">
                   <div class="flex items-center gap-0">
-                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-                    <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-                    <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-                    <Tooltip arrow={false}>Danny Casimero</Tooltip>
-                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-                    <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                    {#each research.researchLeaders as member}
+                        {#if newUserList}
+                            {#each newUserList as user}
+                              {#if user.id === member}
+                                <div class="flex items-center gap-0">
+                                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">{user.avatar}</Avatar>
+                                  <Tooltip arrow={false}>{user.name}</Tooltip>
+                                </div>
+                              {/if}
+                            {/each}
+                          {/if}
+                      {/each}
+
                   </div>
 
                   <div class="flex justify-start items-center gap-2">
@@ -143,11 +159,11 @@
               </div>
               <P weight="semibold" size="sm" class="line-clamp-2"><A href={`/main/${research._id}`} class="text-black">{research.researchTitle}</A></P>
             </div>
-          {/each}
-        {/if}
-      </div>
-    </div>
+        {/each}
+      {/if}
   </div>
+</div>
+      
 
   <!-- modal for create new research -->
   <Modal title="Create New Research" bind:open={createNewResearch} size="xs" autoclose={false} outsideclose class="w-full">
