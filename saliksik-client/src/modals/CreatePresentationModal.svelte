@@ -49,16 +49,16 @@
     <div class="flex justify-start items-center gap-2">
       <FileCirclePlusOutline size="sm" class="text-blue-700" />
       <P for="researchLeaders" weight="bold" size="base" class="whitespace-nowrap text-gray-700">Add Research</P>
-      <div class="flex justify-start items-center gap-2 p-2 rounded-md w-full">
-        <div class="gap-2 w-full">
-          <MultiSelect required size="sm" class="" />
-        </div>
-        <div class="flex items-center gap-2">
-          <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap"><CirclePlusOutline size="sm" />Add</Button>
-        </div>
+      
+    </div>
+    <div class="flex justify-start items-center gap-2 p-2 rounded-md w-full">
+      <div class="gap-2 w-full">
+        <MultiSelect required size="sm" class="" />
+      </div>
+      <div class="flex items-center gap-2">
+        <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap"><CirclePlusOutline size="sm" />Add</Button>
       </div>
     </div>
-
     <div class="flex justify-between items-center p-2 rounded-md hover:bg-blue-50">
       <div class="flex justify-between items-center gap-2">
         <FileLinesOutline size="sm" class="text-blue-700" />
@@ -85,13 +85,14 @@
         <MessageCaptionOutline size="sm" class="text-blue-700" />
         <P for="researchLeaders" weight="bold" size="base" class="whitespace-nowrap text-gray-700">Add Panelist</P>
       </div>
-      <div class="flex justify-start items-center gap-2 p-2 rounded-md w-full">
-        <div class="gap-2 w-full">
-          <MultiSelect required size="sm" class="" />
-        </div>
-        <div class="flex items-center gap-2">
-          <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap"><CirclePlusOutline size="sm" />Add</Button>
-        </div>
+      
+    </div>
+    <div class="flex justify-start items-center gap-2 p-2 rounded-md w-full">
+      <div class="gap-2 w-full">
+        <MultiSelect required size="sm" class="" />
+      </div>
+      <div class="flex items-center gap-2">
+        <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap"><CirclePlusOutline size="sm" />Add</Button>
       </div>
     </div>
     <div class="flex justify-between items-center p-2 rounded-md hover:bg-blue-50">
