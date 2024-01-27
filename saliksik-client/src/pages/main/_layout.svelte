@@ -92,7 +92,8 @@
             <svelte:fragment slot="icon"><UserSettingsOutline color="blue" /></svelte:fragment>
             <SidebarDropdownItem label="Admin Dashboard" on:click={$goto('/main/admin/checkProposals')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
             <SidebarDropdownItem label="Sample" on:click={$goto('/main/admin/presentations')}  class="font-normal text-base rounded-md hover:bg-blue-100"/>
-            <SidebarDropdownItem label="Create User Accounts" on:click={$goto('/main/admin/createAccount')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
+            <SidebarDropdownItem label="User Accounts" on:click={$goto('/main/admin/createAccount')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
+            <SidebarDropdownItem label="List Of Panelist" on:click={$goto('/main/admin/listOfPanelist')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
           </SidebarDropdownWrapper>
         </SidebarGroup>
         <!---->
