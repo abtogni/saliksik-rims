@@ -12,6 +12,12 @@ export class Research {
 
     @prop({ type: () => conceptNote})
     public conceptNote?: conceptNote;
+
+    @prop({ type: () => Presentation})
+    public initialPresentation?: Presentation;
+
+    @prop({ type: () => Presentation})
+    public finalPresentation?: Presentation;
 }
 
 class conceptNote {
@@ -54,6 +60,11 @@ class conceptNote {
     @prop({ type: () => String })
     public workPlan!: string;
 
+}
+
+class Presentation{
+    @prop({ type: () => String})
+    public comments?: string;
 }
 
 export const ResearchModel = getModelForClass(Research, { schemaOptions: { timestamps: true } });

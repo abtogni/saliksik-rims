@@ -6,16 +6,10 @@ export class Presentation{
     public presentationDate!: Date;
 
     @prop({ type: () => Array<string>})
-    public researchIDs: string[] = [];
+    public researchIDs!: string[];
 
     @prop({ type: () => Array<string>})
-    public panelistID?: string[];
-
-    @prop({ type: () => String})
-    public comments?: string;
-
-    @prop({ type: () => Array<string>})
-    public minutes?: string[];
+    public panelistNames?: string[];
 
 }
 
