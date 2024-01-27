@@ -2,7 +2,7 @@
   import { Alert, Button, Card, FloatingLabelInput, Helper, Input, P, Textarea, Toolbar, ToolbarButton, ToolbarGroup } from "flowbite-svelte";
   import { CodeOutline, FaceGrinOutline, FileCirclePlusOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, UserAddOutline } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
-  import { selectedResearchInfo, updateResearch } from "../../../components/store";
+  import { selectedResearchInfo } from "../../../components/store";
   import { goto } from "@roxi/routify";
 
   
@@ -26,7 +26,6 @@
     })
       .then((response) => {
         if (response.ok) {
-          //To edit
           $goto("/main/");
         } else {
           console.error("Login failed");
