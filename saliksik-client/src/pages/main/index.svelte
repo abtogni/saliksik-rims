@@ -11,7 +11,7 @@
 
 <main class="p-4">
   <div class="flex justify-center gap-2 bg-gray-50">
-    <div class="grid grid-flow-row items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
+    <div class="grid grid-flow-row items-center gap-2 w-11/12 sm:w-full md:w-full lg:w-11/12 xl:w-11/12 2xl:w-11/12">
       <!--helper card-->
       <Alert dismissable color="blue" class="border-l-8">
         <div class="flex items-center gap-2">
@@ -25,7 +25,7 @@
         <div class="flex justify-between items-center gap-2 w-full">
           <div class="flex items-center gap-2">
             <FolderOutline size="md" class="text-blue-700" />
-            <P size="xl" weight="bold" class="text-gray-900">00 <span class="text-gray-500">Researches</span></P>
+            <P size="xl" weight="bold" class="text-gray-900">{$researches.length} <span class="text-gray-500">Researches</span></P>
           </div>
           <div class="flex items-center gap-2">
             <Button on:click={() => (createNewResearch = true)} type="submit" color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FolderPlusOutline size="sm" /> Create New Research</Button>
@@ -73,10 +73,13 @@
               <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Rejected</Checkbox>
               </DropdownItem>
+              <!--archive
               <DropdownItem class=" rounded-md hover:bg-blue-50">
                 <Checkbox color="blue" class="font-medium text-sm w-full  text-gray-500 ">Archive</Checkbox>
               </DropdownItem>
+              -->
             </Dropdown>
+            
           </div>
         </div>
 
@@ -104,41 +107,41 @@
                     <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
                       <P weight="normal" size="sm" class=" text-gray-500">Last Updated in <span class="font-medium text-gray-500">January 21, 2023</span></P>
                     </Tooltip>
-                    <Badge border large color="blue" class="flex items-center gap-2">
-                      <Indicator color="blue" size="md" class="" />Concept Note Approval
-                    </Badge>
                   </div>
                   <div class="flex justify-start items-center gap-2">
                     <P size="base" weight="bold" class="text-gray-500">·</P>
                     <P weight="normal" size="sm" class=" text-gray-500">Created in <span class="font-medium text-gray-500">{moment(research.updatedAt).format("lll")}</span></P>
                   </div>
                 </div>
-                <StarOutline size="sm" class="text-blue-700" />
-                <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-                  <P weight="normal" size="sm" class="font-medium text-gray-500">Not Starred</P>
-                </Tooltip>
-                <StarSolid size="sm" class="text-blue-700" />
-                <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-                  <P weight="normal" size="sm" class="font-medium text-gray-500">Starred</P>
-                </Tooltip>
-                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
-                <Dropdown>
-                  <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                    <StarOutline size="sm" class="text-blue-700" />Star
-                    <StarSolid size="sm" class="text-blue-700" />Starred
-                  </DropdownItem>
-                  <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                    <EyeOutline size="sm" class="text-blue-700" />View Research
-                  </DropdownItem>
-                  <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                    <ArchiveOutline size="sm" class="text-blue-700" />Archive Research
-                  </DropdownItem>
-                  <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
-                    <TrashBinOutline size="sm" class="text-blue-700" />Delete Research
-                  </DropdownItem>
-                </Dropdown>
+                <div class="flex justify-end items-center gap-1">
+                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><StarOutline size="sm" /></Button>
+                  <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                    <P weight="normal" size="sm" class="font-medium text-gray-500">Not Starred</P>
+                  </Tooltip>
+                  <!--starred
+                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><StarSolid size="sm" /></Button>
+                  <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                    <P weight="normal" size="sm" class="font-medium text-gray-500">Starred</P>
+                  </Tooltip>
+                  -->
+                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
+                  <Dropdown>
+                    <DropdownItem href={`/main/${research._id}`} class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                      <EyeOutline size="sm" class="text-blue-700" />View Research
+                    </DropdownItem>
+                    <!--archive
+                    <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                      <ArchiveOutline size="sm" class="text-blue-700" />Archive Research
+                    </DropdownItem>
+                    -->
+                    <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
+                      <TrashBinOutline size="sm" class="text-blue-700" />Delete Research
+                    </DropdownItem>
+                  </Dropdown>
+                </div>
+                
               </div>
-              <P weight="semibold" size="sm" class="line-clamp-2"><A href="" class="text-black">{research.researchTitle}</A></P>
+              <P weight="semibold" size="sm" class="line-clamp-2"><A href={`/main/${research._id}`} class="text-black">{research.researchTitle}</A></P>
             </div>
           {/each}
         {/if}

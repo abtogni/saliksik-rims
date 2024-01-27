@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, Avatar, Card, Button, Modal, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, Alert, Checkbox, MultiSelect, Helper } from "flowbite-svelte";
-  import { CalendarEditOutline, CalendarMonthOutline, CalendarPlusSolid, CirclePlusOutline, ClipboardOutline, CloseOutline, DotsHorizontalOutline, EditOutline, FileCirclePlusOutline, FileLinesOutline, FilterOutline, InfoCircleOutline, MapLocationOutline, MessageCaptionOutline, MessageCaptionSolid, MinusOutline, QuestionCircleOutline, SortOutline, TrashBinOutline, UsersGroupOutline } from "flowbite-svelte-icons";
+  import { TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, Avatar, Card, Button, Modal, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, Alert, Checkbox, MultiSelect, Helper, Accordion, AccordionItem } from "flowbite-svelte";
+  import { ArchiveOutline, CalendarEditOutline, CalendarMonthOutline, CalendarPlusSolid, CheckCircleOutline, CirclePlusOutline, ClipboardOutline, CloseOutline, DotsHorizontalOutline, EditOutline, EyeOutline, FileCirclePlusOutline, FileLinesOutline, FilterOutline, InfoCircleOutline, MapLocationOutline, MessageCaptionOutline, MessageCaptionSolid, MinusOutline, QuestionCircleOutline, SortOutline, TrashBinOutline, UsersGroupOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import CreatePresentationModal from '../../../modals/CreatePresentationModal.svelte';
   import { researches } from "../../../components/store";
@@ -424,7 +424,7 @@
     <TabItem open>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Initial Presentation</div>
       <div class="flex justify-center gap-2 bg-gray-50">
-        <div class="grid grid-flow-row col-start-2 col-span-3 items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
+        <div class="grid grid-flow-row col-start-2 col-span-3 items-center gap-2 w-11/12 sm:w-full md:w-full lg:w-11/12 xl:w-11/12 2xl:w-11/12 ">
           <Alert dismissable color="blue" class="border-l-8 w-full  mb-2">
             <div class="flex items-center gap-2">
               <QuestionCircleOutline slot="icon" size="sm" />
@@ -437,7 +437,7 @@
           <div class="flex justify-between items-center w-full">
             <div class="flex items-center gap-2">
               <FileLinesOutline size="md" class="text-blue-700" />
-              <P weight="bold" size="xl" class="text-gray-900">00 <span class="text-gray-500">Researches Viable for Initial Presentation</span></P>
+              <P weight="bold" size="xl" class="text-gray-900">00 <span class="text-gray-500">Researches For Initial Presentation</span></P>
             </div>
 
             <div class="flex items-center gap-2">
@@ -445,26 +445,28 @@
             </div>
           </div>
 
-          
-          
-
-          <!--card presenter list-->
-          <div class="flex justify-center items-center gap-2 shadow-lg border rounded-md p-3">
-            <P size="lg" weight="medium" class="text-gray-500">No set schedule</P>
-          </div>
-
           <!--card schedule-->
-          <div class="grid grid-flow-row gap-2 shadow-lg border rounded-md p-3">
+          <div class="grid grid-flow-row w-full shadow-lg border rounded-lg bg-white">
             <!--card schedule header-->
-            <div class="grid grid-flow-row items-center gap-2 p-2">
+            <div class="grid grid-flow-row items-center gap-2 px-4 py-3 border-b">
               <div class="flex justify-between items-center gap-2">
                 <div class="flex justify-start items-center gap-2">
                   <CalendarMonthOutline size="md" class="text-blue-700" />
                   <P size="lg" weight="bold" class="uppercase">Sunday, January 21, 2023 at 1:30 PM</P>
                 </div>
 
-                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
+                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
                 <Dropdown>
+                  <DropdownItem>
+                    <div class="flex justify-start items-center gap-2">
+                      <FileCirclePlusOutline size="sm" class="text-blue-700" />Add Research
+                    </div>
+                  </DropdownItem>
+                  <DropdownItem>
+                    <div class="flex justify-start items-center gap-2">
+                      <CalendarEditOutline size="sm" class="text-blue-700" />Change Schedule
+                    </div>
+                  </DropdownItem>
                   <DropdownItem>
                     <div class="flex justify-start items-center gap-2">
                       <TrashBinOutline size="sm" class="text-blue-700" />Delete Schedule
@@ -481,56 +483,150 @@
 
                 <div class="flex justify-start items-center gap-2">
                   <UsersGroupOutline size="sm" class="text-blue-700" />
-                  <P weight="semibold" size="base" class="line-clamp-1 text-gray-500">5 <span class="font-normal">presenters going</span></P>
+                  <P weight="semibold" size="base" class="line-clamp-1 text-gray-500">00 <span class="font-normal">presenters going</span></P>
                 </div>
               </div>
-            </div>
-            <div class="flex justify-start items-center gap-2">
-              <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileCirclePlusOutline size="sm" />Add Research</Button>
-              <Button outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><CalendarEditOutline size="sm" />Change Schedule</Button>
             </div>
 
-            <!--card presenter-->
-            <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-orange-50">
-              <div class="flex justify-between items-center gap-2 w-full">
-                <div class="flex justify-start items-center gap-2">
-                  <div class="flex items-center gap-0">
-                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-                    <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-                    <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-                    <Tooltip arrow={false}>Danny Casimero</Tooltip>
-                    <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-                    <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
-                  </div>
-                  <div class="flex justify-start items-center gap-2">
-                    <Badge border large class="flex items-center gap-2">
-                      <Indicator color="orange" size="md" class="" />Waiting for Reply
-                    </Badge>
-                    <Badge border large color="blue" class="flex items-center gap-2">
-                      <Indicator color="blue" size="md" class="" />Going
-                    </Badge>
-                    <Badge border large color="red" class="flex items-center gap-2">
-                      <Indicator color="red" size="md" class="" />Not Going
-                    </Badge>
-                  </div>
-                </div>
-                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
-                <Dropdown>
-                  <DropdownItem>
-                    <div class="flex justify-start items-center gap-2">
-                      <TrashBinOutline size="sm" class="text-blue-700" />Delete Schedule
+            <Accordion flush>
+              {#if $researches}
+                {#each $researches as research, i}
+                  <AccordionItem paddingFlush="" >
+                    <div slot="header" class="flex flex-wrap gap-2 px-4 py-3 hover:bg-blue-50">
+                      <div class="flex justify-between items-center gap-2 w-full">
+                        <div class="flex justify-start items-center gap-2">
+                          <div class="flex items-center gap-0">
+                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
+                            <Tooltip arrow={false}>Agnes Reyes</Tooltip>
+                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
+                            <Tooltip arrow={false}>June Arreb Danila</Tooltip>
+                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
+                            <Tooltip arrow={false}>Danny Casimero</Tooltip>
+                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
+                            <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                          </div>
+    
+                          <div class="flex justify-start items-center gap-2">
+                            <Badge border large class="flex items-center gap-2">
+                              <Indicator color="orange" size="md" class="" />Waiting for Reply
+                            </Badge>
+                            <Badge border large color="blue" class="flex items-center gap-2">
+                              <Indicator color="blue" size="md" class="" />Going
+                            </Badge>
+                            <Badge border large color="red" class="flex items-center gap-2">
+                              <Indicator color="red" size="md" class="" />Not Going
+                            </Badge>
+                          </div>
+                          <div class="flex items-center gap-2">
+                            <Button on:click={() => (addSchedule = true)} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><MessageCaptionOutline size="sm" />Add Panelist Comment</Button>
+                          </div>
+                        </div>
+                        <div class="flex justify-end items-center gap-2">
+                          <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><EyeOutline size="sm" /></Button>
+                          <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                            <P weight="normal" size="sm" class="font-medium text-gray-500">Full View</P>
+                          </Tooltip>
+    
+                          <Button outline color="blue" size="sm"  class="flex items-center rounded-full border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
+                          <Dropdown>
+                            <DropdownItem>
+                              <div class="flex justify-start items-center gap-2">
+                                <TrashBinOutline size="sm" class="text-blue-700" />Remove Research
+                              </div>
+                            </DropdownItem>
+                          </Dropdown>
+                        </div>
+                      </div>
+                      <div class="flex justify-start items-start w-full">
+                        <P weight="semibold" size="sm" class="line-clamp-2">{research.researchTitle}</P>
+                      </div>
+                      
+                      
                     </div>
-                  </DropdownItem>
-                </Dropdown>
-              </div>
-              <P weight="semibold" size="base" class="line-clamp-3">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</P>
-              <div class="flex items-center gap-2">
-                <Button on:click={() => (addSchedule = true)} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><MessageCaptionOutline size="sm" />Add Panelist Comment</Button>
-              </div>
+    
+                    <div slot="arrowup"></div>
+                    <span slot="arrowdown"> </span>
+    
+                    <div class="flex flex-wrap justify-start items-center gap-2 p-3 w-full h-96 overflow-auto">
+                      <!--concept note overview card-->
+                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 bg-white">
+                        <div class="flex items-start gap-2">
+                          <div class="grid grid-flow-row items-start gap-2">
+                            <div class="flex flex-wrap justify-start items-start gap-2">
+                              <P size="sm" weight="medium">Implementing Agency/Department:</P>
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{research.conceptNote.implementingDept}</Badge>
+                            </div>
+                            <div class="flex flex-wrap justify-start items-start gap-2">
+                              <P size="sm" weight="medium">Cooperating Agency:</P>
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500"></Badge>
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">Vice-President for Academic Affairs</Badge>
+                            </div>
+                            <div class="flex flex-wrap justify-start items-start gap-2">
+                              <P size="sm" weight="medium">Site/s of Implementation:</P>
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.siteImplementation}</Badge>
+                            </div>
+                            <div class="flex flex-wrap justify-start items-start gap-2">
+                              <P size="sm" weight="medium">Project Duration:</P>
+                              <P size="sm" weight="normal" class="text-gray-500">{moment($selectedResearchInfo.conceptNote.projectDuration).format("LL")}</P>
+                            </div>
+                            <div class="flex flex-wrap justify-start items-start gap-2">
+                              <P size="sm" weight="medium">Total Project Cost:</P>
+                              <P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.totalCost}</P>
+                            </div>
+                            <div class="flex flex-wrap justify-start items-start gap-2">
+                              <P size="sm" weight="medium">Funding Source:</P>
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.fundingSource}</Badge>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+    
+                      <P size="lg" weight="medium">Project Description</P>
+                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.description}</P>
+                      </div>
+                      <P size="lg" weight="medium">Significance</P>
+                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.significance}</P>
+                      </div>
+                      <P size="lg" weight="medium">Objectives</P>
+                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.objectives}</P>
+                      </div>
+                      <P size="lg" weight="medium">Methodology</P>
+                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.methodology}</P>
+                      </div>
+                      <P size="lg" weight="medium">Technology Roadmap</P>
+                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.technologyRoadmap}</P>
+                      </div>
+                      <P size="lg" weight="medium">Expected Outputs (6Ps)</P>
+                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.expectedOutput}</P>
+                      </div>
+                      <P size="lg" weight="medium">Work Plan</P>
+                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-2 bg-white">
+                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.workPlan}</P>
+                      </div>
+                      <div class="flex justify-between items-center gap-2 w-full">
+                        <Button on:click={() => (approveConceptNote = true)} color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"><CheckCircleOutline size="sm" /> Approve</Button>
+                        <Button on:click={() => (rejectConceptNote = true)} outline color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"
+                          ><svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                          </svg> Reject</Button>
+                      </div>
+                    </div>
+                  </AccordionItem>
+                {/each}
+              {/if}
+            </Accordion>
+            <!--card presenter-->
+            
+            <div class="flex flex-wrap gap-2 px-4 py-3">
+              <Button on:click={() => (sendNoticeToPresent = true)} color="blue" size="md" class="rounded-md w-full">Send Notice to Present</Button>
             </div>
-            <Button on:click={() => (sendNoticeToPresent = true)} color="blue" size="md" class="rounded-md w-full">Send Notice to Present</Button>
+            
 
             <!--modal send notice to present-->
             <Modal title="Send Notice to Present" bind:open={sendNoticeToPresent} size="xs" autoclose class="w-full">
@@ -677,7 +773,7 @@
 
   <!--modal for create schedule-->
   <Modal title="Create Schedule" bind:open={addSchedule} size="md" autoclose={false} outsideclose class="rounded-md w-full">
-    <CreatePresentationModal/>
+    <CreatePresentationModal />
   </Modal>
   <div class="h-96"></div>
   <div class="h-96"></div>

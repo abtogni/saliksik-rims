@@ -35,13 +35,13 @@
       <!--card researches active-->
       <div class="grid grid-flow-row w-full shadow-lg border rounded-lg bg-white">
         <!--card research-->
-        <Accordion flush>
+        <Accordion flush >
           {#if $researches}
             {#each $researches as research}
               <AccordionItem paddingFlush="" open>
                 <!--accordionItem header-->
-                <div slot="header" class="flex flex-wrap gap-0 px-4 py-3 hover:bg-blue-50">
-                  <div class="flex justify-start items-center gap-2 w-full">
+                <div slot="header" class="flex flex-wrap gap-2 px-4 py-3 hover:bg-blue-50">
+                  <div class="flex justify-start items-center gap-2">
                     <div class="flex items-center gap-2">
                       <CheckCircleOutline size="md" class="text-blue-700" />
                       <P size="xl" weight="bold" class="text-gray-900">Notice To Proceed</P>
@@ -58,28 +58,28 @@
                 <span slot="arrowdown"> </span>
 
                 <!--accordionItem content-->
-                <div class="flex flex-wrap justify-start items-center gap-2 p-3 w-full h-96 overflow-auto">
+                <div class="flex flex-wrap justify-start items-start gap-2 p-3 w-full h-96 overflow-auto">
                   <!--concept note overview card-->
 
-                  <P size="lg" weight="medium">Project Description</P>
                   <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
                     <div>
                       <P weight="normal" size="sm" class="text-center text-gray-500">This research hereto entitled:</P>
                       <P weight="medium" size="sm" class="text-center text-gray-900">{research.researchTitle}</P>
                     </div>
-
+                    
                     <div>
                       <P weight="normal" size="sm" class="text-center text-gray-500">Prepared and submitted by:</P>
                       <P weight="medium" size="sm" class="text-center text-gray-900">Insert Research Leader Names</P>
-                    </div>
-
-                    <div>
-                      <P weight="normal" size="sm" class="text-center text-gray-500">Has been examined and is recommended for acceptance and approval to proceed to the next phase of research process.</P>
-                    </div>
-
-                    <div>
-                      <P weight="normal" size="sm" class="text-center text-gray-500">Approved by the University Research Center on <span class="font-medium text-gray-900">Insert timestamp when approved</span></P>
-                    </div>
+                      </div>
+                    
+                      <div>
+                        <P weight="normal" size="sm" class="text-center text-gray-500">Has been examined and is recommended for acceptance and approval to proceed to the next phase of research process.</P>
+                        </div>
+                    
+                        <div>
+                          <P weight="normal" size="sm" class="text-center text-gray-500">Approved by the University Research Center on <span class="font-medium text-gray-900">Insert timestamp when approved</span></P>
+                        </div>
+                    
                   </div>
                 </div>
               </AccordionItem>
