@@ -115,48 +115,49 @@
           </div>
           {#if $selectedResearchInfo}
             <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-              <P size="lg" weight="medium">{$selectedResearchInfo.researchTitle}</P>
+              
               <div class="flex items-center gap-2">
                 <div class="flex items-center gap-0">
                   {#each $selectedResearchInfo.researchLeaders as member}
-                        {#if $userList}
-                            {#each $userList as user}
-                              {#if user._id === member}
-                                <div class="flex items-center gap-0">
-                                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">{user.avatar}</Avatar>
-                                  <Tooltip arrow={false}>{`${user.firstName} ${user.lastName}`}</Tooltip>
-                                </div>
-                              {/if}
-                            {/each}
-                          {/if}
+                    {#if $userList}
+                      {#each $userList as user}
+                        {#if user._id === member}
+                          <div class="flex items-center gap-0">
+                            <Avatar border size="xs" class="text-xs font-medium ring-blue-700">{user.avatar}</Avatar>
+                            <Tooltip arrow={false}>{`${user.firstName} ${user.lastName}`}</Tooltip>
+                          </div>
+                        {/if}
                       {/each}
+                    {/if}
+                  {/each}
                 </div>
               </div>
+              <P size="base" weight="medium">{$selectedResearchInfo.researchTitle}</P>
 
               <div class="flex items-start gap-2">
                 <div class="grid grid-flow-row items-start gap-2">
                   <div class="flex flex-wrap justify-start items-start gap-2">
-                    <P size="base" weight="medium">Implementing Agency/Department:</P>
+                    <P size="sm" weight="medium">Implementing Agency/Department:</P>
                     <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.implementingDept}</Badge>
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
-                    <P size="base" weight="medium">Cooperating Agency:</P>
+                    <P size="sm" weight="medium">Cooperating Agency:</P>
                     <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.coopAgency}</Badge>
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
-                    <P size="base" weight="medium">Site/s of Implementation:</P>
+                    <P size="sm" weight="medium">Site/s of Implementation:</P>
                     <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.siteImplementation}</Badge>
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
-                    <P size="base" weight="medium">Project Duration:</P>
+                    <P size="sm" weight="medium">Project Duration:</P>
                     <P size="sm" weight="normal" class="text-gray-500">{moment($selectedResearchInfo.conceptNote.projectDuration).format("LL")}</P>
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
-                    <P size="base" weight="medium">Total Project Cost:</P>
+                    <P size="sm" weight="medium">Total Project Cost:</P>
                     <P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.totalCost}</P>
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
-                    <P size="base" weight="medium">Funding Source:</P>
+                    <P size="sm" weight="medium">Funding Source:</P>
                     <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.fundingSource}</Badge>
                   </div>
                 </div>

@@ -4,15 +4,15 @@
   import CreateNewResearchModal from "../../modals/CreateNewResearchModal.svelte";
   import { researches, userList } from "../../components/store";
   import moment from "moment";
-    import { onMount } from "svelte";
+  import { onMount } from "svelte";
 
   let newUserList: any[];
 
   onMount(async () => {
-     newUserList = $userList.map((user: any) => ({
+    newUserList = $userList.map((user: any) => ({
       id: `${user._id}`,
       name: `${user.firstName} ${user.lastName}`,
-      avatar: user.avatar
+      avatar: user.avatar,
     }));
   });
 
@@ -90,7 +90,6 @@
               </DropdownItem>
               -->
             </Dropdown>
-            
           </div>
         </div>
 
@@ -102,20 +101,23 @@
                 <div class="flex justify-start items-center gap-2">
                   <div class="flex items-center gap-0">
                     {#each research.researchLeaders as member}
-                        {#if newUserList}
-                            {#each newUserList as user}
-                              {#if user.id === member}
-                                <div class="flex items-center gap-0">
-                                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">{user.avatar}</Avatar>
-                                  <Tooltip arrow={false}>{user.name}</Tooltip>
-                                </div>
-                              {/if}
-                            {/each}
+                      {#if newUserList}
+                        {#each newUserList as user}
+                          {#if user.id === member}
+                            <div class="flex items-center gap-0">
+                              <Avatar border size="xs" class="text-xs font-medium ring-blue-700">{user.avatar}</Avatar>
+                              <Tooltip arrow={false}>{user.name}</Tooltip>
+                            </div>
                           {/if}
-                      {/each}
-
+                        {/each}
+                      {/if}
+                    {/each}
                   </div>
-
+                  <P weight="semibold" size="sm" class="line-clamp-2"><A href={`/main/${research._id}`} class="text-black">{research.researchTitle}</A></P>
+                 
+                  
+                </div>
+                <div class="flex justify-end items-center gap-1">
                   <div class="flex justify-start items-center gap-2">
                     <Badge border large class="flex items-center gap-2">
                       <Indicator color="orange" size="md" class="" />No Status
@@ -126,15 +128,13 @@
                   </div>
                   <div class="flex justify-start items-center gap-2">
                     <P size="base" weight="bold" class="text-gray-500">·</P>
-                    <P weight="normal" size="sm" class=" text-gray-500">Created in <span class="font-medium text-gray-500">{moment(research.updatedAt).format("lll")}</span></P>
+                    <P weight="normal" size="sm" class="whitespace-nowrap line-clamp-2 text-gray-500">Created in <span class="font-medium text-gray-500">{moment(research.updatedAt).format("lll")}</span></P>
                   </div>
-                </div>
-                <div class="flex justify-end items-center gap-1">
+                  <!--star research
                   <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><StarOutline size="sm" /></Button>
                   <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
                     <P weight="normal" size="sm" class="font-medium text-gray-500">Not Starred</P>
                   </Tooltip>
-                  <!--starred
                   <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><StarSolid size="sm" /></Button>
                   <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
                     <P weight="normal" size="sm" class="font-medium text-gray-500">Starred</P>
@@ -155,19 +155,19 @@
                     </DropdownItem>
                   </Dropdown>
                 </div>
-                
               </div>
-              <P weight="semibold" size="sm" class="line-clamp-2"><A href={`/main/${research._id}`} class="text-black">{research.researchTitle}</A></P>
+              
             </div>
-        {/each}
-      {/if}
-  </div>
-</div>
-      
+          {/each}
+        {/if}
+      </div>
+    </div>
 
-  <!-- modal for create new research -->
-  <Modal title="Create New Research" bind:open={createNewResearch} size="xs" autoclose={false} outsideclose class="w-full">
-    <CreateNewResearchModal />
-  </Modal>
+    <!-- modal for create new research -->
+    <Modal title="Create New Research" bind:open={createNewResearch} size="xs" autoclose={false} outsideclose class="w-full">
+      <CreateNewResearchModal />
+    </Modal>
+  </div>
+  <div class="h-96"></div>
   <div class="h-96"></div>
 </main>
