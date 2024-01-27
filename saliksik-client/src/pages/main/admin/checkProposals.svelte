@@ -497,7 +497,7 @@
               {#if $researches}
                 {#each $researches as research, i}
                   <AccordionItem paddingFlush="" >
-                    <div slot="header" class="flex flex-wrap gap-2 px-4 py-3 hover:bg-blue-50">
+                    <div slot="header" class="flex flex-wrap gap-2 px-4 py-3 w-full hover:bg-blue-50">
                       <div class="flex justify-between items-center gap-2 w-full">
                         <div class="flex justify-start items-center gap-2">
                           <div class="flex items-center gap-0">
