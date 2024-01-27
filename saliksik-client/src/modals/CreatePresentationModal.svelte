@@ -7,7 +7,7 @@
 
   var researchTitles: any[] = [],
     researchList: any,
-    addedResearches: any;
+    addedResearches: any, presentationDate:any;
 
   onMount(async () => {
     researchList = $researches.map((research: any) => ({
@@ -68,7 +68,7 @@
     </div>
     <div class="flex justify-start items-center gap-2 px-2 py-0">
       <CalendarWeekOutline size="sm" class="text-blue-700" />
-      <DateInput format="yyyy-MM-dd" placeholder="yyyy-MM-dd" required --date-picker-highlight-border="#1d4ed8" --date-picker-highlight-shadow="none" --date-input-width="100%" class="w-full rounded-md text-gray-500  " />
+      <DateInput format="yyyy-MM-dd" bind:value={presentationDate} placeholder="yyyy-MM-dd" required --date-picker-highlight-border="#1d4ed8" --date-picker-highlight-shadow="none" --date-input-width="100%" class="w-full rounded-md text-gray-500  " />
     </div>
   </div>
 
