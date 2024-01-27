@@ -4,7 +4,7 @@
   import { goto } from "@roxi/routify";
   import moment from "moment";
   import { DateInput } from "date-picker-svelte";
-  import { selectedResearchInfo, updateResearch } from "../../../components/store";
+  import { selectedResearchInfo, userList } from "../../../components/store";
   import { getResearchInfo } from "../../../components/fetch";
   import { onMount } from "svelte";
   import Research from "../profile/Research.svelte";
@@ -118,14 +118,18 @@
               <P size="lg" weight="medium">{$selectedResearchInfo.researchTitle}</P>
               <div class="flex items-center gap-2">
                 <div class="flex items-center gap-0">
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-                  <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-                  <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-                  <Tooltip arrow={false}>Danny Casimero</Tooltip>
-                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-                  <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
+                  {#each $selectedResearchInfo.researchLeaders as member}
+                        {#if $userList}
+                            {#each $userList as user}
+                              {#if user._id === member}
+                                <div class="flex items-center gap-0">
+                                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">{user.avatar}</Avatar>
+                                  <Tooltip arrow={false}>{`${user.firstName} ${user.lastName}`}</Tooltip>
+                                </div>
+                              {/if}
+                            {/each}
+                          {/if}
+                      {/each}
                 </div>
               </div>
 
