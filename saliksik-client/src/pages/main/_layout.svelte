@@ -96,7 +96,7 @@
             <SidebarDropdownItem label="List Of Panelist" on:click={$goto('/main/admin/listOfPanelist')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
           </SidebarDropdownWrapper>
         </SidebarGroup>
-        <!---->
+        <!--starred researches
         <SidebarGroup border class="truncate ...">
           {#if $researches}
             <SidebarDropdownWrapper label="Starred" isOpen class="font-normal text-base rounded-md hover:bg-blue-100">
@@ -109,6 +109,7 @@
             <SidebarItem href="/main/createResearch" label="Create Research" class="font-normal text-base rounded-md hover:bg-blue-100"></SidebarItem>
           {/if}
         </SidebarGroup>
+        -->
         <SidebarGroup border>
           {#if $userData}
             <SidebarItem href={`/main/profile/myProfile`} label="My Profile" {spanClass} class="font-normal text-base rounded-md hover:bg-blue-100">

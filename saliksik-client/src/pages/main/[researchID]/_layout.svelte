@@ -4,8 +4,19 @@
   import { selectedResearchInfo } from "../../../components/store";
   import { UserOutline, FolderOutline, StarOutline, ArchiveOutline, TrashBinOutline, DotsHorizontalOutline, ClockOutline } from "flowbite-svelte-icons";
   import moment from "moment";
-  import ConceptNoteWaitingForApproval from "../../../assets/status/conceptNoteWaitingForApproval.svelte";
   import NoStatus from "../../../assets/status/noStatus.svelte";
+  import ConceptNoteWaitingForApproval from "../../../assets/status/conceptNoteWaitingForApproval.svelte";
+  import ConceptNoteApproved from "../../../assets/status/conceptNoteApproved.svelte";
+  import ConceptNoteRejected from "../../../assets/status/conceptNoteRejected.svelte";
+  import InitialPresentationWaitingForResponse from "../../../assets/status/initialPresentationWaitingForResponse.svelte";
+  import InitialPresentationGoing from "../../../assets/status/initialPresentationGoing.svelte";
+  import InitialPresentationNotGoing from "../../../assets/status/initialPresentationNotGoing.svelte";
+  import FinalPresentationWaitingForResponse from "../../../assets/status/finalPresentationWaitingForResponse.svelte";
+  import FinalPresentationGoing from "../../../assets/status/finalPresentationGoing.svelte";
+  import FinalPresentationNotGoing from "../../../assets/status/finalPresentationNotGoing.svelte";
+  import IncentiveProcessing from "../../../assets/status/incentiveProcessing.svelte";
+  import IncentiveReleased from "../../../assets/status/incentiveReleased.svelte";
+  import Published from "../../../assets/status/published.svelte";
 </script>
 
 <nav class="flex justify-between z-50 gap-2 pl-4 pt-2 pr-4 pb-2 border-b bg-white">
@@ -17,8 +28,30 @@
 
     {#if $selectedResearchInfo.researchStatus === "No Status"}
       <NoStatus />
-    {:else if $selectedResearchInfo.researchStatus === "Concept Note Approval"}
+    {:else if $selectedResearchInfo.researchStatus === "Concept Note (waiting For Approval)"}
       <ConceptNoteWaitingForApproval />
+    {:else if $selectedResearchInfo.researchStatus === "Concept Note (Approved)"}
+      <ConceptNoteApproved />
+    {:else if $selectedResearchInfo.researchStatus === "Concept Note (Rejected)"}
+      <ConceptNoteRejected />
+    {:else if $selectedResearchInfo.researchStatus === "Initial Presentation (Waiting For Response)"}
+      <InitialPresentationWaitingForResponse />
+    {:else if $selectedResearchInfo.researchStatus === "Initial Presentation (Going)"}
+      <InitialPresentationGoing />
+    {:else if $selectedResearchInfo.researchStatus === "Initial Presentation (Not Going)"}
+      <InitialPresentationNotGoing />
+    {:else if $selectedResearchInfo.researchStatus === "Final Presentation (Waiting For Response)"}
+      <FinalPresentationWaitingForResponse />
+    {:else if $selectedResearchInfo.researchStatus === "Final Presentation (Going)"}
+      <FinalPresentationGoing />
+    {:else if $selectedResearchInfo.researchStatus === "Final Presentation (Not Going)"}
+      <FinalPresentationNotGoing />
+    {:else if $selectedResearchInfo.researchStatus === "Incentive (Processing)"}
+      <IncentiveProcessing />
+    {:else if $selectedResearchInfo.researchStatus === "Incentive (Released)"}
+      <IncentiveReleased />
+    {:else if $selectedResearchInfo.researchStatus === "Published"}
+      <Published />
     {/if}
   </div>
 
