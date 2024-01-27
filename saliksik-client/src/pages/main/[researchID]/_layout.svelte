@@ -4,8 +4,8 @@
   import { selectedResearchInfo } from "../../../components/store";
   import { UserOutline, FolderOutline, StarOutline, ArchiveOutline, TrashBinOutline, DotsHorizontalOutline, ClockOutline } from "flowbite-svelte-icons";
   import moment from "moment";
-  import ConceptNote from "../../../assets/status/conceptNoteApproval.svelte";
-  import NoStatus from "../../../assets/status/noStatusResearch.svelte";
+  import ConceptNote from "../../../assets/status/conceptNoteWaitingForApproval.svelte";
+  import NoStatus from "../../../assets/status/noStatus.svelte";
 </script>
 
 <nav class="flex justify-between z-50 gap-2 pl-4 pt-2 pr-4 pb-2 border-b bg-white">
