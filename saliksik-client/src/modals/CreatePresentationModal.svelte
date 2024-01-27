@@ -5,9 +5,8 @@
   import { researches } from "../components/store";
   import { onMount } from "svelte";
   
-  $researches
 
-  var researchTitle: any[] = [], researchList:any;
+  var researchTitles: any[] = [], researchList: any, addedResearches: any;
 
   onMount(async () => {
      researchList = $researches.map((research: any) => ({
@@ -15,6 +14,21 @@
       name: `${research.researchTitle} `,
     }));
   });
+
+  function addResearch(e: Event) {
+   
+    researchList = researchList.filter((x: any) => !researchTitles.includes(x.value));
+    addedResearches = $researches
+      .filter((r) => researchTitles.includes(r._id))
+      .map((r) => ({
+        _id: r._id,
+        researchTitle: r.researchTitle,
+      }));
+    researchTitles = [];
+  }
+
+console.log(addedResearches);
+
 
   function submit(e: Event) {
     e.preventDefault();
@@ -44,7 +58,7 @@
   let addSchedule = false;
 </script>
 
-<form class="flex flex-col gap-2">
+<form class="flex flex-col gap-2" on:submit={submit}>
   <!--modal date and time-->
   <div class="grid grid-flow-row gap-2 border-b pb-5">
     <div class="flex justify-start items-center gap-2">
@@ -66,29 +80,27 @@
     </div>
     <div class="flex justify-start items-center gap-2 p-2 rounded-md w-full">
       <div class="gap-2 w-full">
-        <MultiSelect required items={$researches} bind:value={researchTitle} size="sm" class="" />
+        <MultiSelect required items={researchList} bind:value={researchTitles} size="sm" class="" />
       </div>
       <div class="flex items-center gap-2">
-        <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap"><CirclePlusOutline size="sm" />Add</Button>
+        <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap" on:click={addResearch}><CirclePlusOutline size="sm" />Add</Button>
       </div>
     </div>
-    <div class="flex justify-between items-center p-2 rounded-md hover:bg-blue-50">
-      <div class="flex justify-between items-center gap-2">
-        <FileLinesOutline size="sm" class="text-blue-700" />
-        <div class="flex items-center gap-0">
-          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-          <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-          <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-          <Tooltip arrow={false}>Danny Casimero</Tooltip>
-          <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-          <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
-        </div>
-        <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">{$researches}</P>
-      </div>
-      <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><MinusOutline size="sm" /></Button>
-    </div>
+    {#if addedResearches}
+      {#each addedResearches as r}
+          <div class="flex justify-between items-center p-2 rounded-md hover:bg-blue-50">
+            <div class="flex justify-between items-center gap-2">
+              <FileLinesOutline size="sm" class="text-blue-700" />
+              <div class="flex items-center gap-0">
+                <!-- Your Avatar and Tooltip elements here -->
+              </div>
+              <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">{r.researchTitle}</P>
+            </div>
+            <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><MinusOutline size="sm" /></Button>
+          </div>
+      {/each}
+  {/if}
+  
   </div>
 
   <!--modal add panelist-->

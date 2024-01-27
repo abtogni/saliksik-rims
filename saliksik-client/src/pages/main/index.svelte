@@ -1,6 +1,6 @@
 <script lang="ts">
   import { A, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Hr, Indicator, Modal, P, Search, Tooltip } from "flowbite-svelte";
-  import { ArchiveOutline, DotsHorizontalOutline, EyeOutline, FileCirclePlusOutline, FileExportOutline, FilePenOutline, FilterOutline, FolderOutline, FolderPlusOutline, MessageCaptionOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
+  import { ArchiveOutline, DotsHorizontalOutline, EyeOutline, FolderOutline, FolderPlusOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline } from "flowbite-svelte-icons";
   import CreateNewResearchModal from "../../modals/CreateNewResearchModal.svelte";
   import { researches } from "../../components/store";
   import moment from "moment";

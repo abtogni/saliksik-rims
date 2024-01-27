@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import * as userHandler from '../../services/userHandler';
 import { UserModel } from '../../models/userModel';
+import mongoose from 'mongoose';
 
 const successResponse = (res: Response, data: any, status = 200) => {
   res.status(status).json(data);
@@ -92,3 +93,21 @@ export const userLogout = async (req: Request, res: Response) => {
   res.clearCookie('jwt');
   successResponse(res, { message: 'User logged out' });
 };
+
+export const deleteUser = async (req : Request, res: Response) => {
+  const { id } = req.body
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such user'})
+  }
+
+  const user = await UserModel.findOneAndDelete({_id: id})
+
+  if (!user) {
+    return res.status(400).json({error: 'No such user'})
+  }
+
+  res.status(200).json(user)
+
+
+}
