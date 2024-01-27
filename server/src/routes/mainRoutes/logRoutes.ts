@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { getUserLogs } from '../../controllers/mainRoutes/logController';
+import { createLog, deleteLog, getLogs, getUserLogs, updateLog } from '../../controllers/mainRoutes/logController';
 
 const router = express.Router();
 

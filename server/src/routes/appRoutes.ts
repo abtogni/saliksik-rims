@@ -8,7 +8,7 @@ const router = express.Router();
 
 router.use('/user', auth);
 router.use('/research',research);
-router.use('/presentation',presentation);
+router.use('/research',presentation);
 router.use('/logs', log);
 
 export default router;

@@ -1,11 +1,10 @@
 <script lang="ts">
-  import { goto } from "@roxi/routify";
-  import { DateInput } from "date-picker-svelte";
-  import { Heading, TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, TableSearch, Avatar, Popover, Card, Button, Modal, Accordion, AccordionItem, Listgroup, ListgroupItem, ImagePlaceholder, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, FloatingLabelInput, Alert, Checkbox, MultiSelect, Helper } from "flowbite-svelte";
-  import { CalendarEditOutline, CalendarMonthOutline, CalendarPlusSolid, CirclePlusOutline, ClipboardOutline, ClockOutline, CloseOutline, DotsHorizontalOutline, EditOutline, FileCirclePlusOutline, FileLinesOutline, FileOutline, FilterOutline, GridOutline, InfoCircleOutline, MapLocationOutline, MessageCaptionOutline, MessageCaptionSolid, MinusOutline, QuestionCircleOutline, SortOutline, StarOutline, TrashBinOutline, UserAddOutline, UsersGroupOutline } from "flowbite-svelte-icons";
+  import { TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, Avatar, Card, Button, Modal, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, Alert, Checkbox, MultiSelect, Helper } from "flowbite-svelte";
+  import { CalendarEditOutline, CalendarMonthOutline, CalendarPlusSolid, CirclePlusOutline, ClipboardOutline, DotsHorizontalOutline, EditOutline, FileCirclePlusOutline, FileLinesOutline, FilterOutline, InfoCircleOutline, MapLocationOutline, MessageCaptionOutline, MinusOutline, QuestionCircleOutline, SortOutline, TrashBinOutline, UsersGroupOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
+  import CreatePresentationModal from '../../../modals/CreatePresentationModal.svelte';
   import { researches } from "../../../components/store";
 
   //For search bar
@@ -464,22 +463,16 @@
               <div class="grid grid-flow-row gap-2">
                 <div class="flex justify-between items-center gap-2">
                   <div class="flex justify-start items-center gap-2">
-                    <FileCirclePlusOutline size="sm" class="text-blue-700" />
-                    <P for="researchLeaders" weight="bold" size="base" class="whitespace-nowrap text-gray-700">Add Research</P>
+                    <UserAddOutline size="sm" class="text-blue-700" />
+                    <P for="researchLeaders" weight="bold" size="base" class="text-gray-700">Add Presenter</P>
                   </div>
-                  <div class="flex justify-start items-center gap-2 p-2 rounded-md w-full">
-                    <div class="gap-2 w-full">
-                      <MultiSelect required size="sm" class="" />
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap"><CirclePlusOutline size="sm" />Add</Button>
-                    </div>
+                  <div class="">
+                    <Checkbox color="blue" class="text-gray-500">Select All</Checkbox>
                   </div>
                 </div>
-                
-                <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-blue-50">
-                  <div class="flex justify-start items-center gap-2">
-                    <FileLinesOutline size="sm" class="text-blue-700" />
+                <div class="">
+                  <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-orange-50">
+                    <Checkbox color="blue" class="w-full  text-gray-500 ">Insert Research Title</Checkbox>
                     <div class="flex items-center gap-0">
                       <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
                       <Tooltip arrow={false}>Agnes Reyes</Tooltip>
@@ -490,9 +483,7 @@
                       <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
                       <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
                     </div>
-                    <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">Insert Research Title</P>
                   </div>
-                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><MinusOutline size="sm" /></Button>
                 </div>
               </div>
 
@@ -501,30 +492,31 @@
                 <div class="flex justify-between items-center gap-2">
                   <div class="flex justify-start items-center gap-2">
                     <MessageCaptionOutline size="sm" class="text-blue-700" />
-                    <P for="researchLeaders" weight="bold" size="base" class="whitespace-nowrap text-gray-700">Add Panelist</P>
+                    <P for="researchLeaders" weight="bold" size="base" class="text-gray-700">Add Panelist</P>
                   </div>
-                  <div class="flex justify-start items-center gap-2 p-2 rounded-md w-full">
-                    <div class="gap-2 w-full">
-                      <MultiSelect required size="sm" class="" />
-                    </div>
-                    <div class="flex items-center gap-2">
-                      <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap"><CirclePlusOutline size="sm" />Add</Button>
-                    </div>
+                  <div class="flex justify-start items-center gap-2">
+                    <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileCirclePlusOutline size="sm" />Add Existing Panelist</Button>
+                    <Button outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><CalendarEditOutline size="sm" />Create New Panelist</Button>
                   </div>
                 </div>
-                
-                <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-blue-50">
-                  <div class="flex justify-start items-center gap-2">
-                    <MessageCaptionOutline size="sm" class="text-blue-700" />
-                    <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">Insert Panelist Name</P>
+
+                <div class="">
+                  <div class="flex justify-between items-center p-2 rounded-md hover:bg-orange-50">
+                    <div class="flex justify-start items-center gap-2">
+                      <MessageCaptionSolid size="sm" class="text-blue-700" />
+                      <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">Insert Panelist Name</P>
+                    </div>
+                    <div class="">
+                      <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-2"><CloseOutline size="xs" /></Button>
+                    </div>
                   </div>
-                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><MinusOutline size="sm" /></Button>
                 </div>
               </div>
 
               <Button on:click={() => alert('Handle "success"')} type="submit" color="blue" size="md" class="rounded-md w-full">Add Schedule</Button>
             </form>
           </Modal>
+          
 
           <!--card presenter list-->
           <div class="flex justify-center items-center gap-2 shadow-lg border rounded-md p-3">

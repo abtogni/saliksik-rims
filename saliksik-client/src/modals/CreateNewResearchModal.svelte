@@ -45,11 +45,9 @@
     })
       .then((response) => {
         if (response.ok) {
-          // Handle a successful response (e.g., redirect to a new page)
           window.location.href = "/main/";
         } else {
-          // Handle errors or authentication failures
-          console.error("Login failed");
+          console.error("Error occured");
         }
       })
       .catch((error) => {
