@@ -1,18 +1,19 @@
 <script lang="ts">
-  import { TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, Avatar, Card, Button, Modal, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, Alert, Checkbox, MultiSelect, Helper, Accordion, AccordionItem } from "flowbite-svelte";
-  import { ArchiveOutline, CalendarEditOutline, CalendarMonthOutline, CalendarPlusSolid, CheckCircleOutline, CirclePlusOutline, ClipboardOutline, CloseOutline, DotsHorizontalOutline, EditOutline, EyeOutline, FileCirclePlusOutline, FileLinesOutline, FilterOutline, InfoCircleOutline, MapLocationOutline, MessageCaptionOutline, MessageCaptionSolid, MinusOutline, QuestionCircleOutline, SortOutline, TrashBinOutline, UsersGroupOutline } from "flowbite-svelte-icons";
+  import { TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, Avatar, Card, Button, Modal, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, Alert, Checkbox, Accordion, AccordionItem } from "flowbite-svelte";
+  import { CalendarEditOutline, CalendarMonthOutline, CalendarPlusSolid, CheckCircleOutline, ClipboardOutline, DotsHorizontalOutline, EditOutline, EyeOutline, FileCirclePlusOutline, FileLinesOutline, FilterOutline, InfoCircleOutline, MapLocationOutline, MessageCaptionOutline, QuestionCircleOutline, SortOutline, TrashBinOutline, UsersGroupOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import CreatePresentationModal from '../../../modals/CreatePresentationModal.svelte';
   import { researches } from "../../../components/store";
-    import ApproveConceptNoteModal from "../../../modals/ApproveConceptNoteModal.svelte";
-    import RejectConceptNote from "../../../modals/RejectConceptNote.svelte";
+  import ApproveConceptNoteModal from "../../../modals/ApproveConceptNoteModal.svelte";
+  import RejectConceptNoteModal from "../../../modals/RejectConceptNoteModal.svelte";
+
+  let selectedResearchID: any;
 
   //For search bar
   let searchTerm = "";
 
   //for pop-up admin-buttons
-  let approve = false;
-  let reject = false;
+  let approve = false, reject = false;;
 
   //table-modal
   let openRow: number;
@@ -21,11 +22,6 @@
     openRow = openRow === i ? null : i;
   };
 
-  //modal for concept note approval
-  let approveConceptNote = false;
-
-  //modal for concept note rejection
-  let rejectConceptNote = false;
 
   //modal for add schedule
   let addSchedule = false;
@@ -39,6 +35,15 @@
   //modal for changing incentive status to released
   let changeIncentiveStatusToReleased = false;
 
+
+  function approveConceptNote (id: any){
+    selectedResearchID = id;
+    approve = true;
+  }
+  function rejectConceptNote (id: any){
+    selectedResearchID = id;
+    reject = true;
+  }
 </script>
 
 <main class="p-4">
@@ -168,8 +173,8 @@
                         <div class="flex justify-between items-start gap-2">
                           <P weight="semibold" size="xl" class="">Concept Note Overview</P>
                           <div class="flex items-center gap-2">
-                            <Button on:click={() => (approveConceptNote = true)} class="gap-2"><EditOutline size="sm" />Approve</Button>
-                            <Button on:click={() => (rejectConceptNote = true)} class="gap-2"><ClipboardOutline size="sm" />Reject</Button>
+                            <Button on:click={() => (approveConceptNote(research._id))} class="gap-2"><EditOutline size="sm" />Approve</Button>
+                            <Button on:click={() => (rejectConceptNote(research._id))} class="gap-2"><ClipboardOutline size="sm" />Reject</Button>
                           </div>
                         </div>
                       </Card>
@@ -330,8 +335,8 @@
                         <div class="flex justify-between items-start gap-2">
                           <P weight="semibold" size="xl" class="">Concept Note Overview</P>
                           <div class="flex items-center gap-2">
-                            <Button on:click={() => (approveConceptNote = true)} class="gap-2"><EditOutline size="sm" />Approve</Button>
-                            <Button on:click={() => (rejectConceptNote = true)} class="gap-2"><ClipboardOutline size="sm" />Reject</Button>
+                            <Button on:click={() => (approveConceptNote(research._id))} class="gap-2"><EditOutline size="sm" />Approve</Button>
+                            <Button on:click={() => (rejectConceptNote(research._id))} class="gap-2"><ClipboardOutline size="sm" />Reject</Button>
                           </div>
                         </div>
                       </Card>
@@ -563,19 +568,19 @@
                             </div>
                             <div class="flex flex-wrap justify-start items-start gap-2">
                               <P size="sm" weight="medium">Site/s of Implementation:</P>
-                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.siteImplementation}</Badge>
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{research.conceptNote.siteImplementation}</Badge>
                             </div>
                             <div class="flex flex-wrap justify-start items-start gap-2">
                               <P size="sm" weight="medium">Project Duration:</P>
-                              <P size="sm" weight="normal" class="text-gray-500">{moment($selectedResearchInfo.conceptNote.projectDuration).format("LL")}</P>
+                              <P size="sm" weight="normal" class="text-gray-500">{moment(research.conceptNote.projectDuration).format("LL")}</P>
                             </div>
                             <div class="flex flex-wrap justify-start items-start gap-2">
                               <P size="sm" weight="medium">Total Project Cost:</P>
-                              <P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.totalCost}</P>
+                              <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.totalCost}</P>
                             </div>
                             <div class="flex flex-wrap justify-start items-start gap-2">
                               <P size="sm" weight="medium">Funding Source:</P>
-                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.fundingSource}</Badge>
+                              <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{research.conceptNote.fundingSource}</Badge>
                             </div>
                           </div>
                         </div>
@@ -610,8 +615,8 @@
                         <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.workPlan}</P>
                       </div>
                       <div class="flex justify-between items-center gap-2 w-full">
-                        <Button on:click={() => (approveConceptNote = true)} color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"><CheckCircleOutline size="sm" /> Approve</Button>
-                        <Button on:click={() => (rejectConceptNote = true)} outline color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"
+                        <Button on:click={() => (approveConceptNote(research._id))} color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"><CheckCircleOutline size="sm" /> Approve</Button>
+                        <Button on:click={() => (rejectConceptNote(research._id))} outline color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"
                           ><svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                           </svg> Reject</Button>
@@ -763,12 +768,13 @@
     </TabItem>
   </Tabs>
 
-  <Modal title="Approve Concept Note?" bind:open={approveConceptNote} size="xs" autoclose class="w-full">
-    <ApproveConceptNoteModal />
+  <Modal title="Approve Concept Note?" bind:open={approve} size="xs" autoclose class="w-full">
+    <ApproveConceptNoteModal propValue={selectedResearchID} />
   </Modal>
+  
 
-  <Modal title="Reject Concept Note?" bind:open={rejectConceptNote} size="xs" autoclose class="w-full">
-    <RejectConceptNote />
+  <Modal title="Reject Concept Note?" bind:open={reject} size="xs" autoclose class="w-full">
+    <RejectConceptNoteModal propValue={selectedResearchID} />
   </Modal>
 
   <!--modal for create schedule-->
