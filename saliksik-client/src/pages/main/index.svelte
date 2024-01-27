@@ -34,13 +34,14 @@
         <P size="sm" weight="normal" class="text-gray-500">Create, view and organize all your researches.</P>
       </div>
 
-      <!--card researches inactive-->
+      <!--card researches inactive
       <div class="grid grid-flow-row justify-center w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
         <P size="sm" weight="normal" class="text-gray-500">No existing researches...<span></span></P>
       </div>
+      -->
       <!--card researches active-->
-      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-        <div class="flex justify-between items-center gap-2 w-full">
+      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg bg-white">
+        <div class="flex justify-between items-center gap-2 px-4 py-3 border-b w-full">
           <Search color="blue" size="sm" placeholder="Search by title or status..." class="border rounded-md"></Search>
           <div class="flex items-center gap-2">
             <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md"><Indicator class="text-white" />Status</Button>
@@ -82,7 +83,7 @@
         <!--card research-->
         {#if $researches}
           {#each $researches as research}
-            <div class="flex flex-wrap gap-2 rounded-md p-2 hover:bg-blue-50">
+            <div class="flex flex-wrap gap-2 px-4 py-3 border-b hover:bg-blue-50">
               <div class="flex justify-between items-center gap-2 w-full">
                 <div class="flex justify-start items-center gap-2">
                   <div class="flex items-center gap-0">
@@ -120,7 +121,7 @@
                 <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
                   <P weight="normal" size="sm" class="font-medium text-gray-500">Starred</P>
                 </Tooltip>
-                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
+                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
                 <Dropdown>
                   <DropdownItem class="flex justify-start items-center gap-2 rounded-md font-medium text-sm w-full text-gray-500  hover:bg-blue-50">
                     <StarOutline size="sm" class="text-blue-700" />Star
@@ -139,7 +140,6 @@
               </div>
               <P weight="semibold" size="sm" class="line-clamp-2"><A href="" class="text-black">{research.researchTitle}</A></P>
             </div>
-            <Hr classHr="my-.5" />
           {/each}
         {/if}
       </div>

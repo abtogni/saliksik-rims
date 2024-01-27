@@ -138,7 +138,6 @@
                   <div class="flex flex-wrap justify-start items-start gap-2">
                     <P size="base" weight="medium">Cooperating Agency:</P>
                     <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.coopAgency}</Badge>
-                    <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">Vice-President for Academic Affairs</Badge>
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
                     <P size="base" weight="medium">Site/s of Implementation:</P>
@@ -186,11 +185,23 @@
               {/each}
             </div>
             <P size="lg" weight="medium">Technology Roadmap</P>
-            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white"><P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.technologyRoadmap}</P></div>
+            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+              {#each $selectedResearchInfo.conceptNote.technologyRoadmap.split('\n') as paragraph}
+              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {/each}
+            </div>
             <P size="lg" weight="medium">Expected Outputs (6Ps)</P>
-            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white"><P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.expectedOutput}</P></div>
+            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+              {#each $selectedResearchInfo.conceptNote.expectedOutput.split('\n') as paragraph}
+              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {/each}
+            </div>
             <P size="lg" weight="medium">Work Plan</P>
-            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white"><P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.workPlan}</P></div>
+            <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+              {#each $selectedResearchInfo.conceptNote.workPlan.split('\n') as paragraph}
+              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {/each}
+            </div>
           {/if}
         </div>
       </div>

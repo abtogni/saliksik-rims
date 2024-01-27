@@ -71,16 +71,17 @@
         </div>
         <P size="sm" weight="normal" class="text-gray-500">Create and organize user accounts.</P>
       </div>
-
+      <!--
       <div class="grid grid-flow-row justify-center w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
         <P size="sm" weight="normal" class="text-gray-500">No existing account...<span></span></P>
       </div>
+      -->
 
       <!--personnel accounts-->
-      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
+      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg bg-white">
         <div class="grid grid-flow-row items-center gap-0">
           {#each $userList as user}
-            <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-blue-50">
+            <div class="flex justify-between items-center gap-2 px-4 py-3 border-b hover:bg-blue-50">
               <div class="flex justify-start items-center gap-2">
                 <UserOutline size="sm" class="text-blue-700" />
                 <P size="base" weight="semibold" class="whitespace-nowrap">{user.firstName} {user.lastName}</P>
@@ -88,8 +89,8 @@
                 <P weight="normal" size="sm" class="line-clamp-1 text-gray-500 w-96">Created in <span class="font-medium text-gray-500">{moment(user.createdAt).format("LL")}</span></P>
               </div>
               <div class="flex justify-start items-center gap-0">
-                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><EyeOutline size="sm" /></Button>
-                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><DotsHorizontalOutline size="sm" /></Button>
+                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><EyeOutline size="sm" /></Button>
+                <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
                 <Dropdown>
                   <DropdownItem>
                     <div class="flex justify-start items-center gap-2">
@@ -155,5 +156,6 @@
       </Modal>
     </div>
   </div>
+  <div class="h-96"></div>
   <div class="h-96"></div>
 </main>
