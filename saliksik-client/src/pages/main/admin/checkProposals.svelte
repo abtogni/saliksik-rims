@@ -2,10 +2,10 @@
   import { TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, Avatar, Card, Button, Modal, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, Alert, Checkbox, MultiSelect, Helper } from "flowbite-svelte";
   import { CalendarEditOutline, CalendarMonthOutline, CalendarPlusSolid, CirclePlusOutline, ClipboardOutline, CloseOutline, DotsHorizontalOutline, EditOutline, FileCirclePlusOutline, FileLinesOutline, FilterOutline, InfoCircleOutline, MapLocationOutline, MessageCaptionOutline, MessageCaptionSolid, MinusOutline, QuestionCircleOutline, SortOutline, TrashBinOutline, UsersGroupOutline } from "flowbite-svelte-icons";
   import moment from "moment";
-  import { onMount } from "svelte";
-  import { slide } from "svelte/transition";
   import CreatePresentationModal from '../../../modals/CreatePresentationModal.svelte';
   import { researches } from "../../../components/store";
+    import ApproveConceptNoteModal from "../../../modals/ApproveConceptNoteModal.svelte";
+    import RejectConceptNote from "../../../modals/RejectConceptNote.svelte";
 
   //For search bar
   let searchTerm = "";
@@ -38,6 +38,7 @@
 
   //modal for changing incentive status to released
   let changeIncentiveStatusToReleased = false;
+
 </script>
 
 <main class="p-4">
@@ -667,25 +668,11 @@
   </Tabs>
 
   <Modal title="Approve Concept Note?" bind:open={approveConceptNote} size="xs" autoclose class="w-full">
-    <div class="flex justify-center items-center">
-      <InfoCircleOutline size="xl" />
-    </div>
-    <P weight="normal" size="base" class="text-center">Once, the Concept Note is approved. A Notice To Proceed will be sent to the owner.</P>
-    <div class="flex gap-2">
-      <Button class="w-full">Approve</Button>
-      <Button class="w-full">Cancel</Button>
-    </div>
+    <ApproveConceptNoteModal />
   </Modal>
 
   <Modal title="Reject Concept Note?" bind:open={rejectConceptNote} size="xs" autoclose class="w-full">
-    <div class="flex justify-center items-center">
-      <InfoCircleOutline size="xl" />
-    </div>
-    <P weight="normal" size="base" class="text-center">Once, you click the reject button. You can find the Concept Note in the Reject tab of the Research Dashboard</P>
-    <div class="flex gap-2">
-      <Button class="w-full">Reject</Button>
-      <Button class="w-full">Cancel</Button>
-    </div>
+    <RejectConceptNote />
   </Modal>
 
   <!--modal for create schedule-->
