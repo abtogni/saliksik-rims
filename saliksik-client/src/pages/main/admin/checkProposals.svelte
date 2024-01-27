@@ -1,8 +1,8 @@
 <script lang="ts">
   import { goto } from "@roxi/routify";
   import { DateInput } from "date-picker-svelte";
-  import { Heading, TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, TableSearch, Avatar, Popover, Card, Button, Modal, Accordion, AccordionItem, Listgroup, ListgroupItem, ImagePlaceholder, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, FloatingLabelInput, Alert, Checkbox } from "flowbite-svelte";
-  import { CalendarEditOutline, CalendarMonthOutline, CalendarPlusSolid, ClipboardOutline, ClockOutline, CloseOutline, DotsHorizontalOutline, EditOutline, FileCirclePlusOutline, FileLinesOutline, FileOutline, FilterOutline, GridOutline, InfoCircleOutline, MapLocationOutline, MessageCaptionOutline, MessageCaptionSolid, QuestionCircleOutline, SortOutline, StarOutline, TrashBinOutline, UserAddOutline, UsersGroupOutline } from "flowbite-svelte-icons";
+  import { Heading, TabItem, TableBody, TableBodyCell, TableBodyRow, Table, TableHead, TableHeadCell, Tabs, TableSearch, Avatar, Popover, Card, Button, Modal, Accordion, AccordionItem, Listgroup, ListgroupItem, ImagePlaceholder, P, Search, Dropdown, DropdownItem, Tooltip, Indicator, Badge, Hr, FloatingLabelInput, Alert, Checkbox, MultiSelect, Helper } from "flowbite-svelte";
+  import { CalendarEditOutline, CalendarMonthOutline, CalendarPlusSolid, CirclePlusOutline, ClipboardOutline, ClockOutline, CloseOutline, DotsHorizontalOutline, EditOutline, FileCirclePlusOutline, FileLinesOutline, FileOutline, FilterOutline, GridOutline, InfoCircleOutline, MapLocationOutline, MessageCaptionOutline, MessageCaptionSolid, MinusOutline, QuestionCircleOutline, SortOutline, StarOutline, TrashBinOutline, UserAddOutline, UsersGroupOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import { onMount } from "svelte";
   import { slide } from "svelte/transition";
@@ -53,7 +53,7 @@
 
   <!--all researches-->
   <Tabs style="none" activeClasses="p-2 text-blue-700 border-b-2 border-b-blue-700 rounded-t-lg" inactiveClasses="p-2 text-gray-500 rounded-t-lg hover:text-gray-600 hover:bg-blue-50 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300" contentClass="bg-white p-0 mt-2 rounded-md border-0 shadow-none" class="">
-    <TabItem >
+    <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>All Researches</div>
       <div class="flex items-center gap-2 mb-2">
         <Search color="blue" size="sm" placeholder="Search by title or status..." class="border rounded-md "></Search>
@@ -93,34 +93,33 @@
 
       <Table hoverable={true} noborder={false} shadow={true} class="bg-blue-50">
         <TableHead class="bg-blue-700 text-white">
-              <TableHeadCell class="w-32">
-                <div class="flex items-center gap-1">
-                  Status<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
-                </div>
-              </TableHeadCell>
-              <TableHeadCell class="">
-                <div class="flex items-center gap-1">
-                  Title<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
-                </div>
-              </TableHeadCell>
-              <TableHeadCell class="w-44">
-                <div class="flex items-center gap-1">
-                  Leader<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
-                </div>
-              </TableHeadCell>
-              <TableHeadCell class="w-56">
-                <div class="flex items-center gap-1">
-                  Agency/Department<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
-                </div>
-              </TableHeadCell>
-              <TableHeadCell class="w-56">
-                <div class="flex items-center gap-1">
-                  Date Submitted<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
-                </div>
-              </TableHeadCell>
+          <TableHeadCell class="w-32">
+            <div class="flex items-center gap-1">
+              Status<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
+            </div>
+          </TableHeadCell>
+          <TableHeadCell class="">
+            <div class="flex items-center gap-1">
+              Title<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
+            </div>
+          </TableHeadCell>
+          <TableHeadCell class="w-44">
+            <div class="flex items-center gap-1">
+              Leader<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
+            </div>
+          </TableHeadCell>
+          <TableHeadCell class="w-56">
+            <div class="flex items-center gap-1">
+              Agency/Department<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
+            </div>
+          </TableHeadCell>
+          <TableHeadCell class="w-56">
+            <div class="flex items-center gap-1">
+              Date Submitted<Button color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1.5"><SortOutline size="sm" /></Button>
+            </div>
+          </TableHeadCell>
         </TableHead>
 
-        
         <TableBody>
           {#if $researches}
             {#each $researches as research, i}
@@ -422,7 +421,7 @@
     </TabItem>
 
     <!--initial presentation-->
-    <TabItem>
+    <TabItem open>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Initial Presentation</div>
       <div class="flex justify-center gap-2 bg-gray-50">
         <div class="grid grid-flow-row col-start-2 col-span-3 items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">
@@ -465,16 +464,22 @@
               <div class="grid grid-flow-row gap-2">
                 <div class="flex justify-between items-center gap-2">
                   <div class="flex justify-start items-center gap-2">
-                    <UserAddOutline size="sm" class="text-blue-700" />
-                    <P for="researchLeaders" weight="bold" size="base" class="text-gray-700">Add Presenter</P>
+                    <FileCirclePlusOutline size="sm" class="text-blue-700" />
+                    <P for="researchLeaders" weight="bold" size="base" class="whitespace-nowrap text-gray-700">Add Research</P>
                   </div>
-                  <div class="">
-                    <Checkbox color="blue" class="text-gray-500">Select All</Checkbox>
+                  <div class="flex justify-start items-center gap-2 p-2 rounded-md w-full">
+                    <div class="gap-2 w-full">
+                      <MultiSelect required size="sm" class="" />
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap"><CirclePlusOutline size="sm" />Add</Button>
+                    </div>
                   </div>
                 </div>
-                <div class="">
-                  <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-orange-50">
-                    <Checkbox color="blue" class="w-full  text-gray-500 ">Insert Research Title</Checkbox>
+                
+                <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-blue-50">
+                  <div class="flex justify-start items-center gap-2">
+                    <FileLinesOutline size="sm" class="text-blue-700" />
                     <div class="flex items-center gap-0">
                       <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
                       <Tooltip arrow={false}>Agnes Reyes</Tooltip>
@@ -485,7 +490,9 @@
                       <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
                       <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
                     </div>
+                    <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">Insert Research Title</P>
                   </div>
+                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><MinusOutline size="sm" /></Button>
                 </div>
               </div>
 
@@ -494,24 +501,24 @@
                 <div class="flex justify-between items-center gap-2">
                   <div class="flex justify-start items-center gap-2">
                     <MessageCaptionOutline size="sm" class="text-blue-700" />
-                    <P for="researchLeaders" weight="bold" size="base" class="text-gray-700">Add Panelist</P>
+                    <P for="researchLeaders" weight="bold" size="base" class="whitespace-nowrap text-gray-700">Add Panelist</P>
                   </div>
-                  <div class="flex justify-start items-center gap-2">
-                    <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileCirclePlusOutline size="sm" />Add Existing Panelist</Button>
-                    <Button outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><CalendarEditOutline size="sm" />Create New Panelist</Button>
+                  <div class="flex justify-start items-center gap-2 p-2 rounded-md w-full">
+                    <div class="gap-2 w-full">
+                      <MultiSelect required size="sm" class="" />
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md whitespace-nowrap"><CirclePlusOutline size="sm" />Add</Button>
+                    </div>
                   </div>
                 </div>
-
-                <div class="">
-                  <div class="flex justify-between items-center p-2 rounded-md hover:bg-orange-50">
-                    <div class="flex justify-start items-center gap-2">
-                      <MessageCaptionSolid size="sm" class="text-blue-700" />
-                      <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">Insert Panelist Name</P>
-                    </div>
-                    <div class="">
-                      <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-2"><CloseOutline size="xs" /></Button>
-                    </div>
+                
+                <div class="flex justify-between items-center gap-2 p-2 rounded-md hover:bg-blue-50">
+                  <div class="flex justify-start items-center gap-2">
+                    <MessageCaptionOutline size="sm" class="text-blue-700" />
+                    <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">Insert Panelist Name</P>
                   </div>
+                  <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><MinusOutline size="sm" /></Button>
                 </div>
               </div>
 
@@ -625,7 +632,7 @@
     </TabItem>
 
     <!--tabitem incentive status-->
-    <TabItem open>
+    <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Incentive Status</div>
 
       <div class="grid grid-flow-row items-center gap-2 bg-gray-50">
