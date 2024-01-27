@@ -86,8 +86,22 @@
           <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
             <div class="flex justify-between items-center gap-2">
               <div class="flex items-center gap-2">
-                <Button href={`/main/${researchID}/createConceptNote`} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FilePenOutline size="sm" /> Edit</Button>
-                <Button on:click={() => (submitExistingResearch = true)} outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileExportOutline size="sm" /> Submit</Button>
+                <Badge border large color="dark" class="flex items-center gap-2 font-medium text-sm whitespace-nowrap text-gray-500"><Indicator color="dark" size="md" class="" />Saved as Draft</Badge>
+                <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                  <P weight="normal" size="sm" class=" text-gray-500">Last Updated in <span class="font-medium text-gray-500">January 21, 2023</span></P>
+                </Tooltip>
+                <Badge border large class="flex items-center gap-2 font-medium text-sm  whitespace-nowrap text-gray-500"><Indicator color="orange" size="md" class="" />Waiting for Approval</Badge>
+                <Tooltip arrow={false} class="border rounded-md shadow-lg bg-white">
+                  <P weight="normal" size="sm" class=" text-gray-500">Submitted in <span class="font-medium text-gray-500">January 21, 2023</span></P>
+                </Tooltip>
+                <Badge border large color="blue" class="flex items-center gap-2 font-medium text-sm text-gray-500"><Indicator color="blue" size="md" class="" />Approved</Badge>
+                <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                  <P weight="normal" size="sm" class=" text-gray-500">Approved in <span class="font-medium text-gray-500">January 21, 2023</span></P>
+                </Tooltip>
+                <div class="flex justify-start items-center gap-2">
+                  <P size="base" weight="bold" class="text-gray-500">·</P>
+                  <P weight="normal" size="sm" class=" text-gray-500">Created in <span class="font-medium text-gray-500">{moment($selectedResearchInfo.conceptNote.createdAt).format("LL")}</span></P>
+                </div>
               </div>
               <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2.5"><DotsHorizontalOutline size="sm" /></Button>
               <Dropdown>
@@ -95,22 +109,8 @@
               </Dropdown>
             </div>
             <div class="flex items-center gap-2">
-              <Badge border large color="dark" class="flex items-center gap-2 font-medium text-sm whitespace-nowrap text-gray-500"><Indicator color="dark" size="md" class="" />Saved as Draft</Badge>
-              <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-                <P weight="normal" size="sm" class=" text-gray-500">Last Updated in <span class="font-medium text-gray-500">January 21, 2023</span></P>
-              </Tooltip>
-              <Badge border large class="flex items-center gap-2 font-medium text-sm  whitespace-nowrap text-gray-500"><Indicator color="orange" size="md" class="" />Waiting for Approval</Badge>
-              <Tooltip arrow={false} class="border rounded-md shadow-lg bg-white">
-                <P weight="normal" size="sm" class=" text-gray-500">Submitted in <span class="font-medium text-gray-500">January 21, 2023</span></P>
-              </Tooltip>
-              <Badge border large color="blue" class="flex items-center gap-2 font-medium text-sm text-gray-500"><Indicator color="blue" size="md" class="" />Approved</Badge>
-              <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-                <P weight="normal" size="sm" class=" text-gray-500">Approved in <span class="font-medium text-gray-500">January 21, 2023</span></P>
-              </Tooltip>
-              <div class="flex justify-start items-center gap-2">
-                <P size="base" weight="bold" class="text-gray-500">·</P>
-                <P weight="normal" size="sm" class=" text-gray-500">Created in <span class="font-medium text-gray-500">{moment($selectedResearchInfo.conceptNote.createdAt).format('LL')}</span></P>
-              </div>
+              <Button href={`/main/${researchID}/createConceptNote`} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FilePenOutline size="sm" /> Edit</Button>
+              <Button on:click={() => (submitExistingResearch = true)} outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileExportOutline size="sm" /> Submit</Button>
             </div>
           </div>
           {#if $selectedResearchInfo}
@@ -145,7 +145,7 @@
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
                     <P size="base" weight="medium">Project Duration:</P>
-                    <P size="sm" weight="normal" class="text-gray-500">{moment($selectedResearchInfo.conceptNote.projectDuration).format('LL')}</P>
+                    <P size="sm" weight="normal" class="text-gray-500">{moment($selectedResearchInfo.conceptNote.projectDuration).format("LL")}</P>
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
                     <P size="base" weight="medium">Total Project Cost:</P>
@@ -161,45 +161,45 @@
 
             <P size="lg" weight="medium">Project Description</P>
             <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-              {#each $selectedResearchInfo.conceptNote.description.split('\n') as paragraph}
-              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {#each $selectedResearchInfo.conceptNote.description.split("\n") as paragraph}
+                <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
               {/each}
             </div>
 
             <P size="lg" weight="medium">Significance</P>
             <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-              {#each $selectedResearchInfo.conceptNote.significance.split('\n') as paragraph}
-              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {#each $selectedResearchInfo.conceptNote.significance.split("\n") as paragraph}
+                <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
               {/each}
             </div>
             <P size="lg" weight="medium">Objectives</P>
             <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-              {#each $selectedResearchInfo.conceptNote.objectives.split('\n') as paragraph}
-              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {#each $selectedResearchInfo.conceptNote.objectives.split("\n") as paragraph}
+                <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
               {/each}
             </div>
             <P size="lg" weight="medium">Methodology</P>
             <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-              {#each $selectedResearchInfo.conceptNote.methodology.split('\n') as paragraph}
-              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {#each $selectedResearchInfo.conceptNote.methodology.split("\n") as paragraph}
+                <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
               {/each}
             </div>
             <P size="lg" weight="medium">Technology Roadmap</P>
             <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-              {#each $selectedResearchInfo.conceptNote.technologyRoadmap.split('\n') as paragraph}
-              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {#each $selectedResearchInfo.conceptNote.technologyRoadmap.split("\n") as paragraph}
+                <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
               {/each}
             </div>
             <P size="lg" weight="medium">Expected Outputs (6Ps)</P>
             <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-              {#each $selectedResearchInfo.conceptNote.expectedOutput.split('\n') as paragraph}
-              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {#each $selectedResearchInfo.conceptNote.expectedOutput.split("\n") as paragraph}
+                <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
               {/each}
             </div>
             <P size="lg" weight="medium">Work Plan</P>
             <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-              {#each $selectedResearchInfo.conceptNote.workPlan.split('\n') as paragraph}
-              <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
+              {#each $selectedResearchInfo.conceptNote.workPlan.split("\n") as paragraph}
+                <P size="sm" weight="normal" class="text-gray-500">{paragraph}</P>
               {/each}
             </div>
           {/if}
@@ -237,11 +237,11 @@
             <P size="xl" weight="bold">Presentation Schedule</P>
           </div>
 
-          <!--card schedule not active-->
+          <!--card schedule not active
           <div class="grid grid-flow-row justify-center w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
             <P size="sm" weight="normal" class="text-gray-500">Wait for the Admin to set the Initial Presentation Schedule...<span></span></P>
           </div>
-
+          -->
           <!--card schedule active-->
           <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4">
             <div class="grid grid-flow-row items-center gap-2 p-2">
