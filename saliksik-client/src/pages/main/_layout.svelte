@@ -6,7 +6,7 @@
   import { goto } from "@roxi/routify";
   import { onMount } from "svelte";
   import { userData, researches, isAuthenticated } from "../../components/store";
-  import { UserOutline, CirclePlusOutline, FolderOutline, StarSolid, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, UserSettingsOutline, FolderPlusOutline } from "flowbite-svelte-icons";
+  import { UserOutline, CirclePlusOutline, FolderOutline, StarSolid, SearchOutline, BookmarkOutline, BellOutline, LandmarkOutline, ArrowRightFromBracketSolid, UserSettingsOutline, FolderPlusOutline, MessageCaptionOutline, CalendarWeekOutline, CalendarMonthOutline, FileLinesOutline, GridOutline, DollarOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import { fetchResearches, fetchUser } from "../../components/fetch";
 
@@ -88,13 +88,28 @@
             <svelte:fragment slot="icon"><BellOutline color="blue" size="sm" /></svelte:fragment>
           </SidebarItem>
           
-          <SidebarDropdownWrapper label="Admin Tools" isOpen class="font-normal text-base rounded-md hover:bg-blue-100">
-            <svelte:fragment slot="icon"><UserSettingsOutline color="blue" /></svelte:fragment>
-            <SidebarDropdownItem label="Admin Dashboard" on:click={$goto('/main/admin/checkProposals')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
-            <SidebarDropdownItem label="Concept Note Approval" on:click={$goto('/main/admin/conceptNoteApproval')}  class="font-normal text-base rounded-md hover:bg-blue-100"/>
-            <SidebarDropdownItem label="User Accounts" on:click={$goto('/main/admin/createAccount')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
-            <SidebarDropdownItem label="List Of Panelist" on:click={$goto('/main/admin/listOfPanelist')} class="font-normal text-base rounded-md hover:bg-blue-100"/>
-          </SidebarDropdownWrapper>
+            <SidebarItem label="Admin Dashboard" on:click={$goto('/main/admin/checkProposals')} class="font-normal text-base rounded-md hover:bg-blue-100">
+              <svelte:fragment slot="icon"><GridOutline color="blue" size="sm" /></svelte:fragment>
+            </SidebarItem> 
+            <SidebarItem label="Concept Note Approval" on:click={$goto('/main/admin/conceptNoteApproval')}  class="font-normal text-base rounded-md hover:bg-blue-100">
+              <svelte:fragment slot="icon"><FileLinesOutline color="blue" size="sm" /></svelte:fragment>
+            </SidebarItem>
+            <SidebarItem label="Initial Presentation" on:click={$goto('/main/admin/initialPresentation')}  class="font-normal text-base rounded-md hover:bg-blue-100">
+              <svelte:fragment slot="icon"><CalendarMonthOutline color="blue" size="sm" /></svelte:fragment>
+            </SidebarItem>
+            <SidebarItem label="Final Presentation" on:click={$goto('/main/admin/finalPresentation')}  class="font-normal text-base rounded-md hover:bg-blue-100">
+              <svelte:fragment slot="icon"><CalendarWeekOutline color="blue" size="sm" /></svelte:fragment>
+            </SidebarItem>
+            <SidebarItem label="Incentive" on:click={$goto('/main/admin/incentive')}  class="font-normal text-base rounded-md hover:bg-blue-100">
+              <svelte:fragment slot="icon"><DollarOutline color="blue" size="sm" /></svelte:fragment>
+            </SidebarItem>
+            <SidebarItem label="User Accounts" on:click={$goto('/main/admin/createAccount')} class="font-normal text-base rounded-md hover:bg-blue-100">
+              <svelte:fragment slot="icon"><UserOutline color="blue" size="sm" /></svelte:fragment>
+            </SidebarItem>
+            <SidebarItem label="List Of Panelist" on:click={$goto('/main/admin/listOfPanelist')} class="font-normal text-base rounded-md hover:bg-blue-100">
+              <svelte:fragment slot="icon"><MessageCaptionOutline color="blue" size="sm" /></svelte:fragment>
+            </SidebarItem>
+        
         </SidebarGroup>
         <!--starred researches
         <SidebarGroup border class="truncate ...">

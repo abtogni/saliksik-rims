@@ -39,6 +39,7 @@
       avatar: user.avatar,
     }));
   });
+
   //modal for concept note approval
   let approveConceptNote = false;
 

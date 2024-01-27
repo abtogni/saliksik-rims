@@ -57,7 +57,7 @@
           <div class="flex justify-between items-center gap-2 px-4 py-3 border-b hover:bg-blue-50">
             <div class="flex justify-start items-center gap-2">
               <MessagesOutline size="sm" class="text-blue-700" />
-              <P size="base" weight="semibold" class="whitespace-nowrap">{`${p.firstName} ${p.lastName}`}</P>
+              <P size="base" weight="semibold" class="whitespace-nowrap">{`${p.honorific} ${p.firstName} ${p.middleName} ${p.lastName}`}</P>
               <P size="base" weight="bold" class="text-gray-500">·</P>
               <P weight="normal" size="sm" class="line-clamp-1 text-gray-500 w-96">Created in <span class="font-medium text-gray-500">{moment(p.createdAt).format('LL')}</span></P>
             </div>
