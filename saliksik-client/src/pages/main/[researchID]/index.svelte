@@ -86,36 +86,56 @@
           <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
             <div class="flex justify-between items-center gap-2">
               <div class="flex items-center gap-2">
-                <Badge border large color="dark" class="flex items-center gap-2 font-medium text-sm whitespace-nowrap text-gray-500"><Indicator color="dark" size="md" class="" />Saved as Draft</Badge>
-                <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-                  <P weight="normal" size="sm" class=" text-gray-500">Last Updated in <span class="font-medium text-gray-500">January 21, 2023</span></P>
-                </Tooltip>
-                <Badge border large class="flex items-center gap-2 font-medium text-sm  whitespace-nowrap text-gray-500"><Indicator color="orange" size="md" class="" />Waiting for Approval</Badge>
-                <Tooltip arrow={false} class="border rounded-md shadow-lg bg-white">
-                  <P weight="normal" size="sm" class=" text-gray-500">Submitted in <span class="font-medium text-gray-500">January 21, 2023</span></P>
-                </Tooltip>
-                <Badge border large color="blue" class="flex items-center gap-2 font-medium text-sm text-gray-500"><Indicator color="blue" size="md" class="" />Approved</Badge>
-                <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
-                  <P weight="normal" size="sm" class=" text-gray-500">Approved in <span class="font-medium text-gray-500">January 21, 2023</span></P>
-                </Tooltip>
-                <div class="flex justify-start items-center gap-2">
-                  <P size="base" weight="bold" class="text-gray-500">·</P>
-                  <P weight="normal" size="sm" class=" text-gray-500">Created in <span class="font-medium text-gray-500">{moment($selectedResearchInfo.conceptNote.createdAt).format("LL")}</span></P>
+                <Button href={`/main/${researchID}/createConceptNote`} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FilePenOutline size="sm" /> Edit</Button>
+                <Button on:click={() => (submitExistingResearch = true)} outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileExportOutline size="sm" /> Submit</Button>
+                <div class="flex items-center gap-2">
+                  <Badge border large color="dark" class="flex items-center gap-2 font-medium text-sm whitespace-nowrap text-gray-500"><Indicator color="dark" size="md" class="" />Saved as Draft</Badge>
+                  <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                    <P weight="normal" size="sm" class=" text-gray-500">Last Updated in <span class="font-medium text-gray-500">January 21, 2023</span></P>
+                  </Tooltip>
+                  <Badge border large class="flex items-center gap-2 font-medium text-sm  whitespace-nowrap text-gray-500"><Indicator color="orange" size="md" class="" />Waiting for Approval</Badge>
+                  <Tooltip arrow={false} class="border rounded-md shadow-lg bg-white">
+                    <P weight="normal" size="sm" class=" text-gray-500">Submitted in <span class="font-medium text-gray-500">January 21, 2023</span></P>
+                  </Tooltip>
+                  <Badge border large color="blue" class="flex items-center gap-2 font-medium text-sm text-gray-500"><Indicator color="blue" size="md" class="" />Approved</Badge>
+                  <Tooltip arrow={false} class="border rounded-md shadow-lg  bg-white">
+                    <P weight="normal" size="sm" class=" text-gray-500">Approved in <span class="font-medium text-gray-500">January 21, 2023</span></P>
+                  </Tooltip>
                 </div>
               </div>
-              <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2.5"><DotsHorizontalOutline size="sm" /></Button>
-              <Dropdown>
-                <DropdownItem class="flex justify-start items-center gap-2"><TrashBinOutline size="sm" class="text-blue-700" />Delete</DropdownItem>
-              </Dropdown>
-            </div>
-            <div class="flex items-center gap-2">
-              <Button href={`/main/${researchID}/createConceptNote`} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FilePenOutline size="sm" /> Edit</Button>
-              <Button on:click={() => (submitExistingResearch = true)} outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileExportOutline size="sm" /> Submit</Button>
+              
+              <div class="flex items-center gap-0">
+                <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-1"><ClockOutline size="sm" /></Button>
+                <Dropdown>
+                  <DropdownItem class="flex justify-start items-center gap-2 hover:bg-blue-50"
+                    ><ClockOutline size="sm" class="text-blue-700" />
+                    <div class="flex justify-start items-center gap-2">
+                      <P weight="normal" size="sm" class=" text-gray-500">Created in <span class="font-medium text-gray-500">{moment($selectedResearchInfo.conceptNote.createdAt).format("LL")}</span></P>
+                    </div>
+                  </DropdownItem>
+                  <DropdownItem class="flex justify-start items-center gap-2 hover:bg-blue-50"
+                    ><ClockOutline size="sm" class="text-blue-700" />
+                    <div class="flex justify-start items-center gap-2">
+                      <P weight="normal" size="sm" class=" text-gray-500">Submitted in <span class="font-medium text-gray-500">Insert Date and Time</span></P>
+                    </div>
+                  </DropdownItem>
+                  <DropdownItem class="flex justify-start items-center gap-2 hover:bg-blue-50"
+                    ><ClockOutline size="sm" class="text-blue-700" />
+                    <div class="flex justify-start items-center gap-2">
+                      <P weight="normal" size="sm" class=" text-gray-500">Approved in <span class="font-medium text-gray-500">Insert Date and Time</span></P>
+                    </div>
+                  </DropdownItem>
+                </Dropdown>
+                <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
+                <Dropdown>
+                  <DropdownItem class="flex justify-start items-center gap-2"><TrashBinOutline size="sm" class="text-blue-700" />Delete</DropdownItem>
+                </Dropdown>
+              </div>
             </div>
           </div>
           {#if $selectedResearchInfo}
             <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-              
+              <P size="base" weight="medium">{$selectedResearchInfo.researchTitle}</P>
               <div class="flex items-center gap-2">
                 <div class="flex items-center gap-0">
                   {#each $selectedResearchInfo.researchLeaders as member}
@@ -132,7 +152,6 @@
                   {/each}
                 </div>
               </div>
-              <P size="base" weight="medium">{$selectedResearchInfo.researchTitle}</P>
 
               <div class="flex items-start gap-2">
                 <div class="grid grid-flow-row items-start gap-2">
@@ -264,7 +283,7 @@
                   </div>
                 </div>
 
-                <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2.5"><DotsHorizontalOutline size="sm" /></Button>
+                <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
                 <Dropdown>
                   <DropdownItem class="flex justify-start items-center gap-2"><CalendarEditOutline size="sm" class="text-blue-700" />Change Status</DropdownItem>
                 </Dropdown>
@@ -294,11 +313,11 @@
           <!--header comment-->
           <P size="xl" weight="bold">Panelist Comments</P>
 
-          <!--card comment not active-->
+          <!--card comment not active
           <div class="grid grid-flow-row justify-center w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
             <P size="sm" weight="normal" class="text-gray-500">Waiting for your confirmation to the set schedule...<span></span></P>
           </div>
-
+-->
           <!--card comment active-->
           <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
             <div class="flex justify-start items-center gap-2">
@@ -344,5 +363,6 @@
     </form>
   </Modal>
 
+  <div class="h-96"></div>
   <div class="h-96"></div>
 </main>
