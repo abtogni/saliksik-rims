@@ -157,15 +157,20 @@
                 <div class="grid grid-flow-row items-start gap-2">
                   <div class="flex flex-wrap justify-start items-start gap-2">
                     <P size="sm" weight="medium">Implementing Agency/Department:</P>
-                    <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.implementingDept}</Badge>
+                    <P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.implementingDept}</P>
+                    <!--badge
+
+                    
+                    <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{research.conceptNote.implementingDept}</Badge>
+                 -->
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
                     <P size="sm" weight="medium">Cooperating Agency:</P>
-                    <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.coopAgency}</Badge>
+                    <P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.coopAgency}</P>
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
                     <P size="sm" weight="medium">Site/s of Implementation:</P>
-                    <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.siteImplementation}</Badge>
+                    <P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.siteImplementation}</P>
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
                     <P size="sm" weight="medium">Project Duration:</P>
@@ -177,7 +182,7 @@
                   </div>
                   <div class="flex flex-wrap justify-start items-start gap-2">
                     <P size="sm" weight="medium">Funding Source:</P>
-                    <Badge border large color="dark" class="flex items-center gap-2 font-normal text-sm border-none text-gray-500">{$selectedResearchInfo.conceptNote.fundingSource}</Badge>
+                    <P size="sm" weight="normal" class="text-gray-500">{$selectedResearchInfo.conceptNote.fundingSource}</P>
                   </div>
                 </div>
               </div>

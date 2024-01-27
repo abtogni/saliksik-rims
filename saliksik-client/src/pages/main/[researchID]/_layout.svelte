@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Button, Tooltip, Dropdown, DropdownItem, P, Avatar } from "flowbite-svelte";
   import { onMount } from "svelte";
-  import { selectedResearchInfo } from "../../../components/store";
+  import { researches, selectedResearchInfo, userList } from "../../../components/store";
   import { UserOutline, FolderOutline, StarOutline, ArchiveOutline, TrashBinOutline, DotsHorizontalOutline, ClockOutline } from "flowbite-svelte-icons";
   import moment from "moment";
   import NoStatus from "../../../assets/status/noStatus.svelte";
@@ -17,6 +17,16 @@
   import IncentiveProcessing from "../../../assets/status/incentiveProcessing.svelte";
   import IncentiveReleased from "../../../assets/status/incentiveReleased.svelte";
   import Published from "../../../assets/status/published.svelte";
+
+  let newUserList: any[];
+
+  onMount(async () => {
+    newUserList = $userList.map((user: any) => ({
+      id: `${user._id}`,
+      name: `${user.firstName} ${user.lastName}`,
+      avatar: user.avatar,
+    }));
+  });
 </script>
 
 <nav class="flex justify-between z-50 gap-2 pl-4 pt-2 pr-4 pb-2 border-b bg-white">
@@ -25,7 +35,9 @@
     {#if $selectedResearchInfo}
       <P weight="semibold" class="line-clamp-1" size="base">{$selectedResearchInfo.researchTitle}</P>
     {/if}
+  </div>
 
+  <div class="flex items-center gap-2">
     {#if $selectedResearchInfo.researchStatus === "No Status"}
       <NoStatus />
     {:else if $selectedResearchInfo.researchStatus === "Concept Note (waiting For Approval)"}
@@ -53,19 +65,23 @@
     {:else if $selectedResearchInfo.researchStatus === "Published"}
       <Published />
     {/if}
-  </div>
 
-  <div class="flex items-center gap-2">
-    <div class="flex items-center gap-0">
-      <Avatar border size="xs" class="text-xs font-medium ring-blue-700">AR</Avatar>
-      <Tooltip arrow={false}>Agnes Reyes</Tooltip>
-      <Avatar border size="xs" class="text-xs font-medium ring-blue-700">JA</Avatar>
-      <Tooltip arrow={false}>June Arreb Danila</Tooltip>
-      <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DC</Avatar>
-      <Tooltip arrow={false}>Danny Casimero</Tooltip>
-      <Avatar border size="xs" class="text-xs font-medium ring-blue-700">DI</Avatar>
-      <Tooltip arrow={false}>Dennis Ignacio</Tooltip>
-    </div>
+    {#if $selectedResearchInfo}
+      <div class="flex items-center gap-0">
+        {#each $selectedResearchInfo.researchLeaders as member}
+          {#if $userList}
+            {#each $userList as user}
+              {#if user._id === member}
+                <div class="flex items-center gap-0">
+                  <Avatar border size="xs" class="text-xs font-medium ring-blue-700">{user.avatar}</Avatar>
+                  <Tooltip arrow={false}>{`${user.firstName} ${user.lastName}`}</Tooltip>
+                </div>
+              {/if}
+            {/each}
+          {/if}
+        {/each}
+      </div>
+    {/if}
     <div class="flex items-center gap-0">
       <Button pill outline color="blue" size="sm" class="items-center border-none gap-2 p-2"><ClockOutline size="sm" /></Button>
       <Tooltip arrow={false}>Last edit was 00 hours ago</Tooltip>

@@ -586,41 +586,7 @@
                         </div>
                       </div>
     
-                      <P size="lg" weight="medium">Project Description</P>
-                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.description}</P>
-                      </div>
-                      <P size="lg" weight="medium">Significance</P>
-                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.significance}</P>
-                      </div>
-                      <P size="lg" weight="medium">Objectives</P>
-                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.objectives}</P>
-                      </div>
-                      <P size="lg" weight="medium">Methodology</P>
-                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.methodology}</P>
-                      </div>
-                      <P size="lg" weight="medium">Technology Roadmap</P>
-                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.technologyRoadmap}</P>
-                      </div>
-                      <P size="lg" weight="medium">Expected Outputs (6Ps)</P>
-                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-4 bg-white">
-                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.expectedOutput}</P>
-                      </div>
-                      <P size="lg" weight="medium">Work Plan</P>
-                      <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 mb-2 bg-white">
-                        <P size="sm" weight="normal" class="text-gray-500">{research.conceptNote.workPlan}</P>
-                      </div>
-                      <div class="flex justify-between items-center gap-2 w-full">
-                        <Button on:click={() => (approveConceptNote(research._id))} color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"><CheckCircleOutline size="sm" /> Approve</Button>
-                        <Button on:click={() => (rejectConceptNote(research._id))} outline color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"
-                          ><svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                          </svg> Reject</Button>
-                      </div>
+                      
                     </div>
                   </AccordionItem>
                 {/each}

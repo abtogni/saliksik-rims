@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Alert, Button, Card, FloatingLabelInput, Helper, Input, P, Textarea, Toolbar, ToolbarButton, ToolbarGroup } from "flowbite-svelte";
-  import { CodeOutline, FaceGrinOutline, FileCirclePlusOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, UserAddOutline } from "flowbite-svelte-icons";
+  import { CodeOutline, FaceGrinOutline, FileCirclePlusOutline, FileLinesOutline, ImageOutline, MapPinAltSolid, PaperClipOutline, PapperPlaneOutline, QuestionCircleOutline, UploadOutline, UserAddOutline } from "flowbite-svelte-icons";
   import { DateInput } from "date-picker-svelte";
   import { selectedResearchInfo } from "../../../components/store";
   import { goto } from "@roxi/routify";
@@ -56,8 +56,8 @@
               <P size="xl" weight="bold" class="text-gray-900">Create Concept Note</P>
             </div>
             <div class="flex items-center gap-2">
-              <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md"><UserAddOutline size="sm" />Save as Draft</Button>
-              <Button type="submit" outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><UserAddOutline size="sm" />Submit</Button>
+              <Button color="blue" size="sm" class="flex items-center gap-2 rounded-md"><FileLinesOutline size="sm" />Save As Draft</Button>
+              <Button type="submit" outline color="blue" size="sm" class="flex items-center gap-2 rounded-md"><UploadOutline size="sm" />Submit</Button>
             </div>
           </div>
           <P size="sm" weight="normal" class="text-gray-500">Fill out all empty fields with the appropriate texts. Put "N/A" if not applicable and "To Be Followed" as it states.</P>
@@ -66,17 +66,17 @@
         <div class="grid grid-flow-row items-center gap-2 shadow-lg border rounded-md p-3 mb-4 w-full bg-white">
           <div class="flex flex-wrap items-center gap-1">
             <P weight="medium" size="base">Implementing Agency/Department</P>
-            <Input type="text" size="sm" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" required class="rounded-md focus:ring-blue-700 focus:border-blue-700 text-gray-500"></Input>
+            <Input type="text" size="sm" id="implementingDept" name="implementingDept" label="Implementing Agency/Department" placeholder="Separate with a comma, if multiple." required class="rounded-md focus:ring-blue-700 focus:border-blue-700 text-gray-500"></Input>
             <Helper class=" text-gray-500"></Helper>
           </div>
           <div class="flex flex-wrap items-center gap-1">
             <P weight="medium" size="base">Cooperating Agency</P>
-            <Input type="text" size="sm" id="coopAgency" name="coopAgency" label="Cooperating Agency" required class="rounded-md text-gray-500 focus:ring-blue-500 focus:border-blue-500"></Input>
+            <Input type="text" size="sm" id="coopAgency" name="coopAgency" label="Cooperating Agency" placeholder="Separate with a comma, if multiple." required class="rounded-md text-gray-500 focus:ring-blue-500 focus:border-blue-500"></Input>
             <Helper class=" text-gray-500">State the name of agency to be tapped for funding/ co-implementing the project.</Helper>
           </div>
           <div class="flex flex-wrap items-center gap-1">
             <P weight="medium" size="base">Site/s of Implementation</P>
-            <Input type="text" size="sm" id="siteImplementation" name="siteImplementation" label="Site/s of Implementation" required class="rounded-md text-gray-500 focus:ring-blue-500 focus:border-blue-500"></Input>
+            <Input type="text" size="sm" id="siteImplementation" name="siteImplementation" label="Site/s of Implementation" placeholder="Separate with a comma, if multiple." required class="rounded-md text-gray-500 focus:ring-blue-500 focus:border-blue-500"></Input>
             <Helper class=" text-gray-500">Site/s of Implementation</Helper>
           </div>
           <div class="flex flex-wrap items-center gap-1">
@@ -86,7 +86,7 @@
           </div>
           <div class="flex flex-wrap items-center gap-1">
             <P weight="medium" size="base">Funding Source</P>
-            <Input type="text" size="sm" id="fundingSource" name="fundingSource" label="Funding Source" required class="rounded-md text-gray-500 focus:ring-blue-500 focus:border-blue-500"></Input>
+            <Input type="text" size="sm" id="fundingSource" name="fundingSource" label="Funding Source" placeholder="Separate with a comma, if multiple." required class="rounded-md text-gray-500 focus:ring-blue-500 focus:border-blue-500"></Input>
             <Helper class=" text-gray-500">Specific funding source, including counterpart funds.</Helper>
           </div>
 
