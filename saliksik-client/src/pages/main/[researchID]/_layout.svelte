@@ -17,7 +17,7 @@
 
     {#if $selectedResearchInfo.researchStatus === "No Status"}
       <NoStatus />
-    {:else if $selectedResearchInfo.researchStatus === "Concept Note"}
+    {:else if $selectedResearchInfo.researchStatus === "Concept Note Approval"}
       <ConceptNote />
     {/if}
   </div>

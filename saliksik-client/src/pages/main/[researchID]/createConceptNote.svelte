@@ -5,12 +5,13 @@
   import { selectedResearchInfo, updateResearch } from "../../../components/store";
   import { goto } from "@roxi/routify";
 
-  let data = { conceptNote: {} };
+  
 
   function submit(e: Event) {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     let json = Object.fromEntries(formData.entries());
+    let data = { researchStatus: 'Concept Note Approval' ,conceptNote: {} };
     data.conceptNote = {
       ...json,
       projectDuration,
