@@ -1,5 +1,7 @@
 import { updateResearchList, updateUser, updateResearch, updateUserList } from "./store";
 
+
+//user fetching
 export async function fetchUser() {
   try {
     const response = await fetch("/api/checkUser");
@@ -18,6 +20,8 @@ export async function getUserList() {
   }
 }
 
+
+//research fetching
 export async function fetchResearches(userID: string) {
   try {
     const response = await fetch(`/api/research/getResearches?userID=${userID}`);
