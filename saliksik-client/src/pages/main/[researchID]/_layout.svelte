@@ -4,7 +4,7 @@
   import { selectedResearchInfo } from "../../../components/store";
   import { UserOutline, FolderOutline, StarOutline, ArchiveOutline, TrashBinOutline, DotsHorizontalOutline, ClockOutline } from "flowbite-svelte-icons";
   import moment from "moment";
-  import ConceptNote from "../../../assets/status/conceptNoteWaitingForApproval.svelte";
+  import ConceptNoteWaitingForApproval from "../../../assets/status/conceptNoteWaitingForApproval.svelte";
   import NoStatus from "../../../assets/status/noStatus.svelte";
 </script>
 
@@ -18,7 +18,7 @@
     {#if $selectedResearchInfo.researchStatus === "No Status"}
       <NoStatus />
     {:else if $selectedResearchInfo.researchStatus === "Concept Note Approval"}
-      <ConceptNote />
+      <ConceptNoteWaitingForApproval />
     {/if}
   </div>
 
