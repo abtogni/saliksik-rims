@@ -264,7 +264,7 @@
     </TabItem>
 
     <!--concept note approval-->
-    <TabItem>
+    <TabItem open>
       <div slot="title" class="flex items-center gap-2"><Indicator color="orange"></Indicator>Concept Note Approval</div>
       <div class="flex items-center gap-2 mb-2">
         <Search></Search>
@@ -426,7 +426,7 @@
     </TabItem>
 
     <!--initial presentation-->
-    <TabItem open>
+    <TabItem>
       <div slot="title" class="flex items-center gap-2"><Indicator color="blue"></Indicator>Initial Presentation</div>
       <div class="flex justify-center gap-2 bg-gray-50">
         <div class="grid grid-flow-row col-start-2 col-span-3 items-center gap-2 w-11/12 sm:w-full md:w-full lg:w-11/12 xl:w-11/12 2xl:w-11/12 ">

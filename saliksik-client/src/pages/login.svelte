@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onMount } from 'svelte';
     import UNCLogo from '/login.png';
     import { goto } from '@roxi/routify';
     import { isAuthenticated } from '../components/store';
