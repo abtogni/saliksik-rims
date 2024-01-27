@@ -1,7 +1,7 @@
 <script lang="ts">
   import { DateInput } from "date-picker-svelte";
-  import { Modal, P, Checkbox, Avatar, Tooltip, Button, MultiSelect } from "flowbite-svelte";
-  import { CalendarPlusSolid, CalendarMonthOutline, UserAddOutline, MessageCaptionOutline, FileCirclePlusOutline, CalendarEditOutline, MessageCaptionSolid, CloseOutline, MinusOutline, CirclePlusOutline, FileLinesOutline, CalendarEditSolid, CalendarWeekOutline } from "flowbite-svelte-icons";
+  import { P, Button, MultiSelect, Input } from "flowbite-svelte";
+  import { CalendarPlusSolid, CalendarMonthOutline, MessageCaptionOutline, FileCirclePlusOutline, MinusOutline, CirclePlusOutline, FileLinesOutline, CalendarWeekOutline } from "flowbite-svelte-icons";
   import { researches } from "../components/store";
   import { onMount } from "svelte";
 
@@ -33,24 +33,26 @@
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     let json = Object.fromEntries(formData.entries());
+    json = {...json, presentationDate};
+    console.log(JSON.stringify(json));
 
-    fetch("/api/research/createPresentation", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(json),
-    })
-      .then((response) => {
-        if (response.ok) {
-          window.location.href = "/main/";
-        } else {
-          console.error("Error occured");
-        }
-      })
-      .catch((error) => {
-        console.error("Network error:", error);
-      });
+    // fetch("/api/research/createPresentation", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(json),
+    // })
+    //   .then((response) => {
+    //     if (response.ok) {
+    //       window.location.href = "/main/";
+    //     } else {
+    //       console.error("Error occured");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     console.error("Network error:", error);
+    //   });
   }
 
   //modal for add schedule
@@ -122,7 +124,7 @@
     <div class="flex justify-between items-center p-2 rounded-md hover:bg-blue-50">
       <div class="flex justify-start items-center gap-2">
         <MessageCaptionOutline size="sm" class="text-blue-700" />
-        <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">Insert Panelist Name</P>
+        <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500"><Input type="text" id="panelistNames" name="panelistNames" placeholder="Insert Panelist Name" required /></P>
       </div>
       <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><MinusOutline size="sm" /></Button>
     </div>

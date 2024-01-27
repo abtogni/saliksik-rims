@@ -3,51 +3,17 @@ import { writable } from "svelte/store";
 
 
 //Research List
-const storedResearches = localStorage.getItem('researches');
-const storedResearchData = storedResearches ? JSON.parse(storedResearches) : [];
-export const researches = writable<any[]>(storedResearchData);
+  const storedResearches = localStorage.getItem('researches');
+  const storedResearchData = storedResearches ? JSON.parse(storedResearches) : [];
+  export const researches = writable<any[]>(storedResearchData);
 
-researches.subscribe((value) => {
-  localStorage.setItem('researches', JSON.stringify(value));
-});
+  researches.subscribe((value) => {
+    localStorage.setItem('researches', JSON.stringify(value));
+  });
 
-export const updateResearchList = (newResearches: any[]) => {
-  researches.set(newResearches);
-};
-
-
-// User Data
-const storedUserData = localStorage.getItem('userData');
-const UserModel = storedUserData ? JSON.parse(storedUserData) : {
-  _id: '',
-  email: '',
-  userType: '',
-  firstName: '',
-  middleName: '',
-  lastName: '',
-  suffix: '',
-  avatar: '',
-  researchCount: 0,
-  createdAt: ''
-};
-
-export const userData = writable(UserModel);
-
-userData.subscribe((value) => {
-  localStorage.setItem('userData', JSON.stringify(value));
-});
-
-export const updateUser = (newUserData: any) => {
-  userData.update((prevUserData) => ({ ...prevUserData, ...newUserData }));
-};
-
-const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
-export const isAuthenticated = writable(storedIsAuthenticated ? JSON.parse(storedIsAuthenticated) : false);
-
-isAuthenticated.subscribe((value) => {
-  localStorage.setItem('isAuthenticated', JSON.stringify(value));
-});
-
+  export const updateResearchList = (newResearches: any[]) => {
+    researches.set(newResearches);
+  };
 
 //Current Research
 const currentResearchStored = localStorage.getItem('selectedResearchInfo');
@@ -85,6 +51,38 @@ selectedResearchInfo.subscribe((value) => {
 export const updateResearch = (selectedResearch: any) => {
   selectedResearchInfo.update((oldResearch) => ({ ...oldResearch, ...selectedResearch}));
 };
+
+// User Data
+const storedUserData = localStorage.getItem('userData');
+const UserModel = storedUserData ? JSON.parse(storedUserData) : {
+  _id: '',
+  email: '',
+  userType: '',
+  firstName: '',
+  middleName: '',
+  lastName: '',
+  suffix: '',
+  avatar: '',
+  researchCount: 0,
+  createdAt: ''
+};
+
+export const userData = writable(UserModel);
+
+userData.subscribe((value) => {
+  localStorage.setItem('userData', JSON.stringify(value));
+});
+
+export const updateUser = (newUserData: any) => {
+  userData.update((prevUserData) => ({ ...prevUserData, ...newUserData }));
+};
+
+const storedIsAuthenticated = localStorage.getItem('isAuthenticated');
+export const isAuthenticated = writable(storedIsAuthenticated ? JSON.parse(storedIsAuthenticated) : false);
+
+isAuthenticated.subscribe((value) => {
+  localStorage.setItem('isAuthenticated', JSON.stringify(value));
+});
 
 
 //User List
