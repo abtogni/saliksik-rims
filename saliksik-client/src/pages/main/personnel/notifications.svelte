@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Indicator, Modal, P, Search, Tooltip } from "flowbite-svelte";
-  import { ArchiveOutline, BellActiveAltOutline, BellOutline, CheckCircleOutline, DotsHorizontalOutline, EnvelopeOpenOutline, EyeOutline, FileCirclePlusOutline, FileExportOutline, FilePenOutline, FilterOutline, FolderOutline, FolderPlusOutline, MessageCaptionOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
+  import { Accordion, AccordionItem, Alert, P } from "flowbite-svelte";
+  import { BellActiveAltOutline, CheckCircleOutline, QuestionCircleOutline } from "flowbite-svelte-icons";
   import { researches, selectedResearchInfo } from "../../../components/store";
   import moment from "moment";
 </script>
