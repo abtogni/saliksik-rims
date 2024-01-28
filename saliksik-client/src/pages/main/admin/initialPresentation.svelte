@@ -1,7 +1,8 @@
 <script lang="ts">
   import { Accordion, AccordionItem, Alert, Avatar, Badge, Button, Dropdown, DropdownItem, Indicator, Modal, P, Tooltip } from "flowbite-svelte";
   import { CalendarEditOutline, CalendarMonthOutline, CalendarPlusSolid, DotsHorizontalOutline, EyeOutline, FileCirclePlusOutline, FileLinesOutline, InfoCircleOutline, MapLocationOutline, MessageCaptionOutline, QuestionCircleOutline, TrashBinOutline, UsersGroupOutline } from "flowbite-svelte-icons";
-  import { researches, userList } from "../../../components/store";
+  import { researches, userList, presentation } from "../../../components/store";
+  import { getPresentationList } from "../../../components/fetch"; 
   import moment from "moment";
   import { onMount } from "svelte";
   import CreatePresentationModal from "../../../modals/CreatePresentationModal.svelte";
@@ -15,6 +16,7 @@
   let newUserList: any[];
 
   onMount(async () => {
+    getPresentationList();
     newUserList = $userList.map((user: any) => ({
       id: `${user._id}`,
       name: `${user.firstName} ${user.lastName}`,
@@ -38,7 +40,7 @@
       <div class="flex justify-between items-center w-full">
         <div class="flex items-center gap-2">
           <FileLinesOutline size="md" class="text-blue-700" />
-          <P weight="bold" size="xl" class="text-gray-900">00 <span class="text-gray-500">Researches For Initial Presentation</span></P>
+          <P weight="bold" size="xl" class="text-gray-900">{$presentation.length} <span class="text-gray-500">Researches For Initial Presentation</span></P>
         </div>
 
         <div class="flex items-center gap-2">
@@ -47,13 +49,14 @@
       </div>
 
       <!--card schedule-->
+      {#each $presentation as p}
       <div class="grid grid-flow-row w-full shadow-lg border rounded-lg bg-white">
         <!--card schedule header-->
         <div class="grid grid-flow-row items-center gap-2 px-4 py-3 border-b">
           <div class="flex justify-between items-center gap-2">
             <div class="flex justify-start items-center gap-2">
               <CalendarMonthOutline size="md" class="text-blue-700" />
-              <P size="lg" weight="bold" class="uppercase">Sunday, January 21, 2023 at 1:30 PM</P>
+              <P size="lg" weight="bold" class="uppercase">{moment(p.presentationDate).format('LLLL')}</P>
             </div>
 
             <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><DotsHorizontalOutline size="sm" /></Button>
@@ -122,9 +125,9 @@
                           <Indicator color="red" size="md" class="" />Not Going
                         </Badge>
                       </div>
-                      <div class="flex items-center gap-2">
+                      <!-- <div class="flex items-center gap-2">
                         <Button on:click={() => (addSchedule = true)} color="blue" size="sm" class="flex items-center gap-2 rounded-md"><MessageCaptionOutline size="sm" />Add Panelist Comment</Button>
-                      </div>
+                      </div> -->
                     </div>
                     <div class="flex justify-end items-center gap-2">
                       <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><EyeOutline size="sm" /></Button>
@@ -150,8 +153,8 @@
                 <div slot="arrowup"></div>
                 <span slot="arrowdown"> </span>
 
-                <div class="flex flex-wrap justify-start items-center gap-2 p-3 w-full h-96 overflow-auto">
-                  <!--concept note overview card-->
+                <!-- <div class="flex flex-wrap justify-start items-center gap-2 p-3 w-full h-96 overflow-auto">
+                  concept note overview card
                   <div class="grid grid-flow-row w-full shadow-lg border rounded-lg gap-2 p-3 bg-white">
                     <div class="flex items-start gap-2">
                       <div class="grid grid-flow-row items-start gap-2">
@@ -183,16 +186,16 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
               </AccordionItem>
             {/each}
           {/if}
         </Accordion>
         <!--card presenter-->
 
-        <div class="flex flex-wrap gap-2 px-4 py-3">
+        <!-- <div class="flex flex-wrap gap-2 px-4 py-3">
           <Button on:click={() => (sendNoticeToPresent = true)} color="blue" size="md" class="rounded-md w-full">Send Notice to Present</Button>
-        </div>
+        </div> -->
 
         <!--modal send notice to present-->
         <Modal title="Send Notice to Present" bind:open={sendNoticeToPresent} size="xs" autoclose class="w-full">
@@ -206,6 +209,7 @@
           </div>
         </Modal>
       </div>
+      {/each}
     </div>
   </div>
 

@@ -88,9 +88,9 @@
             <svelte:fragment slot="icon"><BellOutline color="blue" size="sm" /></svelte:fragment>
           </SidebarItem>
           
-            <SidebarItem label="Admin Dashboard" on:click={$goto('/main/admin/checkProposals')} class="font-normal text-base rounded-md hover:bg-blue-100">
+            <!-- <SidebarItem label="Admin Dashboard" on:click={$goto('/main/admin/checkProposals')} class="font-normal text-base rounded-md hover:bg-blue-100">
               <svelte:fragment slot="icon"><GridOutline color="blue" size="sm" /></svelte:fragment>
-            </SidebarItem> 
+            </SidebarItem>  -->
             <SidebarItem label="Concept Note Approval" on:click={$goto('/main/admin/conceptNoteApproval')}  class="font-normal text-base rounded-md hover:bg-blue-100">
               <svelte:fragment slot="icon"><FileLinesOutline color="blue" size="sm" /></svelte:fragment>
             </SidebarItem>

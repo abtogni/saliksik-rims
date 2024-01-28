@@ -143,19 +143,21 @@
         <Button color="blue" size="sm" on:click={addPanelist} class="flex items-center gap-2 rounded-md whitespace-nowrap" ><CirclePlusOutline size="sm" />Add</Button>
       </div>
     </div>
-    <div class="flex justify-between items-center p-2 rounded-md border-b hover:bg-blue-50">
+    
       {#if addedPanelists}
          {#each addedPanelists as p}
+         <div class="flex justify-between items-center p-2 rounded-md border-b hover:bg-blue-50">
           <div class="flex justify-start items-center gap-2">
             <MessageCaptionOutline size="sm" class="text-blue-700" />
             <P for="researchLeaders" weight="semibold" size="sm" class="text-gray-500">{`${p.firstName} ${p.lastName}`}</P>
           </div>
           <Button outline color="blue" size="sm" class="flex items-center rounded-full border-none gap-2 p-1"><MinusOutline size="sm" /></Button>
-         {/each}
+        </div>
+          {/each}
       {/if}
       
       
-    </div>
+    
   </div>
   <Button on:click={() => alert('Handle "success"')} type="submit" color="blue" size="md" class="rounded-md w-full mt-6">Add Schedule</Button>
 </form>

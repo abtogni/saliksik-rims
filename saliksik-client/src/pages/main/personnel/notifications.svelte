@@ -1,10 +1,16 @@
 <script lang="ts">
   import { Accordion, AccordionItem, Alert, P } from "flowbite-svelte";
   import { BellActiveAltOutline, CheckCircleOutline, QuestionCircleOutline } from "flowbite-svelte-icons";
-  import { researches, selectedResearchInfo } from "../../../components/store";
+  import { researches, logs, userData } from "../../../components/store";
+  import { getLogs } from "../../../components/fetch";
   import moment from "moment";
-</script>
+  import { onMount } from "svelte";
 
+  onMount(async () => {
+    getLogs($userData._id);
+    console.log($logs);
+  });
+</script>
 <main class="p-4">
   <div class="flex justify-center gap-2 bg-gray-50">
     <div class="grid grid-flow-row items-center gap-2 w-1/2 sm:w-full md:w-full lg:w-11/12 xl:w-8/12 2xl:w-1/2">

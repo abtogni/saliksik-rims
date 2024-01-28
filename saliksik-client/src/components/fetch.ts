@@ -1,4 +1,4 @@
-import { updateResearchList, updateUser, updateResearch, updateUserList, updatePanelist } from "./store";
+import { updateResearchList, updateUser, updateResearch, updateUserList, updatePanelist, updateLogs, updatePresentationList } from "./store";
 
 
 //user fetching
@@ -55,6 +55,26 @@ export async function getPanelists(){
   try {
     const response = await fetch("/api/research/getPanelists");
     updatePanelist(await response.json());
+  } catch (e) {
+    console.error("Error fetching user:", e);
+  }
+}
+
+//logs fetching
+export async function getLogs(userID: string){
+  try {
+    const response = await fetch(`/api/logs/getUserLogs?userID=${userID}`);
+    updateLogs(await response.json());
+  } catch (e) {
+    console.error("Error fetching user:", e);
+  }
+}
+
+//presentation fetcher
+export async function getPresentationList(){
+  try {
+    const response = await fetch(`/api/research/getPresentations`);
+    updatePresentationList(await response.json());
   } catch (e) {
     console.error("Error fetching user:", e);
   }
