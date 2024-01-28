@@ -2,7 +2,7 @@
     import { Button, P} from "flowbite-svelte";
     import { InfoCircleOutline } from "flowbite-svelte-icons";
     export let propValue: any;
-    let data = { researchStatus: 'Rejected' };
+    let data = { researchStatus: 'Concept Note (Rejected)' };
   
     function reject(_e: Event){
       fetch(`/api/research/updateResearch?researchID=${propValue}`, {

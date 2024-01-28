@@ -3,7 +3,8 @@
   import { InfoCircleOutline } from "flowbite-svelte-icons";
   export let propValue: any;
 
-  let data = { researchStatus: 'Approved' };
+  console.log(propValue);
+  let data = { researchStatus: 'Concept Note (Approved)' };
 
   function approve(_e: Event){
     fetch(`/api/research/updateResearch?researchID=${propValue}`, {
