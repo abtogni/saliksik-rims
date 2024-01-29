@@ -1,18 +1,18 @@
 import { Router } from 'express';
-import { createResearch, getResearches, getResearch, updateResearch, deleteResearch } from '../../controllers/mainRoutes/researchController';
+import { createResearch, getResearches, getResearchData, updateResearch, deleteResearch } from '../../controllers/mainRoutes/researchController';
 
 const router = Router();
 
 
-router.get('/api/research/getUserResearches', getResearches);
+router.get('/getResearches', getResearches);
 
-router.get('/api/research/getResearch', getResearch);
+router.get('/getResearchData', getResearchData);
 
-router.post('/api/research/createResearch', createResearch);
+router.post('/createResearch', createResearch);
 
-router.patch('/api/research/updateResearch', updateResearch);
+router.post('/updateResearch', updateResearch);
 
-router.delete('/api/research/deleteResearch', deleteResearch);
+router.delete('/deleteResearch', deleteResearch);
 
 export default router;
 

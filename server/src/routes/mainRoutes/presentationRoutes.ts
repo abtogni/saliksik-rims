@@ -1,18 +1,16 @@
 import express, { Request, Response } from 'express';
-import { createPresentation, getPresentations, getPresentation, updatePresentation, deletePresentation } from '../../controllers/mainRoutes/presentationController';
+import { createPresentation, getPresentations, updatePresentation, deletePresentation } from '../../controllers/mainRoutes/presentationController';
 
 const router = express.Router();
 
 
-router.get('/api/presentation/getPresentations', getPresentations);
+router.get('/getPresentations', getPresentations);
 
-router.get('/api/presentation/getPresentation', getPresentation);
+router.post('/createPresentation', createPresentation);
 
-router.post('/api/presentation/createPresentation', createPresentation);
+router.patch('/updatePresentation', updatePresentation);
 
-router.patch('/api/presentation/updatePresentation', updatePresentation);
-
-router.delete('/api/presentation/deletePresentation', deletePresentation);
+router.delete('/deletePresentation', deletePresentation);
 
 export default router;
 

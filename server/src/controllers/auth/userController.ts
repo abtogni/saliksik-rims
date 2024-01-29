@@ -1,77 +1,113 @@
 import { Request, Response } from 'express';
-import { UserModel } from "../../models/userModel";
-import mongoose, { Document } from "mongoose";
-import jwt from 'jsonwebtoken';
+import * as userHandler from '../../services/userHandler';
+import { UserModel } from '../../models/userModel';
+import mongoose from 'mongoose';
 
-const maxAge: number = 3 * 24 * 60 * 60;
+const successResponse = (res: Response, data: any, status = 200) => {
+  res.status(status).json(data);
+};
 
-export const createToken = (id: string): string => {
-    return jwt.sign({ id }, 'unc research office', {
-      expiresIn: maxAge
-    });
-  };
+const errorResponse = (res: Response, message: string, status = 500) => {
+  res.status(status).json({ error: message });
+};
 
+export const getUsers = async (req: Request, res: Response) => {
+  try {
+    const users = await userHandler.getUsers(req.body.researchID);
+    successResponse(res, users);
+  } catch (err: any) {
+    errorResponse(res, err.message);
+  }
+};
 
-export const getUsers = async (req : Request, res: Response) => {
-    const { researchID } = req.body;
+export const getUser = async (req: Request, res: Response) => {
+  const userId = req.query.id as string | undefined;
 
-    try{
-        const presentations = await UserModel.find({researchID}).sort({createdAt: -1});
-        res.status(200).json(presentations);
-    }catch (err) {
-        res.status(400).json({err: err});
+  if (!userId) {
+    return errorResponse(res, 'User ID is missing in the request', 400);
+  }
+
+  const user = await userHandler.getUserByID(userId);
+
+  if (user) {
+    successResponse(res, user);
+  } else {
+    errorResponse(res, 'User not found', 404);
+  }
+};
+
+export const createUser = async (req: Request, res: Response) => {
+  const {
+    userID,
+    email,
+    password,
+    firstName,
+    middleName,
+    lastName,
+    suffix,
+    userType,
+  } = req.body;
+
+  try {
+    const user = await userHandler.createUser(userID, email, password, firstName, middleName, lastName, suffix, userType);
+    successResponse(res, { message: 'User Successfully Created an Account', user: user._id }, 201);
+  } catch (err: any) {
+    errorResponse(res, err.message, 400);
+  }
+};
+
+export const updateUser = async (req: Request, res: Response) => {
+  const { id } = req.body;
+
+  if (!id) {
+    return errorResponse(res, 'User ID is missing in the request', 400);
+  }
+
+  try {
+    const user = await UserModel.findOneAndUpdate({ _id: id }, { ...req.body }, { new: true });
+
+    if (!user) {
+      return errorResponse(res, 'User not found', 404);
     }
-    
 
-}
+    successResponse(res, user);
+  } catch (error) {
+    console.error('Error updating user:', error);
+    errorResponse(res, 'Internal server error', 500);
+  }
+};
 
-export const getUser = async (req : Request, res: Response) => {
-    const { id } = req.body;
+export const userLogin = async (req: Request, res: Response) => {
+  const { userID, password, userType } = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'User not found'});
-      }
+  try {
+    const token = await userHandler.userLogin(userID, password, userType);
+    res.cookie('jwt', token, { httpOnly: true });
+    successResponse(res, { message: 'Login successful' });
+  } catch (err: any) {
+    errorResponse(res, err.message, 401);
+  }
+};
 
-  const user = await UserModel.findById(id)
+export const userLogout = async (req: Request, res: Response) => {
+  res.clearCookie('jwt');
+  successResponse(res, { message: 'User logged out' });
+};
+
+export const deleteUser = async (req : Request, res: Response) => {
+  const { id } = req.body
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({error: 'No such user'})
+  }
+
+  const user = await UserModel.findOneAndDelete({_id: id})
 
   if (!user) {
-    return res.status(404).json({error: 'User not found'})
+    return res.status(400).json({error: 'No such user'})
   }
-  
+
   res.status(200).json(user)
 
-}
-
-export const createUser = async (req : Request, res: Response): Promise<void> => {
-    const { userID, email, password, firstName, middleName, lastName, suffix, userType } = req.body;
-
-    try {
-        const user: Document = await UserModel.create({ userID, email, password, firstName, middleName, lastName, suffix, userType });
-        const token: string = createToken(user._id);
-        res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        res.status(201).json({ user: user._id });
-      } catch (err) {
-        res.status(400).json({ err });
-      }
 
 }
-
-export const userLogin = async (req : Request, res: Response): Promise<void> => {
-    const { userID, password, userType } = req.body;
-  
-    try {
-      // @ts-expect-error
-      const user: Document = await User.login(userID, password, userType);
-      const token: string = createToken(user._id);
-      res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-      res.status(200).json({ user: user._id });
-    } catch (err) {
-      res.status(400).json({ err });
-    }
-  };
-
-export const userLogout = async (req: Request, res: Response): Promise<void> => {
-    res.cookie('jwt', '', { maxAge: 1 });
-    res.redirect('/');
-  };
-

@@ -1,10 +1,12 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import appRoutes from './routes/appRoutes';
 import mongoose, { ConnectOptions } from 'mongoose';
+import { checkUser, requireAuth } from './middlewares/authMiddleware';
+import { userLogin, userLogout } from './controllers/auth/userController';
 
 //.ENV
 dotenv.config();
@@ -18,9 +20,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(cookieParser());
 
-
 //DB Connection
-
 const start = async (): Promise<void> => {
   try {
     await mongoose.connect(dbURI, {
@@ -38,13 +38,16 @@ const start = async (): Promise<void> => {
 
 start();
 
-app.get('/', (req: Request, res: Response) => {
+//routes
+app.post('/api/login', userLogin);
+app.get('/api/logout', userLogout);
+app.get('/api/checkUser', checkUser, (req, res) => {
+  res.json({ user: res.locals.user });
+});
+app.get('/api/checkAuth', requireAuth);
+app.use('/api', appRoutes);
+
+app.get('/api', (_, res) => {
   res.json({ message: 'Backend is online' });
 });
 
-
-  //routes
-  app.use(appRoutes);
-  app.get('/api', (req, res) => {
-    res.json({ message: 'Backend is online' });
-});

@@ -1,14 +1,16 @@
-import express, { Request, Response } from 'express'
+import express from 'express'
 import auth from './auth/authRoutes';
 import research from './mainRoutes/researchRoutes';
-import proposal from './mainRoutes/proposalRoutes';
 import presentation from './mainRoutes/presentationRoutes';
+import log from './mainRoutes/logRoutes';
+import panelists from './mainRoutes/panelistRoutes';
 
 const router = express.Router();
 
-router.use(auth);
-router.use(proposal);
-router.use(research);
-router.use(presentation);
+router.use('/user', auth);
+router.use('/research',research);
+router.use('/research',presentation);
+router.use('/research',panelists);
+router.use('/logs', log);
 
 export default router;

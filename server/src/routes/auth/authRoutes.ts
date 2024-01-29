@@ -1,12 +1,12 @@
-import { Router }  from 'express';
-import { getUsers, createUser, userLogin, userLogout } from '../../controllers/auth/userController';
+import { Request, Response, Router } from 'express'
+import { getUsers, createUser, getUser, updateUser } from '../../controllers/auth/userController';
 
 const router = Router();
 
-router.get('/api/user/getUsers', getUsers);
-router.post('/api/user/createAccount', createUser);
-router.post('/api/login', userLogin);
-router.get('/api/logout', userLogout);
+router.get('/getUsers', getUsers);
+router.get('/getUser', getUser);
+router.post('/createAccount', createUser);
+router.post('/updateAccount', updateUser);
 
 
 export default router;

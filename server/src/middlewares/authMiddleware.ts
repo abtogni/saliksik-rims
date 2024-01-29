@@ -1,44 +1,42 @@
 import jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
-import { UserModel } from '../models/userModel'
+import { UserModel } from '../models/userModel';
 
+const secretKey = process.env.JWT_SECRET || 'unc research office';
 
-const requireAuth = (req: Request, res: Response , next: NextFunction) =>{
-    const token = req.cookies.jwt;
-
-    if (token){
-        jwt.verify(token, 'unc research office', (err: any, decodedToken: any)=>{
-            if(err){
-                console.log(err.message);
-                res.redirect('/');
-            }else{
-                console.log(decodedToken);
-                next();
-            }
-        })
-    }else{
-        res.redirect('/');
-    }
-
-    next();
-}
-
-//check current user
-const checkUser = (requiredUserType: string) => (req : Request, res: Response, next: NextFunction) => {
+export const requireAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.jwt;
+
+  jwt.verify(token, secretKey, (err: jwt.VerifyErrors | null, decodedToken: any) => {
+    if (err) {
+      console.error(err.message);
+      return res.status(401).json({ error: 'Authentication failed' });
+    } else {
+      // Authentication is successful
+      res.locals.userId = decodedToken.id;
+      // Respond with a 200 status code
+      res.status(200).json({ message: 'Authentication successful' });
+    }
+  });
+};
+
+export const checkUser = (req: Request, res: Response, next: NextFunction) => {
+  const token = req.cookies.jwt;
+
   if (token) {
-    jwt.verify(token, 'net ninja secret', async (err: any, decodedToken: any) => {
+    jwt.verify(token, secretKey, async (err: jwt.VerifyErrors | null, decodedToken: any) => {
       if (err) {
+        console.error(err.message);
         res.locals.user = null;
         next();
       } else {
-        let user = await UserModel.findById(decodedToken.id);
-        res.locals.user = user;
-        if (user && user.userType === requiredUserType) {
+        try {
+          const user = await UserModel.findById(decodedToken.id);
+          res.locals.user = user;
           next();
-        } else {
-          // User type is not allowed to access the page
-          res.status(403).send('Forbidden');
+        } catch (error) {
+          console.error(error);
+          res.status(500).json({ error: 'Internal server error' });
         }
       }
     });
@@ -47,5 +45,3 @@ const checkUser = (requiredUserType: string) => (req : Request, res: Response, n
     next();
   }
 };
-
-module.exports = { requireAuth, checkUser };
