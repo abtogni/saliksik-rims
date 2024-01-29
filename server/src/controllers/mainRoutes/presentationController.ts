@@ -3,33 +3,14 @@ import { PresentationModel } from "../../models/presentationModel";
 import mongoose, { Document } from "mongoose";
 
 
-export const getPresentations = async (req : Request, res: Response): Promise<void> => {
-    const { researchID } = req.body;
-
+export const getPresentations = async (_req : Request, res: Response): Promise<void> => {
     try{
-        const presentations = await PresentationModel.find({researchID}).sort({createdAt: -1});
+        const presentations = await PresentationModel.find().sort({createdAt: -1});
         res.status(200).json(presentations);
     }catch (err) {
         res.status(400).json({err: err});
     }
     
-
-}
-
-export const getPresentation = async (req : Request, res: Response) => {
-    const { id } = req.body;
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: 'presentation not found'});
-      }
-
-  const presentation = await PresentationModel.findById(id)
-
-  if (!presentation) {
-    return res.status(404).json({error: 'presentation not found'})
-  }
-  
-  res.status(200).json(presentation)
 
 }
 

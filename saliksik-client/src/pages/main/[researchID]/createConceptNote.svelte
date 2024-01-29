@@ -11,7 +11,7 @@
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
     let json = Object.fromEntries(formData.entries());
-    let data = { researchStatus: 'Concept Note Approval' ,conceptNote: {} };
+    let data = { researchStatus: 'Concept Note (Waiting for Approval)' ,conceptNote: {} };
     data.conceptNote = {
       ...json,
       projectDuration,

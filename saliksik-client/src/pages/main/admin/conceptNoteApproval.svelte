@@ -1,12 +1,14 @@
 <script lang="ts">
-  import { A, Accordion, AccordionItem, Alert, Avatar, Badge, Button, Checkbox, Dropdown, DropdownItem, Indicator, Modal, P, Search, TabItem, Tabs, Tooltip } from "flowbite-svelte";
-  import { ArchiveOutline, CheckCircleOutline, ChevronDoubleDownOutline, ChevronDoubleUpOutline, ClockOutline, DotsHorizontalOutline, EyeOutline, FileCirclePlusOutline, FileExportOutline, FileLinesOutline, FileOutline, FilePenOutline, FilterOutline, FolderOutline, FolderPlusOutline, MessageCaptionOutline, QuestionCircleOutline, StarOutline, StarSolid, TrashBinOutline, UserAddOutline, UserOutline } from "flowbite-svelte-icons";
+  import { Accordion, AccordionItem, Avatar, Badge, Button, Dropdown, DropdownItem, Indicator, Modal, P, Search, Tooltip } from "flowbite-svelte";
+  import { ArchiveOutline, CheckCircleOutline, DotsHorizontalOutline, EyeOutline, FileLinesOutline, TrashBinOutline} from "flowbite-svelte-icons";
   import moment from "moment";
   import { onMount } from "svelte";
   import { researches, selectedResearchInfo, userList } from "../../../components/store";
   import { getResearchInfo } from "../../../components/fetch";
-  import CreateNewResearchModal from "../../../modals/CreateNewResearchModal.svelte";
   import ApproveConceptNoteModal from "../../../modals/ApproveConceptNoteModal.svelte";
+  import RejectConceptNoteModal from "../../../modals/RejectConceptNoteModal.svelte";
+
+  let selectedResearchID: any;
 
   //modal for create new research
   let createNewResearch = false;
@@ -41,10 +43,19 @@
   });
 
   //modal for concept note approval
-  let approveConceptNote = false;
+  let approve = false;
+  function approveConceptNote (id: any){
+    selectedResearchID = id;
+    approve = true;
+  }
 
   //modal for concept note rejection
-  let rejectConceptNote = false;
+  let reject = false;
+  function rejectConceptNote (id: any){
+    selectedResearchID = id;
+    reject = true;
+  }
+
 </script>
 
 <main class="p-4">
@@ -257,8 +268,8 @@
                     {/each}
                   </div>
                   <div class="flex justify-between items-center gap-2 w-full">
-                    <Button on:click={() => (approveConceptNote = true)} color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"><CheckCircleOutline size="sm" /> Approve</Button>
-                    <Button on:click={() => (rejectConceptNote = true)} outline color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"
+                    <Button on:click={() => (approveConceptNote(research._id))} color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"><CheckCircleOutline size="sm" /> Approve</Button>
+                    <Button on:click={() => (rejectConceptNote(research._id))} outline color="blue" size="sm" class="flex items-center gap-2 w-full rounded-md"
                       ><svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m13 7-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                       </svg> Reject</Button>
@@ -273,13 +284,13 @@
   </div>
 
   <!-- modal for accept concept note-->
-  <Modal title="Approve Concept Note" bind:open={approveConceptNote} size="xs" autoclose={false} outsideclose class="w-full">
-    <ApproveConceptNoteModal />
+  <Modal title="Approve Concept Note" bind:open={approve} size="xs" autoclose class="w-full">
+    <ApproveConceptNoteModal propValue={selectedResearchID} />
   </Modal>
 
   <!-- modal for reject concept note-->
-  <Modal title="Reject Concept Note" bind:open={rejectConceptNote} size="xs" autoclose={false} outsideclose class="w-full">
-    <CreateNewResearchModal />
+  <Modal title="Reject Concept Note" bind:open={reject} size="xs" autoclose class="w-full">
+    <RejectConceptNoteModal propValue={selectedResearchID} />
   </Modal>
   <div class="h-96"></div>
   <div class="h-96"></div>

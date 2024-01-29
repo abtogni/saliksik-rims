@@ -118,3 +118,32 @@ panelist.subscribe((value) => {
 export const updatePanelist = (panelistNames: any[]) => {
   panelist.set(panelistNames);
 };
+
+//Logs
+const storedLogs = localStorage.getItem('logs');
+const storedLogData = storedLogs ? JSON.parse(storedLogs) : [];
+export const logs = writable<any[]>(storedLogData);
+
+logs.subscribe((value) => {
+  localStorage.setItem('logs', JSON.stringify(value));
+});
+
+export const updateLogs = (logList: any[]) => {
+  logs.set(logList);
+};
+
+
+//presentation
+//Logs
+const storedPresentations = localStorage.getItem('presentations');
+const storedPresentationData = storedPresentations ? JSON.parse(storedPresentations) : [];
+export const presentation = writable<any[]>(storedPresentationData);
+
+presentation.subscribe((value) => {
+  localStorage.setItem('presentation', JSON.stringify(value));
+});
+
+export const updatePresentationList = (presentationList: any[]) => {
+  presentation.set(presentationList);
+};
+

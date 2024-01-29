@@ -11,6 +11,10 @@ export class Presentation{
     @prop({ type: () => Array<string>})
     public panelistNames?: string[];
 
+    @prop({ type: () => String})
+    public location!: string;
+
+
 }
 
 export const PresentationModel = getModelForClass(Presentation, {schemaOptions: {timestamps: true}}); //

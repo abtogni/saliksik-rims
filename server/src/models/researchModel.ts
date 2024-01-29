@@ -63,8 +63,8 @@ class conceptNote {
 }
 
 class Presentation{
-    @prop({ type: () => String})
-    public comments?: string;
+    @prop({ type: () => Array<string>})
+    public comments?: string[];
 }
 
 export const ResearchModel = getModelForClass(Research, { schemaOptions: { timestamps: true } });
