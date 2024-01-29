@@ -1,4 +1,4 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
 import bodyParser from 'body-parser';
@@ -41,13 +41,12 @@ start();
 //routes
 app.post('/api/login', userLogin);
 app.get('/api/logout', userLogout);
-// @ts-ignore
 app.get('/api/checkUser', checkUser, (req, res) => {
   res.json({ user: res.locals.user });
 });
 app.get('/api/checkAuth', requireAuth);
 app.use('/api', appRoutes);
-// @ts-ignore
+
 app.get('/api', (_, res) => {
   res.json({ message: 'Backend is online' });
 });
