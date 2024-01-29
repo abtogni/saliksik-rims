@@ -44,7 +44,7 @@ app.get('/', (req: Request, res: Response) => {
 
 
   //routes
-  app.use(appRoutes);
+app.use(appRoutes);
   app.get('/api', (req, res) => {
     res.json({ message: 'Backend is online' });
 });
