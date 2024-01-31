@@ -4,42 +4,37 @@
       <img src="@/assets/schoolSeal.png" alt="schoolLogo" />
     </v-row>
     <v-row class="login-row">
-      <v-card id="login-field" elevation="2">
+      <v-card id="login-field" elevation="8">
         <h6>Account Login</h6>
-
         <v-form fast-fail @submit.prevent="login">
           <v-select
           class="input-field"
             v-model="form_data.user_role"
             label="User Role"
-            :error-messages="v$.user_type.$errors.map((e:any) => e.$message)"
             :items="user_roles"
             variant="outlined"
+            :rules="field_required"
           >
           </v-select>
           <v-text-field
           class="input-field"
-            :error-messages="v$.user_id.$errors.map((e:any) => e.$message)"
             v-model="form_data.user_id"
             label="User ID"
             prepend-inner-icon="mdi-account"
             variant="outlined"
-            required
+            :rules="userid_rules"
           ></v-text-field>
           <v-text-field
             class="input-field"
             v-model="form_data.password"
-            :error-messages="v$.password.$errors.map((e:any) => e.$message)"
             label="Password"
             :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="visible ? 'text' : 'password'"
             prepend-inner-icon="mdi-lock-outline"
             variant="outlined"
-            @click:append-inner="toggleVisibility"
-            required
+            @click:append-inner="visible = !visible"
+            :rules="password_rules"
           ></v-text-field>
-
-
           <v-btn type="submit" block id="login-button"> Login </v-btn>
         </v-form>
       </v-card>
@@ -48,43 +43,33 @@
 </template>
 
 <script setup lang="ts">
-import { minLength, required } from "@vuelidate/validators";
-import { useVuelidate } from "@vuelidate/core";
-import { reactive, ref } from "vue";
+import { ref, reactive } from 'vue';
 
-const form_data = reactive({
-  user_id: "",
-  password: "",
-  user_role: "",
-});
-const visible = ref(false);
-const toggleVisibility = () => {
-  visible.value = !visible.value;
-};
+  const form_data = reactive({
+    user_role: null,
+    user_id: "",
+    password: "",
+  });
+  const visible = ref(false);
 
-const user_roles = ["Admin", "Internal Panelist" , "External Panelist", "Researcher"];
-const rules = {
-  user_id: {
-    required,
-    minLength: minLength(6),
-  },
-  password: {
-    required,
-    minLength: minLength(6),
-  },
-  user_type: {
-    required,
-  },
-};
+  const field_required = [
+    (v: any) => !!v || "Field is required",
+  ]
 
-const v$ = useVuelidate(rules, form_data);
+  const userid_rules = [
+    ...field_required,
+    (v: any) => (v && v.length > 5) || 'User ID must be atleast 6 characters',
+  ]
 
-const login = async () => {
-  const response = await v$.value.$validate();
-  if (response) {
-    alert("Form successfully submitted!");
-  } else {
-    alert("Form has an error");
-  }
-};
+  const password_rules = [
+    ...field_required,
+    (v: any) => (v && v.length > 5) || 'Password must be atleast 6 characters',
+  ]
+
+
+  const user_roles = ["Admin", "Internal Panelist" , "External Panelist", "Researcher"];
+
+  const login = async () => {
+    alert(JSON.stringify(form_data))
+  };
 </script>
