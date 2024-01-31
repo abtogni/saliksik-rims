@@ -29,9 +29,13 @@ $button-color: #297BE5;
         font-weight: 400;
         margin-bottom: 1rem;
     }
+    .input-field{
+        margin: 1rem 0;
+    }
     #login-field{
+        text-align: start;
         margin: 0 auto;
-        min-width: 20rem;
+        min-width: 25rem;
         min-height: 25rem;
         border-radius: 0.625rem;
         padding: 2rem;
