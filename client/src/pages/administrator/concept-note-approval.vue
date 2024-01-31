@@ -22,9 +22,16 @@
       <v-expansion-panels mandatory="force">
         <!--collapsible approval-->
         <v-expansion-panel
-          title="Approval"
+         
         >
-      
+        <v-expansion-panel-title disable-icon-rotate>
+          <v-btn type="submit" tonal class="counter">00
+        </v-btn>
+          Approved
+        </v-expansion-panel-title>
+        <v-expansion-panel-text>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        </v-expansion-panel-text>
       </v-expansion-panel>
         <!--collapsible approved-->
         <v-expansion-panel
@@ -48,15 +55,4 @@
 </template>
 
 <script  lang="ts">
-  export default {
-    data: () => ({
-      trip: {
-        name: '',
-        location: null,
-        start: null,
-        end: null,
-      },
-      locations: ['Australia', 'Barbados', 'Chile', 'Denmark', 'Ecuador', 'France'],
-    }),
-  }
 </script>
