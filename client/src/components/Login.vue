@@ -21,7 +21,6 @@
             ></v-text-field>
             <v-text-field
               v-model="form_data.password"
-              :error-messages="v$.password.$errors.map((e:any) => e.$message)"
               label="Password"
               :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
               :type="visible ? 'text' : 'password'"
@@ -33,12 +32,11 @@
             <v-select
               v-model="form_data.user_type"
               label="User Type"
-              :error-messages="v$.user_type.$errors.map((e:any) => e.$message)"
               :items="user_types"
               variant="outlined">
             </v-select>
 
-            <v-btn type="submit" block id="login-button">
+            <v-btn type="submit" @click="submit" block id="login-button">
               Submit
             </v-btn>
         </v-form>
@@ -48,8 +46,7 @@
 </template>
 
 <script setup lang="ts">
-  import { minLength, required } from '@vuelidate/validators';
-  import { useVuelidate }  from '@vuelidate/core';
+import { useField, useForm } from 'vee-validate'
 import { reactive, ref } from 'vue';
 
   const form_data = reactive({
@@ -63,28 +60,11 @@ import { reactive, ref } from 'vue';
     };
 
   const user_types = ['Admin', 'Panelist', 'Researcher'];
-  const rules = {
-        user_id:{
-          required,
-          minLength: minLength(3)
-        },
-        password:{
-          required,
-          minLength: minLength(6)
-        },
-        user_type:{
-          required
-        }
-      };
 
-  const v$ = useVuelidate(rules, form_data);
 
-  const login = async () => {
-    const response = await v$.value.$validate();
-    if (response) {
-      alert("Form successfully submitted!");
-    }else{
-      alert("Form has an error");
-    }
+  async function submit(e: Event) {
+    e.preventDefault();
+
   }
+
 </script>
