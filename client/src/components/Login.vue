@@ -4,7 +4,7 @@
       <img src="@/assets/schoolSeal.png" alt="schoolLogo" />
     </v-row>
     <v-row class="login-row">
-      <v-card id="login-field" elevation="2">
+      <v-card id="login-field" elevation="8">
         <h6>Account Login</h6>
 
         <v-form fast-fail @submit.prevent="login">

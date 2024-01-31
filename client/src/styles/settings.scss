@@ -21,14 +21,16 @@ $button-color: #297BE5;
 }
     
 #login-container{
+    background-color: lightgrey;
     .login-row{
         justify-content: center;
         text-align: center;
     }
     h6{
+        text-align: center;
         font-weight: 500;
         font-size: 1.5rem;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
     }
     .input-field{
         margin: 1rem 0;
