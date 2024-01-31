@@ -46,9 +46,23 @@ $button-color: #297be5;
 }
 
 .counter{
-    border-radius: 50rem;
-    padding: 0;
-    margin: 0;
+    font-weight: 500;
+    color: #6b7280;
+
+    .count{
+        color: #1e40af;
+    }
+}
+
+.preview{
+
+    .preview-title{
+        
+    }
+}
+
+.height{
+    height: 10rem;
 }
 
 content {
