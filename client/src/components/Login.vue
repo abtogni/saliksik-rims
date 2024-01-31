@@ -5,7 +5,7 @@
     </v-row>
     <v-row class="login-row">
       <v-card id="login-field" elevation="2">
-        <h1>Account Login</h1>
+        <h6>Account Login</h6>
 
         <v-form fast-fail @submit.prevent="login">
           <v-select
