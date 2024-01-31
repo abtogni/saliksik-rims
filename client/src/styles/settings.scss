@@ -74,10 +74,15 @@ content {
     border-radius: 0.625rem;
     padding: 2rem;
   }
+  #login-button {
+    background-color: $button-color;
+    color: white;
+  }
 }
 
-.button-regular {
-  background-color: $button-color;
-  color: white;
+#main-container{
+    min-height: 15.625rem;
 }
+
+
 

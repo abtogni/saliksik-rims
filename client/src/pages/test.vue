@@ -1,8 +1,5 @@
 <template>
-  <v-layout>
-    <Nav_bar />
-    <v-main id="main-content">Test</v-main>
-  </v-layout>
+  <h1>Test</h1>
 </template>
 
 <script setup lang="ts"></script>
