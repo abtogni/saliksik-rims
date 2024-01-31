@@ -43,6 +43,7 @@
 </template>
 
 <script setup lang="ts">
+import router from '@/router';
 import { ref, reactive } from 'vue';
 
   const form_data = reactive({
@@ -71,5 +72,6 @@ import { ref, reactive } from 'vue';
 
   const login = async () => {
     alert(JSON.stringify(form_data))
+    router.push('administrator/concept-note-approval');
   };
 </script>
