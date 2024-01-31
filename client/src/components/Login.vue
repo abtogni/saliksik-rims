@@ -1,44 +1,46 @@
 <template>
   <v-container id="login-container" class="fill-height" fluid>
     <v-row class="login-row">
-      <img src="@/assets/schoolSeal.png" alt="schoolLogo">
+      <img src="@/assets/schoolSeal.png" alt="schoolLogo" />
     </v-row>
     <v-row class="login-row">
+      <v-card id="login-field" elevation="2">
+        <h6>Account Login</h6>
 
-      <v-card
-      id="login-field"
-      elevation="2"
-      >
-      <h1>Login</h1>
-          <v-form fast-fail @submit.prevent="login">
-            <v-text-field
-              :error-messages="v$.user_id.$errors.map((e:any) => e.$message)"
-              v-model="form_data.user_id"
-              label="User ID"
-              prepend-inner-icon="mdi-account"
-              variant="outlined"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="form_data.password"
-              label="Password"
-              :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-              :type="visible ? 'text' : 'password'"
-              prepend-inner-icon="mdi-lock-outline"
-              variant="outlined"
-              @click:append-inner="toggleVisibility"
-              required
-            ></v-text-field>
-            <v-select
-              v-model="form_data.user_type"
-              label="User Type"
-              :items="user_types"
-              variant="outlined">
-            </v-select>
+        <v-form fast-fail @submit.prevent="login">
+          <v-select
+          class="input-field"
+            v-model="form_data.user_role"
+            label="User Role"
+            :error-messages="v$.user_type.$errors.map((e:any) => e.$message)"
+            :items="user_roles"
+            variant="outlined"
+          >
+          </v-select>
+          <v-text-field
+          class="input-field"
+            :error-messages="v$.user_id.$errors.map((e:any) => e.$message)"
+            v-model="form_data.user_id"
+            label="User ID"
+            prepend-inner-icon="mdi-account"
+            variant="outlined"
+            required
+          ></v-text-field>
+          <v-text-field
+            class="input-field"
+            v-model="form_data.password"
+            :error-messages="v$.password.$errors.map((e:any) => e.$message)"
+            label="Password"
+            :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+            :type="visible ? 'text' : 'password'"
+            prepend-inner-icon="mdi-lock-outline"
+            variant="outlined"
+            @click:append-inner="toggleVisibility"
+            required
+          ></v-text-field>
 
-            <v-btn type="submit" @click="submit" block id="login-button">
-              Submit
-            </v-btn>
+
+          <v-btn type="submit" block id="login-button"> Login </v-btn>
         </v-form>
       </v-card>
     </v-row>
@@ -46,25 +48,41 @@
 </template>
 
 <script setup lang="ts">
-import { useField, useForm } from 'vee-validate'
 import { reactive, ref } from 'vue';
 
-  const form_data = reactive({
-        user_id: '',
-        password: '',
-        user_type: '',
-      })
-  const visible = ref(false);
-  const toggleVisibility = () => {
-      visible.value = !visible.value;
-    };
+const form_data = reactive({
+  user_id: "",
+  password: "",
+  user_role: "",
+});
+const visible = ref(false);
+const toggleVisibility = () => {
+  visible.value = !visible.value;
+};
 
-  const user_types = ['Admin', 'Panelist', 'Researcher'];
+const user_roles = ["Admin", "Internal Panelist" , "External Panelist", "Researcher"];
+const rules = {
+  user_id: {
+    required,
+    minLength: minLength(6),
+  },
+  password: {
+    required,
+    minLength: minLength(6),
+  },
+  user_type: {
+    required,
+  },
+};
 
+const v$ = useVuelidate(rules, form_data);
 
-  async function submit(e: Event) {
-    e.preventDefault();
-
+const login = async () => {
+  const response = await v$.value.$validate();
+  if (response) {
+    alert("Form successfully submitted!");
+  } else {
+    alert("Form has an error");
   }
-
+};
 </script>
