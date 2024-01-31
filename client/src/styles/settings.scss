@@ -8,46 +8,70 @@
 // @use 'vuetify/settings' with (
 //   $color-pack: false
 // );
-@import 'https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap';
+@import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap";
 
+$primary-font: "Open Sans", sans-serif;
+$button-color: #297be5;
 
-$primary-font: 'Open Sans', sans-serif;
-$button-color: #297BE5;
-
-*{
-    margin: 0;
-    padding: 0;
-    font-family: 100% $primary-font;
-}
-    
-#login-container{
-    .login-row{
-        justify-content: center;
-        text-align: center;
-    }
-    h6{
-        font-weight: 500;
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-    .input-field{
-        margin: 1rem 0;
-    }
-    #login-field{
-        text-align: start;
-        margin: 0 auto;
-        min-width: 25rem;
-        min-height: 25rem;
-        border-radius: 0.625rem;
-        padding: 2rem;
-    }
-}
-
-#login-button{
-    background-color: $button-color;
-    color: white;
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 100% $primary-font;
 }
 
 
+.header-caption {
+  justify-content: space-between;
+  text-align: left;
 
-    
+  //for subtitles
+  h6 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    width: 100%;
+  }
+
+  //for helper text
+  caption {
+    font-weight: 400;
+    font-size: 0.8rem;
+    text-align: left;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.header-button{
+    text-align: end;
+}
+
+content {
+  padding: 3rem;
+  margin: 3rem;
+  background-color: lightcyan;
+}
+
+#login-container {
+  .login-row {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .input-field {
+    margin: 1rem 0;
+  }
+  #login-field {
+    text-align: start;
+    margin: 0 auto;
+    min-width: 25rem;
+    min-height: 25rem;
+    border-radius: 0.625rem;
+    padding: 2rem;
+  }
+}
+
+.button-regular {
+  background-color: $button-color;
+  color: white;
+}
+
