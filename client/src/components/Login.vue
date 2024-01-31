@@ -12,14 +12,12 @@
           class="input-field"
             v-model="form_data.user_role"
             label="User Role"
-            :error-messages="v$.user_type.$errors.map((e:any) => e.$message)"
             :items="user_roles"
             variant="outlined"
           >
           </v-select>
           <v-text-field
           class="input-field"
-            :error-messages="v$.user_id.$errors.map((e:any) => e.$message)"
             v-model="form_data.user_id"
             label="User ID"
             prepend-inner-icon="mdi-account"
@@ -29,7 +27,6 @@
           <v-text-field
             class="input-field"
             v-model="form_data.password"
-            :error-messages="v$.password.$errors.map((e:any) => e.$message)"
             label="Password"
             :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="visible ? 'text' : 'password'"
@@ -61,28 +58,8 @@ const toggleVisibility = () => {
 };
 
 const user_roles = ["Admin", "Internal Panelist" , "External Panelist", "Researcher"];
-const rules = {
-  user_id: {
-    required,
-    minLength: minLength(6),
-  },
-  password: {
-    required,
-    minLength: minLength(6),
-  },
-  user_type: {
-    required,
-  },
-};
-
-const v$ = useVuelidate(rules, form_data);
 
 const login = async () => {
-  const response = await v$.value.$validate();
-  if (response) {
     alert("Form successfully submitted!");
-  } else {
-    alert("Form has an error");
-  }
 };
 </script>
