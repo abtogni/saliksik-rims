@@ -1,6 +1,9 @@
+<!-- App.vue -->
+
 <template>
   <v-app>
-    <v-main>
+    <Nav_bar />
+    <v-main id="main-container">
       <router-view />
     </v-main>
   </v-app>
