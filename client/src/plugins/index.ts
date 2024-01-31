@@ -7,11 +7,12 @@
 // Plugins
 import vuetify from './vuetify'
 import router from '../router'
+import { useVuelidate } from "@vuelidate/core"
 
 // Types
 import type { App } from 'vue'
 
-export function registerPlugins (app: App) {
+export function registerPlugins(app: App) {
   app
     .use(vuetify)
     .use(router)
