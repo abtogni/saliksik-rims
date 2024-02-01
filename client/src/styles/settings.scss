@@ -131,6 +131,12 @@ content {
   text-transform: capitalize;
 }
 #login-container {
+  background-color: lightgray;
+  h6 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    width: 100%;
+  }
   .login-row {
     justify-content: center;
     text-align: center;
