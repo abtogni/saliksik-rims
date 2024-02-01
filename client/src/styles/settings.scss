@@ -24,12 +24,6 @@ $button-color: #297be5;
   justify-content: space-between;
   text-align: left;
 
-  //for subtitles
-  h6 {
-    font-weight: 500;
-    font-size: 1.5rem;
-    width: 100%;
-  }
 
   //for helper text
   caption {
@@ -72,6 +66,12 @@ content {
 }
 
 #login-container {
+  background-color: lightgray;
+  h6 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    width: 100%;
+  }
   .login-row {
     justify-content: center;
     text-align: center;
@@ -97,6 +97,9 @@ content {
 #main-container{
     min-height: 15.625rem;
 }
+
+
+
 
 
 
