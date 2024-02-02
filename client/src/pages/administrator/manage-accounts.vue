@@ -1,7 +1,7 @@
 <template>
   <h1>Manage User Accounts</h1>
   <div id="user_list">
-      <h3>{{ user_count }} accounts</h3>
+      <h3>{{ sampleUsers.length }} accounts</h3>
       <Create_user />
       <User_list id="user_container" :sampleUsers="sampleUsers" />
   </div>
@@ -16,7 +16,6 @@ const sampleUsers = [
   { user_id: '33243431', first_name: 'Test', last_name: 'A', user_role: 'External Panelist' },
   { user_id: '41243431', first_name: 'Test', last_name: 'B', user_role: 'External Panelist' },
 ];
-const user_count = 1;
 </script>
 <style lang="scss">
 

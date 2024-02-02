@@ -119,9 +119,10 @@
   ]
 
   const name_rules = [
-    (v: string) => /^[a-zA-Z ]+$/.test(v) || 'Name must only contain alphabet characters',
-    (v: string) => (v && v.length > 2) || 'Name must be atleast 3 characters',
-  ]
+    (v: string) => (!v || /^[a-zA-Z ]+$/.test(v)) || 'Name must only contain alphabet characters',
+    (v: string) => (!v || v.length > 2) || 'Name must be at least 3 characters',
+  ];
+
 
   const password_rules = [
     ...field_required,
