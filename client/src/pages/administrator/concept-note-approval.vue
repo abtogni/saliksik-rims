@@ -235,7 +235,7 @@
 
                 <!--overview context-->
                 <v-expansion-panel-text style="height: 46rem; overflow: auto">
-                  <v-row style="gap: 1rem; margin-top: .5rem;">
+                  <v-row style="gap: 1rem; margin-top: 0.5rem">
                     <v-row no-gutters style="gap: 1rem">
                       <v-col>
                         <v-card
@@ -274,10 +274,9 @@
                       </v-col>
                     </v-row>
                     <v-row no-gutters>
-                      <v-col>
-                        <v-card
-                          title="Project Description"
-                          text="Outcome-based education (OBE) and continuous quality improvement (CQI) are two of the most important concepts in education today. OBE is a student-centered approach that focuses on the development of specific skills, knowledge, and attitudes that are relevant to the needs of the society. (Akir et al., 2012) CQI, on the other hand, is a continuous process of reviewing, analyzing, and improving educational practices and policies to ensure that the highest quality of education is delivered. (Misran et al.,2011)
+                      <v-card
+                        title="Project Description"
+                        text="Outcome-based education (OBE) and continuous quality improvement (CQI) are two of the most important concepts in education today. OBE is a student-centered approach that focuses on the development of specific skills, knowledge, and attitudes that are relevant to the needs of the society. (Akir et al., 2012) CQI, on the other hand, is a continuous process of reviewing, analyzing, and improving educational practices and policies to ensure that the highest quality of education is delivered. (Misran et al.,2011)
 
 In recent years, there has been a growing interest in the development and utilization of new educational technologies and resources for inclusive education (Smith, 2018). This is because these technologies have the potential to significantly improve the efficiency and effectiveness of OBE-CQI processes.
 
@@ -287,57 +286,41 @@ The IMS is expected to improve the inclusiveness of OBE-CQI at the University of
 
 Therefore, the research aims to design, develop, and evaluate the IMS for OBE-CQI at the University of Nueva Caceres. The study will focus on the following areas: variables or parameters to be measured and evaluated or analyzed; treatments to be used and their layout; experimental procedures and design; statistical analysis; evaluation method and observations to be made; and strategies for implementation.
 "
-                        ></v-card>
-                      </v-col>
+                      ></v-card>
                     </v-row>
-                    <v-row no-gutters>
-                      <v-col>
-                        <v-card
-                          title="Significance"
-                          text=""
-                        ></v-card>
-                      </v-col>
-                    </v-row>
-                    <v-row no-gutters>
-                      <v-col>
-                        <v-card
-                          title="Objectives"
-                          text=""
-                        ></v-card>
-                      </v-col>
-                    </v-row>
-                    <v-row no-gutters>
-                      <v-col>
-                        <v-card
-                          title="Methodology"
-                          text=""
-                        ></v-card>
-                      </v-col>
-                    </v-row>
-                    <v-row no-gutters>
-                      <v-col>
-                        <v-card
-                          title="Technology Roadmap"
-                          text=""
-                        ></v-card>
-                      </v-col>
-                    </v-row>
-                    <v-row no-gutters>
-                      <v-col>
-                        <v-card
-                          title="Expected Ouputs (6Ps)"
-                          text=""
-                        ></v-card>
-                      </v-col>
-                    </v-row>
-                    <v-row no-gutters>
-                      <v-col>
-                        <v-card
-                          title="Work Plan"
-                          text=""
-                        ></v-card>
-                      </v-col>
-                    </v-row>
+                      <v-row no-gutters>
+                        <v-col>
+                          <v-card title="Significance" text=""></v-card>
+                        </v-col>
+                      </v-row>
+                      <v-row no-gutters>
+                        <v-col>
+                          <v-card title="Objectives" text=""></v-card>
+                        </v-col>
+                      </v-row>
+                      <v-row no-gutters>
+                        <v-col>
+                          <v-card title="Methodology" text=""></v-card>
+                        </v-col>
+                      </v-row>
+                      <v-row no-gutters>
+                        <v-col>
+                          <v-card title="Technology Roadmap" text=""></v-card>
+                        </v-col>
+                      </v-row>
+                      <v-row no-gutters>
+                        <v-col>
+                          <v-card
+                            title="Expected Ouputs (6Ps)"
+                            text=""
+                          ></v-card>
+                        </v-col>
+                      </v-row>
+                      <v-row no-gutters>
+                        <v-col>
+                          <v-card title="Work Plan" text=""></v-card>
+                        </v-col>
+                      </v-row>
                   </v-row>
                 </v-expansion-panel-text>
               </v-expansion-panel>
