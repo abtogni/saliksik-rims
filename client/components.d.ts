@@ -7,11 +7,11 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
-    Create_user: typeof import('./src/components/page-modals/create_user.vue')['default']
-    Login: typeof import('./src/components/Login.vue')['default']
+    Create_user: typeof import('./src/components/pages/create_user.vue')['default']
+    Login: typeof import('./src/components/pages/Login.vue')['default']
     Nav_bar: typeof import('./src/components/nav_bar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    User_list: typeof import('./src/components/page-modals/user_list.vue')['default']
+    User_list: typeof import('./src/components/pages/user_list.vue')['default']
   }
 }

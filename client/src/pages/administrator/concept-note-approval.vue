@@ -19,7 +19,7 @@
 
     <v-row no-gutters>
       <v-expansion-panels mandatory="force">
-        <!--collapsible approval--
+        collapsible approval
         <v-expansion-panel>
           <v-expansion-panel-title>
             <v-row no-gutters>
@@ -95,17 +95,17 @@
             </div>
           </v-expansion-panel-text>
         </v-expansion-panel>
-        <!--collapsible approved--
+        collapsible approved--
         <v-expansion-panel
           title="Approved"
           text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
         ></v-expansion-panel>
-        <!--collapsible rejected--
+        collapsible rejected--
         <v-expansion-panel
           title="Rejected"
           text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
         ></v-expansion-panel>
-        <!--collapsible datails--
+        collapsible datails--
         <v-expansion-panel
           title="Details"
           text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."

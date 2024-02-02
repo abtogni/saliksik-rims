@@ -26,21 +26,14 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
 
+
+const props = defineProps(['sampleUsers']);
 const user_roles = ["Admin", "Internal Panelist", "External Panelist", "Researcher"];
 const tab = ref(null);
 
-const sampleUsers = [
-  { user_id: '12345661', first_name: 'John', last_name: 'Doe', user_role: 'Admin' },
-  { user_id: '34567851', first_name: 'Jane', last_name: 'Doe', user_role: 'Researcher' },
-  { user_id: '33353151', first_name: 'James', last_name: 'Bond', user_role: 'Internal Panelist' },
-  { user_id: '33212331', first_name: 'Fredrik', last_name: 'Chopan', user_role: 'Internal Panelist' },
-  { user_id: '33243431', first_name: 'Test', last_name: 'A', user_role: 'External Panelist' },
-  { user_id: '41243431', first_name: 'Test', last_name: 'B', user_role: 'External Panelist' },
-];
-
-const filteredUsers = computed(() => tab.value ? sampleUsers.filter(user => user.user_role === tab.value) : []);
+const filteredUsers = computed(() => tab.value ? props.sampleUsers.filter((user: any) => user.user_role === tab.value) : []);
 </script>
 
 <style lang="scss">
-  @import '../../styles/manage-accounts.scss';
+  @import '../../styles/pages/manage-accounts.scss';
 </style>
