@@ -7,9 +7,8 @@
     <!-- Drawer content -->
     <v-list>
       <v-list-item
-        prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
-        title="Sandra Adams"
-        subtitle="sandra_a88@gmailcom"
+        :title="user.name"
+        :subtitle="user.user_id"
       ></v-list-item>
     </v-list>
 
@@ -24,13 +23,15 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect } from 'vue';
-import { useRoute } from 'vue-router';
 
-const route = useRoute();
-const showDrawer = ref(route.path !== '/');
+  const user = {name: 'Test Account', user_id: '07-11312'}
+  import { ref, watchEffect } from 'vue';
+  import { useRoute } from 'vue-router';
 
-watchEffect(() => {
-  showDrawer.value = route.path !== '/';
-});
+  const route = useRoute();
+  const showDrawer = ref(route.path !== '/');
+
+  watchEffect(() => {
+    showDrawer.value = route.path !== '/';
+  });
 </script>
