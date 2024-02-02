@@ -11,6 +11,7 @@
           class="input-field"
             v-model="form_data.user_role"
             label="User Role"
+            prepend-inner-icon="mdi-briefcase"
             :items="user_roles"
             variant="outlined"
             :rules="field_required"
@@ -35,7 +36,7 @@
             @click:append-inner="visible = !visible"
             :rules="password_rules"
           ></v-text-field>
-          <v-btn type="submit" block id="login-button"> Login </v-btn>
+          <v-btn color="#297be5" type="submit" block> Login </v-btn>
         </v-form>
       </v-card>
     </v-row>
