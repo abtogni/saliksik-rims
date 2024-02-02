@@ -28,7 +28,6 @@ import { ref, computed } from 'vue';
 
 
 const props = defineProps(['sampleUsers']);
-
 const user_roles = ["Admin", "Internal Panelist", "External Panelist", "Researcher"];
 const tab = ref(null);
 
@@ -36,5 +35,5 @@ const filteredUsers = computed(() => tab.value ? props.sampleUsers.filter((user:
 </script>
 
 <style lang="scss">
-  @import '../../styles/manage-accounts.scss';
+  @import '../../styles/pages/manage-accounts.scss';
 </style>

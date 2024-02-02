@@ -22,5 +22,5 @@ const user_count = 1;
 </script>
 <style lang="scss">
 
-  @import '../../styles/manage-accounts.scss';
+  @import '../../styles/pages/manage-accounts.scss';
 </style>
