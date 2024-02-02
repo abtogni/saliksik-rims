@@ -1,10 +1,8 @@
 <template>
   <h1>Manage User Accounts</h1>
-
-
   <div id="user_list">
       <h3>{{ user_count }} accounts</h3>
-      <v-btn color="#297be5" class="new_user">Create New Account</v-btn>
+      <Create_user />
       <User_list id="user_container" :sampleUsers="sampleUsers" />
   </div>
 </template>

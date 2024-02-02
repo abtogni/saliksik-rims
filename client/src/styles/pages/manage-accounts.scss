@@ -20,3 +20,17 @@ div#user_list{
         margin-top: 2rem;
     }
 }
+#create_user_card{
+    margin: 0 auto;
+    padding: 1.2rem;
+    height: 60rem;
+    width: 40rem;
+    h2{
+        font-weight: 300;
+        margin: 1rem 0;
+    }
+    #close_create_user{
+        position: fixed;
+        right: 20.5rem;
+    }
+}
