@@ -1,0 +1,61 @@
+//color gray-700 #374151 gray-800 #1f2937 
+//blue-500 #3b82f6
+
+
+.header-container{
+  padding-bottom: .5rem;
+}
+
+//for page name and caption
+.pageName-container {
+  justify-content: space-between;
+  text-align: left;
+}
+
+.cta-container {
+  text-align: end;
+}
+
+h2 {
+  font-size: x-large;
+  font-weight: 700;
+  width: 100%;
+  color: #374151; //gray-700
+}
+
+.caption{
+  font-size: .9rem;
+  font-weight: 400;
+  width: 100%;
+  color: #374151;; //gray-700
+}
+
+
+.truncate{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tab{
+  border-width: 10;
+  border: #2563eb;
+  height: 58rem;
+}
+
+.tab-option{
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  color: #374151;
+
+}
+
+.count {
+  background-color: #1d4ed8;
+  color: white;
+  border-radius: 0.2rem;
+  text-align: center;
+  padding: 0.2rem;
+  margin-left: 0.5rem;
+}
