@@ -140,16 +140,21 @@
     </v-row>
 
     <!--tab container-->
-      <v-card elevation="5" class="tab">
-        <v-tabs v-model="tab" class="tab-option">
-          <v-tab value="one">Item One</v-tab>
-          <v-tab value="two">Item Two</v-tab>
-          <v-tab value="three">Item Three</v-tab>
+      <v-card elevation="5" class="">
+        <v-tabs v-model="tab" >
+          <v-tab value="one" class="tab-option">Verify and Review</v-tab>
+          <v-tab value="two">Approval</v-tab>
+          <v-tab value="three">Approved</v-tab>
+          <v-tab value="three">Rejected</v-tab>
+          <v-tab value="three">Summary</v-tab>
         </v-tabs>
 
-        <v-card-text>
-          <v-window v-model="tab">
-            <v-window-item value="one">one</v-window-item>
+        <v-card-text style="">
+          <v-window v-model="tab"  >
+            <v-window-item value="one" >
+              <concept_note_submissions />
+
+            </v-window-item>
 
             <v-window-item value="two"> Two </v-window-item>
 
@@ -157,17 +162,15 @@
           </v-window>
         </v-card-text>
       </v-card>
-    
   </v-container>
 </template>
 
 <script lang="ts">
+
 export default {
     data: () => ({
-      tab: null,
+        tab: null,
     }),
-  }
+}
 </script>
 
-<style lang="scss">
-</style>
