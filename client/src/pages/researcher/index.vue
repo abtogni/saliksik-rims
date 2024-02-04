@@ -1,20 +1,34 @@
 <template>
+
   <div id="research_table">
-    <h2>Hi {{ user.first_name }} !</h2>
-    <h4>You have {{ user.researchCount }} researches</h4>
+    <v-row no gutters class="header-container">
+      <!--page name container-->
+      <v-col>
+        <!--pageName-cap container-->
+        <v-row no-gutters class="pageName-container">
+          <h2>All Researches</h2>
+          <h4>You have {{ research.length }} researches</h4>
+          <p class="caption">
+            Create new research to start. View and manage your researches here.
+          </p>
+        </v-row>
+      </v-col>
+      <!--cta container-->
+      <v-col cols="4" class="cta-container">
+        <!--cta call for submission-->
+        <v-btn type="submit" class="button-regular">
+          <v-icon start icon="mdi-phone-in-talk-outline"></v-icon> Create Research Project
+        </v-btn>
+      </v-col>
+    </v-row>
+
+
     <research_table  :research="research"/>
   </div>
 </template>
 
 <script setup lang="ts">
   import moment from 'moment';
-
-  const user: { first_name: string; last_name: string; avatar: string, researchCount: number } = {
-    first_name: 'Angelo',
-    last_name: 'Jimenez',
-    avatar: '',
-    researchCount: 6
-  };
 
   const research = [
     {research_title: "Test Title", research_leaders: 'Test 1, Test 2', research_status: 'A', createdAt: moment().format('LL') },

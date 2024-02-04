@@ -6,7 +6,21 @@
         single-line
         variant="outlined"
         hide-details
+        density="compact"
+        class="search_bar"
       />
+      <v-btn @click="toggleFilter" id="filter-button">
+        <v-icon icon="mdi-filter-outline"/>
+         Filter
+      </v-btn>
+
+        <v-combobox
+          v-model="select"
+          :items="statuses"
+          label="Filter Research Status"
+          multiple
+          chips
+        />
 
 
     <v-data-table
@@ -20,6 +34,8 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+  const select = ref([]);
+  const statuses = ['A', 'B', 'C', 'D'];
   const { research }: any = defineProps(['research']);
   const headers = [
     {key: 'research_title', title: 'Research Title'},
@@ -27,6 +43,9 @@ import { ref } from 'vue';
     {key: 'research_status', title: 'Research Status'},
     {key: 'createdAt', title: 'Created At'},
   ]
+  const filter_dropdown: any = ref(false);
+
+  const toggleFilter = () => filter_dropdown.value = !filter_dropdown.value;
 
   const search = ref('');
 </script>

@@ -44,7 +44,6 @@ declare module 'vue-router/auto/routes' {
     '/administrator/concept-note-approval': RouteRecordInfo<'/administrator/concept-note-approval', '/administrator/concept-note-approval', Record<never, never>, Record<never, never>>,
     '/administrator/manage-accounts': RouteRecordInfo<'/administrator/manage-accounts', '/administrator/manage-accounts', Record<never, never>, Record<never, never>>,
     '/researcher/': RouteRecordInfo<'/researcher/', '/researcher', Record<never, never>, Record<never, never>>,
-    '/test': RouteRecordInfo<'/test', '/test', Record<never, never>, Record<never, never>>,
   }
 }
 
