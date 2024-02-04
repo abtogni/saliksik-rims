@@ -11,7 +11,7 @@
 @import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap";
 
 $primary-font: "Open Sans", sans-serif;
-$button-color: #297be5;
+$button-color: #2563eb;
 
 * {
   margin: 0;
@@ -23,53 +23,14 @@ $button-color: #297be5;
 //for page name
 
 //color gray-700 #374151 gray-800 #1f2937 blue-500 #3b82f6
-h6 {
-  font-weight: 600;
-  font-size: 1.2rem;
-  width: 100%;
-  color: #374151; //gray-700
-}
-
-//for caption
-caption {
-  font-weight: 400;
-  font-size: 0.8rem;
-  text-align: left;
-  width: 100%;
-  margin-bottom: 0.5rem;
-  color: #6b7280; //gray-500
-}
-
-//for page name and caption
-.pageName-cap-container {
-  justify-content: space-between;
-  text-align: left;
-}
-
-.cta-container {
-  text-align: end;
-}
 
 .button-regular {
-  background-color: #2563eb; //blue-500
+  background-color: $button-color; 
+  // blue-500
   color: white;
   text-transform: capitalize;
 }
 
-.tab-option {
-  font-weight: 500;
-  text-transform: capitalize;
-  color: #374151;
-}
-
-.count {
-  background-color: #1d4ed8;
-  color: white;
-  border-radius: 0.2rem;
-  text-align: center;
-  padding: 0.2rem;
-  margin-left: 0.5rem;
-}
 
 .icon {
   color: #374151;
@@ -82,11 +43,6 @@ caption {
   margin-right: 0.1rem;
 }
 
-.truncate {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
 
 .prev-title {
   font-weight: 400;
