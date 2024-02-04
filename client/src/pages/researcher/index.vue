@@ -1,9 +1,9 @@
 <template>
-  <h2>Hi {{ user.first_name }} !</h2>
-
-  <span>You have {{ user.researchCount }} researches</span>
-
-  <Research_table :research="research"/>
+  <div id="research_table">
+    <h2>Hi {{ user.first_name }} !</h2>
+    <h4>You have {{ user.researchCount }} researches</h4>
+    <research_table  :research="research"/>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -21,7 +21,7 @@
     {research_title: "Test 2", research_leaders: 'Test 1, Test 2', research_status: 'B', createdAt: moment().format('LL') },
     {research_title: "Test", research_leaders: 'Test 1, Test 2', research_status: 'C', createdAt: moment().format('LL') },
     {research_title: "Testasdfgh", research_leaders: 'Test 1, Test 2', research_status: 'A', createdAt: moment().format('LL') }
-  ]
+  ];
 
 
 
