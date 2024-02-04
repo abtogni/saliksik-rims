@@ -207,9 +207,16 @@ div#research_table{
   margin: 2rem 4rem;
 
   #filter-button{
-    position: fixed;
-    right: 4rem;
-    display: inline-block;
+    margin-right: 2rem;
+    float: right;
+  }
+  #filter_dropdown{
+    z-index: 1;
+    top: 10rem;
+    right: 5rem;
+    position: absolute;
+    padding: 0.625rem;
+    width: 15rem;
   }
 }
 
@@ -217,4 +224,6 @@ div#research_table{
   display: inline-block;
   width: 20rem;
 }
+
+
 
