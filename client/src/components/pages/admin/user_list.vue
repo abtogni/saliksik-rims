@@ -27,13 +27,13 @@
 import { ref, computed } from 'vue';
 
 
-const props = defineProps(['sampleUsers']);
+const users = defineProps(['sampleUsers']);
 const user_roles = ["Admin", "Internal Panelist", "External Panelist", "Researcher"];
 const tab = ref(null);
 
-const filteredUsers = computed(() => tab.value ? props.sampleUsers.filter((user: any) => user.user_role === tab.value) : []);
+const filteredUsers = computed(() => tab.value ? users.sampleUsers.filter((user: any) => user.user_role === tab.value) : []);
 </script>
 
 <style lang="scss">
-  @import '../../styles/pages/manage-accounts.scss';
+  @import '../../../styles/pages/manage-accounts.scss';
 </style>

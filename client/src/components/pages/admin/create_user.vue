@@ -138,5 +138,5 @@
 </script>
 
 <style lang="scss">
-  @import '../../styles/pages/manage-accounts.scss'
+  @import '../../../styles/pages/manage-accounts.scss'
 </style>
