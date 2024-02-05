@@ -4,89 +4,89 @@
       v-model="create_user"
       activator="parent"
     >
-    <v-card id="create_user_card">
-      <h2>Create A New Account</h2>
-      <v-icon id="close_create_user" icon="mdi-close" @click="create_user = false"></v-icon>
-      <v-form @submit.prevent="register">
+      <v-card id="create_user_card">
+        <h2>Create A New Account</h2>
+        <v-icon id="close_create_user" icon="mdi-close" @click="create_user = false"></v-icon>
+        <v-form @submit.prevent="register">
 
 
-          <v-row>
+            <v-row>
+                <v-col>
+                  <v-select
+                  v-model="form_data.user_role"
+                  label="User Role"
+                  prepend-inner-icon="mdi-briefcase"
+                  :items="user_roles"
+                  variant="outlined"
+                  :rules="field_required"
+                  />
+                </v-col>
+            </v-row>
+            <v-row>
               <v-col>
-                <v-select
-                v-model="form_data.user_role"
-                label="User Role"
-                prepend-inner-icon="mdi-briefcase"
-                :items="user_roles"
-                variant="outlined"
-                :rules="field_required"
+                <v-text-field
+                  v-model="form_data.first_name"
+                  label="First Name"
+                  variant="outlined"
+                  :rules="[name_rules, field_required].flat()"
                 />
               </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model="form_data.first_name"
-                label="First Name"
-                variant="outlined"
-                :rules="[name_rules, field_required].flat()"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="form_data.last_name"
-                label="Last Name"
-                variant="outlined"
-                :rules="[name_rules, field_required].flat()"
-              />
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model="form_data.middle_name"
-                label="Middle Name"
-                variant="outlined"
-                :rules="name_rules"
-              />
-            </v-col>
-            <v-col>
-              <v-text-field
-                v-model="form_data.suffix"
-                label="Suffix"
-                variant="outlined"
-              />
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col>
-              <v-text-field
-                v-model="form_data.user_id"
-                label="User ID"
-                prepend-inner-icon="mdi-account"
-                variant="outlined"
-                :rules="userid_rules"
-              />
-            </v-col>
-            <v-col>
+              <v-col>
                 <v-text-field
-                v-model="form_data.password"
-                label="Password"
-                :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-                :type="visible ? 'text' : 'password'"
-                prepend-inner-icon="mdi-lock-outline"
-                variant="outlined"
-                @click:append-inner="visible = !visible"
-                :rules="password_rules"
+                  v-model="form_data.last_name"
+                  label="Last Name"
+                  variant="outlined"
+                  :rules="[name_rules, field_required].flat()"
                 />
-            </v-col>
-          </v-row>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-text-field
+                  v-model="form_data.middle_name"
+                  label="Middle Name"
+                  variant="outlined"
+                  :rules="name_rules"
+                />
+              </v-col>
+              <v-col>
+                <v-text-field
+                  v-model="form_data.suffix"
+                  label="Suffix"
+                  variant="outlined"
+                />
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <v-text-field
+                  v-model="form_data.user_id"
+                  label="User ID"
+                  prepend-inner-icon="mdi-account"
+                  variant="outlined"
+                  :rules="userid_rules"
+                />
+              </v-col>
+              <v-col>
+                  <v-text-field
+                  v-model="form_data.password"
+                  label="Password"
+                  :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
+                  :type="visible ? 'text' : 'password'"
+                  prepend-inner-icon="mdi-lock-outline"
+                  variant="outlined"
+                  @click:append-inner="visible = !visible"
+                  :rules="password_rules"
+                  />
+              </v-col>
+            </v-row>
 
-          <v-btn color="#297be5" type="submit" block> Create Account </v-btn>
-        </v-form>
+            <v-btn color="#297be5" type="submit" block> Create Account </v-btn>
+          </v-form>
 
-    </v-card>
+      </v-card>
 
-  </v-dialog>
+    </v-dialog>
 
 
   </v-btn>

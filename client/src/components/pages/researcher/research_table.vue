@@ -27,9 +27,18 @@
 
     <v-data-table
       :headers="headers"
+      :items-length="filteredResearch.length"
       :items="filteredResearch"
-      :search="search"
-    />
+      :search="search">
+      <template v-slot:item="{ item: research }">
+        <tr>
+          <td><a :href="'/researcher/' + research._id">{{ research.research_title }}</a></td>
+          <td>{{ research.research_leaders }}</td>
+          <td>{{ research.research_status }}</td>
+          <td>{{ research.createdAt }}</td>
+        </tr>
+      </template>
+    </v-data-table>
   </div>
 </template>
 
@@ -37,6 +46,7 @@
 import { ref, computed } from 'vue';
 
 const statusFilters = ref<{ [key: string]: boolean }>({});
+
 const statuses = ['A', 'B', 'C', 'D'];
 const { research }: any = defineProps(['research']);
 const headers = [
@@ -50,13 +60,12 @@ const search = ref('');
 
 const toggleFilter = () => filter_dropdown.value = !filter_dropdown.value;
 
-const filteredResearch = computed(() => {
+const filteredResearch = computed( () => {
   const activeFilters = Object.values(statusFilters.value).some(filter => filter);
 
   if (!activeFilters) {
     return research;
   }
-
   return research.filter((item: any) => statusFilters.value[item.research_status]);
 });
 </script>
