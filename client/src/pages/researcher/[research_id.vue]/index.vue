@@ -1,6 +1,6 @@
 <template>
   <div>
-    One
+    <v-btn class="button-regular" > <v-icon icon="mdi-pen" />  Create Concept Note</v-btn>
   </div>
 </template>
 
