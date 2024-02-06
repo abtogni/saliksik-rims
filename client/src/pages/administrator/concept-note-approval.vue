@@ -114,13 +114,9 @@
     </v-row>
   </v-container> -->
 <template>
-  <!--main container-->
   <v-container fluid >
-    <!--header container-->
     <v-row no gutters class="header-container">
-      <!--page name container-->
       <v-col>
-        <!--pageName-cap container-->
         <v-row no-gutters class="pageName-container">
           <h2>Concept Note Submissions</h2>
           <p class="caption">
@@ -129,9 +125,7 @@
           </p>
         </v-row>
       </v-col>
-      <!--cta container-->
       <v-col cols="4" class="cta-container">
-        <!--cta call for submission-->
         <v-btn type="submit" class="button-regular">
           <v-icon start icon="mdi-phone-in-talk-outline"></v-icon> Call For
           Submission
@@ -139,14 +133,13 @@
       </v-col>
     </v-row>
 
-    <!--tab container-->
-      <v-card elevation="5" class="">
+      <v-card class="">
         <v-tabs v-model="tab" >
           <v-tab value="one" class="tab-option">Verify and Review</v-tab>
-          <v-tab value="two">Approval</v-tab>
-          <v-tab value="three">Approved</v-tab>
-          <v-tab value="three">Rejected</v-tab>
-          <v-tab value="three">Summary</v-tab>
+          <v-tab value="two" class="tab-option">Approval</v-tab>
+          <v-tab value="three" class="tab-option">Approved</v-tab>
+          <v-tab value="three" class="tab-option">Rejected</v-tab>
+          <v-tab value="three" class="tab-option">Summary</v-tab>
         </v-tabs>
 
         <v-card-text style="">
