@@ -14,13 +14,14 @@
     <v-data-table
       v-model:expanded="expanded"
       :headers="concept_note_header"
-      :items="concept_note"
+
+      :items="formattedConceptNote"
       :search="search"
       item-value="research_title"
       show-expand
       class="table"
     >
-      <template v-slot:expanded-row="{ columns, item}">
+      <template v-slot:expanded-row="{ columns }">
         <tr>
           <td :colspan="columns.length">
           <concept_note_overview/>
@@ -31,13 +32,12 @@
   </v-card>
 </template>
 
-<script lang="ts">
-export default {
-  data() {
-    return {
-      search: "",
-      expanded: [],
-      concept_note_header: [
+<script setup lang="ts">
+import { ref } from 'vue';
+
+  const search = ref('');
+  const expanded = ref([]);
+  const concept_note_header: readonly { title: any, key: any, align?: any, width?: any}[] = [
         { title: "Leaders", key: "leaders" },
         {
           title: "Title",
@@ -52,23 +52,25 @@ export default {
           align: "start",
           width: "13rem",
         },
-      ],
-      concept_note: [
-        {
-          research_title:
-            "Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness",
-          leaders: "Agnes Reyes June Areb DanilaDanny CasimeroDennis Ignacio",
-          status: "No Status",
-          submitted_in: "Insert Date of submission",
-        },
-        {
-          research_title: "test",
-          leaders: "Agnes Reyes June Areb Danila Danny Casimero Dennis Ignacio",
-          status: "No Status",
-          submitted_in: "Insert Date of submission",
-        },
-      ],
-    };
-  },
-};
+      ]
+    const concept_note = [
+      {
+        research_title:
+          "Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness",
+        leaders: ["Agnes Reyes", "June Arreb Danila", "Danny Casimero", "Dennis Ignacio"],
+        status: "No Status",
+        submitted_in: "Insert Date of submission",
+      },
+      {
+        research_title: "test",
+        leaders: ["Agnes Reyes", "June Arreb Danila", "Danny Casimero", "Dennis Ignacio"],
+        status: "No Status",
+        submitted_in: "Insert Date of submission",
+      },
+    ];
+
+    const formattedConceptNote = concept_note.map(item => ({
+      ...item,
+      leaders: item.leaders.join(', '),
+    }));
 </script>

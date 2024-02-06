@@ -272,21 +272,26 @@ content {
 }
 
 div#research_table{
-  text-align: center;
-  margin: 0 2rem;
-  h2,h4{
-    margin-bottom: 1rem;
-  }
-  h2{
-    font-size: 2rem;
-  }
-  h4{
-    font-size: 1rem;
-    font-weight: 300;
-  }
+  margin: 2rem 4rem;
 
+  #filter-button{
+    margin-right: 2rem;
+    float: right;
+  }
+  #filter_dropdown{
+    z-index: 1;
+    top: 10rem;
+    right: 5rem;
+    position: absolute;
+    padding: 0.625rem;
+    width: 15rem;
+  }
 }
 
+.search_bar{
+  display: inline-block;
+  width: 20rem;
+}
 
 
 

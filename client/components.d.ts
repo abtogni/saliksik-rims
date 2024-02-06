@@ -13,6 +13,7 @@ declare module 'vue' {
     Create_user_modal: typeof import('./src/components/pages/admin/create_user_modal.vue')['default']
     Login: typeof import('./src/components/pages/Login.vue')['default']
     Nav_bar: typeof import('./src/components/nav_bar.vue')['default']
+    Panelist: typeof import('./src/components/pages/panelist/index.vue')['default']
     Research_table: typeof import('./src/components/pages/researcher/research_table.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

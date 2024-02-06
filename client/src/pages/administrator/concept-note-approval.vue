@@ -133,37 +133,30 @@
       </v-col>
     </v-row>
 
-      <v-card class="">
-        <v-tabs v-model="tab" >
-          <v-tab value="one" class="tab-option">Verify and Review</v-tab>
-          <v-tab value="two" class="tab-option">Approval</v-tab>
-          <v-tab value="three" class="tab-option">Approved</v-tab>
-          <v-tab value="three" class="tab-option">Rejected</v-tab>
-          <v-tab value="three" class="tab-option">Summary</v-tab>
-        </v-tabs>
+    <!--tab container-->
+      <v-card elevation="5" class="">
+        <v-tabs v-model="tab"
+          :items="tab_items"
+        />
+
 
         <v-card-text style="">
           <v-window v-model="tab"  >
-            <v-window-item value="one" >
+            <v-window-item value="Verify and Review" >
               <concept_note_submissions />
-
             </v-window-item>
-
-            <v-window-item value="two"> Two </v-window-item>
-
-            <v-window-item value="three"> Three </v-window-item>
+            <v-window-item value="Approval"> Two </v-window-item>
+            <v-window-item value="Approved"> Three </v-window-item>
           </v-window>
         </v-card-text>
       </v-card>
   </v-container>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+  import { ref } from 'vue';
 
-export default {
-    data: () => ({
-        tab: null,
-    }),
-}
+  const tab = ref(null)
+  const tab_items = ['Verify and Review', 'Approval', 'Approved', 'Rejected', 'Summary'];
 </script>
 
