@@ -6,7 +6,7 @@
     <v-row class="login-row">
       <v-card id="login-field" elevation="8">
         <h6>Account Login</h6>
-        <v-form fast-fail @submit.prevent="login">
+        <v-form @submit.prevent="login">
           <v-select
           class="input-field"
             v-model="form_data.user_role"
