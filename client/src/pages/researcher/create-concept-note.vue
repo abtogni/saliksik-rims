@@ -1,6 +1,7 @@
 <template>
   <v-container fluid class="fill-height body pa-0">
     <!--header-->
+    <v-row no-gutters class="row-content">
     <v-row no-gutters class="row-header">
       <v-col class="col-start">
         <v-row no-gutters>
@@ -24,7 +25,7 @@
     </v-row>
 
     <!--form-->
-    <v-row no-gutters class="row-content">
+    
       <v-form class="form-concept-note">
         <v-card class="card-concept-note">
           <v-text-field
