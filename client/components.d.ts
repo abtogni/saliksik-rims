@@ -16,6 +16,7 @@ declare module 'vue' {
     Research_table: typeof import('./src/components/pages/researcher/research_table.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    Submit_concept_note: typeof import('./src/components/pages/researcher/submit_concept_note.vue')['default']
     User_list: typeof import('./src/components/pages/admin/user_list.vue')['default']
   }
 }

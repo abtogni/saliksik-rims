@@ -10,13 +10,15 @@
 // );
 @import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap";
 
-$primary-font: Montserrat, Inter, Roboto, "Open Sans", sans-serif;
+$primary-font: Montserrat, Inter, Roboto, sans-serif;
 $btn-clr-blue-600: #3b82f6;
 $fnt-clr-gray-800: #1f2937;
 $blue-700: #1d4ed8; 
 $gray-50: #f9fafb;
 $gray-100:#f3f4f6;
 $gray-200: #e5e7eb;
+$gray-500: #6b7280;
+$gray-600: #4b5563;
 $gray-700: #374151;
 $gray-800: #1f2937;
 
@@ -41,20 +43,22 @@ h2 {
 
 .caption {
   font-size: 0.833rem;
-  font-weight: 400;
+  font-weight: 500;
   width: 100%;
-  color: $gray-700; //gray-700
+  color: $gray-500; //gray-700
 }
 
 .button-regular {
   background-color: $blue-700;
   color: white;
+  font-weight: 700;
   text-transform: capitalize;
 }
 
 .button-outlined {
   border-color: $blue-700;
   color: black;
+  font-weight: 700;
   text-transform: capitalize;
 }
 
@@ -150,6 +154,7 @@ h2 {
   width: 100%;
   padding: 0 1.5rem 1.5rem 1.5rem;
 }
+
 .col-start{
   width: 100%;
   height: auto;
@@ -175,6 +180,7 @@ h2 {
   text-align: left;
   align-content: start;
   width: 100%;
+  
 }
 
 .card-concept-note{
@@ -186,22 +192,6 @@ h2 {
 
 
 //create concept note end
-.icon {
-  color: #374151;
-  padding: 0.3rem;
-  margin-right: 0.3rem;
-  size: 23rem;
-}
-
-.avatar {
-  margin-right: 0.1rem;
-}
-
-.prev-title {
-  font-weight: 400;
-  font-size: 1rem;
-  color: #374151; //gray-700
-}
 
 .divider {
   font-weight: 400;
