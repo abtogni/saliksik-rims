@@ -24,7 +24,7 @@
       <template v-slot:expanded-row="{ columns }">
         <tr>
           <td :colspan="columns.length">
-          <concept_note_overview/>
+            <concept_note_overview/>
           </td>
         </tr>
       </template>
@@ -34,7 +34,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-
+  import concept_note from '@/assets/sample_research_data.json' with {type: 'json'}
   const search = ref('');
   const expanded = ref([]);
   const concept_note_header: readonly { title: any, key: any, align?: any, width?: any}[] = [
@@ -48,29 +48,14 @@ import { ref } from 'vue';
         { title: "Status", key: "status", align: "start", width: "7rem" },
         {
           title: "Submitted In",
-          key: "submitted_in",
+          key: "created_at",
           align: "start",
           width: "13rem",
         },
       ]
-    const concept_note = [
-      {
-        research_title:
-          "Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness",
-        leaders: ["Agnes Reyes", "June Arreb Danila", "Danny Casimero", "Dennis Ignacio"],
-        status: "No Status",
-        submitted_in: "Insert Date of submission",
-      },
-      {
-        research_title: "test",
-        leaders: ["Agnes Reyes", "June Arreb Danila", "Danny Casimero", "Dennis Ignacio"],
-        status: "No Status",
-        submitted_in: "Insert Date of submission",
-      },
-    ];
 
     const formattedConceptNote = concept_note.map(item => ({
       ...item,
-      leaders: item.leaders.join(', '),
+      leaders: item.research_members.join(', '),
     }));
 </script>

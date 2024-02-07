@@ -1,0 +1,50 @@
+[
+  {
+    "_id": "B1",
+    "research_title": "Smart Tourism Practices in Naga City:  An Assessment",
+    "research_members": ["Cynthia Liza Arce Abarca, MBA", "Maricar Bien, MM", "Maria Cristina Maniquiz, MBA", "Jason Keith Boñaga, AEM, MDRCM, MBA"],
+    "created_at": "April 11, 2023"
+  },
+  {
+    "_id": "B2",
+    "research_title": "Prognostication of the Factors Affecting the Low Enrollment Turnout on the Biology Course at UNC, Naga City for the Past 5 Years",
+    "research_members": ["Dr. Josephine Alba", "Dr. Sheila Anzano", "Maria Fatima Parro"],
+    "created_at": "April 12, 2023"
+  },
+  {
+    "_id": "B3",
+    "research_title": "PSYCHOLOGICAL WELL-BEING, COPING STRATEGIES, AND ACADEMIC PERFORMANCE OF GEN-Z LEARNERS",
+    "research_members": ["Charey Mae Alvarado"],
+    "created_at": "April 13, 2023"
+  },
+  {
+    "_id": "B4",
+    "research_title": "Attrition Rate of the BS Accountancy Program for A.Y. 2021-2022 and A.Y. 2022-2023",
+    "research_members": ["Salvador C. Arcilla, MAT, PhD", "Aileen N. Mendoza, CPA, MBA", "Philip B. Lozada, CPA", "Maria Carla R. Mañago, CPA", "Maribel N. Ballon, MBA"],
+    "created_at": "April 14, 2023"
+  },
+  {
+    "_id": "B5",
+    "research_title": "Solar Powered Desalination by Thermal Evaporation Heating Process with filtration system",
+    "research_members": ["Engr. Edwin SJ. Badiola"],
+    "created_at": "April 15, 2023"
+  },
+  {
+    "_id": "B6",
+    "research_title": "The New Board Licensure Examination for Criminologist: Identifying Strategies for A Better Board Examination Rating of UNC Examinees",
+    "research_members": ["Vincent Vittorio A. Balmaceda, RCrim", "Lorlie B. Tanjay, Ph.D"],
+    "created_at": "April 16, 2023"
+  },
+  {
+    "_id": "B7",
+    "research_title": "Strategic, Integrated, and Institutional Partnership Program: UNC’s way of bridging the gap between the Academe and the Industry",
+    "research_members": ["Jo-Ann Dancalan", "Janice Brabante", "Paolo Suzara"],
+    "created_at": "April 17, 2023"
+  },
+  {
+    "_id": "B8",
+    "research_title": "Utilization and Effectiveness of Disaster Risk Reduction Management Interventions in Naga City: Basis for a Tactical Framework",
+    "research_members": ["Maiden Angelica R. Hernandez"],
+    "created_at": "April 18, 2023"
+  }
+]
