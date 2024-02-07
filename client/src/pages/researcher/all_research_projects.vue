@@ -16,9 +16,7 @@
       <!--cta container-->
       <v-col cols="4" class="cta-container">
         <!--cta call for submission-->
-        <v-btn type="submit" class="button-regular">
-          <v-icon start icon="mdi-phone-in-talk-outline"></v-icon> Create Research Project
-        </v-btn>
+        <create_research_modal />
       </v-col>
     </v-row>
 

@@ -9,6 +9,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     Concept_note_overview: typeof import('./src/components/pages/admin/concept_note_overview.vue')['default']
     Concept_note_submissions: typeof import('./src/components/pages/admin/concept_note_submissions.vue')['default']
+    Create_research_modal: typeof import('./src/components/pages/researcher/create_research_modal.vue')['default']
     Create_user_modal: typeof import('./src/components/pages/admin/create_user_modal.vue')['default']
     Login: typeof import('./src/components/pages/Login.vue')['default']
     Nav_bar: typeof import('./src/components/nav_bar.vue')['default']

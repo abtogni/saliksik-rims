@@ -2,14 +2,14 @@
   <v-btn color="#297be5" class="new_user"
     >Create New Account
     <v-dialog v-model="create_user" activator="parent">
-      <v-card id="create_user_card">
-        <h2>Create A New Account</h2>
-        <v-icon
-          id="close_create_user"
-          icon="mdi-close"
-          @click="create_user = false"
-        ></v-icon>
-        <v-form @submit.prevent="register">
+      <v-card class="form_modal">
+        <v-toolbar color="primary">
+          <v-btn icon @click="create_user = false">
+            <v-icon>mdi-close</v-icon>
+          </v-btn>
+          <v-toolbar-title>Create New User</v-toolbar-title>
+        </v-toolbar>
+          <v-form class="form_content" @submit.prevent="register" >
           <v-row>
             <v-col>
               <v-select
@@ -138,6 +138,3 @@ const register = async () => {
 };
 </script>
 
-<style lang="scss">
-@import "../../../styles/pages/manage-accounts.scss";
-</style>
