@@ -48,7 +48,7 @@ import { ref } from 'vue';
         { title: "Status", key: "status", align: "start", width: "7rem" },
         {
           title: "Submitted In",
-          key: "submitted_in",
+          key: "created_at",
           align: "start",
           width: "13rem",
         },
