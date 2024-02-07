@@ -2,7 +2,7 @@
   <h1>Manage User Accounts</h1>
   <div id="user_list">
       <h3>{{ sampleUsers.length }} accounts</h3>
-      <Create_user />
+      <Create_user_modal />
       <User_list id="user_container" :sampleUsers="sampleUsers" />
   </div>
 </template>
