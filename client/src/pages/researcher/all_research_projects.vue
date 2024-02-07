@@ -1,43 +1,65 @@
 <template>
-
-  <div id="research_table">
-    <v-row no gutters class="header-container">
-      <!--page name container-->
-      <v-col>
-        <!--pageName-cap container-->
-        <v-row no-gutters class="pageName-container">
-          <h2>All Researches</h2>
-          <h4>You have {{ research.length }} researches</h4>
-          <p class="caption">
-            Create new research to start. View and manage your researches here.
-          </p>
-        </v-row>
-      </v-col>
-      <!--cta container-->
-      <v-col cols="4" class="cta-container">
-        <!--cta call for submission-->
-        <v-btn type="submit" class="button-regular">
-          <v-icon start icon="mdi-phone-in-talk-outline"></v-icon> Create Research Project
-        </v-btn>
-      </v-col>
+  <v-container fluid class="fill-height body pa-0">
+    <v-row no gutters class="table-body">
+      <v-row no-gutters class="row-header">
+        <v-col class="col-start">
+          <div class="header">
+            <h2>All Research Projects</h2>
+            <v-chip color="primary"> You have {{ research.length }} research projects </v-chip>
+          </div>
+          <v-row no-gutters>
+            <h2 class="caption">
+              Create new research project to start. View and manage your
+              research projects here.
+            </h2>
+          </v-row>
+        </v-col>
+        <!--cta container-->
+        <v-col class="col-end">
+          <v-btn type="submit" variant="tonal" class="button-regular">
+            <v-icon start icon="mdi-folder-plus-outline"></v-icon> Create
+            Research Project
+          </v-btn>
+        </v-col>
+      </v-row>
+      <v-card class="table">
+        <research_table :research="research" />
+      </v-card>
     </v-row>
-
-
-    <research_table  :research="research"/>
-  </div>
+  </v-container>
 </template>
 
 <script setup lang="ts">
-  import moment from 'moment';
+import moment from "moment";
 
-  const research = [
-    { _id: 1,research_title: "Test Title", research_leaders: 'Test 1, Test 2', research_status: 'A', createdAt: moment().format('LL') },
-    {_id: 2, research_title: "Test 2", research_leaders: 'Test 1, Test 2', research_status: 'B', createdAt: moment().format('LL') },
-    {_id: 3, research_title: "Test", research_leaders: 'Test 1, Test 2', research_status: 'C', createdAt: moment().format('LL') },
-    {_id: 4, research_title: "Testasdfgh", research_leaders: 'Test 1, Test 2', research_status: 'A', createdAt: moment().format('LL') }
-  ];
-
-
-
+const research = [
+  {
+    _id: 1,
+    research_title: "Test Title",
+    research_leaders: "Test 1, Test 2",
+    research_status: "No Status",
+    createdAt: moment().format("LL"),
+  },
+  {
+    _id: 2,
+    research_title: "Test 2",
+    research_leaders: "Test 1, Test 2",
+    research_status: "Approval",
+    createdAt: moment().format("LL"),
+  },
+  {
+    _id: 3,
+    research_title: "Test",
+    research_leaders: "Test 1, Test 2",
+    research_status: "Reviewing",
+    createdAt: moment().format("LL"),
+  },
+  {
+    _id: 4,
+    research_title: "Testasdfgh",
+    research_leaders: "Test 1, Test 2",
+    research_status: "Initial Presentation",
+    createdAt: moment().format("LL"),
+  },
+];
 </script>
-
