@@ -30,6 +30,7 @@
       :items-length="filteredResearch.length"
       :items="filteredResearch"
       :search="search">
+      <!-- @vue-skip -->
       <template v-slot:item="{ item: research }">
         <tr>
           <td><a :href="'/researcher/' + research._id">{{ research.research_title }}</a></td>

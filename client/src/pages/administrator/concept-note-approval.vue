@@ -143,7 +143,7 @@
         <v-card-text style="">
           <v-window v-model="tab"  >
             <v-window-item value="Verify and Review" >
-              <concept_note_submissions />
+              <concept_note_submissions :research_data="research_data" />
             </v-window-item>
             <v-window-item value="Approval"> Two </v-window-item>
             <v-window-item value="Approved"> Three </v-window-item>
@@ -157,6 +157,7 @@
 
 <script setup lang="ts">
   import { ref } from 'vue';
+  import research_data from '@/assets/sample_research_data.json' with {type: 'json'}
 
   const tab = ref(null)
   const tab_items = ['Verify and Review', 'Approval', 'Approved', 'Rejected', 'Summary'];

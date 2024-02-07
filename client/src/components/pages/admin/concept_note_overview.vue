@@ -1,23 +1,23 @@
 <template>
-  <div class="container" :key="c._id" v-for="c in concept_note">
+  <div class="container">
     <div class="row_container" >
       <div class="column_container" >
         <v-card
           elevation="3"
           title="Implementing Agency/Department"
-          :text="c.implementing_agency"
+          :text="prop.c.implementing_agency"
           style="width: 100%"
         />
         <v-card
           elevation="3"
           title="Cooperating Agency"
-          :text="c.cooperating_agency"
+          :text="prop.c.cooperating_agency"
           style="width: 100%"
         />
         <v-card
           elevation="3"
           title="Site/s of Implementation"
-          :text="c.site_of_implementation"
+          :text="prop.c.site_of_implementation"
           style="width: 100%"
         />
       </div>
@@ -25,19 +25,19 @@
         <v-card
           elevation="3"
           title="Project Duration"
-          :text="c.project_duration"
+          :text="prop.c.project_duration"
           style="width: 100%"
         />
         <v-card
           elevation="3"
           title="Total Cost"
-          :text="c.total_project_cost"
+          :text="prop.c.total_project_cost"
           style="width: 100%"
         />
         <v-card
           elevation="3"
           title="Funding Source"
-          :text="c.funding_source"
+          :text="prop.c.funding_source"
           style="width: 100%"
         />
       </div>
@@ -46,43 +46,43 @@
       <v-card
         elevation="3"
         title="Project Description"
-        :text="c.project_description"
+        :text="prop.c.project_description"
         style="width: 100%"
       />
       <v-card
         elevation="3"
         title="Significance"
-        :text="c.significance"
+        :text="prop.c.significance"
         style="width: 100%"
       />
       <v-card
         elevation="3"
         title="Objectives"
-        :text="c.objectives"
+        :text="prop.c.objectives"
         style="width: 100%"
       />
       <v-card
         elevation="3"
         title="Methodology"
-        :text="c.methodology"
+        :text="prop.c.methodology"
         style="width: 100%"
       />
       <v-card
         elevation="3"
         title="Technology Rodamap"
-        :text="c.technology_roadmap"
+        :text="prop.c.technology_roadmap"
         style="width: 100%"
       />
       <v-card
         elevation="3"
         title="Expected Outputs (6Ps)"
-        :text="c.expected_outputs"
+        :text="prop.c.expected_outputs"
         style="width: 100%"
       />
       <v-card
         elevation="3"
         title="Work Plan"
-        :text="c.work_plan"
+        :text="prop.c.work_plan"
         style="width: 100%"
       />
     </div>
@@ -90,7 +90,5 @@
 </template>
 
 <script setup lang="ts">
-  import concept_note from '@/assets/sample_concept_note.json' with {type: 'json'}
-
-  console.log(concept_note);
+  const prop = defineProps(['c'])
 </script>
