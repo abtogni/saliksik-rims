@@ -3,8 +3,8 @@
     <v-card flat class="header-body">
       <div class="header-left truncate">
         <div class="header-caption-ctr">
-          <h5>Concept Note <concept_note_reviewing/> </h5>
-          
+          <h5>Concept Note <concept_note_reviewing /></h5>
+
           <p class="caption">Create and submit concept note to start.</p>
         </div>
       </div>
@@ -28,7 +28,7 @@
       </div>
     </v-card>
     <v-card></v-card>
-    <div id="overview">
+    <div id="researcher-overview">
       <v-card flat>
         <v-card-title>
           <h5>
@@ -37,16 +37,57 @@
             Information Management System for Improving Inclusiveness
           </h5>
         </v-card-title>
-        <v-card-text style="display: flex; flex-direction: row; justify-content: space-between; align-items: start; gap: 1rem;">
-          <div style="display:flex; flex-direction: column; gap: 1rem; width: 100%;">
-            <p><span style="font-weight: 600">Implementing Agency/Department </span><br>Insert text</p>
-            <p><span style="font-weight: 600">Site's Of Implementation </span><br>Insert text</p>
-            <p><span style="font-weight: 600">Cooperating Agency </span><br>Insert text</p>
+        <v-card-text
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: start;
+            gap: 1rem;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 1rem;
+              width: 100%;
+            "
+          >
+            <p>
+              <span style="font-weight: 600"
+                >Implementing Agency/Department </span
+              ><br />Insert text
+            </p>
+            <p>
+              <span style="font-weight: 600">Site's Of Implementation </span
+              ><br />Insert text
+            </p>
+            <p>
+              <span style="font-weight: 600">Cooperating Agency </span
+              ><br />Insert text
+            </p>
           </div>
-          <div style="display:flex; flex-direction: column; gap: 1rem; width: 100%;">
-            <p><span style="font-weight: 600">Project Duration </span><br>Insert text</p>
-            <p><span style="font-weight: 600">Project Cost </span><br>Insert text</p>
-            <p><span style="font-weight: 600">Funding Source </span><br>Insert text</p>
+          <div
+            style="
+              display: flex;
+              flex-direction: column;
+              gap: 1rem;
+              width: 100%;
+            "
+          >
+            <p>
+              <span style="font-weight: 600">Project Duration </span
+              ><br />Insert text
+            </p>
+            <p>
+              <span style="font-weight: 600">Project Cost </span><br />Insert
+              text
+            </p>
+            <p>
+              <span style="font-weight: 600">Funding Source </span><br />Insert
+              text
+            </p>
           </div>
         </v-card-text>
       </v-card>
