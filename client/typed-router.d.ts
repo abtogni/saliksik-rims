@@ -45,7 +45,6 @@ declare module 'vue-router/auto/routes' {
     '/administrator/manage-accounts': RouteRecordInfo<'/administrator/manage-accounts', '/administrator/manage-accounts', Record<never, never>, Record<never, never>>,
     '/researcher/[research_id.vue]/research_project_dashboard': RouteRecordInfo<'/researcher/[research_id.vue]/research_project_dashboard', '/researcher/:research_ide(.*)/research_project_dashboard', { research_ide: ParamValue<true> }, { research_ide: ParamValue<false> }>,
     '/researcher/all_research_projects': RouteRecordInfo<'/researcher/all_research_projects', '/researcher/all_research_projects', Record<never, never>, Record<never, never>>,
-    '/researcher/concept_note_tab': RouteRecordInfo<'/researcher/concept_note_tab', '/researcher/concept_note_tab', Record<never, never>, Record<never, never>>,
     '/researcher/create_concept_note': RouteRecordInfo<'/researcher/create_concept_note', '/researcher/create_concept_note', Record<never, never>, Record<never, never>>,
   }
 }

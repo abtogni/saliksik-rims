@@ -16,10 +16,10 @@
           </v-col>
           <v-col class="col-end">
             <v-btn variant="tonal" type="submit" class="button-regular">
-              <v-icon start icon="mdi-file-upload"></v-icon> Submit
+              <v-icon start icon="mdi-file-document-check-outline"></v-icon> Submit
             </v-btn>
             <v-btn variant="outlined" type="submit" class="button-outlined">
-              <v-icon start icon="mdi-file"></v-icon> Save As Draft
+              <v-icon start icon="mdi-file-document-outline"></v-icon> Save As Draft
             </v-btn>
           </v-col>
         </v-row>

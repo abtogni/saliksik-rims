@@ -1,11 +1,11 @@
 <template>
   <v-container fluid class="fill-height body pa-0">
     <v-row no gutters class="table-body">
-      <v-row no-gutters class="row-header">
-        <v-col class="col-start">
+      <v-row no-gutters class="table-header-row">
+        <v-col class="col-start" style="background-color: red;">
           <div class="header">
             <h2>All Research Projects</h2>
-            <v-chip color="primary"> You have {{ research.length }} research projects </v-chip>
+            <v-chip color="primary" class="header-count"> You have {{ research.length }} research projects </v-chip>
           </div>
           <v-row no-gutters>
             <h2 class="caption">
@@ -22,7 +22,7 @@
           </v-btn>
         </v-col>
       </v-row>
-      <v-card class="table">
+      <v-card class="table-card">
         <research_table :research="research" />
       </v-card>
     </v-row>
@@ -63,3 +63,6 @@ const research = [
   },
 ];
 </script>
+<style lang="scss">
+
+</style>
