@@ -27,11 +27,11 @@
             <v-icon start icon="mdi-file-document-outline"> </v-icon>
             Concept Note
           </v-tab>
-          <v-tab value="option-1">
+          <v-tab value="option-3">
             <v-icon start icon="mdi-calendar-month-outline"> </v-icon>
             Title Presentation
           </v-tab>
-          <v-tab value="option-3">
+          <v-tab value="option-1">
             <v-icon start icon="mdi-file-document-outline"></v-icon>
             Research Paper Progress
           </v-tab>
@@ -48,28 +48,11 @@
           <v-window-item value="option-2">
             <concept_note_tab />
           </v-window-item>
-          <v-window-item value="option-1">
+          <v-window-item value="option-3">
             <title_presentation_tab/>
           </v-window-item>
-          <v-window-item value="option-3">
-            <v-card flat>
-              <v-card-text>
-                <p>
-                  Fusce a quam. Phasellus nec sem in justo pellentesque
-                  facilisis. Nam eget dui. Proin viverra, ligula sit amet
-                  ultrices semper, ligula arcu tristique sapien, a accumsan nisi
-                  mauris ac eros. In dui magna, posuere eget, vestibulum et,
-                  tempor auctor, justo.
-                </p>
-
-                <p class="mb-0">
-                  Cras sagittis. Phasellus nec sem in justo pellentesque
-                  facilisis. Proin sapien ipsum, porta a, auctor quis, euismod
-                  ut, mi. Donec quam felis, ultricies nec, pellentesque eu,
-                  pretium quis, sem. Nam at tortor in tellus interdum sagittis.
-                </p>
-              </v-card-text>
-            </v-card>
+          <v-window-item value="option-1">
+            <research_paper_progress/>
           </v-window-item>
         </v-window>
       </div>
@@ -78,6 +61,7 @@
 </template>
 
 <script lang="ts">
+
 
 export default {
     data: () => ({

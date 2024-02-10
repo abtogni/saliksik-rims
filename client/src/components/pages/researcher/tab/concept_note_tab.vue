@@ -27,9 +27,8 @@
         </v-btn>
       </div>
     </v-card>
-    <v-card></v-card>
-    <div id="researcher-overview">
-      <v-card flat>
+    <div class="overview-ctr">
+      <v-card elevation="5">
         <v-card-title>
           <h5>
             Streamlining Outcome-Based Education and Continuous Quality
@@ -91,7 +90,7 @@
           </div>
         </v-card-text>
       </v-card>
-      <v-card flat>
+      <v-card elevation="5">
         <v-card-title> <h6>Project Description</h6> </v-card-title>
         <v-card-text>
           <p>
@@ -130,37 +129,37 @@
           </p>
         </v-card-text>
       </v-card>
-      <v-card flat>
+      <v-card elevation="5">
         <v-card-title> <h6>Significance</h6> </v-card-title>
         <v-card-text>
           <p>Insert text</p>
         </v-card-text>
       </v-card>
-      <v-card flat>
+      <v-card elevation="5">
         <v-card-title> <h6>Objectives</h6> </v-card-title>
         <v-card-text>
           <p>Insert text</p>
         </v-card-text>
       </v-card>
-      <v-card flat>
+      <v-card elevation="5">
         <v-card-title> <h6>Methodology</h6> </v-card-title>
         <v-card-text>
           <p>Insert text</p>
         </v-card-text>
       </v-card>
-      <v-card flat>
+      <v-card elevation="5">
         <v-card-title> <h6>Technology Roadmap</h6> </v-card-title>
         <v-card-text>
           <p>Insert text</p>
         </v-card-text>
       </v-card>
-      <v-card flat>
+      <v-card elevation="5">
         <v-card-title> <h6>Expected Outputs (6Ps)</h6> </v-card-title>
         <v-card-text>
           <p>Insert text</p>
         </v-card-text>
       </v-card>
-      <v-card flat>
+      <v-card elevation="5">
         <v-card-title> <h6>Work Plan</h6> </v-card-title>
         <v-card-text>
           <p>Insert text</p>
