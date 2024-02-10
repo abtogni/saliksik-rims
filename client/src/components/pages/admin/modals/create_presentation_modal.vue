@@ -17,12 +17,14 @@
           v-model="form_data.location"
           label="Location"
           variant="outlined"
+          :rules="field_required"
         />
 
         <v-select
             label="Researches"
             multiple
             variant="outlined"
+            :rules="field_required"
             v-model="form_data.research_ids"
             :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
           />
@@ -31,6 +33,7 @@
             label="Panelists"
             multiple
             variant="outlined"
+            :rules="field_required"
             v-model="form_data.panelist_ids"
             :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
           />
@@ -60,6 +63,8 @@ const form_data = reactive({
   research_ids: [],
   panelist_ids: []
 });
+
+const field_required = [(v: string) => !!v || "Field is required"];
 
 </script>
 
