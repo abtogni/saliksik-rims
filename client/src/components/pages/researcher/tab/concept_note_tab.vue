@@ -15,6 +15,7 @@
           flat
           prepend-icon="mdi-file-document-plus-outline"
           class="button-regular"
+          @click="$router.push(`dss/create_concept_note`)"
           >Create Concept Note
         </v-btn>
         <v-btn

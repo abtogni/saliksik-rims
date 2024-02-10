@@ -4,8 +4,8 @@
       <v-card v-for="(presentation, index) in presentationGroup" class="presentation_card"
       :key="presentation._id">
         <div v-if="index === 0 || hasDifferentTime(presentation, presentationGroup[index - 1])">
-          <v-card-title>{{ moment(presentation.time).utc().format('LT') }}</v-card-title>
-          <v-card-subtitle>{{ presentation.location }}</v-card-subtitle>
+          <v-card-title><h5>{{ moment(presentation.time).utc().format('LT') }}</h5></v-card-title>
+          <v-card-subtitle><p>{{ presentation.location }}</p></v-card-subtitle>
         </div>
         <v-card-text>
           <p><span>Panelists:</span> {{ presentation.panelist_id.join(', ') }}</p>
