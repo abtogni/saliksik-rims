@@ -296,3 +296,19 @@ div#research_table{
   }
 }
 
+//create user accounts
+div#user_list{
+  h3{
+      font-weight: 300;
+      display: inline-block;
+  }
+  .new_user{
+      position: fixed;
+      right: 10rem;
+  }
+  width: 60rem;
+  margin: 0 auto;
+  #user_container{
+      margin-top: 2rem;
+  }
+}

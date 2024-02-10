@@ -43,6 +43,7 @@ declare module 'vue-router/auto/routes' {
     '/404': RouteRecordInfo<'/404', '/404', Record<never, never>, Record<never, never>>,
     '/administrator/concept-note-approval': RouteRecordInfo<'/administrator/concept-note-approval', '/administrator/concept-note-approval', Record<never, never>, Record<never, never>>,
     '/administrator/manage-accounts': RouteRecordInfo<'/administrator/manage-accounts', '/administrator/manage-accounts', Record<never, never>, Record<never, never>>,
+    '/administrator/presentations': RouteRecordInfo<'/administrator/presentations', '/administrator/presentations', Record<never, never>, Record<never, never>>,
     '/researcher/': RouteRecordInfo<'/researcher/', '/researcher', Record<never, never>, Record<never, never>>,
     '/researcher/[research_id.vue]/': RouteRecordInfo<'/researcher/[research_id.vue]/', '/researcher/:research_ide(.*)', { research_ide: ParamValue<true> }, { research_ide: ParamValue<false> }>,
     '/researcher/[research_id.vue]/concept_note_tab': RouteRecordInfo<'/researcher/[research_id.vue]/concept_note_tab', '/researcher/:research_ide(.*)/concept_note_tab', { research_ide: ParamValue<true> }, { research_ide: ParamValue<false> }>,
