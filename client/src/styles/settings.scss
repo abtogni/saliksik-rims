@@ -457,3 +457,32 @@ div#research_table {
   gap: 1rem;
   padding: 1rem;
 }
+
+
+//FOR MODAL FORMS
+
+.form_modal{
+  margin: 0 auto;
+  height: 60rem;
+  width: 40rem;
+  .form_content{
+      padding: 2rem;
+  }
+}
+
+//create user accounts
+div#user_list{
+  h3{
+      font-weight: 300;
+      display: inline-block;
+  }
+  .new_user{
+      position: fixed;
+      right: 10rem;
+  }
+  width: 60rem;
+  margin: 0 auto;
+  #user_container{
+      margin-top: 2rem;
+  }
+}
