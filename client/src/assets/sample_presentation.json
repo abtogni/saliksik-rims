@@ -1,8 +1,7 @@
 [
     {
       "_id": "A1",
-      "date": "2024-01-02T00:00:00Z",
-      "time": "2024-01-02T13:00:00Z",
+      "datetime": "2024-01-02T13:00:00Z",
       "location": "Location A",
       "panelist_id": ["Panelist A", "Panelist B", "Panelist C", "Panelist D"],
       "research_id": ["Research A", "Research B"],
@@ -10,8 +9,7 @@
     },
     {
       "_id": "A2",
-      "date": "2024-01-02T00:00:00Z",
-      "time": "2024-01-02T14:00:00Z",
+      "datetime": "2024-01-02T14:00:00Z",
       "location": "Location A",
       "panelist_id": ["Panelist A", "Panelist B"],
       "research_id": ["Research A", "Research B", "Research C", "Research E"],
@@ -19,8 +17,7 @@
     },
     {
       "_id": "A3",
-      "date": "2024-01-03T00:00:00Z",
-      "time": "2024-01-03T15:00:00Z",
+      "datetime": "2024-01-03T15:00:00Z",
       "location": "Location A",
       "panelist_id": ["Panelist A", "Panelist B", "Panelist C", "Panelist D"],
       "research_id": ["Research A", "Research B"],
@@ -28,8 +25,7 @@
     },
     {
       "_id": "A4",
-      "date": "2024-01-03T00:00:00Z",
-      "time": "2024-01-03T16:00:00Z",
+      "datetime": "2024-01-03T16:00:00Z",
       "location": "Location A",
       "panelist_id": ["Panelist A", "Panelist B", "Panelist C", "Panelist D"],
       "research_id": ["Research G", "Research C"],
@@ -37,8 +33,7 @@
     },
     {
       "_id": "A5",
-      "date": "2024-01-05T00:00:00Z",
-      "time": "2024-01-05T17:00:00Z",
+      "datetime": "2024-01-05T17:00:00Z",
       "location": "Location A",
       "panelist_id": ["Panelist A", "Panelist B", "Panelist C", "Panelist D"],
       "research_id": ["Research A", "Research B"],
@@ -46,8 +41,7 @@
     },
     {
       "_id": "A6",
-      "date": "2024-01-05T00:00:00Z",
-      "time": "2024-01-05T18:00:00Z",
+      "datetime": "2024-01-05T18:00:00Z",
       "location": "Location A",
       "panelist_id": ["Panelist A", "Panelist B", "Panelist C", "Panelist D"],
       "research_id": ["Research A", "Research B"],

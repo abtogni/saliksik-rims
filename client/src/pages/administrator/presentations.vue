@@ -1,7 +1,7 @@
 
 <template>
   <h1>Presentations</h1>
-  <v-btn class="button-regular" outlined>Create Presentation</v-btn>
+  <create_presentation_modal />
   <presentation_overview :presentation="presentation" />
 </template>
 
