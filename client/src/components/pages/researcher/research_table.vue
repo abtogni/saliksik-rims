@@ -49,6 +49,7 @@
         font-size: 1rem;
       "
     >
+      <!-- @vue-skip -->
       <template v-slot:item="{ item: research }">
         <tr
           style="

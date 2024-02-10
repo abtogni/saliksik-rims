@@ -1,3 +1,4 @@
+
 <template>
   <v-card>
     <template v-slot:text>
@@ -9,22 +10,22 @@
         variant="outlined"
         hide-details
         density="compact"
-      ></v-text-field>
+      />
     </template>
     <v-data-table
       v-model:expanded="expanded"
       :headers="concept_note_header"
-
       :items="formattedConceptNote"
       :search="search"
       item-value="research_title"
       show-expand
       class="table"
     >
-      <template v-slot:expanded-row="{ columns }">
+      <template v-slot:expanded-row="{ columns, item }">
         <tr>
           <td :colspan="columns.length">
-            <concept_note_overview/>
+             <!-- @vue-ignore -->
+            <concept_note_overview :c="item.concept_note"/>
           </td>
         </tr>
       </template>
@@ -33,10 +34,13 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-  import concept_note from '@/assets/sample_research_data.json' with {type: 'json'}
+  import { ref } from 'vue';
   const search = ref('');
   const expanded = ref([]);
+
+  const props = defineProps(['research_data']);
+
+
   const concept_note_header: readonly { title: any, key: any, align?: any, width?: any}[] = [
         { title: "Leaders", key: "leaders" },
         {
@@ -54,7 +58,7 @@ import { ref } from 'vue';
         },
       ]
 
-    const formattedConceptNote = concept_note.map(item => ({
+    const formattedConceptNote = props.research_data.map((item: any) => ({
       ...item,
       leaders: item.research_members.join(', '),
     }));
