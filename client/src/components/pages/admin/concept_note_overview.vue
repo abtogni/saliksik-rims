@@ -1,7 +1,7 @@
 <template>
   <div class="container">
-    <div class="row_container" >
-      <div class="column_container" >
+    <div class="row_container">
+      <div class="column_container">
         <v-card
           elevation="3"
           title="Implementing Agency/Department"
@@ -69,7 +69,7 @@
       />
       <v-card
         elevation="3"
-        title="Technology Rodamap"
+        title="Technology Roadmap"
         :text="prop.c.technology_roadmap"
         style="width: 100%"
       />
@@ -90,5 +90,5 @@
 </template>
 
 <script setup lang="ts">
-  const prop = defineProps(['c'])
+  const prop = defineProps(['c']);
 </script>
