@@ -11,6 +11,7 @@
           <v-card-title>
             <h2>Incentives List</h2>
           </v-card-title>
+          <v-data-table :headers="headers" :items="incentives" :search="search" />
         </v-card>
       </v-col>
     </v-row>
@@ -20,11 +21,13 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+const search = ref('');
+
 const headers = [
-  { text: 'Name', value: 'name' },
-  { text: 'Description', value: 'description' },
-  { text: 'Amount', value: 'amount' },
-  { text: 'Actions', value: 'actions', sortable: false },
+  { title: 'Name', key: 'name' },
+  { title: 'Description', key: 'description' },
+  { title: 'Amount', key: 'amount' },
+  { title: 'Actions', key: 'actions', sortable: false },
 ];
 
 const incentives = ref([
@@ -34,6 +37,4 @@ const incentives = ref([
 ]);
 </script>
 
-<style scoped>
-/* Add your custom styles here */
-</style>
+
