@@ -16,10 +16,7 @@
         </v-col>
         <!--cta container-->
         <v-col class="col-end">
-          <v-btn type="submit" variant="tonal" class="button-regular">
-            <v-icon start icon="mdi-folder-plus-outline"></v-icon> Create
-            Research Project
-          </v-btn>
+          <create_research_project_modal />
         </v-col>
       </v-row>
       <v-card class="table-card">
@@ -63,6 +60,4 @@ const research = [
   },
 ];
 </script>
-<style lang="scss">
-
-</style>
+<style lang="scss"></style>
