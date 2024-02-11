@@ -12,7 +12,7 @@
       </div>
 
       <div class="header-right">
-        <v-btn
+        <!-- <v-btn
           type="submit"
           flat
           prepend-icon="mdi-check-circle-outline"
@@ -26,20 +26,21 @@
           prepend-icon="mdi-close-circle-outline"
           class="button-outlined"
           >Not Going
-        </v-btn>
+        </v-btn> -->
       </div>
     </v-card>
-    <v-card></v-card>
-    <div id="researcher-overview">
-      <v-card flat>
+    <div class="overview-ctr">
+      <v-card elevation="5" >
         <v-card-title>
           <h5 style="text-transform: uppercase">
-            <v-icon start icon="mdi-calendar-month-outline"></v-icon>
-            Sunday, January 21, 2024 9:00 am
+            <v-icon start icon="mdi-calendar-month-outline"></v-icon>Sunday, January 21, 2024 9:00 am
           </h5>
-          <h4><v-icon start icon="mdi-map-marker-outline"></v-icon></h4>
-          <h4><v-icon start icon="mdi-account-multiple-outline"></v-icon></h4>
         </v-card-title>
+        <v-card-text>
+          <p style="font-weight: 600;">
+            <v-icon start icon="mdi-map-marker-outline"></v-icon>UNC Testing Center AMS110
+          </p>
+        </v-card-text>
       </v-card>
     </div>
   </v-card>
@@ -56,7 +57,7 @@
       </div>
 
       <div class="header-right">
-        <v-btn
+        <!-- <v-btn
           type="submit"
           flat
           prepend-icon="mdi-file-document-plus-outline"
@@ -70,14 +71,14 @@
           prepend-icon="mdi-file-document-edit-outline"
           class="button-outlined"
           >Edit Concept Note
-        </v-btn>
+        </v-btn> -->
       </div>
     </v-card>
     <v-card></v-card>
-    <div id="researcher-overview">
-      <v-card flat>
-          <v-expansion-panels>
-            <v-expansion-panel
+    <div class="overview-ctr">
+      <v-card elevation="5">
+          <v-expansion-panels >
+            <v-expansion-panel 
               title="Panelist Name 1"
               text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima"
             >
