@@ -12,10 +12,10 @@ const UserSchema = new mongoose.Schema({
 
 export const UserModel = mongoose.model('User', UserSchema);
 
-export const getUsers = UserModel.find();
+export const getUsers = () => UserModel.find();
 export const getUserByUserID = (userID: string) => UserModel.findOne({ userID });
 export const getUserBySessionToken = (token: string) => UserModel.findOne({ 'authentication.sessionToken': token });
 export const getUserById = (id: string) => UserModel.findById(id);
 export const createUser = (values: Record<string, any>) => new UserModel(values).save().then((user) => user.toObject());
-export const deleteUser = (id: string) => UserModel.findOneAndDelete({ _id: id }); 
-export const updateUser = (id: string, values: Record<string, any>) => UserModel.findOneAndUpdate({ _id: id }, values); 
+export const deleteUserByID = (id: string) => UserModel.findOneAndDelete({ _id: id }); 
+export const updateUserByID = (id: string, values: Record<string, any>) => UserModel.findOneAndUpdate({ _id: id }, values); 
