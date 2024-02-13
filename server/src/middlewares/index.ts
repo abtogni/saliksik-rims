@@ -1,10 +1,14 @@
 import { NextFunction, Request, Response } from "express";
 import { getUserBySessionToken } from "../db/users";
 import { get, merge } from "lodash";
+import { config } from "dotenv";
+config();
+
+const cookie = process.env.JWT_COOKIE;
 
 export const isAuthenticated = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const token = req.cookies['RIMS-AUTH'];
+        const token = req.cookies[cookie];
 
         if (!token) {
             return res.sendStatus(403);
@@ -31,7 +35,7 @@ export const isOwner = async (req: Request, res: Response, next: NextFunction) =
     try {
         const { id } = req.params;
         const currentUserId = get(req, 'identity._id') as string;
-        console.log(currentUserId);
+
         if (!currentUserId) {
         return res.sendStatus(400);
         }

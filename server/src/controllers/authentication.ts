@@ -1,9 +1,13 @@
 import { Request, Response } from "express";
 import { createUser, getUserByName, getUserByUserID } from "../db/users";
 import { authentication, random } from "../helpers";
+import { config } from 'dotenv';
 
+config();
 
-// To edit
+const cookie = process.env.JWT_COOKIE;
+
+//REGISTER
 export const register = async (req: Request, res: Response) => {
     try {
         const { userID, role, affiliation, firstName, middleName, lastName, suffix, email, password } = req.body;
@@ -43,6 +47,8 @@ export const register = async (req: Request, res: Response) => {
     }
 }
 
+
+//LOGIN
 export const login = async (req: Request, res: Response) => {
     try {
         const { userID, role, password } = req.body;
@@ -74,7 +80,7 @@ export const login = async (req: Request, res: Response) => {
 
         await user.save();
 
-        res.cookie('RIMS-AUTH', user.authentication.sessionToken, { domain: 'localhost', path: '/'});
+        res.cookie(cookie, user.authentication.sessionToken, { domain: 'localhost', path: '/'});
     
         return res.status(200).json(user).end();
     } catch (error) {
