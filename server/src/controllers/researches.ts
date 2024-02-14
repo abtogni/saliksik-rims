@@ -1,15 +1,16 @@
+import { getUserById } from "../db/users";
 import { createResearch, deleteResearchByID, getResearchByID, getResearches, updateResearchByID } from "../db/researches";
 import { Request, Response } from "express";
 
 // create a new research project
 export const createNewResearch = async (req: Request, res: Response) => {
     try {
-        const { researchTitle, researchLeaders, researchStatus } = req.body;
+        const { researchTitle, researchLeaders } = req.body;
 
         const newResearch = await createResearch({
             researchTitle,
             researchLeaders,
-            researchStatus
+            researchStatus: "No"
         });
 
         return res.status(200).json(newResearch).end();
@@ -24,8 +25,7 @@ export const createNewResearch = async (req: Request, res: Response) => {
 export const getAllResearches = async (_req: Request, res: Response) => {
     try {
         const researches = await getResearches();
-
-        return res.status(200).json(researches).end();
+        return res.status(200).json({researches}).end();
     } catch (error) {
         console.log(error);
         return res.sendStatus(400);
@@ -37,9 +37,14 @@ export const fetchResearch = async (req: Request, res: Response) => {
     try {
         const { id } = req.params;
 
-        const research = await getResearchByID(id);
+        const data = await getResearchByID(id);
 
-        return res.status(200).json(research);
+        const researchLeadersData = await Promise.all(data.researchLeaders.map(async (id) => {
+            const user = await getUserById(id);
+            return user;
+        }));
+
+        return res.status(200).json({data, researchLeadersData});
     } catch (error) {
         console.log(error);
         return res.sendStatus(400);

@@ -11,7 +11,7 @@ export default (router: Router) => {
     router.post('/research/create', isAuthenticated, createNewResearch);
 
     //PATCH
-    router.patch('/research/update/:id', isAuthenticated, updateResearch);
+    router.patch('/research/update/:id', isAuthenticated, isOwner, updateResearch);
 
     //DELETE
     router.delete('/research/delete/:id', isAuthenticated, isOwner, deleteResearch);
