@@ -34,27 +34,38 @@
       </div>
     </v-card>
     <div class="overview-ctr">
-      <v-card elevation="5">
+      <v-card variant="outlined" class="card-style">
         <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-title class="title expansion-title-body">
               <span class="expansion-title-left truncate">
                 <span>
-                <v-icon start icon="mdi-account-multiple-outline"></v-icon>
-                <v-tooltip
-                  activator="parent"
-                  location="top"
-                  style="display: flex; flex-direction: column"
+                  <v-icon start icon="mdi-account-multiple-outline"></v-icon>
+                  <v-tooltip
+                    activator="parent"
+                    location="top"
+                    style="display: flex; flex-direction: column"
+                  >
+                    <div style="text-transform: uppercase; font-weight: 600">
+                      Uploaded by
+                    </div>
+                    <div>Jomari Valenciano</div>
+                    <div>Andrei Togñi</div>
+                  </v-tooltip>
+                </span>
+                <span class="truncate">
+                  Insert research titleInsert research titleInsert research
+                  titleInsert research titleInsert research titleInsert research
+                  titleInsert research titleInsert research titleInsert research
+                  titleInsert research titleInsert research titleInsert research
+                  titleInsert research title</span
                 >
-                <div style="text-transform: uppercase;">Uploaded by</div>
-                  <div>Jomari Valenciano</div>
-                  <div>Jomari Valenciano</div>
-                </v-tooltip>
               </span>
-                <span class="truncate"> Insert research titleInsert research titleInsert research titleInsert research titleInsert research titleInsert research titleInsert research titleInsert research titleInsert research titleInsert research titleInsert research titleInsert research titleInsert research title</span>
-              </span>
-              <span class="expansion-title-right">Insert upload date</span>
+              <span class="expansion-title-right"
+                ><v-chip>January 21, 2023</v-chip></span
+              >
             </v-expansion-panel-title>
+            <v-expansion-panel-text>dasfdsaf</v-expansion-panel-text>
           </v-expansion-panel>
           <v-expansion-panel title="Panelist Name 2"> </v-expansion-panel>
         </v-expansion-panels>

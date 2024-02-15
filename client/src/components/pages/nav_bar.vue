@@ -8,8 +8,10 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav>
-      <v-list-item prepend-icon="mdi-folder" title="Administrator" href="/administrator" link />
-      <v-list-item prepend-icon="mdi-folder" title="Researcher" href="/researcher" link />
+      <v-list-item prepend-icon="mdi-folder-multiple-outline" title="All Research Projects" value="myfiles"
+        href=""></v-list-item>
+      <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
+      <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
