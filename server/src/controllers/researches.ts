@@ -10,7 +10,7 @@ export const createNewResearch = async (req: Request, res: Response) => {
         const newResearch = await createResearch({
             researchTitle,
             researchLeaders,
-            researchStatus: "No"
+            researchStatus: "No Status"
         });
 
         return res.status(200).json(newResearch).end();

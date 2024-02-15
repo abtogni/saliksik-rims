@@ -20,9 +20,30 @@ const ResearchSchema = new mongoose.Schema({
         technologyRoadmap: { type: String },
         workPlan: { type: String },
         status: { type: String },
+        presentation: {
+            presentationID: { type: String },
+            panelistsNotes: [{ 
+                panelistID: { type: String },
+                comments: { type: String },
+                suggestions: { type: String }
+            }]
+        }
     },
     initialPresentation: {
-        panelists: { type: [String] }
+        presentationID: { type: String },
+        panelistNotes: [{ 
+            panelistID: { type: String },
+            comments: { type: String },
+            suggestions: { type: String }
+         }]
+    },
+    finalPresentation: {
+        presentationID: { type: String },
+        panelistNotes: [{ 
+            panelistID: { type: String },
+            comments: { type: String },
+            suggestions: { type: String }
+         }]
     }
 
 }, { timestamps: true });
@@ -35,7 +56,7 @@ export const getResearches = () => ResearchModel.find();
 export const getResearchByID = (id: string) => ResearchModel.findById(id);
 
 //POST
-export const createResearch = (values: Record<string, any>) => new ResearchModel(values).save().then((user) => user.toObject());
+export const createResearch = (values: Record<string, any>) => new ResearchModel(values).save().then((x) => x.toObject());
 
 //PATCH
 export const updateResearchByID = (id: string, values: Record<string, any>) => ResearchModel.findByIdAndUpdate(id, values);
