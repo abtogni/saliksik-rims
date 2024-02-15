@@ -41,7 +41,7 @@
           </v-tab>
           <v-tab value="option-5">
             <v-icon start icon="mdi-currency-php"></v-icon>
-            Incentive
+            Incentive Status
           </v-tab>
         </v-tabs>
         <v-window v-model="tab" style="width: 100%">
@@ -53,6 +53,12 @@
           </v-window-item>
           <v-window-item value="option-1">
             <research_paper_progress/>
+          </v-window-item>
+          <v-window-item value="option-4">
+            <final_presentation_tab/>
+          </v-window-item>
+          <v-window-item value="option-5">
+            <incentive_status_tab/>
           </v-window-item>
         </v-window>
       </div>

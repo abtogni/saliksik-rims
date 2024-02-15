@@ -48,6 +48,7 @@ declare module 'vue-router/auto/routes' {
     '/researcher/': RouteRecordInfo<'/researcher/', '/researcher', Record<never, never>, Record<never, never>>,
     '/researcher/[research_id.vue]/': RouteRecordInfo<'/researcher/[research_id.vue]/', '/researcher/:research_ide(.*)', { research_ide: ParamValue<true> }, { research_ide: ParamValue<false> }>,
     '/researcher/[research_id.vue]/create_concept_note': RouteRecordInfo<'/researcher/[research_id.vue]/create_concept_note', '/researcher/:research_ide(.*)/create_concept_note', { research_ide: ParamValue<true> }, { research_ide: ParamValue<false> }>,
+    '/researcher/researcher_notification': RouteRecordInfo<'/researcher/researcher_notification', '/researcher/researcher_notification', Record<never, never>, Record<never, never>>,
   }
 }
 
