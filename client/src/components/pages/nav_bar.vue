@@ -8,6 +8,9 @@
     <v-divider></v-divider>
 
     <v-list density="compact" nav>
+      <!-- Sample -->
+      <v-list-item prepend-icon="mdi-folder-multiple-outline" title="Researcher" value="myfiles" href="/researcher"
+        link />
       <v-list-item prepend-icon="mdi-folder-multiple-outline" title="All Research Projects" value="myfiles" href=""
         link />
       <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared" link />
