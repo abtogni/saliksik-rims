@@ -20,7 +20,11 @@ const ResearchSchema = new mongoose.Schema({
         technologyRoadmap: { type: String },
         workPlan: { type: String },
         status: { type: String },
+    },
+    initialPresentation: {
+        panelists: { type: [String] }
     }
+
 }, { timestamps: true });
 
 export const ResearchModel = mongoose.model('Research', ResearchSchema);
