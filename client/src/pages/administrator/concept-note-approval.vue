@@ -24,29 +24,25 @@
 
       <v-card-text style="">
         <v-window v-model="tab">
-          <!-- BEGIN: Concept Note (Reviewing) -->
-          <v-window-item value="Concept Note (Reviewing)">
-            <concept_note_submissions
-              :research_data="filteredResearchData('Concept Note (Reviewing)')"
-            />
+          <!-- Concept Note (Reviewing) -->
+          <v-window-item value="For Review">
+            <concept_note_submissions :research_data="filteredResearchData('For Review')" />
           </v-window-item>
-          <!-- END: Concept Note (Reviewing) -->
 
-          <!-- BEGIN: Concept Note (Approved) -->
-          <v-window-item value="Concept Note (Approved)">
-            <concept_note_submissions
-              :research_data="filteredResearchData('Concept Note (Approved)')"
-            />
+          <!-- Concept Note (Approval) -->
+          <v-window-item value="Approval">
+            <concept_note_submissions :research_data="filteredResearchData('Approval')" />
           </v-window-item>
-          <!-- END: Concept Note (Approved) -->
 
-          <!-- BEGIN: Concept Note (Rejected) -->
-          <v-window-item value="Concept Note (Rejected)">
-            <concept_note_submissions
-              :research_data="filteredResearchData('Concept Note (Rejected)')"
-            />
+          <!-- Concept Note (Approved) -->
+          <v-window-item value="Approved">
+            <concept_note_submissions :research_data="filteredResearchData('Approved')" />
           </v-window-item>
-          <!-- END: Concept Note (Rejected) -->
+
+          <!-- Concept Note (Rejected) -->
+          <v-window-item value="Rejected">
+            <concept_note_submissions :research_data="filteredResearchData('Rejected')" />
+          </v-window-item>
         </v-window>
       </v-card-text>
     </v-card>
@@ -58,11 +54,11 @@ import { ref, computed } from 'vue';
 import research_data from '@/assets/sample_research_data.json' with { type: 'json' };
 
 const tab = ref(null);
-const tab_items = ['Concept Note (Reviewing)', 'Concept Note (Approved)', 'Concept Note (Rejected)', 'Summary'];
+const tab_items = ['For Review', 'Approval', 'Approved', 'Rejected',];
 
 const filteredResearchData: any = computed(() => {
   return (status: string) => {
-    return research_data.filter(item => item.research_status === status);
+    return research_data.filter(item => item.research_status === `Concept Note (${status})`);
   };
 });
 </script>

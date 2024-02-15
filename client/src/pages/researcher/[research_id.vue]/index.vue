@@ -23,36 +23,36 @@
     <v-card class="body">
       <div class="d-flex flex-row">
         <v-tabs v-model="tab" direction="vertical" color="primary">
-          <v-tab value="option-2">
+          <v-tab value="concept-note">
             <v-icon start icon="mdi-file-document-outline"> </v-icon>
             Concept Note
           </v-tab>
-          <v-tab value="option-3">
+          <v-tab value="title-presentation">
             <v-icon start icon="mdi-calendar-month-outline"> </v-icon>
             Title Presentation
           </v-tab>
-          <v-tab value="option-1">
+          <v-tab value="research-paper-progress">
             <v-icon start icon="mdi-file-document-outline"></v-icon>
             Research Paper Progress
           </v-tab>
-          <v-tab value="option-4">
+          <v-tab value="final-presentation">
             <v-icon start icon="mdi-calendar-month-outline"></v-icon>
             Final Presentation
           </v-tab>
-          <v-tab value="option-5">
+          <v-tab value="incentive">
             <v-icon start icon="mdi-currency-php"></v-icon>
             Incentive Status
           </v-tab>
         </v-tabs>
         <v-window v-model="tab" style="width: 100%">
-          <v-window-item value="option-2">
+          <v-window-item value="concept-note">
             <concept_note_tab />
           </v-window-item>
-          <v-window-item value="option-3">
-            <title_presentation_tab/>
+          <v-window-item value="title-presentation">
+            <title_presentation_tab />
           </v-window-item>
-          <v-window-item value="option-1">
-            <research_paper_progress/>
+          <v-window-item value="research-paper-progress">
+            <research_paper_progress />
           </v-window-item>
           <v-window-item value="option-4">
             <final_presentation_tab/>
@@ -70,8 +70,8 @@
 
 
 export default {
-    data: () => ({
-        tab: "option-1",
-    }),
+  data: () => ({
+    tab: "concept-note",
+  }),
 };
 </script>

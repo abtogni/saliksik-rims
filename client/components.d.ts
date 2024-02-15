@@ -34,7 +34,6 @@ declare module 'vue' {
     Status_update_concept_note: typeof import('./src/components/pages/researcher/notification/researcher/status_update_concept_note.vue')['default']
     Status_update_incentive: typeof import('./src/components/pages/researcher/notification/researcher/status_update_incentive.vue')['default']
     Title_presentation_tab: typeof import('./src/components/pages/researcher/tab/title_presentation_tab.vue')['default']
-    Title_presentation_waiting_response: typeof import('./src/components/pages/researcher/status/title_presentation_waiting_response.vue')['default']
     Title_presentation_waiting_schedule: typeof import('./src/components/pages/researcher/status/title_presentation_waiting_schedule.vue')['default']
     User_list: typeof import('./src/components/pages/admin/user_list.vue')['default']
   }
