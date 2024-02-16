@@ -4,7 +4,18 @@ import axios from 'axios';
 
 export const useUsersStore = defineStore('user', () => {
   const userList = ref([]);
+  const currentUser = ref(null);
   const isLoading = ref(false);
+
+  const getCurrentUser = async () => {
+    return axios
+      .get('/api/auth/current-user')
+      .then((res) => currentUser.value = res.data)
+      .catch((error) => {
+        console.log(error.response.data.error);
+        currentUser.value = null;
+      })
+  }
 
   const getUsers = async () => {
     isLoading.value = true;
@@ -18,10 +29,12 @@ export const useUsersStore = defineStore('user', () => {
       .finally(() => isLoading.value = false)
   };
 
-  getUsers();
 
   const userCount = computed(() => userList.value.length);
 
 
-  return { userList, isLoading, getUsers, userCount };
+
+  return { userList, currentUser, isLoading, getUsers, getCurrentUser, userCount };
 });
+
+export interface User { _id: string; userID: string; role: string; affiliation: string; firstName: string; middleName: string; lastName: string; email: string; createdAt: string; updatedAt: string; __v: number; }

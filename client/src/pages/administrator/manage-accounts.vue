@@ -9,12 +9,9 @@
 
 <script setup lang="ts">
 import { useUsersStore } from '@/stores/users';
-import { onMounted } from 'vue';
 
 const users = useUsersStore();
-onMounted(async () => {
-  await users.getUsers();
-})
+
 </script>
 
 <style lang="scss">

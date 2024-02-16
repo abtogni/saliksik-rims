@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { createUser, getUserByName, getUserByUserID } from "../db/users";
+import { createUser, getUserByName, getUserBySessionToken, getUserByUserID } from "../db/users";
 import { authentication, random } from "../helpers";
 import { config } from 'dotenv';
 
@@ -82,4 +82,13 @@ export const login = async (req: Request, res: Response) => {
         console.log(error);
         return res.sendStatus(400);
     }
+}
+
+
+//GET CURRENT USER
+export const whoAmI = async (req: Request, res: Response) => {
+    const token = req.cookies[cookie];
+    const user = await getUserBySessionToken(token);
+
+    return res.status(200).json(user);
 }
