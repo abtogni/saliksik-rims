@@ -1,6 +1,5 @@
 <template>
-  <v-btn color="#297be5" class="new_user"
-    >Create New Account
+  <v-btn color="#297be5" class="new_user">Create New Account
     <v-dialog v-model="create_user" activator="parent">
       <v-card class="form_modal">
         <v-toolbar color="primary">
@@ -9,75 +8,53 @@
           </v-btn>
           <v-toolbar-title>Create New User</v-toolbar-title>
         </v-toolbar>
-          <v-form class="form_content" @submit.prevent="register" >
+        <v-form novalidate class="form_content" @submit.prevent="register">
           <v-row>
             <v-col>
-              <v-select
-                v-model="form_data.user_role"
-                label="User Role"
-                prepend-inner-icon="mdi-briefcase"
-                :items="user_roles"
-                variant="outlined"
-                :rules="field_required"
-              />
+              <!-- @vue-ignore -->
+              <v-select v-model="role.value.value" label="User Role" :error-messages="role.errorMessage.value"
+                prepend-inner-icon="mdi-briefcase" :items="user_roles" variant="outlined" />
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <v-text-field
-                v-model="form_data.first_name"
-                label="First Name"
-                variant="outlined"
-                :rules="[name_rules, field_required].flat()"
-              />
+              <v-text-field v-model="email.value.value" :error-messages="email.errorMessage.value" label="Email"
+                variant="outlined" />
             </v-col>
             <v-col>
-              <v-text-field
-                v-model="form_data.last_name"
-                label="Last Name"
-                variant="outlined"
-                :rules="[name_rules, field_required].flat()"
-              />
+              <v-text-field v-model="affiliation.value.value" :error-messages="affiliation.errorMessage.value"
+                label="Affiliation" variant="outlined" />
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <v-text-field
-                v-model="form_data.middle_name"
-                label="Middle Name"
-                variant="outlined"
-                :rules="name_rules"
-              />
+              <v-text-field v-model="firstName.value.value" :error-messages="firstName.errorMessage.value"
+                label="First Name" variant="outlined" />
             </v-col>
             <v-col>
-              <v-text-field
-                v-model="form_data.suffix"
-                label="Suffix"
-                variant="outlined"
-              />
+              <v-text-field v-model="lastName.value.value" :error-messages="lastName.errorMessage.value" label="Last Name"
+                variant="outlined" />
             </v-col>
           </v-row>
           <v-row>
             <v-col>
-              <v-text-field
-                v-model="form_data.user_id"
-                label="User ID"
-                prepend-inner-icon="mdi-account"
-                variant="outlined"
-                :rules="userid_rules"
-              />
+              <v-text-field v-model="middleName.value.value" :error-messages="middleName.errorMessage.value"
+                label="Middle Name" variant="outlined" />
             </v-col>
             <v-col>
-              <v-text-field
-                v-model="form_data.password"
-                label="Password"
-                :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-                :type="visible ? 'text' : 'password'"
-                prepend-inner-icon="mdi-lock-outline"
-                variant="outlined"
-                @click:append-inner="visible = !visible"
-                :rules="password_rules"
-              />
+              <v-text-field v-model="suffix.value.value" :error-messages="suffix.errorMessage.value" label="Suffix"
+                variant="outlined" />
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
+              <v-text-field v-model="userID.value.value" :error-messages="userID.errorMessage.value" label="User ID"
+                prepend-inner-icon="mdi-account" variant="outlined" />
+            </v-col>
+            <v-col>
+              <v-text-field v-model="password.value.value" :error-messages="password.errorMessage.value" label="Password"
+                :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" :type="visible ? 'text' : 'password'"
+                prepend-inner-icon="mdi-lock-outline" variant="outlined" @click:append-inner="visible = !visible" />
             </v-col>
           </v-row>
 
@@ -89,42 +66,99 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import axios from "axios";
+import { useField, useForm } from 'vee-validate';
+import { ref } from "vue";
 
 const create_user = ref(false);
 
-const form_data = reactive({
-  user_role: null,
-  user_id: "",
-  password: "",
-  first_name: "",
-  last_name: "",
-  middle_name: "",
-  suffix: "",
+const { handleSubmit } = useForm({
+  validationSchema: {
+    firstName(v: string) {
+      if (!v) {
+        return 'Name is required.';
+      } else if (v.length < 2) {
+        return 'Name needs to be at least 2 characters.';
+      } else if (!/^[a-zA-Z ]+$/.test(v)) {
+        return "Name must only contain alphabet characters.";
+      }
+      return true;
+    },
+    lastName(v: string) {
+      if (!v) {
+        return 'Name is required.';
+      } else if (v.length < 2) {
+        return 'Name needs to be at least 2 characters.';
+      } else if (!/^[a-zA-Z ]+$/.test(v)) {
+        return "Name must only contain alphabet characters.";
+      }
+      return true;
+    },
+    middleName(v: string) {
+      if (v && v.length < 2) {
+        return 'Name needs to be at least 2 characters.';
+      } else if (v && !/^[a-zA-Z ]+$/.test(v)) {
+        return "Name must only contain alphabet characters.";
+      }
+      return true;
+    },
+    suffix(v: string) {
+      if (v && v.length < 2) {
+        return 'Name needs to be at least 2 characters.';
+      } else if (v && !/^[a-zA-Z. ]+$/.test(v)) {
+        return "Name must only contain alphabet characters.";
+      }
+      return true;
+    },
+    role(v: string) {
+      if (v) return true;
+
+      return 'Select an item.'
+    },
+    email(v: string) {
+      if (v) return true;
+
+      return 'Please enter your email.'
+    },
+    affiliation(v: string) {
+      if (v) return true;
+
+      return 'Select an item.'
+    },
+    userID(v: string) {
+      if (!v) {
+        return 'User ID is required'
+      }
+      else if (v.length < 3 && v.length > 8) {
+        return 'User ID must be between 3-8 characters.'
+      }
+      return true;
+    },
+    password(v: string) {
+      if (!v) {
+        return 'Password is required.'
+      }
+      else if (v.length < 8) {
+        return 'Password must be atleast 8 characters.'
+      }
+      return true;
+    },
+  }
 });
+
+const role = useField('role')
+const firstName = useField('firstName');
+const middleName = useField('middleName');
+const lastName = useField('lastName');
+const suffix = useField('suffix');
+const email = useField('email');
+const affiliation = useField('affiliation');
+const userID = useField('userID');
+const password = useField('password');
+
+
 const visible = ref(false);
 
-const field_required = [(v: string) => !!v || "Field is required"];
-
-const userid_rules = [
-  ...field_required,
-  (v: string) =>
-    (v && v.length > 5 && v.length < 11) ||
-    "User ID must be between 6 to 10 characters",
-];
-
-const name_rules = [
-  (v: string) =>
-    !v ||
-    /^[a-zA-Z ]+$/.test(v) ||
-    "Name must only contain alphabet characters",
-  (v: string) => !v || v.length > 2 || "Name must be at least 3 characters",
-];
-
-const password_rules = [
-  ...field_required,
-  (v: string) => (v && v.length > 5) || "Password must be atleast 6 characters",
-];
 
 const user_roles = [
   "Admin",
@@ -133,8 +167,19 @@ const user_roles = [
   "Researcher",
 ];
 
-const register = async () => {
-  alert(JSON.stringify(form_data));
-};
-</script>
+const register = handleSubmit(async values => {
+  const data = JSON.stringify(values);
 
+  try {
+    await axios.post('/api/auth/register', data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    alert('Successfully created a new account!');
+    location.reload();
+  } catch (error) {
+    alert(error);
+  }
+});
+</script>
