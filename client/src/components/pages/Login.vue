@@ -56,7 +56,7 @@ const role = useField('role');
 const userID = useField('userID');
 const password = useField('password');
 
-const user_roles = ["Admin", "Internal Panelist", "External Panelist", "Researcher"];
+const user_roles = ["Administrator", "Internal Panelist", "External Panelist", "Researcher"];
 
 const login = handleSubmit(async (values) => {
   const data = JSON.stringify(values);
@@ -68,6 +68,13 @@ const login = handleSubmit(async (values) => {
       }
     });
     alert('Successfully logged in!');
+    if (values.role == 'Administrator') {
+      router.push('/administrator/concept-note-approval')
+    } else if (values.role == 'Researcher') {
+      router.push('/researcher')
+    } if (values.role == 'Internal Panelist' || (values.role == 'External Panelist')) {
+      router.push('/panelists')
+    }
   } catch (error: any) {
     if (error.response && error.response.data) {
       const { passwordError, userError } = error.response.data;
