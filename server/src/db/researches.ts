@@ -4,47 +4,9 @@ const ResearchSchema = new mongoose.Schema({
     researchTitle: { type: String, required: true },
     researchLeaders: { type: [String], required: true },
     researchStatus: { type: String, required: true },
-    conceptNote: {
-        projectTitle: { type: String },
-        implementingDept: { type: String },
-        cooperatingAgency: { type: String },
-        projectDuration: { type: String },
-        siteOfImplementation: { type: String },
-        totalProjectCost: { type: Number },
-        fundingSource: { type: String },
-        description: { type: String },
-        objectives: { type: String },
-        significance: { type: String },
-        methodology: { type: String },
-        expectedOutputs: { type: String },
-        technologyRoadmap: { type: String },
-        workPlan: { type: String },
-        status: { type: String },
-        presentation: {
-            presentationID: { type: String },
-            panelistsNotes: [{ 
-                panelistID: { type: String },
-                comments: { type: String },
-                suggestions: { type: String }
-            }]
-        }
-    },
-    initialPresentation: {
-        presentationID: { type: String },
-        panelistNotes: [{ 
-            panelistID: { type: String },
-            comments: { type: String },
-            suggestions: { type: String }
-         }]
-    },
-    finalPresentation: {
-        presentationID: { type: String },
-        panelistNotes: [{ 
-            panelistID: { type: String },
-            comments: { type: String },
-            suggestions: { type: String }
-         }]
-    }
+    conceptNote: { type: mongoose.Schema.Types.ObjectId, ref: 'ConceptNote', required: true },
+    initialPresentation: {type: mongoose.Schema.Types.ObjectId, ref: 'Presentation', required: true},
+    finalPresentation: {type: mongoose.Schema.Types.ObjectId, ref: 'Presentation', required: true}
 
 }, { timestamps: true });
 
