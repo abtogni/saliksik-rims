@@ -1,4 +1,3 @@
-import { getUserById } from "../db/users";
 import { createResearch, deleteResearchByID, getResearchByID, getResearches, updateResearchByID } from "../db/researches";
 import { Request, Response } from "express";
 
@@ -7,13 +6,13 @@ export const createNewResearch = async (req: Request, res: Response) => {
     try {
         const { researchTitle, researchLeaders } = req.body;
 
-        const newResearch = await createResearch({
+        await createResearch({
             researchTitle,
             researchLeaders,
             researchStatus: "No Status"
         });
 
-        return res.status(200).json(newResearch).end();
+        return res.status(200).end();
     } catch (error) {
         console.log(error);
         return res.sendStatus(400);
@@ -39,12 +38,7 @@ export const fetchResearch = async (req: Request, res: Response) => {
 
         const data = await getResearchByID(id);
 
-        const researchLeadersData = await Promise.all(data.researchLeaders.map(async (id) => {
-            const user = await getUserById(id);
-            return user;
-        }));
-
-        return res.status(200).json({data, researchLeadersData});
+        return res.status(200).json({data});
     } catch (error) {
         console.log(error);
         return res.sendStatus(400);
@@ -67,9 +61,9 @@ export const updateResearch = async (req: Request, res: Response) => {
 
         await research.save();
 
-        const updatedResearch = await updateResearchByID(id, research);
+        await updateResearchByID(id, research);
 
-        return res.status(200).json(updatedResearch);
+        return res.status(200);
     } catch (error) {
         console.log(error);
         return res.sendStatus(400);

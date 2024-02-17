@@ -26,7 +26,7 @@ export const register = async (req: Request, res: Response) => {
         }
 
         const salt = random();
-        const user = await createUser({
+        await createUser({
             userID,
             role,
             affiliation,
@@ -41,7 +41,7 @@ export const register = async (req: Request, res: Response) => {
             },
         });
 
-        return res.status(200).json(user).end();
+        return res.status(200).end();
     } catch (e) {
         console.log(e);
         return res.sendStatus(400);
@@ -77,7 +77,7 @@ export const login = async (req: Request, res: Response) => {
 
         res.cookie(cookie, user.authentication.sessionToken, { domain: 'localhost', path: '/' });
 
-        return res.status(200).json(user);
+        return res.status(200);
     } catch (error) {
         console.log(error);
         return res.sendStatus(400);
