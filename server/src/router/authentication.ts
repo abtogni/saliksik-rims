@@ -2,7 +2,7 @@ import {
   login,
   register,
   whoAmI,
-} from "../../controllers/users/authentication";
+} from "../controllers/authentication";
 import { Router } from "express";
 
 export default (router: Router) => {

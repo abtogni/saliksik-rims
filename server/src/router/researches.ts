@@ -6,7 +6,7 @@ import {
   fetchResearch,
   getAllResearches,
   updateResearch,
-} from "../../controllers/researches/researches";
+} from "../controllers/researches";
 
 export default (router: Router) => {
   //GET

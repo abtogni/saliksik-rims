@@ -6,7 +6,7 @@ import {
   getAllPresentations,
   getPresentationByID,
   updatePresentationByID,
-} from "../../db/presentations";
+} from "../db/presentations";
 
 // get all presentations
 export const getPresentations = async (_req: Request, res: Response) => {

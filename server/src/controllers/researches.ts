@@ -4,7 +4,7 @@ import {
   getResearchByID,
   getResearches,
   updateResearchByID,
-} from "../../db/researches";
+} from "../db/researches";
 import { Request, Response } from "express";
 
 // create a new research project

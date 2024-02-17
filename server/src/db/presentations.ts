@@ -6,12 +6,21 @@ const PanelistNoteSchema = new mongoose.Schema({
   suggestions: { type: String },
 });
 
-const PresentationSchema = new mongoose.Schema({
-    type: { type: mongoose.Schema.Types.ObjectId, ref: 'PresentationType', required: true },
+const PresentationSchema = new mongoose.Schema(
+  {
+    type: { type: String, required: true },
     scheduleID: { type: String, required: true },
     status: { type: String, required: true },
-    panelistsNotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'PanelistNote', required: true }]
-}, { timestamps: true });
+    panelistNotes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "PanelistNote",
+        required: true,
+      },
+    ],
+  },
+  { timestamps: true },
+);
 
 const PanelistNotesModel = mongoose.model("PanelistNote", PanelistNoteSchema);
 const PresentationModel = mongoose.model("Presentation", PresentationSchema);

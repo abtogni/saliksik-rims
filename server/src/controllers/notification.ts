@@ -25,7 +25,7 @@ export const sendNewNotification = async (req: Request, res: Response) => {
   }
 };
 
-export const getAllNotifcations = async (req: Request, res: Response) => {
+export const getAllNotifcations = async (_req: Request, res: Response) => {
   try {
     const notifications = await getNotifications();
     return res.status(200).json(notifications).end();

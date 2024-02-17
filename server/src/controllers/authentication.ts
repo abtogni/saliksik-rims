@@ -4,8 +4,8 @@ import {
   getUserByName,
   getUserBySessionToken,
   getUserByUserID,
-} from "../../db/users";
-import { authentication, random } from "../../helpers";
+} from "../db/users";
+import { authentication, random } from "../helpers";
 import { config } from "dotenv";
 
 config();
