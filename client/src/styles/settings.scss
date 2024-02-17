@@ -1,0 +1,611 @@
+/**
+ * src/styles/settings.scss
+ *
+ * Configures SASS variables and Vuetify overwrites
+ */
+
+// https://vuetifyjs.com/features/sass-variables/`
+// @use 'vuetify/settings' with (
+//   $color-pack: false
+// );
+@import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap";
+
+$primary-font: Montserrat, Inter, Roboto, sans-serif;
+$blue-300: #93c5fd;
+$blue-500: #6366f1;
+$blue-700: #1d4ed8;
+$gray-50: #f9fafb;
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-500: #6b7280;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$gray-800: #1f2937;
+$default: #212121;
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: 100% $primary-font;
+}
+
+//start jomari css
+//for page name
+
+//color gray-700 #374151 gray-800 #1f2937 blue-500 #3b82f6
+
+//general
+
+.col-start {
+  width: 100%;
+  height: auto;
+  gap: 1rem;
+}
+
+.col-end {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: end;
+  align-content: end;
+  gap: 1rem;
+  text-align: end;
+}
+
+h2 {
+  font-size: 1.44rem;
+  font-weight: 700;
+  color: $gray-800; //gray-700
+}
+
+h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: $gray-800; //gray-700
+  text-transform: uppercase;
+}
+h4 {
+  font-size: 1rem;
+  font-weight: 500;
+  color: $gray-500; //gray-700
+}
+
+//working (no issue)
+h5 {
+  font-size: 1.44rem;
+  color: $default;
+  font-weight: 700;
+  text-wrap: wrap;
+}
+//working (no issue)
+h6 {
+  font-size: 1.2rem;
+  color: $default;
+  font-weight: 600;
+  text-wrap: wrap;
+}
+//working (no issue)
+h7 {
+  font-size: .933rem;
+  color: $default;
+  font-weight: 600;
+}
+//working (no issue)
+p {
+  font-size: 0.933rem;
+  color: $default;
+  font-weight: 400;
+  text-wrap: pre-wrap;
+}
+//working (no issue)
+.title {
+  font-size: 1rem;
+  color: $default;
+  font-weight: 500;
+}
+//working (no issue)
+.caption {
+  font-size: 0.833rem;
+  font-weight: 400;
+  color: $default;
+  text-wrap: wrap;
+}
+
+.bold{
+  font-weight: 500;
+}
+
+
+//working (no issue)
+.button-regular {
+  background-color: $blue-700;
+  color: white;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+//working (no issue)
+.button-outlined {
+  border-color: $blue-700;
+  color: black;
+  border-width: 1px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+//working (no issue)
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+//tabs
+.header-container {
+  padding-bottom: 0.5rem;
+}
+
+//for page name and caption
+.pageName-container {
+  justify-content: space-between;
+  text-align: left;
+}
+
+.cta-container {
+  text-align: end;
+}
+
+.table {
+  height: max-content;
+  overflow: auto;
+}
+
+.tab-option {
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #374151;
+}
+
+.count {
+  background-color: #1d4ed8;
+  color: white;
+  border-radius: 0.2rem;
+  text-align: center;
+  padding: 0.2rem;
+  margin-left: 0.5rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  height: 38rem;
+  padding-top: 1rem;
+  overflow: auto;
+  white-space: pre-wrap;
+}
+
+.row_container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+.column_container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+}
+
+//tabs end
+
+//create concept note start
+
+.form-body {
+  width: 100%;
+  padding: 0 1.5rem 2rem 1.5rem;
+
+  .form-concept-note {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: start;
+    text-align: left;
+    align-content: start;
+    width: 100%;
+    padding: 1.5rem 0 0 0;
+  }
+
+  .card-concept-note {
+    display: flex;
+    flex-direction: column;
+    gap: 0.833rem;
+    text-align: left;
+    margin: 0 auto;
+    padding: 1rem 1rem 0.3rem 1rem;
+    width: 100%;
+  }
+
+  .card-concept-note2 {
+    text-align: left;
+    margin: 0 auto;
+    padding: 1rem 1rem 0 1rem;
+    width: 100%;
+  }
+}
+
+//create concept note end
+.table-body {
+  width: 100%;
+  padding: 2rem 2rem 2rem 2rem;
+
+  .table-header-row {
+    width: 100%;
+    padding: 0 0 1rem 0;
+  }
+}
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.header-count {
+  font-weight: 500;
+}
+.table-card {
+  text-align: left;
+  width: 100%;
+  background-color: orange;
+}
+
+.table-toolbar {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1rem 1.3rem 1rem 1.3rem;
+}
+
+//
+.tab-card {
+  text-align: left;
+  width: 100%;
+  overflow: auto;
+}
+
+.card {
+  width: 100%;
+  padding: 1rem;
+}
+//
+
+.center-dot {
+  font-weight: 500;
+  font-size: 2.5rem;
+  color: #6b7280;
+  margin: 0 0.5rem;
+}
+
+.prev-date {
+  font-weight: 400;
+  font-size: 1rem;
+  color: #6b7280; //gray-500
+  margin-right: 0.5rem;
+}
+
+//ends jomari css
+
+.height {
+  height: 10rem;
+}
+
+content {
+  padding: 3rem;
+  margin: 3rem;
+  background-color: lightcyan;
+}
+
+.research-title {
+  text-align: left;
+  text-transform: capitalize;
+}
+
+#login-container {
+  background-color: lightgray;
+  h6 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    width: 100%;
+  }
+  .login-row {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .input-field {
+    margin: 1rem 0;
+  }
+  #login-field {
+    text-align: start;
+    margin: 0 auto;
+    min-width: 25rem;
+    min-height: 25rem;
+    border-radius: 0.625rem;
+    padding: 2rem;
+  }
+}
+
+#main-container {
+  min-height: 15.625rem;
+}
+
+div#research_table {
+  margin: 2rem 4rem;
+
+  #filter-button {
+    margin-right: 2rem;
+    float: right;
+  }
+  #filter_dropdown {
+    z-index: 1;
+    top: 10rem;
+    right: 5rem;
+    position: absolute;
+    padding: 0.625rem;
+    width: 15rem;
+  }
+}
+
+.search_bar {
+  display: inline-block;
+  width: 20rem;
+}
+
+//research_project_dashboard.vue
+
+//working (no issue)
+.ctr {
+  background-color: white;
+  align-content: start;
+  justify-content: start;
+
+  .body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: .3rem;
+  }
+
+  .header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    justify-content: space-between;
+    border-radius: 0%;
+    padding: 0rem 1rem 0 1rem;
+
+    .header-left {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+
+      .header-caption {
+        width: auto;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+      }
+    }
+
+    .header-right {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: start;
+      justify-content: end;
+    }
+  }
+
+  .content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0rem 1rem 0 1rem;
+    
+  }
+}
+
+.notif-body{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 0.2rem;
+  padding: .5rem 1rem .5rem 1rem;
+
+  .notif-header{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    gap: 1rem;
+
+    .notif-left{
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      align-content: start;
+    }
+  
+    .notif-right{
+      display: flex;
+            flex-direction: row;
+            gap: 0rem;
+            align-items: center;
+    }
+  }
+  .notif-txt{
+    font-weight: 400; text-wrap: wrap;
+  }
+  
+  .notif-date-txt{
+    font-weight: 500;
+                  color: #1d4ed8;
+                  text-wrap: wrap;
+                  padding-top: 0.2rem;
+  }
+}
+
+
+//working (no issue)
+.nav-ctr {
+  width: 100%;
+  //working (no issue)
+  .nav-body {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.2rem 0rem 0.2rem 1rem;
+    border-radius: 0%;
+    //working (no issue)
+    .nav-left {
+      width: auto;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+    //working (no issue)
+    .nav-right {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+    }
+  }
+}
+
+.status-txt {
+  font-weight: 500;
+  width: fit-content;
+  background-color: #eff6ff;
+}
+
+//concept_note_tab.vue
+.header-body {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 0rem 0rem 1rem;
+  border-radius: 0%;
+
+  .header-left {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    .header-caption-ctr {
+      width: auto;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+    }
+  }
+  .header-right {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    gap: 0.833rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: end;
+  }
+}
+
+.overview-ctr {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+//expansion panel
+.expansion-title-body {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0%;
+
+  .expansion-title-left {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .expansion-title-right {
+    display: flex;
+    flex-direction: row;
+    gap: 0.833rem;
+    flex-wrap: nowrap;
+    text-wrap: nowrap;
+    align-items: center;
+    justify-content: end;
+    color: $gray-500;
+  }
+}
+
+.card-style {
+  color: #a5b4fc;
+}
+
+//FOR MODAL FORMS
+.form_modal {
+  margin: 0 auto;
+  height: 60rem;
+  width: 40rem;
+  .form_content {
+    padding: 2rem;
+  }
+}
+
+//create user accounts
+div#user_list {
+  h3 {
+    font-weight: 300;
+    display: inline-block;
+  }
+  .new_user {
+    position: fixed;
+    right: 10rem;
+  }
+  width: 60rem;
+  margin: 0 auto;
+  #user_container {
+    margin-top: 2rem;
+  }
+}
