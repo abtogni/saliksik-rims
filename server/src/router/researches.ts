@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isAuthenticated, isOwner } from "../../middlewares";
+import { isAuthenticated, isOwner } from "../middlewares";
 import {
   createNewResearch,
   deleteResearch,

@@ -4,7 +4,7 @@ import {
   getUserById,
   getUsers,
   updateUserByID,
-} from "../../db/users";
+} from "../db/users";
 
 // find specific user
 export const findUser = async (req: Request, res: Response) => {

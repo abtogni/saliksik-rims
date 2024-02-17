@@ -1,7 +1,7 @@
 import { Router } from "express";
-import authentication from "./users/authentication";
-import users from "./users/users";
-import researches from "./researches/researches";
+import authentication from "./authentication";
+import users from "./users";
+import researches from "./researches";
 
 const router = Router();
 
