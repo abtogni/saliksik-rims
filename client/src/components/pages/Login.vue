@@ -61,21 +61,21 @@ const user_roles = ["Administrator", "Internal Panelist", "External Panelist", "
 const login = handleSubmit(async (values) => {
   const data = JSON.stringify(values);
 
-  try {
-    await axios.post('/api/auth/login', data, {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    alert('Successfully logged in!');
-    if (values.role == 'Administrator') {
-      router.push('/administrator/concept-note-approval')
-    } else if (values.role == 'Researcher') {
-      router.push('/researcher')
-    } if (values.role == 'Internal Panelist' || (values.role == 'External Panelist')) {
-      router.push('/panelists')
+  return axios.post('/api/auth/login', data, {
+    headers: {
+      'Content-Type': 'application/json'
     }
-  } catch (error: any) {
+  }).then((response) => {
+    alert(response.data.message);
+    if (response.data.role == 'Administrator') {
+      router.push({ path: '/administrator/concept-note-approval' })
+    } else if (response.data.role == 'Researcher') {
+      router.push({ path: '/researcher' })
+    } else if (response.data.role == 'Internal Panelist' || response.data.role == 'External Panelist') {
+      router.push({ path: '/panelists' })
+    }
+  }).catch(error => {
+
     if (error.response && error.response.data) {
       const { passwordError, userError } = error.response.data;
       if (passwordError) {
@@ -88,7 +88,7 @@ const login = handleSubmit(async (values) => {
     } else {
       alert('An error occurred while logging in.');
     }
-  }
+  })
 });
 
 </script>

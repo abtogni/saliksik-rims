@@ -161,7 +161,7 @@ const visible = ref(false);
 
 
 const user_roles = [
-  "Admin",
+  "Administrator",
   "Internal Panelist",
   "External Panelist",
   "Researcher",

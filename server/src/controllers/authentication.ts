@@ -103,11 +103,20 @@ export const login = async (req: Request, res: Response) => {
       path: "/",
     });
 
-    return res.status(200);
+    return res
+      .status(200)
+      .json({ message: "Successfully logged in!", role: user.role })
+      .end();
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);
   }
+};
+
+//LOGOUT
+export const logout = async (req: Request, res: Response) => {
+  res.clearCookie(cookie, { domain: "localhost", path: "/" });
+  return res.status(200).json({ message: "Successfully logged out!" });
 };
 
 //GET CURRENT USER
