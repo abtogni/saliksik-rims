@@ -1,8 +1,8 @@
 <template>
   <v-navigation-drawer v-if="showDrawer" expand-on-hover rail>
     <!-- Drawer content -->
-    <v-list v-if="user">
-      <v-list-item :title="user.firstName + ' ' + user.lastName" :subtitle="user.email" />
+    <v-list>
+      <v-list-item :title="user.name" :subtitle="user.user_id"></v-list-item>
     </v-list>
 
     <v-divider></v-divider>
@@ -20,12 +20,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref, watchEffect, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { useUsersStore, User } from '@/stores/users';
 
-const user = ref<User | null>(null);
-const showDrawer = ref(false);
+const user = { name: 'Test Account', user_id: '07-11312' }
+import { ref, watchEffect } from 'vue';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 
