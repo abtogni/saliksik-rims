@@ -13,6 +13,7 @@ declare module 'vue' {
     Concept_note_tab: typeof import('./src/components/pages/researcher/tab/concept_note_tab.vue')['default']
     Create_presentation_modal: typeof import('./src/components/pages/admin/modals/create_presentation_modal.vue')['default']
     Create_research_project_modal: typeof import('./src/components/pages/researcher/modals/create_research_project_modal.vue')['default']
+    Create_schedule_modal: typeof import('./src/components/pages/admin/modals/create_schedule_modal.vue')['default']
     Create_user_modal: typeof import('./src/components/pages/admin/modals/create_user_modal.vue')['default']
     Final_presentation_tab: typeof import('./src/components/pages/researcher/tab/final_presentation_tab.vue')['default']
     Incentive_status_tab: typeof import('./src/components/pages/researcher/tab/incentive_status_tab.vue')['default']

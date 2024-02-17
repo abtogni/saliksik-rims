@@ -22,7 +22,7 @@ export const useUsersStore = defineStore('user', () => {
     return axios
       .get('/api/users')
       .then((res) => userList.value = res.data)
-      .catch((_e) => {
+      .catch(() => {
         userList.value = [];
       })
       .finally(() => isLoading.value = false)

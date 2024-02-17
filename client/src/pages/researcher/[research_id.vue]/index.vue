@@ -4,12 +4,7 @@
       <div class="nav-left truncate">
         <v-icon start icon="mdi-folder-open-outline"></v-icon>
         <h6 class="truncate">
-          Streamlining Outcome-Based Education and Continuous Quality
-          Improvement of University of Nueva Caceres through Technology: A
-          Information Management System for Improving Inclusiveness Streamlining
-          Outcome-Based Education and Continuous Quality Improvement of
-          University of Nueva Caceres through Technology: A Information
-          Management System for Improving Inclusiveness
+          {{ currentResearch.researchTitle }}
         </h6>
       </div>
 
@@ -55,10 +50,10 @@
             <research_paper_progress />
           </v-window-item>
           <v-window-item value="option-4">
-            <final_presentation_tab/>
+            <final_presentation_tab />
           </v-window-item>
           <v-window-item value="option-5">
-            <incentive_status_tab/>
+            <incentive_status_tab />
           </v-window-item>
         </v-window>
       </div>
@@ -66,12 +61,20 @@
   </v-container>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { useResearchesStore } from '@/stores/researches';
+import { onMounted, ref } from 'vue';
 
+const url = window.location.href;
+const currentResearch = ref(null);
+const param = url.split("/").slice(-1)[0];
 
-export default {
-  data: () => ({
-    tab: "concept-note",
-  }),
-};
+const tab = ref("concept-note");
+const r = useResearchesStore();
+
+onMounted(() => {
+  r.getCurrentResearch(param);
+  currentResearch.value = r.currentResearch;
+})
+
 </script>

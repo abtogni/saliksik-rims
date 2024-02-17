@@ -29,7 +29,7 @@ export const createNewResearch = async (req: Request, res: Response) => {
 export const getAllResearches = async (_req: Request, res: Response) => {
   try {
     const researches = await getResearches();
-    return res.status(200).json({ researches }).end();
+    return res.status(200).json(researches).end();
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);
