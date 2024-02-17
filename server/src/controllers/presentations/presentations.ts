@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
 import { Request, Response } from "express";
+
 import {
   createPresentation,
   deletePresentationByID,
@@ -50,8 +50,13 @@ export const fetchPresentation = async (req: Request, res: Response) => {
 export const updatePresentation = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const {} = req.body;
+    const { type, scheduleID, status, panelistNotes } = req.body;
     const presentation = await getPresentationByID(id);
+
+    presentation.status = status;
+    presentation.panelistNotes = panelistNotes;
+    presentation.scheduleID = scheduleID;
+    presentation.type = type;
     await presentation.save();
 
     await updatePresentationByID(id, presentation);
@@ -64,7 +69,7 @@ export const updatePresentation = async (req: Request, res: Response) => {
 };
 
 // delete a research
-export const deleteResearch = async (req: Request, res: Response) => {
+export const deletePresentation = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
 

@@ -1,7 +1,7 @@
-import { Router, Request, Response } from "express";
-import authentication from "./authentication";
-import users from "./users";
-import researches from "./researches";
+import { Router } from "express";
+import authentication from "./users/authentication";
+import users from "./users/users";
+import researches from "./researches/researches";
 
 const router = Router();
 

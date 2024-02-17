@@ -31,8 +31,6 @@ const route = useRoute();
 
 onMounted(async () => {
   const usersStore = useUsersStore();
-  await usersStore.getCurrentUser();
-  console.log(usersStore.currentUser);
   await usersStore.getUsers();
   user.value = usersStore.currentUser;
 });
