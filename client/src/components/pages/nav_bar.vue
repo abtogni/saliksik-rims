@@ -19,33 +19,34 @@
 
     <template v-slot:append>
       <div class="pa-2">
-        <v-btn block class="button-regular">
+        <v-btn block @click="logoutDialog = true" class="button-regular">
           LOGOUT
-          <v-dialog v-model="logoutDialog" activator="parent" width="auto">
-            <v-card>
-              <v-card-text>
-                Do you really want to log out?
-              </v-card-text>
-              <v-card-actions>
-                <v-row>
-                  <v-col>
-                    <v-btn color="primary" block @click="logout">Logout</v-btn>
-                  </v-col>
-                  <v-col>
-                    <v-btn color="primary" block @click="logoutDialog = false">Cancel</v-btn>
-                  </v-col>
-                </v-row>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
         </v-btn>
+
+        <v-dialog v-model="logoutDialog" width="auto">
+          <v-card>
+            <v-card-text>
+              Do you really want to log out?
+            </v-card-text>
+            <v-card-actions>
+              <v-row>
+                <v-col>
+                  <v-btn color="primary" block @click="logout">Logout</v-btn>
+                </v-col>
+                <v-col>
+                  <v-btn color="primary" block @click="logoutDialog = false">Cancel</v-btn>
+                </v-col>
+              </v-row>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
       </div>
     </template>
   </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, watchEffect } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { User, useUsersStore } from '@/stores/users';
 import router from '@/router';
@@ -57,18 +58,18 @@ const showDrawer = ref(false);
 const user = ref<User | null>(null);
 
 const logout = () => {
-  usersStore.logoutUser
+  usersStore.logoutUser;
   router.push({ path: '/' });
 }
 
 onMounted(async () => {
-
   await usersStore.getCurrentUser();
   await usersStore.getUsers();
   user.value = usersStore.currentUser;
+  showDrawer.value = route.path !== '/';
 });
 
-watchEffect(() => {
+router.afterEach(() => {
   showDrawer.value = route.path !== '/';
 });
 </script>
