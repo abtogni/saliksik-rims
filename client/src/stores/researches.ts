@@ -39,22 +39,21 @@ export const useResearchesStore = defineStore('researches', () => {
     return axios
     .get('/api/research/' + id)
     .then((response) => {
-      currentResearch.value = response.data.map((research: any) => ({
-        "_id": research._id,
-        "researchTitle": research.researchTitle,
-        "researchLeaders": research.researchLeaders.map((_leader: any, i: any) => ({
+      currentResearch.value = ({
+        "_id": response.data._id,
+        "researchTitle": response.data.researchTitle,
+        "researchLeaders": response.data.researchLeaders.map((_leader: any, i: any) => ({
           //@ts-ignore
           "_id":  user.userList[i]._id,
           //@ts-ignore
           "name": user.userList[i].firstName + " " + user.userList[i].lastName
           })),
-        "researchStatus": research.researchStatus,
-        "conceptNote": research.conceptNote,
-        "createdAt": moment(research.createdAt).format("MMMM DD, YYYY"),
-        "updatedAt": moment(research.updatedAt).format("MMMM DD, YYYY")
+        "researchStatus": response.data.researchStatus,
+        "conceptNote": response.data.conceptNote,
+        "createdAt": moment(response.data.createdAt).format("MMMM DD, YYYY"),
+        "updatedAt": moment(response.data.updatedAt).format("MMMM DD, YYYY")
         })
-    )
-  })
+    })
     .catch((e) => alert(e));
   }
 
