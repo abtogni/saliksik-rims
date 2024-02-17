@@ -24,18 +24,15 @@ const ResearchSchema = new mongoose.Schema(
       presentation: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Presentation",
-        required: true,
       },
     },
     initialPresentation: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Presentation",
-      required: true,
     },
     finalPresentation: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Presentation",
-      required: true,
     },
   },
   { timestamps: true },
