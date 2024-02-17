@@ -1,24 +1,19 @@
 import mongoose from "mongoose";
 
-const PanelistNotesSchema = new mongoose.Schema({
+const PanelistNoteSchema = new mongoose.Schema({
   panelistID: { type: String },
   comments: { type: String },
   suggestions: { type: String },
 });
 
-const PresentationSchema = new mongoose.Schema(
-  {
+const PresentationSchema = new mongoose.Schema({
+    type: { type: mongoose.Schema.Types.ObjectId, ref: 'PresentationType', required: true },
     scheduleID: { type: String, required: true },
-    type: { type: String, required: true },
     status: { type: String, required: true },
-    panelistNotes: [
-      { type: mongoose.Schema.Types.ObjectId, ref: "PanelistNote" },
-    ],
-  },
-  { timestamps: true },
-);
+    panelistsNotes: [{ type: mongoose.Schema.Types.ObjectId, ref: 'PanelistNote', required: true }]
+}, { timestamps: true });
 
-const PanelistNotesModel = mongoose.model("PanelistNote", PanelistNotesSchema);
+const PanelistNotesModel = mongoose.model("PanelistNote", PanelistNoteSchema);
 const PresentationModel = mongoose.model("Presentation", PresentationSchema);
 
 // Methods for PanelistNote
