@@ -6,8 +6,8 @@
           <div class="header-caption">
             <h2>
               All Research Projects
-              <v-chip  class="header-count">
-                You have {{ research.length }} research projects
+              <v-chip class="header-count">
+                You have {{ researchStore.researchCount }} research projects
               </v-chip>
             </h2>
 
@@ -24,7 +24,7 @@
       </v-card-title>
       <v-card-text elevation="5" class="content">
         <v-card elevation="5">
-          <research_table :research="research" />
+          <research_table :research="researches" />
         </v-card>
       </v-card-text>
     </v-card>
@@ -32,37 +32,16 @@
 </template>
 
 <script setup lang="ts">
-import moment from "moment";
+import { useResearchesStore } from "@/stores/researches";
+import { onMounted, ref } from "vue";
 
-const research = [
-  {
-    _id: 1,
-    research_title: "Test Title",
-    research_leaders: "Test 1, Test 2",
-    research_status: "No Status",
-    createdAt: moment().format("LL"),
-  },
-  {
-    _id: 2,
-    research_title: "Test 2",
-    research_leaders: "Test 1, Test 2",
-    research_status: "Approval",
-    createdAt: moment().format("LL"),
-  },
-  {
-    _id: 3,
-    research_title: "Test",
-    research_leaders: "Test 1, Test 2",
-    research_status: "Reviewing",
-    createdAt: moment().format("LL"),
-  },
-  {
-    _id: 4,
-    research_title: "Testasdfgh",
-    research_leaders: "Test 1, Test 2",
-    research_status: "Initial Presentation",
-    createdAt: moment().format("LL"),
-  },
-];
+const researchStore = useResearchesStore();
+const researches = ref([]);
+
+onMounted(async () => {
+  await researchStore.getResearchList();
+  researches.value = researchStore.researchList;
+})
+
 </script>
 <style lang="scss"></style>

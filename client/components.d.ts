@@ -9,8 +9,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     Concept_note_overview: typeof import('./src/components/pages/admin/concept_note_overview.vue')['default']
     Concept_note_reviewing: typeof import('./src/components/pages/researcher/status/concept_note_reviewing.vue')['default']
-    Concept_note_submissions: typeof import('./src/components/pages/admin/concept_note_submissions.vue')['default']
-    Concept_note_submissions_modal: typeof import('./src/components/pages/admin/concept_note_submissions_modal.vue')['default']
     Concept_note_submissions_table: typeof import('./src/components/pages/admin/concept_note_submissions_table.vue')['default']
     Concept_note_tab: typeof import('./src/components/pages/researcher/tab/concept_note_tab.vue')['default']
     Create_research_project_modal: typeof import('./src/components/pages/researcher/modals/create_research_project_modal.vue')['default']
