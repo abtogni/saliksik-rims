@@ -26,22 +26,22 @@
         <v-window v-model="tab">
           <!-- Concept Note (Reviewing) -->
           <v-window-item value="For Review">
-            <concept_note_submissions :research_data="filteredResearchData('For Review')" />
+            <concept_note_submissions_table :research_data="filteredResearchData('For Review')" />
           </v-window-item>
 
           <!-- Concept Note (Approval) -->
           <v-window-item value="Approval">
-            <concept_note_submissions :research_data="filteredResearchData('Approval')" />
+            <concept_note_submissions_table :research_data="filteredResearchData('Approval')" />
           </v-window-item>
 
           <!-- Concept Note (Approved) -->
           <v-window-item value="Approved">
-            <concept_note_submissions :research_data="filteredResearchData('Approved')" />
+            <concept_note_submissions_table :research_data="filteredResearchData('Approved')" />
           </v-window-item>
 
           <!-- Concept Note (Rejected) -->
           <v-window-item value="Rejected">
-            <concept_note_submissions :research_data="filteredResearchData('Rejected')" />
+            <concept_note_submissions_table :research_data="filteredResearchData('Rejected')" />
           </v-window-item>
         </v-window>
       </v-card-text>

@@ -9,17 +9,10 @@
 
     <v-list density="compact" nav>
       <!-- Sample -->
-      <v-list-item prepend-icon="mdi-folder-plus-outline" class="button-regular">
-        <v-btn
-            type="submit"
-            flat
-            class="button-regular"
-            >Create Reseach Project
-          </v-btn>
-         </v-list-item>
-      <v-list-item prepend-icon="mdi-folder-multiple-outline" title="All Research Projects" value="myfiles" href="/researcher/all_research_projects"
+      
+      <v-list-item prepend-icon="mdi-folder-multiple-outline" title="Research Projects" value="research_projects" href="/researcher/all_research_projects"
         link  />
-      <v-list-item prepend-icon="mdi-bell-outline" title="Notifications" value="myfiles" href="/researcher/researcher_notification" 
+      <v-list-item prepend-icon="mdi-bell-outline" title="Notifications" value="notifications" href="/researcher/researcher_notification" 
         link> 
         <template v-slot:append>
         <v-badge
@@ -29,16 +22,76 @@
         ></v-badge>
       </template>
     </v-list-item> 
-      <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared" link />
-      <v-list-item prepend-icon="mdi-star" title="Starred" value="starred" link />
+    <v-list-item prepend-icon="mdi-calendar-month-outline" title="Presentations" value="presentations" link />
+      <v-list-item prepend-icon="mdi-account-outline" title="Profile" value="profile" link />
+      
     </v-list>
-
+    <v-list density="compact" nav>
+      <!-- Sample -->
+      
+      <v-list-item prepend-icon="mdi-file-document-outline" title="Concept Notes" value="concept_notes" href="/administrator/concept_note_submissions"
+        link  >
+        <template v-slot:append>
+        <v-badge
+          color="info"
+          content="6"
+          inline
+        ></v-badge>
+      </template>
+    </v-list-item>
+      <v-list-item prepend-icon="mdi-calendar-month-outline" title="Presentations" value="presentations" href="/administrator/presentations" 
+        link> 
+        <template v-slot:append>
+        <v-badge
+          color="info"
+          content="6"
+          inline
+        ></v-badge>
+      </template>
+    </v-list-item> 
+    <v-list-item prepend-icon="mdi-note-multiple-outline" title="Research Papers" value="research_progress" href="/administrator/research_papers" link> 
+        <template v-slot:append>
+        <v-badge
+          color="info"
+          content="6"
+          inline
+        ></v-badge>
+      </template>
+    </v-list-item> 
+    <v-list-item prepend-icon="mdi-currency-php" title="Incentive" value="incentive" href="/administrator/incentive" 
+        link> 
+        <template v-slot:append>
+        <v-badge
+          color="info"
+          content="6"
+          inline
+        ></v-badge>
+      </template>
+    </v-list-item> 
+    <v-list-item prepend-icon="mdi-bell-outline" title="Notifications" value="notifications" href="/administrator/administrator_notification" 
+        link> 
+        <template v-slot:append>
+        <v-badge
+          color="info"
+          content="6"
+          inline
+        ></v-badge>
+      </template>
+    </v-list-item> 
+    <v-list-item prepend-icon="mdi-account-outline" title="Accounts" value="accounts" href="/administrator/accounts" 
+        link> 
+        <template v-slot:append>
+        <v-badge
+          color="info"
+          content="6"
+          inline
+        ></v-badge>
+      </template>
+    </v-list-item> 
+      
+    </v-list>
     <template v-slot:append>
-      <div class="pa-2">
-        <v-btn block @click="logoutDialog = true" class="button-regular">
-          LOGOUT
-        </v-btn>
-
+        <v-list-item @click="logoutDialog = true" prepend-icon="mdi-logout" title="Logout" value="logout" />
         <v-dialog v-model="logoutDialog" width="auto">
           <v-card>
             <v-card-text>
@@ -56,7 +109,6 @@
             </v-card-actions>
           </v-card>
         </v-dialog>
-      </div>
     </template>
   </v-navigation-drawer>
 </template>
