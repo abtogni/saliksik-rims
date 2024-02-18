@@ -21,10 +21,10 @@ const ResearchSchema = new mongoose.Schema(
       technologyRoadmap: { type: String },
       workPlan: { type: String },
       status: { type: String },
-      presentation: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Presentation",
-      },
+    },
+    titlePresentation: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Presentation",
     },
     initialPresentation: {
       type: mongoose.Schema.Types.ObjectId,
