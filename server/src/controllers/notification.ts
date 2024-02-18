@@ -64,12 +64,12 @@ export const fetchNotificationData = async (req: Request, res: Response) => {
 export const updateNotification = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { title, type, description, users } = req.body;
+    const { title, referenceID, description, users } = req.body;
 
     const notif = await getNotificationByID(id);
 
     notif.title = title;
-    notif.type = type;
+    notif.referenceID = referenceID;
     notif.description = description;
     notif.users = users;
 
