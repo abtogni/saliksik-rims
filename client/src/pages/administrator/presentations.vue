@@ -71,12 +71,11 @@
       </v-card-text>
     </v-card>
   </v-container>
-  
 </template>
 
 <script setup lang="ts">
 import presentation from "@/assets/sample_presentation.json" with { type: "json" };
 import { ref } from "vue";
 
-const tab = ref('null');
+const tab = ref("null");
 </script>
