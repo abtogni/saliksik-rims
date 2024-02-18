@@ -41,15 +41,14 @@
           rounded="0"
           v-bind="props"
           :color="isHovering ? '#eef2ff' : undefined"
+          style="height: fit-content;"
         >
           <v-card-text class="pres-res-body">
             <div class="pres-res-left">
 
             
               <v-btn variant="text" icon="mdi-account-multiple-outline">
-                <v-badge color="info" content="6" floating>
-                  <v-icon></v-icon>
-                </v-badge>
+                <v-icon></v-icon>
                 <v-tooltip
                   activator="parent"
                   location="bottom"
@@ -61,7 +60,10 @@
                   </div>
                 </v-tooltip>
               </v-btn>
-              insert researcher projects
+              <div class="text" >
+                insert researcher project name
+              </div>
+              
             </div>
               <div class="pres-res-right">
                 <v-btn variant="text" icon="mdi-dots-vertical">
