@@ -42,6 +42,8 @@ export const ResearchModel = mongoose.model("Research", ResearchSchema);
 
 //GET
 export const getResearches = () => ResearchModel.find();
+export const getResearchByUserID = (id: string) =>
+  ResearchModel.find({ researchLeaders: id });
 export const getResearchByID = (id: string) => ResearchModel.findById(id);
 
 //POST

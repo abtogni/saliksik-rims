@@ -39,8 +39,8 @@ const researchStore = useResearchesStore();
 const researches = ref([]);
 
 onMounted(async () => {
-  await researchStore.getResearchList();
-  researches.value = researchStore.researchList;
+  await researchStore.getUserResearches();
+  researches.value = researchStore.userResearchList;
 })
 
 </script>

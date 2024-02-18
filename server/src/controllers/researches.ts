@@ -2,6 +2,7 @@ import {
   createResearch,
   deleteResearchByID,
   getResearchByID,
+  getResearchByUserID,
   getResearches,
   updateResearchByID,
 } from "../db/researches";
@@ -29,6 +30,18 @@ export const createNewResearch = async (req: Request, res: Response) => {
 export const getAllResearches = async (_req: Request, res: Response) => {
   try {
     const researches = await getResearches();
+    return res.status(200).json(researches).end();
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+};
+
+// get researches by userID
+export const getUserResearches = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const researches = await getResearchByUserID(id);
     return res.status(200).json(researches).end();
   } catch (error) {
     console.log(error);
