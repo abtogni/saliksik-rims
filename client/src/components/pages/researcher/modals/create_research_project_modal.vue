@@ -11,13 +11,14 @@
         </v-btn>
         <v-toolbar-title>Create New Research</v-toolbar-title>
       </v-toolbar>
-      <v-form class="form_content" @submit.prevent="create">
-        <v-text-field class="inputs" :rules="field_required" label="Research Title" v-model="form_data.research_title"
-          variant="outlined" />
 
-        <v-select class="inputs" label="Research Leaders" multiple variant="outlined" :rules="field_required"
-          v-model="form_data.research_leaders"
-          :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']" />
+      <v-form class="form_content" @submit.prevent="create">
+        <v-text-field class="inputs" label="Research Title" :error-messages="researchTitle.errorMessage.value"
+          v-model="researchTitle.value.value" variant="outlined" />
+        <!-- @vue-ignore -->
+        <v-select multiple class="input-field" v-model="researchLeaders.value.value"
+          :error-messages="researchLeaders.errorMessage.value" label="Research Leaders" prepend-inner-icon="mdi-briefcase"
+          :items="users" item-title="name" item-value="key" variant="outlined" />
 
         <v-btn type="submit" class="button-regular">Create New Research</v-btn>
       </v-form>
@@ -27,21 +28,59 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
 
-const field_required = [(v: string) => !!v || "Field is required"];
+import { useUsersStore } from '@/stores/users';
+import axios from 'axios';
+import { useField, useForm } from 'vee-validate';
+import { onMounted, ref } from 'vue';
 
+const users = ref<{ key: any; name: string; }[]>([]);
 const prompt = ref(false);
-const form_data = reactive({
-  research_title: '',
-  research_leaders: []
+
+
+const { handleSubmit } = useForm({
+  validationSchema: {
+    researchTitle(v: string) {
+      if (v) return true;
+
+      return 'Field is required.'
+    },
+    researchLeaders(v: any[]) {
+      if (Array.isArray(v) && v.length > 0) return true;
+      return 'At least one research leader is required.';
+    },
+  }
+})
+
+const researchTitle = useField('researchTitle');
+const researchLeaders = useField('researchLeaders');
+
+const create = handleSubmit(async (values) => {
+  const data = JSON.stringify(values);
+
+  return axios.post('/api/research/create', data, {
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(() => {
+    alert("Succesfully created a new research");
+    location.reload();
+  }).catch((e) => {
+    alert(`An error occurred while creating a new research with error ${e}.`);
+  })
 });
 
-const create = async () => {
-  alert(JSON.stringify(form_data));
-};
+onMounted(async () => {
+  const userList = useUsersStore().userList;
+  users.value = userList.map((user: any) => ({
+    key: user._id,
+    name: user.firstName + ' ' + user.lastName
+  }));
+});
 
 </script>
+
+
 
 <style lang="scss">
 .form {

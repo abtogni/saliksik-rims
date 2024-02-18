@@ -6,8 +6,8 @@ import researches from "./researches";
 const router = Router();
 
 export default (): Router => {
-    authentication(router);
-    users(router);
-    researches(router);
-    return router;
-}
+  authentication(router);
+  users(router);
+  researches(router);
+  return router;
+};
