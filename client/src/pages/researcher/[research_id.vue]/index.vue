@@ -41,7 +41,7 @@
 
                   <div class="header-right">
                     <v-btn type="submit" flat prepend-icon="mdi-file-document-plus-outline" class="button-regular"
-                      @click="$router.push(`dss/create_concept_note`)">Create Concept Note
+                      @click="$router.push(`${currentResearch._id}/create_concept_note`)">Create Concept Note
                     </v-btn>
                     <v-btn type="submit" flat variant="outlined" prepend-icon="mdi-file-document-edit-outline"
                       class="button-outlined">Edit Concept Note

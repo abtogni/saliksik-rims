@@ -68,11 +68,11 @@ const login = handleSubmit(async (values) => {
   }).then((response) => {
     alert(response.data.message);
     if (response.data.role == 'Administrator') {
-      router.push({ path: '/administrator/concept-note-approval', force: true })
+      window.location.href = '/administrator/concept-note-approval';
     } else if (response.data.role == 'Researcher') {
-      router.push({ path: '/researcher', force: true })
+      window.location.href = '/researcher';
     } else if (response.data.role == 'Internal Panelist' || response.data.role == 'External Panelist') {
-      router.push({ path: '/panelists', force: true })
+      window.location.href = '/panelists';
     }
   }).catch(error => {
 

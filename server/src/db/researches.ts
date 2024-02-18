@@ -2,18 +2,18 @@ import mongoose from "mongoose";
 
 const ResearchSchema = new mongoose.Schema(
   {
-    researchTitle: { type: String, required: true },
-    researchLeaders: { type: [String], required: true },
-    researchStatus: { type: String, required: true },
+    researchTitle: { type: String },
+    researchLeaders: { type: [String] },
+    researchStatus: { type: String },
     conceptNote: {
       projectTitle: { type: String },
-      implementingDept: { type: String },
+      implementingAgency: { type: String },
       cooperatingAgency: { type: String },
       projectDuration: { type: String },
       siteOfImplementation: { type: String },
       totalProjectCost: { type: Number },
       fundingSource: { type: String },
-      description: { type: String },
+      projectDescription: { type: String },
       objectives: { type: String },
       significance: { type: String },
       methodology: { type: String },
