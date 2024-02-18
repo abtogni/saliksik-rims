@@ -75,13 +75,13 @@ export const useResearchesStore = defineStore("researches", () => {
 
   const getCurrentResearch = async (id: string) => {
     return axios
-      .get("/api/researches/" + id)
+      .get("/api/research/" + id)
       .then((response) => {
         //@ts-ignore
         currentResearch.value = {
           _id: response.data._id,
           researchTitle: response.data.researchTitle,
-          researchLeaders: response.data.map((leader: any) => {
+          researchLeaders: response.data.researchLeaders.map((leader: any) => {
             const matchingUser = user.userList.find(
               (user: any) => user._id === leader,
             );
