@@ -106,8 +106,11 @@
               >
             </v-expansion-panel-title>
             <v-expansion-panel-text>
-              <Presentation_researcher_preview/>
-
+              <presentation_schedule_preview/>
+           
+              <presentation_researcher_preview/>
+              <br>
+              <presentation_panelist_preview/>
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -119,7 +122,6 @@
 
 <script setup lang="ts">
 import moment from "moment";
-import Presentation_researcher_preview from "./presentation/presentation_researcher_preview.vue";
 
 const props = defineProps(["presentation"]);
 

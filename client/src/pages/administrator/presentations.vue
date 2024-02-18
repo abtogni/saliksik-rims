@@ -4,19 +4,11 @@
       <v-card-title class="header">
         <div class="header-left truncate">
           <div class="header-caption">
-            <h5>
-              Presentations
-              <v-chip
-                >00
-                <v-tooltip activator="parent" location="top">
-                  All Schedule
-                </v-tooltip>
-              </v-chip>
-            </h5>
+            <h5>Presentations</h5>
 
             <p class="caption">
-              Check unread notifications, updates, change statuses, notices and
-              other things that may require your attention.
+              Create schedule, add research projects and assign panelist for
+              title and final presentation.
             </p>
           </div>
         </div>
@@ -25,9 +17,9 @@
           <v-btn
             type="submit"
             flat
-            prepend-icon="mdi-email-open-outline"
+            prepend-icon="mdi-calendar-plus-outline"
             class="button-regular"
-            >Mark All As Read
+            >Create Schedule
           </v-btn>
 
           <!-- <v-btn
@@ -41,7 +33,7 @@
         </div>
       </v-card-title>
       <v-card-text class="content">
-        <v-card elevation="5">
+        <v-card elevation="5" style="padding-bottom: 1rem">
           <v-tabs v-model="tab">
             <v-tab value="title"
               >Title
