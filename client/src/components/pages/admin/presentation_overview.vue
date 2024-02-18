@@ -1,46 +1,153 @@
 <template>
-  <div>
-    <div v-for="(presentation_group, date) in grouped_presentations" :key="date">
-      <h2 class="date-header">{{ format_date(grouped_presentations[date][0].datetime) }}</h2>
-      <v-card v-for="(presentation, index) in presentation_group" :key="presentation._id" class="presentation_card">
-        <template v-if="should_display_time(presentation, index, presentation_group)">
-          <v-card-title><h5>{{ format_time(presentation.datetime) }}</h5></v-card-title>
-          <v-card-subtitle><p>{{ presentation.location }}</p></v-card-subtitle>
-        </template>
-        <v-card-text>
-          <p><span>Panelists:</span> {{ presentation.panelist_id.join(', ') }}</p>
-          <p><span>Researches:</span> {{ presentation.research_id.join(', ') }}</p>
-        </v-card-text>
+  <v-card
+    flat
+    style="padding-top: 0.833rem"
+    v-for="(presentation_group, date) in grouped_presentations"
+    :key="date"
+  >
+    <v-card flat class="header-body">
+      <div class="header-left truncate">
+        <div class="header-caption-ctr">
+          <h5>
+            {{ format_date(grouped_presentations[date][0].datetime) }}
+          </h5>
+
+          <!-- <p class="caption">
+            Track and monitor your research paper. Upload a copy of the research
+            paper regularly.
+          </p> -->
+        </div>
+      </div>
+
+      <div class="header-right">
+        <!--cta
+        <v-btn
+          type="submit"
+          flat
+          prepend-icon="mdi-file-upload-outline"
+          class="button-regular"
+          >Submit Research Paper
+        </v-btn>
+
+         <v-btn
+          type="submit"
+          flat
+          variant="outlined"
+          prepend-icon="mdi-close-circle-outline"
+          class="button-outlined"
+          >Not Going
+        </v-btn>  -->
+      </div>
+    </v-card>
+    <div class="overview-ctr">
+      <v-card variant="outlined" class="card-style">
+        <v-expansion-panels>
+          <v-expansion-panel
+            v-for="(presentation, index) in presentation_group"
+            :key="presentation._id"
+          >
+            <v-expansion-panel-title
+              class="title expansion-title-body"
+              v-if="
+                should_display_time(presentation, index, presentation_group)
+              "
+            >
+              <v-btn variant="text" icon="mdi-account-multiple-outline">
+                <v-badge color="info" content="6" floating>
+                  <v-icon></v-icon>
+                </v-badge>
+                <v-tooltip
+                  activator="parent"
+                  location="bottom"
+                  class="tooltip-list"
+                >
+                  <div class="bold-upper">Panelist</div>
+                  <div v-for="id in presentation.panelist_id" :key="id">
+                    {{ id }}
+                  </div>
+                </v-tooltip>
+              </v-btn>
+
+              <v-btn variant="text" icon="mdi-note-outline">
+                <v-badge color="info" content="6" floating>
+                  <v-icon></v-icon>
+                </v-badge>
+
+                <v-tooltip
+                  activator="parent"
+                  location="bottom"
+                  class="tooltip-list"
+                >
+                  <div class="bold-upper">Researh Projects</div>
+                  <div v-for="id in presentation.research_id" :key="id">
+                    {{ id }}
+                  </div>
+                </v-tooltip>
+              </v-btn>
+              <span class="expansion-title-left truncate">
+                <span class="truncate">
+                  Insert Name of the day
+                  {{ format_date(grouped_presentations[date][0].datetime) }}
+                  {{ format_time(presentation.datetime) }}
+                </span>
+                <span class="truncate"> | </span>
+                <span class="truncate">
+                  {{ presentation.location }}
+                </span>
+              </span>
+              <span class="expansion-title-right"
+                ><v-chip
+                  >January 21, 2023
+                  <v-tooltip activator="parent" location="top"
+                    >Created In
+                  </v-tooltip>
+                </v-chip></span
+              >
+            </v-expansion-panel-title>
+            <v-expansion-panel-text>dasfdsaf</v-expansion-panel-text>
+          </v-expansion-panel>
+        </v-expansion-panels>
       </v-card>
     </div>
-  </div>
+  </v-card>
+  
 </template>
 
 <script setup lang="ts">
-import moment from 'moment';
+import moment from "moment";
 
-const props = defineProps(['presentation']);
+const props = defineProps(["presentation"]);
 
-const grouped_presentations = props.presentation.reduce((acc: any, curr: any) => {
-  const date = moment(curr.datetime).format('YYYY-MM-DD');
-  if (!acc[date]) {
-    acc[date] = [curr];
-  } else {
-    acc[date].push(curr);
-  }
-  return acc;
-}, {});
+const grouped_presentations = props.presentation.reduce(
+  (acc: any, curr: any) => {
+    const date = moment(curr.datetime).format("YYYY-MM-DD");
+    if (!acc[date]) {
+      acc[date] = [curr];
+    } else {
+      acc[date].push(curr);
+    }
+    return acc;
+  },
+  {},
+);
 
-const should_display_time = (presentation: any, index: number, presentation_group: any[]) => {
-  return index === 0 || presentation.datetime !== presentation_group[index - 1].datetime;
+const should_display_time = (
+  presentation: any,
+  index: number,
+  presentation_group: any[],
+) => {
+  return (
+    index === 0 ||
+    presentation.datetime !== presentation_group[index - 1].datetime
+  );
 };
 
 const format_date = (date: string) => {
-  return moment(date).format('MMMM DD, YYYY');
+  return moment(date).format("MMMM DD, YYYY");
 };
 
 const format_time = (datetime: string) => {
-  return moment(datetime).utc().format('LT');
+  return moment(datetime).utc().format("LT");
 };
 </script>
 

@@ -2,122 +2,148 @@
   <v-navigation-drawer v-if="showDrawer" expand-on-hover rail>
     <!-- Drawer content -->
     <v-list>
-      <v-list-item :title="user?.firstName + ' ' + user?.lastName" :subtitle="user?.userID" />
+      <v-list-item
+        :title="user?.firstName + ' ' + user?.lastName"
+        :subtitle="user?.userID"
+      />
     </v-list>
 
     <v-divider />
 
     <v-list density="compact" nav>
       <!-- Sample -->
-      
-      <v-list-item prepend-icon="mdi-folder-multiple-outline" title="Research Projects" value="research_projects" href="/researcher/all_research_projects"
-        link  />
-      <v-list-item prepend-icon="mdi-bell-outline" title="Notifications" value="notifications" href="/researcher/researcher_notification" 
-        link> 
+
+      <v-list-item
+        prepend-icon="mdi-folder-multiple-outline"
+        title="Research Projects"
+        value="research_projects"
+        href="/researcher/research_projects"
+        link
+      />
+      <v-list-item
+        prepend-icon="mdi-bell-outline"
+        title="Notifications"
+        value="notifications"
+        href="/researcher/researcher_notification"
+        link
+      >
         <template v-slot:append>
-        <v-badge
-          color="info"
-          content="6"
-          inline
-        ></v-badge>
-      </template>
-    </v-list-item> 
-    <v-list-item prepend-icon="mdi-calendar-month-outline" title="Presentations" value="presentations" link />
-      <v-list-item prepend-icon="mdi-account-outline" title="Profile" value="profile" link />
-      
+          <v-badge color="info" content="6" inline></v-badge>
+        </template>
+      </v-list-item>
+      <v-list-item
+        prepend-icon="mdi-calendar-month-outline"
+        title="Presentations"
+        value="presentations"
+        link
+      />
+      <v-list-item
+        prepend-icon="mdi-account-outline"
+        title="Profile"
+        value="profile"
+        link
+      />
     </v-list>
     <v-list density="compact" nav>
       <!-- Sample -->
-      
-      <v-list-item prepend-icon="mdi-file-document-outline" title="Concept Notes" value="concept_notes" href="/administrator/concept_note_submissions"
-        link  >
+
+      <v-list-item
+        prepend-icon="mdi-file-document-outline"
+        title="Concept Notes"
+        value="concept_notes"
+        href="/administrator/concept_note_submissions"
+        link
+      >
         <template v-slot:append>
-        <v-badge
-          color="info"
-          content="6"
-          inline
-        ></v-badge>
-      </template>
-    </v-list-item>
-      <v-list-item prepend-icon="mdi-calendar-month-outline" title="Presentations" value="presentations" href="/administrator/presentations" 
-        link> 
+          <v-badge color="info" content="6" inline></v-badge>
+        </template>
+      </v-list-item>
+      <v-list-item
+        prepend-icon="mdi-calendar-month-outline"
+        title="Presentations"
+        value="presentations"
+        href="/administrator/presentations"
+        link
+      >
         <template v-slot:append>
-        <v-badge
-          color="info"
-          content="6"
-          inline
-        ></v-badge>
-      </template>
-    </v-list-item> 
-    <v-list-item prepend-icon="mdi-note-multiple-outline" title="Research Papers" value="research_progress" href="/administrator/research_papers" link> 
+          <v-badge color="info" content="6" inline></v-badge>
+        </template>
+      </v-list-item>
+      <v-list-item
+        prepend-icon="mdi-note-multiple-outline"
+        title="Research Papers"
+        value="research_progress"
+        href="/administrator/research_papers"
+        link
+      >
         <template v-slot:append>
-        <v-badge
-          color="info"
-          content="6"
-          inline
-        ></v-badge>
-      </template>
-    </v-list-item> 
-    <v-list-item prepend-icon="mdi-currency-php" title="Incentive" value="incentive" href="/administrator/incentive" 
-        link> 
+          <v-badge color="info" content="6" inline></v-badge>
+        </template>
+      </v-list-item>
+      <v-list-item
+        prepend-icon="mdi-currency-php"
+        title="Incentive"
+        value="incentive"
+        href="/administrator/incentive"
+        link
+      >
         <template v-slot:append>
-        <v-badge
-          color="info"
-          content="6"
-          inline
-        ></v-badge>
-      </template>
-    </v-list-item> 
-    <v-list-item prepend-icon="mdi-bell-outline" title="Notifications" value="notifications" href="/administrator/administrator_notification" 
-        link> 
+          <v-badge color="info" content="6" inline></v-badge>
+        </template>
+      </v-list-item>
+      <v-list-item
+        prepend-icon="mdi-bell-outline"
+        title="Notifications"
+        value="notifications"
+        href="/administrator/administrator_notification"
+        link
+      >
         <template v-slot:append>
-        <v-badge
-          color="info"
-          content="6"
-          inline
-        ></v-badge>
-      </template>
-    </v-list-item> 
-    <v-list-item prepend-icon="mdi-account-outline" title="Accounts" value="accounts" href="/administrator/accounts" 
-        link> 
-        <template v-slot:append>
-        <v-badge
-          color="info"
-          content="6"
-          inline
-        ></v-badge>
-      </template>
-    </v-list-item> 
-      
+          <v-badge color="info" content="6" inline></v-badge>
+        </template>
+      </v-list-item>
+      <v-list-item
+        prepend-icon="mdi-account-outline"
+        title="Accounts"
+        value="accounts"
+        href="/administrator/accounts"
+        link
+      >
+      </v-list-item>
     </v-list>
     <template v-slot:append>
-        <v-list-item @click="logoutDialog = true" prepend-icon="mdi-logout" title="Logout" value="logout" />
-        <v-dialog v-model="logoutDialog" width="auto">
-          <v-card>
-            <v-card-text>
-              Do you really want to log out?
-            </v-card-text>
-            <v-card-actions>
-              <v-row>
-                <v-col>
-                  <v-btn color="primary" block @click="logout">Logout</v-btn>
-                </v-col>
-                <v-col>
-                  <v-btn color="primary" block @click="logoutDialog = false">Cancel</v-btn>
-                </v-col>
-              </v-row>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
+      <v-list-item
+        @click="logoutDialog = true"
+        prepend-icon="mdi-logout"
+        title="Logout"
+        value="logout"
+      />
+      <v-dialog v-model="logoutDialog" width="auto">
+        <v-card>
+          <v-card-text> Do you really want to log out? </v-card-text>
+          <v-card-actions>
+            <v-row>
+              <v-col>
+                <v-btn color="primary" block @click="logout">Logout</v-btn>
+              </v-col>
+              <v-col>
+                <v-btn color="primary" block @click="logoutDialog = false"
+                  >Cancel</v-btn
+                >
+              </v-col>
+            </v-row>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </template>
   </v-navigation-drawer>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
-import { User, useUsersStore } from '@/stores/users';
-import router from '@/router';
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
+import { User, useUsersStore } from "@/stores/users";
+import router from "@/router";
 
 const route = useRoute();
 const usersStore = useUsersStore();
@@ -127,17 +153,17 @@ const user = ref<User | null>(null);
 
 const logout = () => {
   usersStore.logoutUser;
-  router.push({ path: '/' });
-}
+  router.push({ path: "/" });
+};
 
 onMounted(async () => {
   await usersStore.getCurrentUser();
   await usersStore.getUsers();
   user.value = usersStore.currentUser;
-  showDrawer.value = route.path !== '/';
+  showDrawer.value = route.path !== "/";
 });
 
 router.afterEach(() => {
-  showDrawer.value = route.path !== '/';
+  showDrawer.value = route.path !== "/";
 });
 </script>
