@@ -50,7 +50,7 @@ const headers = [
   { key: "researchTitle", title: "Research Title" },
   { key: "researchLeaders", title: "Research Leaders", sortable: false },
   { key: "researchStatus", title: "Research Status" },
-  { key: "createdAt", title: "Created At" },
+  { key: "createdAt", title: "Created At"},
 ];
 
 

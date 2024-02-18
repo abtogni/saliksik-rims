@@ -115,6 +115,16 @@ p {
   font-weight: 500;
 }
 
+.bold-upper {
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.tooltip-list{
+  display: flex; 
+  flex-direction: column;
+}
+
 //working (no issue)
 .button-regular {
   background-color: $blue-700;

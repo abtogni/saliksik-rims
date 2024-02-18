@@ -5,7 +5,7 @@
         <div class="header-left truncate">
           <div class="header-caption">
             <h2>
-              All Research Projects
+              Research Projects
               <v-chip  class="header-count">
                 You have {{ research.length }} research projects
               </v-chip>
