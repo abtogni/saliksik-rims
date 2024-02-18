@@ -1,28 +1,33 @@
 <template>
-  <v-container fluid class="fill-height body pa-0">
-    <v-row no gutters class="table-body">
-      <v-row no-gutters class="table-header-row">
-        <v-col class="col-start" style="background-color: red;">
-          <div class="header">
-            <h2>All Research Projects</h2>
-            <v-chip color="primary" class="header-count"> You have {{ research.length }} research projects </v-chip>
-          </div>
-          <v-row no-gutters>
-            <h2 class="caption">
+  <v-container fluid class="fill-height ctr">
+    <v-card flat class="body">
+      <v-card-title class="header">
+        <div class="header-left truncate">
+          <div class="header-caption">
+            <h2>
+              All Research Projects
+              <v-chip  class="header-count">
+                You have {{ research.length }} research projects
+              </v-chip>
+            </h2>
+
+            <p class="caption">
               Create new research project to start. View and manage your
               research projects here.
-            </h2>
-          </v-row>
-        </v-col>
+            </p>
+          </div>
+        </div>
         <!--cta container-->
-        <v-col class="col-end">
+        <div class="header-right">
           <create_research_project_modal />
-        </v-col>
-      </v-row>
-      <v-card class="table-card">
-        <research_table :research="research" />
-      </v-card>
-    </v-row>
+        </div>
+      </v-card-title>
+      <v-card-text elevation="5" class="content">
+        <v-card elevation="5">
+          <research_table :research="research" />
+        </v-card>
+      </v-card-text>
+    </v-card>
   </v-container>
 </template>
 

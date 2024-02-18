@@ -20,7 +20,7 @@
     </v-card>
   </v-container>
   <v-container fluid class="fill-height ctr">
-    <v-card class="body">
+    <v-card elevation="5" class="body">
       <div class="d-flex flex-row">
         <v-tabs v-model="tab" direction="vertical" color="primary">
           <v-tab value="concept-note">
