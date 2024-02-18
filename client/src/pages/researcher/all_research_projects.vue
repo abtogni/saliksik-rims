@@ -7,7 +7,7 @@
             <h2>
               All Research Projects
               <v-chip class="header-count">
-                You have {{ researchStore.researchCount }} research projects
+                You have {{ researches.length }} research projects
               </v-chip>
             </h2>
 

@@ -102,14 +102,11 @@ export const useResearchesStore = defineStore("researches", () => {
       .catch((e) => alert(e));
   };
 
-  const researchCount = computed(() => researchList.value.length);
-
   return {
     researchList,
     getCurrentResearch,
     currentResearch,
     getResearchList,
-    researchCount,
     getUserResearches,
     userResearchList,
   };
