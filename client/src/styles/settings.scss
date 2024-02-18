@@ -479,6 +479,34 @@ div#research_table {
   }
 }
 
+.pres-res-body{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0rem 0rem 0rem 0rem;
+
+  .pres-res-left{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    align-content: center;
+
+    .text{
+      font-weight: 500;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+    }
+  }
+  .pres-res-right{
+    display: flex;
+      flex-direction: row;
+      gap: 0rem;
+      align-items: center;
+  }
+}
 //working (no issue)
 .nav-ctr {
   width: 100%;

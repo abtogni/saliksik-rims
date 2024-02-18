@@ -1,10 +1,10 @@
 <template>
-  <v-btn color="#297be5" class="new_user">Create New Account
+  <v-btn color="#297be5" prepend-icon="mdi-account-plus-outline" class="new_user">Create Account
     <v-dialog v-model="create_user" activator="parent">
       <v-card class="form_modal">
         <v-toolbar color="primary">
           <v-btn icon @click="create_user = false">
-            <v-icon>mdi-close</v-icon>
+            <v-icon>mdi-account-plus-outline</v-icon>
           </v-btn>
           <v-toolbar-title>Create New User</v-toolbar-title>
         </v-toolbar>

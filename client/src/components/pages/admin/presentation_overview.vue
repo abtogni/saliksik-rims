@@ -4,10 +4,11 @@
     style="padding-top: 0.833rem"
     v-for="(presentation_group, date) in grouped_presentations"
     :key="date"
+    class="body"
   >
-    <v-card flat class="header-body">
+    <v-card flat class="header">
       <div class="header-left truncate">
-        <div class="header-caption-ctr">
+        <div class="header-caption">
           <h5>
             {{ format_date(grouped_presentations[date][0].datetime) }}
           </h5>
@@ -39,7 +40,7 @@
         </v-btn>  -->
       </div>
     </v-card>
-    <div class="overview-ctr">
+    <div class="content">
       <v-card variant="outlined" class="card-style">
         <v-expansion-panels>
           <v-expansion-panel
@@ -98,13 +99,19 @@
               <span class="expansion-title-right"
                 ><v-chip
                   >January 21, 2023
-                  <v-tooltip activator="parent" location="top"
+                  <v-tooltip activator="parent" location="bottom"
                     >Created In
                   </v-tooltip>
                 </v-chip></span
               >
             </v-expansion-panel-title>
-            <v-expansion-panel-text>dasfdsaf</v-expansion-panel-text>
+            <v-expansion-panel-text>
+              <presentation_schedule_preview/>
+           
+              <presentation_researcher_preview/>
+              <br>
+              <presentation_panelist_preview/>
+            </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-card>
