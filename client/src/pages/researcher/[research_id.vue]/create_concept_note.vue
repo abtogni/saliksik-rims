@@ -15,12 +15,10 @@
             </v-row>
           </v-col>
           <v-col class="col-end">
-            <v-btn variant="tonal" type="submit" class="button-regular">
-              <v-icon start icon="mdi-file-document-check-outline"></v-icon> Submit
-            </v-btn>
-            <v-btn variant="outlined" type="submit" class="button-outlined">
-              <v-icon start icon="mdi-file-document-outline"></v-icon> Save As Draft
-            </v-btn>
+            <v-btn variant="tonal" @click="statusType = 'Verify and Review'"
+              prepend-icon="mdi-file-document-check-outline" type="submit" text="Submit" class="button-regular" />
+            <v-btn variant="outlined" @click="statusType = 'Draft'" type="submit" prepend-icon="mdi-file-document-outline"
+              text="Save as Draft" class="button-outlined" />
           </v-col>
         </v-row>
 
@@ -154,8 +152,10 @@ import router from '@/router';
 import { useResearchesStore } from '@/stores/researches';
 import axios from 'axios';
 import { useField, useForm } from 'vee-validate';
+import { ref } from 'vue';
 const r = useResearchesStore();
 const research = r.currentResearch;
+const statusType = ref('');
 
 const { handleSubmit } = useForm({
   validationSchema: {
@@ -185,9 +185,9 @@ const { handleSubmit } = useForm({
       return 'Field is required.'
     },
     totalProjectCost(v: string) {
-      if (v) return true;
+      if (!isNaN(Number(v))) return true;
 
-      return 'Field is required.'
+      return 'Field must be a number.'
     },
     fundingSource(v: string) {
       if (v) return true;
@@ -242,7 +242,12 @@ const technologyRoadmap = useField('technologyRoadmap');
 const expectedOutputs = useField('expectedOutputs');
 
 const create = handleSubmit(async (values) => {
-  const data = JSON.stringify({ conceptNote: values });
+  const data = JSON.stringify({
+    conceptNote: {
+      ...values,
+      status: statusType.value
+    }
+  });
   // @ts-ignore
   return axios.patch(`/api/research/update/${research._id}`, data, {
     headers: {
