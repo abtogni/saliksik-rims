@@ -243,6 +243,7 @@ const expectedOutputs = useField('expectedOutputs');
 
 const create = handleSubmit(async (values) => {
   const data = JSON.stringify({
+    researchStatus: 'Concept Note',
     conceptNote: {
       ...values,
       status: statusType.value
