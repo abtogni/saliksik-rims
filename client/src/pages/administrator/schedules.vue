@@ -14,29 +14,13 @@
         </div>
 
         <div class="header-right">
-          <v-btn
-            type="submit"
-            flat
-            prepend-icon="mdi-calendar-plus-outline"
-            class="button-regular"
-            >Create Schedule
-          </v-btn>
-
-          <!-- <v-btn
-          type="submit"
-          flat
-          variant="outlined"
-          prepend-icon="mdi-close-circle-outline"
-          class="button-outlined"
-          >Not Going
-        </v-btn>  -->
+          <create_schedule_modal />
         </div>
       </v-card-title>
       <v-card-text class="content">
         <v-card elevation="5" style="padding-bottom: 1rem">
           <v-tabs v-model="tab">
-            <v-tab value="title"
-              >Title
+            <v-tab value="title">Title
               <template v-slot:append>
                 <v-badge color="info" content="6" inline>
                   <v-tooltip activator="parent" location="top">
