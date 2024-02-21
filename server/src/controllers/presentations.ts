@@ -21,10 +21,10 @@ export const getPresentations = async (_req: Request, res: Response) => {
 
 // create new presentation
 export const createNewPresentation = async (req: Request, res: Response) => {
-  const { type, scheduleID, status } = req.body;
+  const { researchID, scheduleID, status } = req.body;
 
   await createPresentation({
-    type,
+    researchID,
     scheduleID,
     status,
   });
@@ -50,13 +50,13 @@ export const fetchPresentation = async (req: Request, res: Response) => {
 export const updatePresentation = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { type, scheduleID, status, panelistNotes } = req.body;
+    const { researchID, scheduleID, status, panelistNotes } = req.body;
     const presentation = await getPresentationByID(id);
 
     presentation.status = status;
     presentation.panelistNotes = panelistNotes;
     presentation.scheduleID = scheduleID;
-    presentation.type = type;
+    presentation.researchID = researchID;
     await presentation.save();
 
     await updatePresentationByID(id, presentation);

@@ -7,6 +7,7 @@ import {
   getScheduleByID,
   updateScheduleByID,
 } from "../db/schedules";
+import { createPresentation } from "../db/presentations";
 
 // get all schedules
 export const getSchedules = async (_req: Request, res: Response) => {
@@ -23,11 +24,19 @@ export const getSchedules = async (_req: Request, res: Response) => {
 export const createNewSchedule = async (req: Request, res: Response) => {
   const { dateAndTime, location, panelists, researches } = req.body;
 
-  await createSchedule({
+  const result = await createSchedule({
     dateAndTime,
     location,
     panelists,
     researches,
+  });
+
+  researches.forEach(async (research: any) => {
+    await createPresentation({
+      researchID: research,
+      scheduleID: result._id,
+      status: "Pending",
+    });
   });
 
   res.status(200).end();

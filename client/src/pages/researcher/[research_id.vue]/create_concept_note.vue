@@ -1,31 +1,49 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-form @submit="create">
+  <v-container fluid class="fill-height body pa-0">
+    <!--header-->
+    <v-row no-gutters class="form-body">
+      <v-form class="form-concept-note" @submit.prevent="create">
+        <v-row no-gutters>
+          <v-col class="col-start">
+            <v-row no-gutters>
+              <h2>Create Concept Note</h2>
+            </v-row>
+            <v-row no-gutters>
+              <h2 class="caption">
+                Fill out all required fields. Put "N/A" if not applicable.
+              </h2>
+            </v-row>
+          </v-col>
+          <v-col class="col-end">
+            <v-btn variant="tonal" @click="statusType = 'Verify and Review'"
+              prepend-icon="mdi-file-document-check-outline" type="submit" text="Submit" class="button-regular" />
+            <v-btn variant="outlined" @click="statusType = 'Draft'" type="submit" prepend-icon="mdi-file-document-outline"
+              text="Save as Draft" class="button-outlined" />
+          </v-col>
+        </v-row>
+
+        <!--form-->
+
         <v-card class="card-concept-note">
+          <v-text-field v-model="projectTitle.value.value" :error-messages="projectTitle.errorMessage.value"
+            label="Project Title" density="compact" required variant="outlined" />
           <v-row>
             <v-col class="card-concept-note">
-              <v-text-field v-model="projectTitle.value.value" :error-messages="projectTitle.errorMessage.value"
-                label="Project Title" density="compact" required variant="outlined">
-                <v-tooltip activator="parent" location="top" width="30%">Title of the project</v-tooltip>
-              </v-text-field>
               <v-text-field v-model="implementingAgency.value.value"
-                :error-messages="implementingAgency.errorMessage.value" label="Implementing Agency" density="compact"
-                required variant="outlined">
-                <v-tooltip activator="parent" location="top" width="30%">Agency responsible for implementing the
-                  project</v-tooltip>
-              </v-text-field>
+                :error-messages="implementingAgency.errorMessage.value" label="Implementing Agency/Department"
+                density="compact" required variant="outlined" />
               <v-text-field v-model="cooperatingAgency.value.value" :error-messages="cooperatingAgency.errorMessage.value"
                 label="Cooperating Agency" density="compact" required variant="outlined">
-                <v-tooltip activator="parent" location="top" width="30%">Agency(s) collaborating with the
-                  implementing agency</v-tooltip>
+                <v-tooltip activator="parent" location="top">
+                  State the name of agency to be tapped for funding/
+                  co-implementing the project.
+                </v-tooltip>
               </v-text-field>
               <v-text-field v-model="siteOfImplementation.value.value"
-                :error-messages="siteOfImplementation.errorMessage.value" label="Site of Implementation" density="compact"
-                required variant="outlined">
-                <v-tooltip activator="parent" location="top" width="30%">Location(s) where the project will be
-                  implemented</v-tooltip>
-              </v-text-field>
+                :error-messages="siteOfImplementation.errorMessage.value" label="Site/s of Implementation"
+                density="compact" required variant="outlined" />
+            </v-col>
+            <v-col class="card-concept-note">
               <v-text-field v-model="projectDuration.value.value" :error-messages="projectDuration.errorMessage.value"
                 label="Project Duration" density="compact" required variant="outlined">
                 <v-tooltip activator="parent" location="top" width="30%">Specific dates that the project will be
@@ -132,8 +150,6 @@
           <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required chips
             multiple />
         </v-card>
-
-        <!-- Other v-card elements -->
       </v-form>
     </v-row>
   </v-container>

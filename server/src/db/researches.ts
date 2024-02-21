@@ -3,7 +3,10 @@ import mongoose from "mongoose";
 const ResearchSchema = new mongoose.Schema(
   {
     researchTitle: { type: String },
-    researchLeaders: { type: [String] },
+    researchLeaders: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+    },
     researchStatus: { type: String },
     conceptNote: {
       projectTitle: { type: String },
