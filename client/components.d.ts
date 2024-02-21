@@ -14,6 +14,7 @@ declare module 'vue' {
     Create_research_project_modal: typeof import('./src/components/pages/researcher/modals/create_research_project_modal.vue')['default']
     Create_schedule_modal: typeof import('./src/components/pages/admin/modals/create_schedule_modal.vue')['default']
     Create_user_modal: typeof import('./src/components/pages/admin/modals/create_user_modal.vue')['default']
+    DatePicker: typeof import('./src/components/pages/date-picker.vue')['default']
     Final_presentation_tab: typeof import('./src/components/pages/researcher/tab/final_presentation_tab.vue')['default']
     Incentive_status_tab: typeof import('./src/components/pages/researcher/tab/incentive_status_tab.vue')['default']
     Login: typeof import('./src/components/pages/Login.vue')['default']

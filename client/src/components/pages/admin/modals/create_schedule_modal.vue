@@ -11,18 +11,20 @@
         </v-btn>
       </v-toolbar>
       <v-form class="form_content" @submit.prevent="create">
-        <p>Date and Time</p>
-        <VueDatePicker label="Date and Time" v-model="dateAndTime.value.value" :min-date="new Date()" :is-24="false"
-          aria-errormessage="dateAndTime.errorMessage.value" />
 
-        <v-text-field v-model="location.value.value" label="Location" :error-messages="dateAndTime.errorMessage.value"
-          variant="outlined" required />
 
-        <v-select label="Researches" multiple variant="outlined" required v-model="researches.value.value"
+        <date-picker label="Date and Time" v-model="dateAndTime.value.value" :error="dateAndTime.errorMessage.value" />
+
+        <v-text-field v-model="location.value.value" label="Location" :error-messages="location.errorMessage.value"
+          variant="outlined" />
+
+        <!-- @vue-ignore -->
+        <v-select label="Researches" multiple variant="outlined" v-model="researches.value.value"
           :error-messages="researches.errorMessage.value"
           :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']" />
 
-        <v-select label="Panelists" multiple variant="outlined" required v-model="panelists.value.value"
+        <!-- @vue-ignore -->
+        <v-select label="Panelists" multiple variant="outlined" v-model="panelists.value.value"
           :error-messages="panelists.errorMessage.value"
           :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']" />
 
@@ -49,22 +51,19 @@ import { ref } from 'vue';
 const prompt = ref(false);
 const confirm = ref(false);
 
-const dateAndTime = useField('dateAndTime');
-const location = useField('location');
-const panelists = useField('panelists');
-const researches = useField('researches')
+
 
 const { handleSubmit } = useForm({
   validationSchema: {
     dateAndTime(v: string) {
       if (v) return true;
 
-      return 'Select an item.'
+      return 'Please enter a string.'
     },
     location(v: string) {
       if (v) return true;
 
-      return 'Select an item.'
+      return 'Please enter a string.'
     },
     panelists(v: string) {
       if (v) return true;
@@ -78,6 +77,11 @@ const { handleSubmit } = useForm({
     },
   }
 });
+
+const dateAndTime = useField('dateAndTime');
+const location = useField('location');
+const panelists = useField('panelists');
+const researches = useField('researches')
 
 const create = handleSubmit(async values => {
   console.log(JSON.stringify(values));
