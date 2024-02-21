@@ -13,7 +13,7 @@ const ScheduleSchema = new mongoose.Schema(
 export const ScheduleModel = mongoose.model("Schedule", ScheduleSchema);
 
 //GET
-export const getSchedules = () => ScheduleModel.find();
+export const getAllSchedules = () => ScheduleModel.find();
 export const getScheduleByID = (id: string) => ScheduleModel.findById(id);
 
 //POST

@@ -34,21 +34,9 @@ const visible = ref(false);
 
 const { handleSubmit, setFieldError } = useForm({
   validationSchema: {
-    role(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    userID(v: string) {
-      if (v) return true;
-
-      return 'User ID is required.'
-    },
-    password(v: string) {
-      if (v) return true;
-
-      return 'Password is required.'
-    }
+    role: (v: string) => v ? true : 'Field is required.',
+    userID: (v: string) => v ? true : 'User ID is required.',
+    password: (v: string) => v ? true : 'Password is required.'
   }
 })
 

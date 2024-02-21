@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import axios from "axios";
 import { useUsersStore } from "./users";
 import moment from "moment";
@@ -22,7 +22,7 @@ export const useResearchesStore = defineStore(
           _id: research._id,
           researchTitle: research.researchTitle,
           researchLeaders: research.researchLeaders.map((leader: any) => {
-            const matchingUser = user.userList.find(
+            const matchingUser: any = user.userList.find(
               (user: any) => user._id === leader,
             );
             if (matchingUser) {
@@ -46,15 +46,15 @@ export const useResearchesStore = defineStore(
     const getUserResearches = async () => {
       isLoading.value = true;
       try {
-        //@ts-ignore
         const response = await axios.get(
+          //@ts-ignore
           `/api/researches/${user.currentUser._id}`,
         );
         userResearchList.value = response.data.map((research: any) => ({
           _id: research._id,
           researchTitle: research.researchTitle,
           researchLeaders: research.researchLeaders.map((leader: any) => {
-            const matchingUser = user.userList.find(
+            const matchingUser: any = user.userList.find(
               (user: any) => user._id === leader,
             );
             if (matchingUser) {
@@ -85,7 +85,7 @@ export const useResearchesStore = defineStore(
             researchTitle: response.data.researchTitle,
             researchLeaders: response.data.researchLeaders.map(
               (leader: any) => {
-                const matchingUser = user.userList.find(
+                const matchingUser: any = user.userList.find(
                   (user: any) => user._id === leader,
                 );
                 if (matchingUser) {
@@ -121,3 +121,15 @@ export const useResearchesStore = defineStore(
     },
   },
 );
+
+export interface Research {
+  _id: string;
+  researchTitle: string;
+  researchStatus: string;
+  conceptNote: any;
+  createdAt: string;
+  updatedAt: string;
+  titlePresentation: string;
+  initialPresentation: string;
+  finalPresentation: string;
+}

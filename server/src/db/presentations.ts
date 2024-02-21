@@ -15,7 +15,6 @@ const PresentationSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "PanelistNote",
-        required: true,
       },
     ],
   },

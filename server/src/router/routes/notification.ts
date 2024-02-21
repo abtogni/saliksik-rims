@@ -4,9 +4,9 @@ import {
   getAllNotifcations,
   sendNewNotification,
   updateNotification,
-} from "../controllers/notification";
+} from "../../controllers/notification";
 import { Router } from "express";
-import { isAuthenticated } from "../middlewares";
+import { isAuthenticated } from "../../middlewares";
 
 export default (router: Router) => {
   router

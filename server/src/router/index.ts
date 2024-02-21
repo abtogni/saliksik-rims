@@ -1,8 +1,9 @@
 import { Router } from "express";
-import authentication from "./authentication";
-import users from "./users";
-import researches from "./researches";
-import notification from "./notification";
+import authentication from "./routes/authentication";
+import users from "./routes/users";
+import researches from "./routes/researches";
+import notification from "./routes/notification";
+import schedules from "./routes/schedules";
 
 const router = Router();
 
@@ -11,5 +12,6 @@ export default (): Router => {
   users(router);
   researches(router);
   notification(router);
+  schedules(router);
   return router;
 };

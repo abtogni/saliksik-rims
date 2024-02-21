@@ -1,49 +1,31 @@
 <template>
-  <v-container fluid class="fill-height body pa-0">
-    <!--header-->
-    <v-row no-gutters class="form-body">
-      <v-form class="form-concept-note" @submit.prevent="create">
-        <v-row no-gutters>
-          <v-col class="col-start">
-            <v-row no-gutters>
-              <h2>Create Concept Note</h2>
-            </v-row>
-            <v-row no-gutters>
-              <h2 class="caption">
-                Fill out all required fields. Put "N/A" if not applicable.
-              </h2>
-            </v-row>
-          </v-col>
-          <v-col class="col-end">
-            <v-btn variant="tonal" @click="statusType = 'Verify and Review'"
-              prepend-icon="mdi-file-document-check-outline" type="submit" text="Submit" class="button-regular" />
-            <v-btn variant="outlined" @click="statusType = 'Draft'" type="submit" prepend-icon="mdi-file-document-outline"
-              text="Save as Draft" class="button-outlined" />
-          </v-col>
-        </v-row>
-
-        <!--form-->
-
+  <v-container>
+    <v-row>
+      <v-form @submit="create">
         <v-card class="card-concept-note">
-          <v-text-field v-model="projectTitle.value.value" :error-messages="projectTitle.errorMessage.value"
-            label="Project Title" density="compact" required variant="outlined" />
           <v-row>
             <v-col class="card-concept-note">
+              <v-text-field v-model="projectTitle.value.value" :error-messages="projectTitle.errorMessage.value"
+                label="Project Title" density="compact" required variant="outlined">
+                <v-tooltip activator="parent" location="top" width="30%">Title of the project</v-tooltip>
+              </v-text-field>
               <v-text-field v-model="implementingAgency.value.value"
-                :error-messages="implementingAgency.errorMessage.value" label="Implementing Agency/Department"
-                density="compact" required variant="outlined" />
+                :error-messages="implementingAgency.errorMessage.value" label="Implementing Agency" density="compact"
+                required variant="outlined">
+                <v-tooltip activator="parent" location="top" width="30%">Agency responsible for implementing the
+                  project</v-tooltip>
+              </v-text-field>
               <v-text-field v-model="cooperatingAgency.value.value" :error-messages="cooperatingAgency.errorMessage.value"
                 label="Cooperating Agency" density="compact" required variant="outlined">
-                <v-tooltip activator="parent" location="top">
-                  State the name of agency to be tapped for funding/
-                  co-implementing the project.
-                </v-tooltip>
+                <v-tooltip activator="parent" location="top" width="30%">Agency(s) collaborating with the
+                  implementing agency</v-tooltip>
               </v-text-field>
               <v-text-field v-model="siteOfImplementation.value.value"
-                :error-messages="siteOfImplementation.errorMessage.value" label="Site/s of Implementation"
-                density="compact" required variant="outlined" />
-            </v-col>
-            <v-col class="card-concept-note">
+                :error-messages="siteOfImplementation.errorMessage.value" label="Site of Implementation" density="compact"
+                required variant="outlined">
+                <v-tooltip activator="parent" location="top" width="30%">Location(s) where the project will be
+                  implemented</v-tooltip>
+              </v-text-field>
               <v-text-field v-model="projectDuration.value.value" :error-messages="projectDuration.errorMessage.value"
                 label="Project Duration" density="compact" required variant="outlined">
                 <v-tooltip activator="parent" location="top" width="30%">Specific dates that the project will be
@@ -142,11 +124,21 @@
           <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required chips
             multiple />
         </v-card>
+        <v-card class="card-concept-note2">
+          <v-textarea v-model="workPlan.value.value" :error-messages="workPlan.errorMessage.value" label="Work Plan"
+            variant="outlined" required rows="20" auto-grow />
+          <v-tooltip activator="parent" location="top" width="25%">Detailed plan of activities and timeline for the
+            project</v-tooltip>
+          <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required chips
+            multiple />
+        </v-card>
+
         <!-- Other v-card elements -->
       </v-form>
     </v-row>
   </v-container>
 </template>
+
 <script setup lang="ts">
 import router from '@/router';
 import { useResearchesStore } from '@/stores/researches';
@@ -159,71 +151,20 @@ const statusType = ref('');
 
 const { handleSubmit } = useForm({
   validationSchema: {
-    projectTitle(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    implementingAgency(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    cooperatingAgency(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    siteOfImplementation(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    projectDuration(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    totalProjectCost(v: string) {
-      if (!isNaN(Number(v))) return true;
-
-      return 'Field must be a number.'
-    },
-    fundingSource(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    projectDescription(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    significance(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    objectives(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    methodology(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    technologyRoadmap(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    expectedOutputs(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
+    projectTitle: (v: string) => v ? true : 'Field is required.',
+    implementingAgency: (v: string) => v ? true : 'Field is required.',
+    cooperatingAgency: (v: string) => v ? true : 'Field is required.',
+    siteOfImplementation: (v: string) => v ? true : 'Field is required.',
+    projectDuration: (v: string) => v ? true : 'Field is required.',
+    totalProjectCost: (v: string) => !isNaN(Number(v)) ? true : 'Field must be a number.',
+    fundingSource: (v: string) => v ? true : 'Field is required.',
+    projectDescription: (v: string) => v ? true : 'Field is required.',
+    significance: (v: string) => v ? true : 'Field is required.',
+    objectives: (v: string) => v ? true : 'Field is required.',
+    methodology: (v: string) => v ? true : 'Field is required.',
+    technologyRoadmap: (v: string) => v ? true : 'Field is required.',
+    expectedOutputs: (v: string) => v ? true : 'Field is required.',
+    workPlan: (v: string) => v ? true : 'Field is required.',
   }
 })
 
@@ -240,6 +181,7 @@ const objectives = useField('objectives');
 const methodology = useField('methodology');
 const technologyRoadmap = useField('technologyRoadmap');
 const expectedOutputs = useField('expectedOutputs');
+const workPlan = useField('workPlan');
 
 const create = handleSubmit(async (values) => {
   const data = JSON.stringify({

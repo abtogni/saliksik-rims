@@ -1,7 +1,7 @@
 <template>
   <v-menu v-model="isMenuOpen" :close-on-content-click="false">
     <template v-slot:activator="{ props }">
-      <v-text-field :label="label" :model-value="formattedDate" :error-messages="error" v-bind="props" variant="outlined"
+      <v-text-field :label="label" :rules="fieldNeed" :model-value="formattedDate" v-bind="props" variant="outlined"
         hide-details />
     </template>
     <VueDatePicker label="Date and Time" v-model="selectedDate" :min-date="new Date()" :is-24="false"
@@ -11,11 +11,18 @@
 
 <script setup lang="ts">
 import moment from "moment";
-import { ref, computed, watch, defineProps, defineEmits } from "vue";
+import { ref, computed, watch, defineProps } from "vue";
 
-const { label, error, modelValue } = defineProps([
+const fieldNeed = ref([
+  (value: any) => {
+    if (value) return true;
+
+    return 'Field is required';
+  },
+]);
+
+const { label, modelValue } = defineProps([
   "label",
-  "error",
   "modelValue",
 ]);
 const emit = defineEmits(["update:modelValue"]);
@@ -35,6 +42,7 @@ watch(selectedDate, (newDate) => {
   emit("update:modelValue", newDate);
 });
 </script>
+
 <style>
 .v-overlay__content:has(> .v-date-picker) {
   min-width: auto !important;
@@ -43,4 +51,4 @@ watch(selectedDate, (newDate) => {
 .v-text-field {
   margin-bottom: 2rem;
 }
-</style>`
+</style>

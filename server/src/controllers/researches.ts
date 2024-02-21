@@ -76,30 +76,22 @@ export const updateResearch = async (req: Request, res: Response) => {
       return res.status(404).json({ error: "Research not found" });
     }
 
-    if (researchTitle) {
-      research.researchTitle = researchTitle;
-    }
+    if (researchTitle) research.researchTitle = researchTitle;
 
-    if (researchLeaders) {
-      research.researchLeaders = researchLeaders;
-    }
+    if (researchLeaders) research.researchLeaders = researchLeaders;
 
-    if (researchStatus) {
-      research.researchStatus = researchStatus;
-    }
+    if (researchStatus) research.researchStatus = researchStatus;
 
-    if (conceptNote) {
+    if (conceptNote)
       research.conceptNote = {
         ...research.conceptNote,
         ...conceptNote,
       };
-    }
 
     await research.save();
+    await updateResearchByID(id, research);
 
-    return res
-      .status(200)
-      .json({ message: "Research updated successfully", research });
+    return res.status(200).json({ message: "Research updated successfully" });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Internal server error" });

@@ -32,7 +32,9 @@
                   <div class="header-left truncate">
                     <div class="header-caption-ctr">
                       <h5>Concept Note
-                        <concept_note_reviewing />
+                        <concept_note_reviewing
+                          v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Verify and Review'" />
+                        <no_status v-else />
                       </h5>
 
                       <p class="caption">Create and submit concept note to start.</p>
@@ -40,11 +42,11 @@
                   </div>
 
                   <div class="header-right">
-                    <v-btn type="submit" flat prepend-icon="mdi-file-document-plus-outline" class="button-regular"
-                      @click="$router.push(`${currentResearch._id}/create_concept_note`)">Create Concept Note
+                    <v-btn v-if="currentResearch.conceptNote" type="submit" flat variant="outlined"
+                      prepend-icon="mdi-file-document-edit-outline" class="button-outlined">Edit Concept Note
                     </v-btn>
-                    <v-btn type="submit" flat variant="outlined" prepend-icon="mdi-file-document-edit-outline"
-                      class="button-outlined">Edit Concept Note
+                    <v-btn type="submit" flat prepend-icon="mdi-file-document-plus-outline" class="button-regular"
+                      @click="$router.push(`${currentResearch._id}/create_concept_note`)" v-else>Create Concept Note
                     </v-btn>
                   </div>
                 </v-card>
