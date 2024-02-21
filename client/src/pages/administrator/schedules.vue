@@ -38,8 +38,12 @@
           </v-tabs>
           <v-window v-model="tab">
             <v-window-item value="title">
-              <create_presentation_modal />
-              <presentation_overview :presentation="presentation" />
+              <template v-if="schedules.length > 0">
+                <schedule_overview :schedule="schedules" />
+              </template>
+              <template v-else>
+                <p>No schedules available.</p>
+              </template>
             </v-window-item>
             <v-window-item value="final"> final </v-window-item>
           </v-window>
@@ -50,8 +54,19 @@
 </template>
 
 <script setup lang="ts">
-import presentation from "@/assets/sample_presentation.json" with { type: "json" };
-import { ref } from "vue";
+import axios from "axios";
+import { onMounted, ref } from "vue";
+
+const schedules = ref([]);
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('/api/schedules');
+    schedules.value = response.data;
+  } catch (error) {
+    console.error(error);
+  }
+})
 
 const tab = ref("null");
 </script>

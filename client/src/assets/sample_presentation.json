@@ -1,50 +1,16 @@
 [
-    {
-      "_id": "A1",
-      "datetime": "2024-01-02T13:00:00Z",
-      "location": "Location A",
-      "panelist_id": ["Panelist A", "Panelist B", "Panelist C", "Panelist D"],
-      "research_id": ["Research A", "Research B"],
-      "created_at": "2024-01-02T00:00:00Z"
-    },
-    {
-      "_id": "A2",
-      "datetime": "2024-01-02T14:00:00Z",
-      "location": "Location A",
-      "panelist_id": ["Panelist A", "Panelist B"],
-      "research_id": ["Research A", "Research B", "Research C", "Research E"],
-      "created_at": "2024-01-02T00:00:00Z"
-    },
-    {
-      "_id": "A3",
-      "datetime": "2024-01-03T15:00:00Z",
-      "location": "Location A",
-      "panelist_id": ["Panelist A", "Panelist B", "Panelist C", "Panelist D"],
-      "research_id": ["Research A", "Research B"],
-      "created_at": "2024-01-03T00:00:00Z"
-    },
-    {
-      "_id": "A4",
-      "datetime": "2024-01-03T16:00:00Z",
-      "location": "Location A",
-      "panelist_id": ["Panelist A", "Panelist B", "Panelist C", "Panelist D"],
-      "research_id": ["Research G", "Research C"],
-      "created_at": "2024-01-03T00:00:00Z"
-    },
-    {
-      "_id": "A5",
-      "datetime": "2024-01-05T17:00:00Z",
-      "location": "Location A",
-      "panelist_id": ["Panelist A", "Panelist B", "Panelist C", "Panelist D"],
-      "research_id": ["Research A", "Research B"],
-      "created_at": "2024-01-05T00:00:00Z"
-    },
-    {
-      "_id": "A6",
-      "datetime": "2024-01-05T18:00:00Z",
-      "location": "Location A",
-      "panelist_id": ["Panelist A", "Panelist B", "Panelist C", "Panelist D"],
-      "research_id": ["Research A", "Research B"],
-      "created_at": "2024-01-05T00:00:00Z"
-    }
+  {
+    "_id": "65d60c9aa72644ba99afb17a",
+    "dateAndTime": "2024-02-29T14:45:00.000Z",
+    "location": "sada",
+    "panelists": [
+      "65d01e8796327adb5cb7b16d",
+      "65d04f22ceafb84b510f6f97",
+      "65d16a8939b48e29628cef99"
+    ],
+    "researches": ["65d60a98a72644ba99afb147"],
+    "createdAt": "2024-02-21T14:45:46.030Z",
+    "updatedAt": "2024-02-21T14:45:46.030Z",
+    "__v": 0
+  }
 ]

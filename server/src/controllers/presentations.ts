@@ -12,7 +12,7 @@ import {
 export const getPresentations = async (_req: Request, res: Response) => {
   try {
     const data = await getAllPresentations();
-    return res.status(200).json({ data }).end();
+    return res.status(200).json(data).end();
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);
