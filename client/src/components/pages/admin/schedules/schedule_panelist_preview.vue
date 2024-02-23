@@ -17,7 +17,9 @@
         <v-card-text class="pres-res-body">
           <div class="pres-res-left">
             <v-btn variant="text" icon="mdi-account-multiple-outline"> </v-btn>
-            <div class="text">{{ panelists.join(', ') }}</div>
+            <div class="text">
+              {{ panelists.map((panelist: any) => users.find((user: any) => user.key === panelist)?.name).join(', ') }}
+            </div>
           </div>
           <div class="pres-res-right">
           </div>
@@ -28,5 +30,5 @@
 </template>
 
 <script setup lang="ts">
-const { panelists } = defineProps(['panelists']);
+const { panelists, users } = defineProps(['panelists', 'users']);
 </script>

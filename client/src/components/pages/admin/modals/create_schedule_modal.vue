@@ -33,16 +33,14 @@
 </template>
 
 <script setup lang="ts">
-import { useUsersStore } from '@/stores/users';
-import { useResearchesStore } from '@/stores/researches';
+
 import { useField, useForm } from 'vee-validate';
-import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 import axios from 'axios';
-import router from '@/router';
 
 const prompt = ref(false);
-const users = ref<{ key: any; name: string; }[]>([]);
-const researchList = ref<{ key: any; name: string; }[]>([]);
+
+const { users, researchList } = defineProps(['users', 'researchList']);
 
 const { handleSubmit } = useForm({
   validationSchema: {
@@ -87,20 +85,7 @@ const create = handleSubmit(async values => {
     .finally(() => window.location.reload());
 });
 
-onMounted(async () => {
-  await useResearchesStore().getResearchList();
-  const userStore = useUsersStore().userList;
-  const researchStore = useResearchesStore().researchList;
-  users.value = userStore.map((user: any) => ({
-    key: user._id,
-    name: user.firstName + ' ' + user.lastName
-  }));
 
-  researchList.value = researchStore.map((research: any) => ({
-    key: research._id,
-    name: research.researchTitle
-  }));
-});
 </script>
 
 <style lang="scss">

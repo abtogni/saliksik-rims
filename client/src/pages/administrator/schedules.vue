@@ -14,7 +14,7 @@
         </div>
 
         <div class="header-right">
-          <create_schedule_modal />
+          <create_schedule_modal :users="users" :researchList="researchList" />
         </div>
       </v-card-title>
       <v-card-text class="content">
@@ -39,7 +39,7 @@
           <v-window v-model="tab">
             <v-window-item value="title">
               <template v-if="schedules.length > 0">
-                <schedule_overview :schedule="schedules" />
+                <schedule_overview :schedule="schedules" :users="users" :researchList="researchList" />
               </template>
               <template v-else>
                 <p>No schedules available.</p>
@@ -54,19 +54,37 @@
 </template>
 
 <script setup lang="ts">
+import { useUsersStore } from '@/stores/users';
+import { useResearchesStore } from '@/stores/researches';
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
+
+const users = ref<{ key: any; name: string; }[]>([]);
+const researchList = ref<{ key: any; name: string; }[]>([]);
 const schedules = ref([]);
 
 onMounted(async () => {
+  await useResearchesStore().getResearchList();
+  const userStore = useUsersStore().userList;
+  const researchStore = useResearchesStore().researchList;
+  users.value = userStore.map((user: any) => ({
+    key: user._id,
+    name: user.firstName + ' ' + user.lastName
+  }));
+
+  researchList.value = researchStore.map((research: any) => ({
+    key: research._id,
+    name: research.researchTitle
+  }));
+
   try {
     const response = await axios.get('/api/schedules');
     schedules.value = response.data;
   } catch (error) {
     console.error(error);
   }
-})
+});
 
 const tab = ref("null");
 </script>

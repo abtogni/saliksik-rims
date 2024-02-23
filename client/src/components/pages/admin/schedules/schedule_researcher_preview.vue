@@ -44,7 +44,9 @@
                 <div class="bold-upper">Researches</div>
               </v-tooltip>
             </v-btn>
-            <div class="text">{{ researches.join(', ') }}</div>
+            <div class="text">
+              {{ researches.map((research: any) => researchIDs.find((id: any) => id.key === research)?.name).join(', ') }}
+            </div>
           </div>
           <div class="pres-res-right">
             <!-- <v-btn variant="text" icon="mdi-trash-can-outline">
@@ -76,5 +78,5 @@
 </template>
 
 <script setup lang="ts">
-const { researches } = defineProps(['researches']);
+const { researches, researchIDs } = defineProps(['researches', 'researchIDs']);
 </script>

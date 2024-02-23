@@ -79,9 +79,9 @@
                 </v-card-title>
               </v-card>
 
-              <schedule_researcher_preview :researches="schedule.researches" />
+              <schedule_researcher_preview :researches="schedule.researches" :researchIDs="researchList" />
               <br>
-              <schedule_panelist_preview :panelists="schedule.panelists" />
+              <schedule_panelist_preview :panelists="schedule.panelists" :users="users" />
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -93,7 +93,7 @@
 <script setup lang="ts">
 import moment from "moment";
 
-const { schedule } = defineProps(["schedule"]);
+const { schedule, users, researchList } = defineProps(['schedule', 'users', 'researchList']);
 
 
 const sortedSchedules = [...schedule].sort((a: any, b: any) => moment(a.dateAndTime).diff(moment(b.dateAndTime)));
