@@ -25,18 +25,12 @@ const ResearchSchema = new mongoose.Schema(
       workPlan: { type: String },
       status: { type: String },
     },
-    titlePresentation: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Presentation",
-    },
-    initialPresentation: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Presentation",
-    },
-    finalPresentation: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Presentation",
-    },
+    presentations: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Presentation",
+      },
+    ],
   },
   { timestamps: true },
 );

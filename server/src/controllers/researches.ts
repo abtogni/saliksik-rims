@@ -17,6 +17,7 @@ export const createNewResearch = async (req: Request, res: Response) => {
       researchTitle,
       researchLeaders,
       researchStatus: "No Status",
+      presentations: [],
     });
 
     return res.status(201).end();
@@ -67,8 +68,13 @@ export const fetchResearch = async (req: Request, res: Response) => {
 export const updateResearch = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { researchTitle, researchLeaders, researchStatus, conceptNote } =
-      req.body;
+    const {
+      researchTitle,
+      researchLeaders,
+      researchStatus,
+      conceptNote,
+      presentations,
+    } = req.body;
 
     const research = await getResearchByID(id);
 
@@ -81,6 +87,8 @@ export const updateResearch = async (req: Request, res: Response) => {
     if (researchLeaders) research.researchLeaders = researchLeaders;
 
     if (researchStatus) research.researchStatus = researchStatus;
+
+    if (presentations) research.presentations = presentations;
 
     if (conceptNote)
       research.conceptNote = {

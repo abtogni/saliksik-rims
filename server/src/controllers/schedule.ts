@@ -8,6 +8,7 @@ import {
   updateScheduleByID,
 } from "../db/schedules";
 import { createPresentation } from "../db/presentations";
+import { updateResearchByID } from "../db/researches";
 
 // get all schedules
 export const getSchedules = async (_req: Request, res: Response) => {
@@ -32,10 +33,14 @@ export const createNewSchedule = async (req: Request, res: Response) => {
   });
 
   researches.forEach(async (research: any) => {
-    await createPresentation({
+    const presentation = await createPresentation({
       researchID: research,
       scheduleID: result._id,
       status: "Pending",
+    });
+
+    await updateResearchByID(research, {
+      $push: { presentations: presentation._id },
     });
   });
 
