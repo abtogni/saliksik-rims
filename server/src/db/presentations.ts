@@ -8,14 +8,17 @@ const PanelistNoteSchema = new mongoose.Schema({
 
 const PresentationSchema = new mongoose.Schema(
   {
-    type: { type: String, required: true },
+    researchID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Research",
+      required: true,
+    },
     scheduleID: { type: String, required: true },
     status: { type: String, required: true },
     panelistNotes: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "PanelistNote",
-        required: true,
       },
     ],
   },

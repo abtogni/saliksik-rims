@@ -2,18 +2,21 @@ import mongoose from "mongoose";
 
 const ResearchSchema = new mongoose.Schema(
   {
-    researchTitle: { type: String, required: true },
-    researchLeaders: { type: [String], required: true },
-    researchStatus: { type: String, required: true },
+    researchTitle: { type: String },
+    researchLeaders: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "User",
+    },
+    researchStatus: { type: String },
     conceptNote: {
       projectTitle: { type: String },
-      implementingDept: { type: String },
+      implementingAgency: { type: String },
       cooperatingAgency: { type: String },
       projectDuration: { type: String },
       siteOfImplementation: { type: String },
       totalProjectCost: { type: Number },
       fundingSource: { type: String },
-      description: { type: String },
+      projectDescription: { type: String },
       objectives: { type: String },
       significance: { type: String },
       methodology: { type: String },
@@ -21,19 +24,13 @@ const ResearchSchema = new mongoose.Schema(
       technologyRoadmap: { type: String },
       workPlan: { type: String },
       status: { type: String },
-      presentation: {
+    },
+    presentations: [
+      {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Presentation",
       },
-    },
-    initialPresentation: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Presentation",
-    },
-    finalPresentation: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Presentation",
-    },
+    ],
   },
   { timestamps: true },
 );

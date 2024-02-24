@@ -8,7 +8,7 @@
           </v-btn>
           <v-toolbar-title>Create New User</v-toolbar-title>
         </v-toolbar>
-        <v-form novalidate class="form_content" @submit.prevent="register">
+        <v-form class="form_content" @submit.prevent="register">
           <v-row>
             <v-col>
               <!-- @vue-ignore -->

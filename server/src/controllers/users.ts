@@ -48,13 +48,13 @@ export const updateUser = async (req: Request, res: Response) => {
 
     const user = await getUserById(id);
 
-    user.role = role;
-    user.affiliation = affiliation;
-    user.firstName = firstName;
-    user.middleName = middleName;
-    user.lastName = lastName;
-    user.suffix = suffix;
-    user.email = email;
+    if (role) user.role = role;
+    if (affiliation) user.affiliation = affiliation;
+    if (firstName) user.firstName = firstName;
+    if (middleName) user.middleName = middleName;
+    if (lastName) user.lastName = lastName;
+    if (suffix) user.suffix = suffix;
+    if (email) user.email = email;
 
     await user.save();
     await updateUserByID(id, user);

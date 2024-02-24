@@ -34,21 +34,9 @@ const visible = ref(false);
 
 const { handleSubmit, setFieldError } = useForm({
   validationSchema: {
-    role(v: string) {
-      if (v) return true;
-
-      return 'Field is required.'
-    },
-    userID(v: string) {
-      if (v) return true;
-
-      return 'User ID is required.'
-    },
-    password(v: string) {
-      if (v) return true;
-
-      return 'Password is required.'
-    }
+    role: (v: string) => v ? true : 'Field is required.',
+    userID: (v: string) => v ? true : 'User ID is required.',
+    password: (v: string) => v ? true : 'Password is required.'
   }
 })
 
@@ -68,11 +56,11 @@ const login = handleSubmit(async (values) => {
   }).then((response) => {
     alert(response.data.message);
     if (response.data.role == 'Administrator') {
-      router.push({ path: '/administrator/concept-note-approval', force: true })
+      window.location.href = '/administrator/concept-note-approval';
     } else if (response.data.role == 'Researcher') {
-      router.push({ path: '/researcher', force: true })
+      window.location.href = '/researcher';
     } else if (response.data.role == 'Internal Panelist' || response.data.role == 'External Panelist') {
-      router.push({ path: '/panelists', force: true })
+      window.location.href = '/panelists';
     }
   }).catch(error => {
 

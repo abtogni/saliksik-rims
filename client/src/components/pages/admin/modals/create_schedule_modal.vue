@@ -1,5 +1,6 @@
 <template>
-  <v-btn class="button-regular" outlined @click="prompt = true">Create Presentation</v-btn>
+  <v-btn flat prepend-icon="mdi-calendar-plus-outline" class="button-regular" @click="prompt = true"
+    text="Create Schedule" />
 
   <v-dialog v-model="prompt">
     <v-card class="form_modal">
@@ -9,69 +10,88 @@
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
-      <v-form class="form_content" @submit.prevent="">
-        <p>Date and Time</p>
-        <VueDatePicker label="Date and Time" v-model="form_data.date" :min-date="new Date()" :is-24="false" />
+      <v-form class="form_content" @submit.prevent="create">
 
-        <v-text-field
-          v-model="form_data.location"
-          label="Location"
-          variant="outlined"
-          :rules="field_required"
-        />
 
-        <v-select
-            label="Researches"
-            multiple
-            variant="outlined"
-            :rules="field_required"
-            v-model="form_data.research_ids"
-            :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-          />
+        <date-picker label="Date and Time" v-model="dateAndTime.value.value" />
 
-          <v-select
-            label="Panelists"
-            multiple
-            variant="outlined"
-            :rules="field_required"
-            v-model="form_data.panelist_ids"
-            :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
-          />
+        <v-text-field v-model="location.value.value" label="Location" :error-messages="location.errorMessage.value"
+          variant="outlined" />
 
-          <v-btn @click="confirm = true" class="button-regular">Confirm Schedule</v-btn>
+        <!-- @vue-ignore -->
+        <v-select label="Researches" multiple variant="outlined" v-model="researches.value.value"
+          :error-messages="researches.errorMessage.value" :items="researchList" item-title="name" item-value="key" />
 
-          <v-dialog v-model="confirm">
-            <v-card class="dialog-box">
-              <p>These will alert the research members of these researches: {{ form_data.research_ids.join(', ') }}. Do you want to send a notification to present?</p>
-              <v-btn class="button-regular" type="submit">Confirm</v-btn>
-              <v-btn @click="confirm = false">Cancel</v-btn>
-            </v-card>
-          </v-dialog>
+        <!-- @vue-ignore -->
+        <v-select label="Panelists" multiple variant="outlined" v-model="panelists.value.value"
+          :error-messages="panelists.errorMessage.value" :items="users" item-title="name" item-value="key" />
+
+        <v-btn class="button-regular" type="submit">Confirm</v-btn>
       </v-form>
     </v-card>
   </v-dialog>
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue';
-const prompt = ref(false);
-const confirm = ref(false);
 
-const form_data = reactive({
-  date: null,
-  location: '',
-  research_ids: [],
-  panelist_ids: []
+import { useField, useForm } from 'vee-validate';
+import { ref } from 'vue';
+import axios from 'axios';
+
+const prompt = ref(false);
+
+const { users, researchList } = defineProps(['users', 'researchList']);
+
+const { handleSubmit } = useForm({
+  validationSchema: {
+    dateAndTime(v: string) {
+      if (v) return true;
+
+      return 'Please enter a string.'
+    },
+    location(v: string) {
+      if (v) return true;
+
+      return 'Please enter a string.'
+    },
+    panelists(v: string) {
+      if (v) return true;
+
+      return 'Select an item.'
+    },
+    researches(v: string) {
+      if (v) return true;
+
+      return 'Select an item.'
+    },
+  }
 });
 
-const field_required = [(v: string) => !!v || "Field is required"];
+const dateAndTime = useField('dateAndTime');
+const location = useField('location');
+const panelists = useField('panelists');
+const researches = useField('researches')
+
+const create = handleSubmit(async values => {
+  const data = JSON.stringify(values);
+  return axios
+    .post('/api/schedule/create', data, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(() => alert('Successfully set a new schedule'))
+    .catch(() => alert('An error occurred'))
+    .finally(() => window.location.reload());
+});
+
 
 </script>
 
 <style lang="scss">
-  .dialog-box{
-    margin: 0 auto;
-    padding: 2rem;
-    width: 20rem;
-  }
+.dialog-box {
+  margin: 0 auto;
+  padding: 2rem;
+  width: 20rem;
+}
 </style>

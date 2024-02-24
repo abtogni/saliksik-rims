@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { isAuthenticated, isOwner } from "../middlewares";
+import { isAuthenticated, isOwner } from "../../middlewares";
 import {
   createNewResearch,
   deleteResearch,
@@ -7,7 +7,7 @@ import {
   getAllResearches,
   getUserResearches,
   updateResearch,
-} from "../controllers/researches";
+} from "../../controllers/researches";
 
 export default (router: Router) => {
   //GET
