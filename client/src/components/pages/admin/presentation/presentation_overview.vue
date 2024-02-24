@@ -5,11 +5,12 @@
     v-for="(presentation_group, date) in grouped_presentations"
     :key="date"
     class="body"
+    
   >
-    <v-card flat class="header">
+    <v-card flat class="header" >
       <div class="header-left truncate">
         <div class="header-caption">
-          <h5>
+          <h5 style="padding-bottom: .3rem;">
             {{ format_date(grouped_presentations[date][0].datetime) }}
           </h5>
 
@@ -19,28 +20,8 @@
           </p> -->
         </div>
       </div>
-
-      <div class="header-right">
-        <!--cta
-        <v-btn
-          type="submit"
-          flat
-          prepend-icon="mdi-file-upload-outline"
-          class="button-regular"
-          >Submit Research Paper
-        </v-btn>
-
-         <v-btn
-          type="submit"
-          flat
-          variant="outlined"
-          prepend-icon="mdi-close-circle-outline"
-          class="button-outlined"
-          >Not Going
-        </v-btn>  -->
-      </div>
     </v-card>
-    <div class="content">
+    <div class="content" >
       <v-card variant="outlined" class="card-style">
         <v-expansion-panels>
           <v-expansion-panel
