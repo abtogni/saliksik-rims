@@ -6,7 +6,7 @@ import {
   fetchSchedule,
   getSchedules,
   updateSchedule,
-} from "../../controllers/schedule";
+} from "../../controllers/schedules";
 
 export default (router: Router) => {
   //GET

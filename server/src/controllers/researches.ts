@@ -17,7 +17,6 @@ export const createNewResearch = async (req: Request, res: Response) => {
       researchTitle,
       researchLeaders,
       researchStatus: "No Status",
-      presentations: [],
     });
 
     return res.status(201).end();
