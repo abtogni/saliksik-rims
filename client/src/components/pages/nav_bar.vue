@@ -30,8 +30,8 @@
           <v-badge color="info" content="6" inline></v-badge>
         </template>
       </v-list-item>
-      <v-list-item prepend-icon="mdi-calendar-month-outline" title="Presentations" value="presentations"
-        href="/administrator/presentations" link>
+      <v-list-item prepend-icon="mdi-calendar-month-outline" title="Presentation" value="schedules"
+        href="/administrator/schedules" link>
         <template v-slot:append>
           <v-badge color="info" content="6" inline></v-badge>
         </template>
