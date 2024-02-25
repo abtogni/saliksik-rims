@@ -7,7 +7,10 @@ import {
   getScheduleByID,
   updateScheduleByID,
 } from "../db/schedules";
-import { createPresentation } from "../db/presentations";
+import {
+  createPresentation,
+  getPresentationByResearchID,
+} from "../db/presentations";
 import { updateResearchByID } from "../db/researches";
 
 // get all schedules
@@ -29,20 +32,32 @@ export const createNewSchedule = async (req: Request, res: Response) => {
     dateAndTime,
     location,
     panelists,
-    researches,
   });
 
-  researches.forEach(async (research: any) => {
-    const presentation = await createPresentation({
-      researchID: research,
-      scheduleID: result._id,
-      status: "Pending",
-    });
+  await Promise.all(
+    researches.map(async (research: any) => {
+      const existingPresentation = await getPresentationByResearchID(research);
 
-    await updateResearchByID(research, {
-      $push: { presentations: presentation._id },
-    });
-  });
+      const presentationType = existingPresentation ? "Final" : "Title";
+
+      const presentation = await createPresentation({
+        scheduleID: result._id,
+        researchID: research,
+        status: "Pending",
+        presentationType,
+      });
+      const id = result._id.toString();
+      await Promise.all([
+        updateResearchByID(research, {
+          $push: { presentations: presentation._id },
+        }),
+
+        updateScheduleByID(id, {
+          $push: { presentations: presentation._id },
+        }),
+      ]);
+    }),
+  );
 
   res.status(200).end();
 };
@@ -65,13 +80,13 @@ export const fetchSchedule = async (req: Request, res: Response) => {
 export const updateSchedule = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { dateAndTime, location, panelists, researches } = req.body;
+    const { dateAndTime, location, panelists, presentations } = req.body;
     const schedule = await getScheduleByID(id);
 
     if (dateAndTime) schedule.dateAndTime = dateAndTime;
     if (location) schedule.location = location;
     if (panelists) schedule.panelists = panelists;
-    if (researches) schedule.researches = researches;
+    if (presentations) schedule.presentations = presentations;
 
     await schedule.save();
     await updateScheduleByID(id, schedule);

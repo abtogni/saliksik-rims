@@ -11,10 +11,10 @@ const PresentationSchema = new mongoose.Schema(
     researchID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Research",
-      required: true,
     },
-    scheduleID: { type: String, required: true },
-    status: { type: String, required: true },
+    presentationType: { type: String },
+    scheduleID: { type: String },
+    status: { type: String },
     panelistNotes: [
       {
         type: mongoose.Schema.Types.ObjectId,
@@ -39,6 +39,8 @@ export const deletePanelistNoteByID = (id: string) =>
 export const getAllPresentations = () => PresentationModel.find();
 export const getPresentationByID = (id: string) =>
   PresentationModel.findById(id);
+export const getPresentationByResearchID = (researchID: string) =>
+  PresentationModel.findOne({ researchID });
 export const createPresentation = (values: Record<string, any>) =>
   new PresentationModel(values).save().then((x) => x.toObject());
 export const updatePresentationByID = (
