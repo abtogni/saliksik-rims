@@ -28,19 +28,19 @@
                 <v-tooltip activator="parent" location="bottom" class="tooltip-list">
                   <div class="bold-upper">Panelist</div>
                   <div v-for="id in schedule.panelists" :key="id">
-                    {{ id }}
+                    {{ users.find((user: any) => user.key === id)?.name }}
                   </div>
                 </v-tooltip>
               </v-btn>
 
               <v-btn variant="text" icon="mdi-note-outline">
-                <v-badge color="info" :content="schedule.researches.length" floating>
+                <v-badge color="info" :content="schedule.presentations.length" floating>
                   <v-icon></v-icon>
                 </v-badge>
 
                 <v-tooltip activator="parent" location="bottom" class="tooltip-list">
-                  <div class="bold-upper">Researh Projects</div>
-                  <div v-for="id in schedule.researches" :key="id">
+                  <div class="bold-upper">Research Projects</div>
+                  <div v-for="id in schedule.presentations" :key="id">
                     {{ id }}
                   </div>
                 </v-tooltip>
@@ -79,7 +79,7 @@
                 </v-card-title>
               </v-card>
 
-              <schedule_researcher_preview :researches="schedule.researches" :researchIDs="researchList" />
+              <schedule_researcher_preview :researches="schedule.presentations" :researchIDs="researchList" />
               <br>
               <schedule_panelist_preview :panelists="schedule.panelists" :users="users" />
             </v-expansion-panel-text>

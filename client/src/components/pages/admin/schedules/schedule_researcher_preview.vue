@@ -45,7 +45,7 @@
               </v-tooltip>
             </v-btn>
             <div class="text">
-              {{ researches.map((research: any) => researchIDs.find((id: any) => id.key === research)?.name).join(', ') }}
+              {{ researches.join(', ') }}
             </div>
           </div>
           <div class="pres-res-right">
