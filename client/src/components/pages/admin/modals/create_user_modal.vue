@@ -15,16 +15,23 @@
               <v-select v-model="role.value.value" label="User Role" :error-messages="role.errorMessage.value"
                 prepend-inner-icon="mdi-briefcase" :items="user_roles" variant="outlined" />
             </v-col>
-          </v-row>
-          <v-row>
             <v-col>
               <v-text-field v-model="email.value.value" :error-messages="email.errorMessage.value" label="Email"
                 variant="outlined" />
             </v-col>
+          </v-row>
+
+          <v-row>
+            <v-col>
+              <v-text-field v-model="honorifics.value.value" :error-messages="honorifics.errorMessage.value"
+                label="Honorifics" variant="outlined" />
+            </v-col>
+
             <v-col>
               <v-text-field v-model="affiliation.value.value" :error-messages="affiliation.errorMessage.value"
                 label="Affiliation" variant="outlined" />
             </v-col>
+
           </v-row>
           <v-row>
             <v-col>
@@ -32,14 +39,15 @@
                 label="First Name" variant="outlined" />
             </v-col>
             <v-col>
-              <v-text-field v-model="lastName.value.value" :error-messages="lastName.errorMessage.value" label="Last Name"
-                variant="outlined" />
+              <v-text-field v-model="middleName.value.value" :error-messages="middleName.errorMessage.value"
+                label="Middle Name" variant="outlined" />
             </v-col>
+
           </v-row>
           <v-row>
             <v-col>
-              <v-text-field v-model="middleName.value.value" :error-messages="middleName.errorMessage.value"
-                label="Middle Name" variant="outlined" />
+              <v-text-field v-model="lastName.value.value" :error-messages="lastName.errorMessage.value" label="Last Name"
+                variant="outlined" />
             </v-col>
             <v-col>
               <v-text-field v-model="suffix.value.value" :error-messages="suffix.errorMessage.value" label="Suffix"
@@ -74,6 +82,12 @@ const create_user = ref(false);
 
 const { handleSubmit } = useForm({
   validationSchema: {
+    honorifics(v: string) {
+      if (v && v.length < 2) {
+        return 'Name needs to be at least 2 characters.';
+      }
+      return true;
+    },
     firstName(v: string) {
       if (!v) {
         return 'Name is required.';
@@ -145,7 +159,7 @@ const { handleSubmit } = useForm({
     },
   }
 });
-
+const honorifics = useField('honorifics')
 const role = useField('role')
 const firstName = useField('firstName');
 const middleName = useField('middleName');
