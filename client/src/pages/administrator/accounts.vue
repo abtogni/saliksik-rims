@@ -34,15 +34,20 @@
     <create_user_modal />
     <User_list id="user_container" :userList="users.userList" />
   </div>
+
+  {{ JSON.stringify(users) }}
 </template>
 
 <script setup lang="ts">
 import { useUsersStore } from '@/stores/users';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 
-const users = useUsersStore();
+const users = ref([]);
+
+const userStore = useUsersStore();
 onMounted(async () => {
-  await users.getUsers();
+  await userStore.getUsers();
+  users.value = userStore.userList;
 })
 </script>
 
