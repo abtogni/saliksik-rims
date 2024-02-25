@@ -1,5 +1,5 @@
 <template>
-  <div v-if="currentResearch" class="overview-ctr">
+  <div v-if="currentResearch">
     <v-container fluid class="nav-ctr pa-0">
       <v-card elevation="1" class="nav-body" v-if="currentResearch">
         <div class="nav-left truncate">
