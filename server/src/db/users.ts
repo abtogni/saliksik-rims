@@ -4,6 +4,7 @@ const UserSchema = new mongoose.Schema(
   {
     userID: { type: String, required: true },
     role: { type: String, required: true },
+    honorifics: { type: String },
     affiliation: { type: String },
     firstName: { type: String },
     middleName: { type: String },

@@ -44,6 +44,7 @@ export const updateUser = async (req: Request, res: Response) => {
       lastName,
       suffix,
       email,
+      honorifics,
     } = req.body;
 
     const user = await getUserById(id);
@@ -55,6 +56,7 @@ export const updateUser = async (req: Request, res: Response) => {
     if (lastName) user.lastName = lastName;
     if (suffix) user.suffix = suffix;
     if (email) user.email = email;
+    if (honorifics) user.honorifics = honorifics;
 
     await user.save();
     await updateUserByID(id, user);
