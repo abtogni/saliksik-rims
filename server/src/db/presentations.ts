@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const PanelistNoteSchema = new mongoose.Schema({
   panelistID: { type: String },
+  presentationID: { type: String },
   comments: { type: String },
 });
 
@@ -29,8 +30,17 @@ const PresentationModel = mongoose.model("Presentation", PresentationSchema);
 
 // Methods for PanelistNote
 export const getAllPanelistNotes = () => PanelistNotesModel.find();
-export const createPanelistNote = (values: Record<string, any>) =>
+export const findNoteByID = (id: string) => PanelistNotesModel.findById(id);
+export const getPanelistNotesByPanelist = (userID: string) =>
+  PanelistNotesModel.findOne({ panelistID: userID });
+export const getPanelistNotesByPresentationID = (presentationID: string) =>
+  PanelistNotesModel.findOne({ presentationID });
+export const createNewPanelistNote = (values: Record<string, any>) =>
   new PanelistNotesModel(values).save().then((x) => x.toObject());
+export const updatePanelistNoteByID = (
+  id: string,
+  values: Record<string, any>,
+) => PanelistNotesModel.findByIdAndUpdate(id, values);
 export const deletePanelistNoteByID = (id: string) =>
   PanelistNotesModel.findByIdAndDelete(id);
 
