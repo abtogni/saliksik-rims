@@ -13,7 +13,7 @@
       />
     </v-row>
     <v-data-table
-    v-model:expanded="expanded"
+      v-model:expanded="expanded"
       :headers="concept_note_header"
       :items="formattedConceptNote"
       :search="search"
@@ -21,33 +21,32 @@
       show-expand
       class="table"
     >
-    <!-- @vue-skip -->
+      <!-- @vue-skip -->
       <template v-slot:item="{ item: concept_note }">
         <tr
           style="
             text-transform: capitalize;
             font-weight: 400;
             color: #6b7280;
-            font-size: 1rem;
+            font-size: 1rem; 
           "
         >
-        <td>
-            <span
+          <td >
+            <span 
               v-for="(leader, index) in concept_note.research_members"
               :key="index"
             >
               {{ leader }}
-              <template v-if="index !== concept_note.research_members.length - 1"
+              <template
+                v-if="index !== concept_note.research_members.length - 1"
                 >,
               </template>
             </span>
           </td>
-          <td>
-            <a href="%">{{
-              concept_note.research_title
-            }}</a>
+          <td >
+            <a href="%">{{ concept_note.research_title }}</a>
           </td>
-          
+
           <td>
             <v-chip variant="tonal" color="primary">{{
               concept_note.research_status
@@ -58,7 +57,6 @@
       </template>
     </v-data-table>
   </div>
-  
 </template>
 
 <script setup lang="ts">
@@ -74,19 +72,19 @@ const concept_note_header: readonly {
   align?: any;
   width?: any;
 }[] = [
-  { title: "Leaders", key: "leaders" },
+  { title: "Leaders", key: "leaders", width: "10%", },
   {
     title: "Title",
     key: "research_title",
     align: "start",
-    width: "65rem",
+    width: "60%",
   },
-  { title: "Status", key: "research_status", align: "start", width: "7rem" },
+  { title: "Status", key: "research_status", align: "start", width: "20%" },
   {
     title: "Submitted In",
     key: "created_at",
     align: "start",
-    width: "13rem",
+    width: "120%",
   },
 ];
 

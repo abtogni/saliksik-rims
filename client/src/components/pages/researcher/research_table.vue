@@ -13,6 +13,7 @@
       />
     </v-row>
     <v-data-table
+      fixed-header
       :headers="headers"
       :items-length="research.length"
       :items="research"
@@ -33,23 +34,30 @@
             font-weight: 400;
             color: #6b7280;
             font-size: 1rem;
+            background-color: orange;
           "
         >
-          <td>
+          <td class="truncate" style="width: 20rem">
+            <v-btn variant="text" icon="mdi-account-multiple-outline">
+              <v-icon></v-icon>
+              <v-tooltip
+                activator="parent"
+                location="bottom"
+                class="tooltip-list"
+              >
+                <div class="bold-upper">Researchers</div>
+                <div
+                  v-for="(leader, index) in research.researchLeaders"
+                  :key="index"
+                >
+                  {{ leader.name }}
+                </div>
+              </v-tooltip>
+            </v-btn>
+
             <a :href="'/researcher/' + research._id">{{
               research.researchTitle
             }}</a>
-          </td>
-          <td>
-            <span
-              v-for="(leader, index) in research.researchLeaders"
-              :key="index"
-            >
-              {{ leader.name }}
-              <template v-if="index !== research.researchLeaders.length - 1"
-                >,
-              </template>
-            </span>
           </td>
           <td>
             <v-chip variant="tonal" color="primary">{{
@@ -68,9 +76,8 @@ import { ref } from "vue";
 const search = ref("");
 const { research }: any = defineProps(["research"]);
 const headers = [
-  { key: "researchTitle", title: "Research Title" },
-  { key: "researchLeaders", title: "Research Leaders", sortable: false },
-  { key: "researchStatus", title: "Research Status" },
+  { key: "researchTitle", title: "Title"},
+  { key: "researchStatus", title: "Status" },
   { key: "createdAt", title: "Created At" },
 ];
 </script>

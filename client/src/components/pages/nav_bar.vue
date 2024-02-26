@@ -57,6 +57,9 @@
       <v-list-item prepend-icon="mdi-account-outline" title="Accounts" value="accounts" href="/administrator/accounts"
         link>
       </v-list-item>
+      <v-list-item prepend-icon="mdi-account-outline" title="Panelist Comment " value="panelist_comments" href="/panelist/panelist_comment_field"
+        link>
+      </v-list-item>
     </v-list>
     <template v-slot:append>
       <v-list-item @click="logoutDialog = true" prepend-icon="mdi-logout" title="Logout" value="logout" />

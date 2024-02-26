@@ -3,7 +3,6 @@ import mongoose from "mongoose";
 const PanelistNoteSchema = new mongoose.Schema({
   panelistID: { type: String },
   comments: { type: String },
-  suggestions: { type: String },
 });
 
 const PresentationSchema = new mongoose.Schema(
