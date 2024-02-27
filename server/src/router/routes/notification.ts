@@ -17,7 +17,7 @@ export default (router: Router) => {
     .post("/notification/create", isAuthenticated, sendNewNotification)
 
     //PATCH
-    .post("/notification/update/id", isAuthenticated, updateNotification)
+    .patch("/notification/update/:id", isAuthenticated, updateNotification)
     //DELETE
-    .post("/notification/delete", isAuthenticated, deleteNotification);
+    .delete("/notification/delete/:id", isAuthenticated, deleteNotification);
 };
