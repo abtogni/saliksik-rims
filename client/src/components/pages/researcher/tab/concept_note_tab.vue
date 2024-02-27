@@ -1,47 +1,54 @@
 <template>
+  <v-card>
   <v-card elevation="5">
     <v-card-title>
       <h5>
         {{ data.projectTitle }}
       </h5>
     </v-card-title>
-    <v-card-text style="
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            align-items: start;
-            gap: 1rem;
-          ">
-      <div style="
-              display: flex;
-              flex-direction: column;
-              gap: 1rem;
-              width: 100%;
-            ">
+    <v-card-text
+      style="
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: start;
+        gap: 1rem;
+      "
+    >
+      <div
+        style="display: flex; flex-direction: column; gap: 1rem; width: 100%"
+      >
         <p>
-          <span style="font-weight: 600">Implementing Agency/Department </span><br />{{ data.implementingAgency }}
+          <span style="font-weight: 600">Implementing Agency/Department </span
+          ><br />{{ data.implementingAgency }}
         </p>
         <p>
-          <span style="font-weight: 600">Site/s Of Implementation </span><br />{{ data.siteOfImplementation }}
+          <span style="font-weight: 600">Site/s Of Implementation </span
+          ><br />{{ data.siteOfImplementation }}
         </p>
         <p>
-          <span style="font-weight: 600">Cooperating Agency </span><br />{{ data.cooperatingAgency }}
+          <span style="font-weight: 600">Cooperating Agency </span><br />{{
+            data.cooperatingAgency
+          }}
         </p>
       </div>
-      <div style="
-              display: flex;
-              flex-direction: column;
-              gap: 1rem;
-              width: 100%;
-            ">
+      <div
+        style="display: flex; flex-direction: column; gap: 1rem; width: 100%"
+      >
         <p>
-          <span style="font-weight: 600">Project Duration </span><br />{{ data.projectDuration }}
+          <span style="font-weight: 600">Project Duration </span><br />{{
+            data.projectDuration
+          }}
         </p>
         <p>
-          <span style="font-weight: 600">Project Cost </span><br />{{ data.totalProjectCost }}
+          <span style="font-weight: 600">Project Cost </span><br />{{
+            data.totalProjectCost
+          }}
         </p>
         <p>
-          <span style="font-weight: 600">Funding Source </span><br />{{ data.fundingSource }}
+          <span style="font-weight: 600">Funding Source </span><br />{{
+            data.fundingSource
+          }}
         </p>
       </div>
     </v-card-text>
@@ -104,8 +111,9 @@
       <p>{{ data.workPlan }}</p>
     </v-card-text>
   </v-card>
+</v-card>
 </template>
 
 <script setup lang="ts">
-const { data } = defineProps(['data']);
+const { data } = defineProps(["data"]);
 </script>

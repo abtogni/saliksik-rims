@@ -44,7 +44,7 @@
             </span>
           </td>
           <td >
-            <a href="%">{{ concept_note.research_title }}</a>
+            <a href="/administrator/concept_note_overview">{{ concept_note.research_title }}</a>
           </td>
 
           <td>

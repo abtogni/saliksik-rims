@@ -9,8 +9,7 @@
               <h2>Panelist Comments and Suggestions</h2>
 
               <p class="caption">
-                Create new research project to start. View and manage your
-                research projects here.
+                Enter your comments and suggestions on the respective research projects.
               </p>
             </div>
           </div>
@@ -18,7 +17,7 @@
           <div class="header-right">
             <v-btn
               variant="tonal"
-              prepend-icon="mdi-file-document-check-outline"
+              prepend-icon="mdi-comment-check-outline"
               type="submit"
               text="Submit"
               class="button-regular"
@@ -29,6 +28,19 @@
         <!--form-->
 
         <v-card-text class="txt-field-col">
+          <v-card color="#fff7ed" variant="flat" rounded="20" class="txt-field-ctr">
+            <v-textarea
+              label="Utilization And Effectiveness Of Disaster Risk Reduction Management Interventions In Naga City: Basis For A Tactical Framework"
+              variant="outlined"
+              color="#5b21b6"
+              required
+              rows="20"
+              auto-grow
+              style="color: #5b21b6"
+            />
+            
+            insert concept note overview
+          </v-card>
           <v-card color="#1d4ed8" variant="outlined" class="txt-field-ctr">
             <v-textarea
               label="Utilization And Effectiveness Of Disaster Risk Reduction Management Interventions In Naga City: Basis For A Tactical Framework"
@@ -40,6 +52,7 @@
               auto-grow
               style="color: black"
             />
+            
             insert concept note overview
           </v-card>
         </v-card-text>

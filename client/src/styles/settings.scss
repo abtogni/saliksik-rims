@@ -14,6 +14,7 @@ $primary-font: Montserrat, Inter, Roboto, sans-serif;
 $blue-300: #93c5fd;
 $blue-500: #6366f1;
 $blue-700: #1d4ed8;
+$blue-800: #5b21b6;
 $gray-50: #f9fafb;
 $gray-100: #f3f4f6;
 $gray-200: #e5e7eb;
@@ -21,6 +22,7 @@ $gray-500: #6b7280;
 $gray-600: #4b5563;
 $gray-700: #374151;
 $gray-800: #1f2937;
+$orange-50: #fff7ed;
 $default: #212121;
 
 * {
@@ -107,7 +109,7 @@ p {
 .caption {
   font-size: 0.833rem;
   font-weight: 400;
-  color: $default;
+  color: $gray-500;
   text-wrap: wrap;
 }
 
@@ -190,7 +192,6 @@ p {
   align-content: space-between;
   gap: 1rem;
   width: 100%;
-  height: 38rem;
   padding-top: 1rem;
   overflow: auto;
   white-space: pre-wrap;
@@ -203,6 +204,7 @@ p {
   justify-content: space-between;
   gap: 1rem;
   width: 100%;
+  background-color: orange;
 }
 
 .column_container {
@@ -210,8 +212,9 @@ p {
   flex-direction: column;
   flex-wrap: nowrap;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 2rem;
   width: 100%;
+  
 }
 
 //tabs end
@@ -409,6 +412,7 @@ div#research_table {
   .txt-field-col {
     display: flex;
     flex-direction: column;
+    gap: 2rem;
   }
 
   .txt-field-row{
