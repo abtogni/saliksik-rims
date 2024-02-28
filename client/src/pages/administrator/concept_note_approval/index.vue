@@ -33,8 +33,6 @@
       </v-card-text>
     </v-card>
   </v-container>
-
-  {{ JSON.stringify(filteredResearchData) }}
 </template>
 
 <script setup lang="ts">
@@ -45,20 +43,20 @@ const research_data = ref([]);
 const tab = ref(null);
 const tab_items = ["Verify and Review", "Approval", "Approved", "Rejected"];
 
-onMounted(() => {
+onMounted(async () => {
   const researchStore = useResearchesStore();
-  researchStore.getResearchList();
+  await researchStore.getResearchList();
   research_data.value = researchStore.researchList;
 });
 
-const filteredResearchData: any = computed(() => {
+
+
+const filteredResearchData = computed(() => {
   return (status: string) => {
-    return research_data.value.filter(
-      (item: any) => {
-        console.log(item);
-        item.conceptNote.status === status
-      },
-    );
+    return research_data.value.filter((item: any) => {
+      return item.conceptNote && item.conceptNote['status'] === status;
+    });
   };
 });
+
 </script>

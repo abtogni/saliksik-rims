@@ -7,7 +7,7 @@
     <v-data-table v-model:expanded="expanded" :headers="concept_note_header" :items="formattedConceptNote"
       :search="search" item-value="research_title" show-expand class="table">
       <!-- @vue-skip -->
-      <template v-slot:item="{ item: concept_note }">
+      <template v-slot:item="{ item: research }">
         <tr style="
             text-transform: capitalize;
             font-weight: 400;
@@ -15,22 +15,22 @@
             font-size: 1rem;
           ">
           <td>
-            <span v-for="(leader, index) in concept_note.research_members" :key="index">
-              {{ leader }}
-              <template v-if="index !== concept_note.research_members.length - 1">,
+            <span v-for="(leader, index) in research.researchLeaders" :key="index">
+              {{ leader.name }}
+              <template v-if="index !== research.researchLeaders.length - 1">,
               </template>
             </span>
           </td>
           <td>
-            <a :href="`/administrator/concept_note_approval/${concept_note._id}`">{{ concept_note.research_title }}</a>
+            <a :href="`/administrator/concept_note_approval/${research._id}`">{{ research.researchTitle }}</a>
           </td>
 
           <td>
             <v-chip variant="tonal" color="primary">{{
-              concept_note.research_status
+              research.conceptNote['status']
               }}</v-chip>
           </td>
-          <td>{{ concept_note.created_at }}</td>
+          <td>{{ research.createdAt }}</td>
         </tr>
       </template>
     </v-data-table>
@@ -50,24 +50,23 @@ const concept_note_header: readonly {
   align?: any;
   width?: any;
 }[] = [
-    { title: "Leaders", key: "leaders", width: "10%", },
+    { title: "Leaders", key: "researchLeaders", width: "10%", },
     {
       title: "Title",
       key: "research_title",
       align: "start",
       width: "60%",
     },
-    { title: "Status", key: "research_status", align: "start", width: "20%" },
+    { title: "Status", key: "status", align: "start", width: "20%" },
     {
       title: "Submitted In",
-      key: "created_at",
+      key: "createdAt",
       align: "start",
       width: "120%",
     },
   ];
 
 const formattedConceptNote = props.research_data.map((item: any) => ({
-  ...item,
-  leaders: item.research_members.join(", "),
+  ...item
 }));
 </script>

@@ -34,6 +34,7 @@ export const useResearchesStore = defineStore(
             return null;
           }),
           researchStatus: research.researchStatus,
+          conceptNote: research.conceptNote,
           createdAt: moment(research.createdAt).format("MMMM DD, YYYY"),
         }));
       } catch (e) {
@@ -65,6 +66,7 @@ export const useResearchesStore = defineStore(
             }
             return null;
           }),
+          conceptNote: research.conceptNote,
           researchStatus: research.researchStatus,
           createdAt: moment(research.createdAt).format("MMMM DD, YYYY"),
         }));
