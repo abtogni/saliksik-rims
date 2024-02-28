@@ -2,33 +2,42 @@
   {
     "_id": "B1",
     "research_title": "Smart Tourism Practices in Naga City:  An Assessment",
-    "research_members": ["Cynthia Liza Arce Abarca, MBA", "Maricar Bien, MM", "Maria Cristina Maniquiz, MBA", "Jason Keith Boñaga, AEM, MDRCM, MBA"],
+    "research_members": [
+      "Cynthia Liza Arce Abarca, MBA",
+      "Maricar Bien, MM",
+      "Maria Cristina Maniquiz, MBA",
+      "Jason Keith Boñaga, AEM, MDRCM, MBA"
+    ],
     "created_at": "April 11, 2023",
     "research_status": "Concept Note (Approval)",
-    "concept_note":{
-        "project_title": "Utilization and Effectiveness of Disaster Risk Reduction Management Interventions in Naga City: Basis for a Tactical Framework",
-        "implementing_agency": "College of Arts and Sciences",
-        "cooperating_agency": "LGU-Naga\n",
-        "site_of_implementation": "Naga City",
-        "project_duration": "March 2023 – March 2024",
-        "total_project_cost": "P20,000,00",
-        "funding_source": "LGU-NAGA and UNC",
-        "project_description": "The geographical location of the Philippines is distinguished as a profound shed of man-made disasters and natural calamities.",
-        "significance": "The DRRM interventions need to assess the level of utilization and its effectiveness. This study is anchored to the UNC Research Agenda number one, Application of Data Analytics in Disaster Risk Management, and Environment Sustainability. This study is aligned with SDG number 13, Climate Action The tapped agency for the conduct of this study is the LGU-Naga. Mier-Manjares (2020) emphasizes that Rinconada Area is an agricultural-centered sector wherein farming is the primary source of their livelihood. Rice fields are being flooded, which causes the rising water level that affects their head of living, their houses, and their safety and security from the flood.  Based on Domingo & Manejar (2018) discussion, the evaluation method sees the implementation process to monitor if the policies reached their target outcomes. It reviewed the programs across their phases and activities, and output. Interventions include complexity of behavior and social factors as it is critical to check on the existing policies and analyze the comprehensiveness and effect of the implementation process for the stakeholders that includes the intended effect. \n",
-        "objectives": "General Objective:\nThis study aims to determine the utilization and effectiveness of the DRRM interventions in Naga City as a basis of a tactical framework.\n\nSpecific Objectives: \n1. Identify the DRRM interventions in the different barangays of Naga City.\n2. Determine the utilization level of the DRRM interventions of different barangays in the city in terms of mitigation, preparedness, response, and rehabilitation.\n3. Measure the effectiveness of the DRRM interventions in the different barangays of Naga City. \n4. Correlate the utilization level and effectiveness of the DRRM interventions.\n5. To come up with a tactical framework for the utilization of The DRRM interventions. \n\n",
-        "methodology": "General Objective:\nThis study aims to determine the utilization and effectiveness of the DRRM interventions in Naga City as a basis of a tactical framework.\n\nSpecific Objectives: \n1. Identify the DRRM interventions in the different barangays of Naga City.\n2. Determine the utilization level of the DRRM interventions of different barangays in the city in terms of mitigation, preparedness, response, and rehabilitation.\n3. Measure the effectiveness of the DRRM interventions in the different barangays of Naga City. \n4. Correlate the utilization level and effectiveness of the DRRM interventions.\n5. To come up with a tactical framework for the utilization of The DRRM interventions. \n\n",
-        "technology_roadmap": "N/A",
-        "expected_outputs": "The expected output from this study will benefit the BDRRMO and residents of the Local Government Unit of Naga. The developmental output will be a tactical plan wherein the framework and command system are integrated to formulate procedures to mitigate and manage the disaster risk based on the four components of DRRM: Mitigation, Preparedness, Response, and Rehabilitation. \n\n",
-        "work_plan": ""
-      }
+    "concept_note": {
+      "project_title": "Utilization and Effectiveness of Disaster Risk Reduction Management Interventions in Naga City: Basis for a Tactical Framework",
+      "implementing_agency": "College of Arts and Sciences",
+      "cooperating_agency": "LGU-Naga\n",
+      "site_of_implementation": "Naga City",
+      "project_duration": "March 2023 – March 2024",
+      "total_project_cost": "P20,000,00",
+      "funding_source": "LGU-NAGA and UNC",
+      "project_description": "The geographical location of the Philippines is distinguished as a profound shed of man-made disasters and natural calamities.",
+      "significance": "The DRRM interventions need to assess the level of utilization and its effectiveness. This study is anchored to the UNC Research Agenda number one, Application of Data Analytics in Disaster Risk Management, and Environment Sustainability. This study is aligned with SDG number 13, Climate Action The tapped agency for the conduct of this study is the LGU-Naga. Mier-Manjares (2020) emphasizes that Rinconada Area is an agricultural-centered sector wherein farming is the primary source of their livelihood. Rice fields are being flooded, which causes the rising water level that affects their head of living, their houses, and their safety and security from the flood.  Based on Domingo & Manejar (2018) discussion, the evaluation method sees the implementation process to monitor if the policies reached their target outcomes. It reviewed the programs across their phases and activities, and output. Interventions include complexity of behavior and social factors as it is critical to check on the existing policies and analyze the comprehensiveness and effect of the implementation process for the stakeholders that includes the intended effect. \n",
+      "objectives": "General Objective:\nThis study aims to determine the utilization and effectiveness of the DRRM interventions in Naga City as a basis of a tactical framework.\n\nSpecific Objectives: \n1. Identify the DRRM interventions in the different barangays of Naga City.\n2. Determine the utilization level of the DRRM interventions of different barangays in the city in terms of mitigation, preparedness, response, and rehabilitation.\n3. Measure the effectiveness of the DRRM interventions in the different barangays of Naga City. \n4. Correlate the utilization level and effectiveness of the DRRM interventions.\n5. To come up with a tactical framework for the utilization of The DRRM interventions. \n\n",
+      "methodology": "General Objective:\nThis study aims to determine the utilization and effectiveness of the DRRM interventions in Naga City as a basis of a tactical framework.\n\nSpecific Objectives: \n1. Identify the DRRM interventions in the different barangays of Naga City.\n2. Determine the utilization level of the DRRM interventions of different barangays in the city in terms of mitigation, preparedness, response, and rehabilitation.\n3. Measure the effectiveness of the DRRM interventions in the different barangays of Naga City. \n4. Correlate the utilization level and effectiveness of the DRRM interventions.\n5. To come up with a tactical framework for the utilization of The DRRM interventions. \n\n",
+      "technology_roadmap": "N/A",
+      "expected_outputs": "The expected output from this study will benefit the BDRRMO and residents of the Local Government Unit of Naga. The developmental output will be a tactical plan wherein the framework and command system are integrated to formulate procedures to mitigate and manage the disaster risk based on the four components of DRRM: Mitigation, Preparedness, Response, and Rehabilitation. \n\n",
+      "work_plan": ""
+    }
   },
   {
     "_id": "B2",
     "research_title": "Prognostication of the Factors Affecting the Low Enrollment Turnout on the Biology Course at UNC, Naga City for the Past 5 Years",
-    "research_members": ["Dr. Josephine Alba", "Dr. Sheila Anzano", "Maria Fatima Parro"],
+    "research_members": [
+      "Dr. Josephine Alba",
+      "Dr. Sheila Anzano",
+      "Maria Fatima Parro"
+    ],
     "created_at": "April 12, 2023",
     "research_status": "Concept Note (Approved)",
-    "concept_note":{
+    "concept_note": {
       "project_title": "Martial Law Activism in Naga City: Revisiting Lived Experiences and Narratives\n\n",
       "implementing_agency": "UNC Center for Nueva Caceres Studies",
       "cooperating_agency": "Potential Partner Agencies or Organizations are Pending\n\n",
@@ -51,7 +60,7 @@
     "research_members": ["Charey Mae Alvarado"],
     "research_status": "Concept Note (Rejected)",
     "created_at": "April 13, 2023",
-    "concept_note":{
+    "concept_note": {
       "project_title": "Prognostication of the Factors Affecting the Low Enrollment Turnout on the Biology Course at UNC, Naga City for the Past 5 Years\n\n",
       "implementing_agency": "CAS",
       "cooperating_agency": "None",
@@ -71,10 +80,16 @@
   {
     "_id": "B4",
     "research_title": "Attrition Rate of the BS Accountancy Program for A.Y. 2021-2022 and A.Y. 2022-2023",
-    "research_members": ["Salvador C. Arcilla, MAT, PhD", "Aileen N. Mendoza, CPA, MBA", "Philip B. Lozada, CPA", "Maria Carla R. Mañago, CPA", "Maribel N. Ballon, MBA"],
+    "research_members": [
+      "Salvador C. Arcilla, MAT, PhD",
+      "Aileen N. Mendoza, CPA, MBA",
+      "Philip B. Lozada, CPA",
+      "Maria Carla R. Mañago, CPA",
+      "Maribel N. Ballon, MBA"
+    ],
     "created_at": "April 14, 2023",
     "research_status": "Concept Note (For Review)",
-    "concept_note":{
+    "concept_note": {
       "_id": "A4",
       "project_title": "Memory Intervention Strategy: An Approach Towards Memory Retention of Biology Concepts for College Students",
       "implementing_agency": "None",
@@ -98,7 +113,7 @@
     "research_members": ["Engr. Edwin SJ. Badiola"],
     "research_status": "Concept Note (For Review)",
     "created_at": "April 15, 2023",
-    "concept_note":{
+    "concept_note": {
       "_id": "A5",
       "project_title": "Strategic, Integrated, and Institutional Partnership Program: UNC’s way of bridging the gap between the Academe and the Industry\n\n",
       "implementing_agency": "Career Center",
@@ -119,10 +134,13 @@
   {
     "_id": "B6",
     "research_title": "The New Board Licensure Examination for Criminologist: Identifying Strategies for A Better Board Examination Rating of UNC Examinees",
-    "research_members": ["Vincent Vittorio A. Balmaceda, RCrim", "Lorlie B. Tanjay, Ph.D"],
+    "research_members": [
+      "Vincent Vittorio A. Balmaceda, RCrim",
+      "Lorlie B. Tanjay, Ph.D"
+    ],
     "research_status": "Concept Note (For Review)",
     "created_at": "April 16, 2023",
-    "concept_note":{
+    "concept_note": {
       "_id": "A6",
       "project_title": "Smart Tourism Practices in Naga City:  An Assessment\n\n",
       "implementing_agency": "College of Business and Accountancy – Hospitality and Tourism Cluster\n\n",
@@ -146,7 +164,7 @@
     "research_members": ["Jo-Ann Dancalan", "Janice Brabante", "Paolo Suzara"],
     "research_status": "Concept Note (For Review)",
     "created_at": "April 17, 2023",
-    "concept_note":{
+    "concept_note": {
       "_id": "A7",
       "project_title": "A Strategic Plan to Improve Student Retention in the UNC College of Business and Accountancy",
       "implementing_agency": "Business Administration and Accountancy programs of the College of Business and Accountancy of the University of Nueva Caceres.",
@@ -170,7 +188,7 @@
     "research_members": ["Maiden Angelica R. Hernandez"],
     "research_status": "Concept Note (For Review)",
     "created_at": "April 18, 2023",
-    "concept_note":{
+    "concept_note": {
       "_id": "A8",
       "project_title": "\"Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness\"",
       "implementing_agency": "COLLEGE OF COMPUTER STUDIES\n\n",

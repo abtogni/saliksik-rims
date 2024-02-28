@@ -57,8 +57,8 @@
       <v-list-item prepend-icon="mdi-account-outline" title="Accounts" value="accounts" href="/administrator/accounts"
         link>
       </v-list-item>
-      <v-list-item prepend-icon="mdi-comment-text-outline" title="Panelist Comment " value="panelist_comments" href="/panelist/panelist_comment_field"
-        link>
+      <v-list-item prepend-icon="mdi-comment-text-outline" title="Panelist Comment " value="panelist_comments"
+        href="/panelist/panelist_comment_field" link>
       </v-list-item>
     </v-list>
     <template v-slot:append>
@@ -102,7 +102,9 @@ onMounted(async () => {
   await usersStore.getCurrentUser();
   await usersStore.getUsers();
   user.value = usersStore.currentUser;
-  showDrawer.value = route.path !== "/";
+  if (route.path !== "/") {
+    showDrawer.value = true;
+  }
 });
 
 router.afterEach(() => {
