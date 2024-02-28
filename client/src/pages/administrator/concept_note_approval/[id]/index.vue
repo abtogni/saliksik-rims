@@ -24,6 +24,8 @@
       <v-card title="Work Plan" :text="c.conceptNote.workPlan" style="width: 100%" />
     </div>
   </div>
+  <v-btn class="button-regular" text="Approve" />  <v-btn class="button-regular" text="Reject" />
+
 </template>
 
 <script setup lang="ts">
