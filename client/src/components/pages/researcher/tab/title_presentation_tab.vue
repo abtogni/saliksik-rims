@@ -5,7 +5,6 @@
         <div class="header-caption">
           <h5 style="margin-right: 0rem">
             Title Presentation Schedule
-            <title_presentation_waiting_response />
           </h5>
           <p class="help" style="padding-top: 0.2rem">
             help

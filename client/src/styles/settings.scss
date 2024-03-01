@@ -241,7 +241,7 @@ div#research_table {
   background-color: white;
   align-content: start;
   justify-content: start;
-
+}
   .body {
     width: 100%;
     display: flex;
@@ -309,8 +309,8 @@ div#research_table {
       display: flex;
       flex-direction: row;
       gap: 1rem;
-      flex-wrap: wrap;
-      align-items: start;
+      flex-wrap: nowrap;
+      align-items: center;
       justify-content: end;
     }
   }
@@ -321,7 +321,7 @@ div#research_table {
     flex-direction: column;
     padding: 0rem 1rem 0 1rem;
   }
-}
+
 
 .overview-ctr {
   display: flex;
@@ -457,6 +457,9 @@ div#research_table {
   font-weight: 500;
   width: fit-content;
   background-color: #eff6ff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 //concept_note_tab.vue

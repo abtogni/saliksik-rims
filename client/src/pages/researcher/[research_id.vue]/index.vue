@@ -18,7 +18,7 @@
       </v-card>
     </v-container>
     <v-container fluid class="fill-height ctr">
-      <v-card elevation="5" variant="flat" class="body">
+      <v-card elevation="0" variant="flat" class="body">
         <div class="d-flex flex-row">
           <v-tabs v-model="tab" direction="vertical" color="primary">
             <v-tab
@@ -39,14 +39,7 @@
                     <div class="header-caption">
                       <h5 style="margin-right: 0rem">
                         Concept Note
-                        <concept_note_reviewing
-                          v-if="
-                            currentResearch.conceptNote &&
-                            currentResearch.conceptNote.status ==
-                              'Verify and Review'
-                          "
-                        />
-                        <status_no_status v-else />
+                        
                       </h5>
                       <p class="help" style="padding-top: 0.3rem">
                         help
@@ -58,6 +51,14 @@
                   </div>
 
                   <div class="header-right">
+                    <status_concept_note_submitted
+                          v-if="
+                            currentResearch.conceptNote &&
+                            currentResearch.conceptNote.status ==
+                              'Verify and Review'
+                          "
+                        />
+                        <status_no_status v-else />
                     <v-btn
                       v-if="currentResearch.conceptNote"
                       type="submit"
@@ -80,13 +81,14 @@
                       v-else
                       >Create Concept Note
                     </v-btn>
+                    
                   </div>
                 </v-card-title>
 
                 <v-card-text v-if="currentResearch.conceptNote">
                   <concept_note_tab :data="currentResearch.conceptNote" />
                 </v-card-text>
-                <v-card
+                <v-card variant="flat"
                   text="You don't have a concept note yet, you should create one."
                   class="bold"
                   v-else
@@ -100,10 +102,10 @@
             <v-window-item value="research-paper">
               <research_paper_progress />
             </v-window-item>
-            <v-window-item value="option-4">
+            <v-window-item value="final-presentation">
               <final_presentation_tab />
             </v-window-item>
-            <v-window-item value="option-5">
+            <v-window-item value="incentive">
               <incentive_status_tab />
             </v-window-item>
           </v-window>
@@ -114,6 +116,7 @@
 </template>
 
 <script setup lang="ts">
+import Status_concept_note_submitted from "@/components/pages/researcher/status/status_concept_note_submitted.vue";
 import { useResearchesStore } from "@/stores/researches";
 import { onMounted, ref } from "vue";
 

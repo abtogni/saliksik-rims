@@ -29,6 +29,8 @@ declare module 'vue' {
     Research_paper_progress: typeof import('./src/components/pages/researcher/tab/research_paper_progress.vue')['default']
     Research_paper_upload: typeof import('./src/components/pages/admin/research papers/research_paper_upload.vue')['default']
     Research_table: typeof import('./src/components/pages/researcher/research_table.vue')['default']
+    Researcher_icentive_processing: typeof import('./src/components/pages/researcher/incentive/researcher_icentive_processing.vue')['default']
+    Researcher_incentive_processing: typeof import('./src/components/pages/researcher/incentive/researcher_incentive_processing.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     Schedule_overview: typeof import('./src/components/pages/admin/schedules/schedule_overview.vue')['default']
