@@ -34,10 +34,10 @@
             font-weight: 400;
             color: #6b7280;
             font-size: 1rem;
-            background-color: orange;
+            width: 100%
           "
         >
-          <td class="truncate" style="width: 20rem">
+          <td class="truncate" style="width: 10rem">
             <v-btn variant="text" icon="mdi-account-multiple-outline">
               <v-icon></v-icon>
               <v-tooltip
@@ -76,8 +76,8 @@ import { ref } from "vue";
 const search = ref("");
 const { research }: any = defineProps(["research"]);
 const headers = [
-  { key: "researchTitle", title: "Title"},
-  { key: "researchStatus", title: "Status" },
-  { key: "createdAt", title: "Created At" },
+  { key: "researchTitle", title: "Title", class: "truncate"},
+  { key: "researchStatus", title: "Status", class: "truncate" },
+  { key: "createdAt", title: "Created At", class: "truncate" },
 ];
 </script>
