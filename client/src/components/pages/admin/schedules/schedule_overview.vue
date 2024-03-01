@@ -40,8 +40,8 @@
 
                 <v-tooltip activator="parent" location="bottom" class="tooltip-list">
                   <div class="bold-upper">Research Projects</div>
-                  <div v-for="id in schedule.presentations" :key="id">
-                    {{ id }}
+                  <div v-for="p in schedule.presentations" :key="p._id">
+                    {{ researchList.find((research: any) => research.key === p.researchID)?.name }}
                   </div>
                 </v-tooltip>
               </v-btn>
@@ -79,9 +79,9 @@
                 </v-card-title>
               </v-card>
 
-              <schedule_researches_preview :researches="schedule.presentations" :researchIDs="researchList" />
+              <schedule_researches_preview :researches="schedule.presentations" />
               <br>
-              <schedule_panelist_preview :panelists="schedule.panelists" :users="users" />
+              <schedule_panelist_preview :panelists="schedule.panelists" />
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>

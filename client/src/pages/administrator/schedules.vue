@@ -59,6 +59,7 @@ import { useUsersStore } from '@/stores/users';
 import { useResearchesStore } from '@/stores/researches';
 import { onMounted, ref } from "vue";
 import { useSchedulesStore } from '@/stores/schedules';
+import { usePresentationsStore } from '@/stores/presentations';
 
 
 const users = ref<{ key: any; name: string; }[]>([]);
@@ -66,6 +67,7 @@ const researchList = ref<{ key: any; name: string; }[]>([]);
 const schedules = ref([]);
 
 onMounted(async () => {
+  await usePresentationsStore().getPresentations();
   await useSchedulesStore().getSchedulesList();
   await useResearchesStore().getResearchList();
   const userStore = useUsersStore().userList;
