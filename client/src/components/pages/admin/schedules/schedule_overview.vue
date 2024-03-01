@@ -27,8 +27,8 @@
                 </v-badge>
                 <v-tooltip activator="parent" location="bottom" class="tooltip-list">
                   <div class="bold-upper">Panelist</div>
-                  <div v-for="id in schedule.panelists" :key="id">
-                    {{ users.find((user: any) => user.key === id)?.name }}
+                  <div v-for="panelist in schedule.panelists" :key="panelist._id">
+                    {{ panelist.name }}
                   </div>
                 </v-tooltip>
               </v-btn>
@@ -93,7 +93,7 @@
 <script setup lang="ts">
 import moment from "moment";
 
-const { schedule, users, researchList } = defineProps(['schedule', 'users', 'researchList']);
+const { schedule, researchList } = defineProps(['schedule', 'researchList']);
 
 
 const sortedSchedules = [...schedule].sort((a: any, b: any) => moment(a.dateAndTime).diff(moment(b.dateAndTime)));
