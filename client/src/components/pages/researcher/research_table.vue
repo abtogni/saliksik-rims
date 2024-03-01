@@ -1,6 +1,6 @@
 <template>
   <div style="padding-bottom: 0.833rem">
-    <v-row no-gutters class="table-toolbar">
+    <v-row no-gutters class="tbl-toolbar">
       <v-text-field
         v-model="search"
         label="Search"
@@ -13,32 +13,23 @@
       />
     </v-row>
     <v-data-table
-      fixed-header
       :headers="headers"
       :items-length="research.length"
       :items="research"
       :search="search"
       density="comfortable"
-      style="
-        text-transform: uppercase;
-        font-weight: 600;
-        color: #374151;
-        font-size: 1rem;
-      "
+      class="b"
     >
       <!-- @vue-skip -->
       <template v-slot:item="{ item: research }">
-        <tr
-          style="
-            text-transform: capitalize;
-            font-weight: 400;
-            color: #6b7280;
-            font-size: 1rem;
-            width: 100%
-          "
-        >
-          <td class="truncate" style="width: 10rem">
-            <v-btn variant="text" icon="mdi-account-multiple-outline">
+        <tr style="align-items:center; white-space: nowrap">
+          <td class="truncate-table">
+            <v-btn
+              variant="text"
+              density="comfortable"
+              icon="mdi-account-multiple-outline"
+              style="margin-right: 1rem"
+            >
               <v-icon></v-icon>
               <v-tooltip
                 activator="parent"
@@ -54,13 +45,13 @@
                 </div>
               </v-tooltip>
             </v-btn>
-
-            <a :href="'/researcher/' + research._id">{{
-              research.researchTitle
-            }}</a>
+              <a class="" :href="'/researcher/' + research._id">{{
+                research.researchTitle
+              }}</a>
+              
           </td>
-          <td>
-            <v-chip variant="tonal" color="primary">{{
+          <td >
+            <v-chip variant="text" color="" density="compact" prepend-icon="mdi-file-document-outline" class="b">{{
               research.researchStatus
             }}</v-chip>
           </td>
@@ -69,6 +60,7 @@
       </template>
     </v-data-table>
   </div>
+  
 </template>
 
 <script setup lang="ts">
@@ -76,8 +68,8 @@ import { ref } from "vue";
 const search = ref("");
 const { research }: any = defineProps(["research"]);
 const headers = [
-  { key: "researchTitle", title: "Title", class: "truncate"},
-  { key: "researchStatus", title: "Status", class: "truncate" },
-  { key: "createdAt", title: "Created At", class: "truncate" },
+  { key: "researchTitle", title: "Title" },
+  { key: "researchStatus", title: "Status"},
+  { key: "createdAt", title: "Created At" },
 ];
 </script>

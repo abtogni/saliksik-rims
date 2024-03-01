@@ -25,7 +25,7 @@
       <!-- Sample -->
 
       <v-list-item prepend-icon="mdi-file-document-outline" title="Concept Notes" value="concept_notes"
-        href="/administrator/concept_note_submissions" link>
+        href="/administrator/concept_note_approval" link>
         <template v-slot:append>
           <v-badge color="info" content="6" inline></v-badge>
         </template>

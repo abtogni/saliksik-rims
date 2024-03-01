@@ -22,8 +22,11 @@ $gray-500: #6b7280;
 $gray-600: #4b5563;
 $gray-700: #374151;
 $gray-800: #1f2937;
+$gray-900: #111827;
 $orange-50: #fff7ed;
-$default: #212121;
+$orange-700: #c2410c;
+$def-h-color: $gray-900;
+$def-p-color: $gray-700;
 
 * {
   margin: 0;
@@ -31,89 +34,69 @@ $default: #212121;
   font-family: 100% $primary-font;
 }
 
-//start jomari css
-//for page name
-
-//color gray-700 #374151 gray-800 #1f2937 blue-500 #3b82f6
-
-//general
-
-.col-start {
-  width: 100%;
-  height: auto;
-  gap: 1rem;
-}
-
-.col-end {
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: end;
-  align-content: end;
-  gap: 1rem;
-  text-align: end;
+h1 {
+  font-size: 3.815rem;
+  font-weight: 700;
+  color: $def-h-color; //gray-700
 }
 
 h2 {
-  font-size: 1.44rem;
+  font-size: 3.052rem;
   font-weight: 700;
-  color: $gray-800; //gray-700
+  color: $def-h-color; //gray-700
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size: 2.441rem;
   font-weight: 600;
-  color: $gray-800; //gray-700
+  color: $def-h-color; //gray-700
   text-transform: uppercase;
 }
+
 h4 {
-  font-size: 1rem;
+  font-size: 1.953rem;
   font-weight: 500;
-  color: $gray-500; //gray-700
+  color: $def-h-color; //gray-700
 }
 
 //working (no issue)
 h5 {
-  font-size: 1.44rem;
-  color: $default;
+  font-size: 1.563rem;
+  color: $def-h-color;
   font-weight: 700;
   text-wrap: wrap;
 }
 //working (no issue)
 h6 {
-  font-size: 1.2rem;
-  color: $default;
-  font-weight: 600;
-  text-wrap: wrap;
-}
-//working (no issue)
-h7 {
-  font-size: 0.933rem;
-  color: $default;
-  font-weight: 600;
-}
-//working (no issue)
-p {
-  font-size: 0.933rem;
-  color: $default;
-  font-weight: 400;
-  text-wrap: pre-wrap;
-}
-//working (no issue)
-.title {
-  font-size: 1rem;
-  color: $default;
-  font-weight: 500;
-}
-//working (no issue)
-.caption {
-  font-size: 0.833rem;
-  font-weight: 400;
-  color: $gray-500;
+  font-size: 1.25rem;
+  color: $def-h-color;
+  font-weight: 700;
   text-wrap: wrap;
 }
 
-.bold {
+//working (no issue)
+.p-reg {
+  font-size: 1rem;
+  color: $def-p-color;
+  font-weight: 400;
+  text-wrap: pre-wrap;
+}
+
+.p-sm {
+  font-size: 0.8rem;
+  color: $def-p-color;
+  font-weight: 500;
+  text-wrap: pre-wrap;
+}
+
+.help {
+  font-size: 0.833rem;
+  color: $orange-700;
+  font-weight: 400;
+  padding-left: 0.5rem;
+  cursor: pointer;
+}
+.b {
   font-weight: 500;
 }
 
@@ -145,36 +128,16 @@ p {
 
 //working (no issue)
 .truncate {
-  width: 20rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-//tabs
-.header-container {
-  padding-bottom: 0.5rem;
-}
 
-//for page name and caption
-.pageName-container {
-  justify-content: space-between;
-  text-align: left;
-}
-
-.cta-container {
-  text-align: end;
-}
-
-.table {
-  height: max-content;
-  width: 100%;
-}
-
-.tab-option {
-  font-size: 0.9rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  color: #374151;
+.truncate-table {
+  max-width: 50vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .count {
@@ -185,42 +148,6 @@ p {
   padding: 0.2rem;
   margin-left: 0.5rem;
 }
-
-.container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  padding-top: 1rem;
-  overflow: auto;
-  white-space: pre-wrap;
-}
-
-.row_container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%;
-  background-color: orange;
-}
-
-.column_container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: space-between;
-  gap: 2rem;
-  width: 100%;
-  
-}
-
-//tabs end
-
-//create concept note start
 
 .form-body {
   width: 100%;
@@ -255,85 +182,7 @@ p {
   }
 }
 
-//create concept note end
-.table-body {
-  width: 100%;
-  padding: 2rem 2rem 2rem 2rem;
-
-  .table-header-row {
-    width: 100%;
-    padding: 0 0 1rem 0;
-  }
-}
-.header {
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
-}
-.header-count {
-  font-weight: 500;
-  color: white;
-  background-color: $blue-500;
-}
-.table-card {
-  text-align: left;
-  width: 100%;
-  background-color: orange;
-}
-
-.table-toolbar {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  gap: 1rem;
-  width: 100%;
-  padding: 1rem 1.3rem 1rem 1.3rem;
-}
-
-//
-.tab-card {
-  text-align: left;
-  width: 100%;
-  overflow: auto;
-}
-
-.card {
-  width: 100%;
-  padding: 1rem;
-}
-//
-
-.center-dot {
-  font-weight: 500;
-  font-size: 2.5rem;
-  color: #6b7280;
-  margin: 0 0.5rem;
-}
-
-.prev-date {
-  font-weight: 400;
-  font-size: 1rem;
-  color: #6b7280; //gray-500
-  margin-right: 0.5rem;
-}
-
-//ends jomari css
-
-.height {
-  height: 10rem;
-}
-
-content {
-  padding: 3rem;
-  margin: 3rem;
-  background-color: lightcyan;
-}
-
-.research-title {
-  text-align: left;
-  text-transform: capitalize;
-}
-
+//login
 #login-container {
   background-color: lightgray;
   h6 {
@@ -397,7 +246,7 @@ div#research_table {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 0.3rem;
+    gap: 0.5rem;
   }
 
   .form-ctr {
@@ -416,7 +265,7 @@ div#research_table {
     gap: 2rem;
   }
 
-  .txt-field-row{
+  .txt-field-row {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -434,23 +283,25 @@ div#research_table {
     width: 100%;
     display: flex;
     flex-direction: row;
-    align-items: start;
+    align-items: center;
     justify-content: space-between;
     border-radius: 0%;
     padding: 0rem 1rem 0 1rem;
-
+    
     .header-left {
       width: 100%;
       display: flex;
       flex-direction: row;
       flex-wrap: nowrap;
-      align-items: center;
+      align-items: start;
+      padding-top: 0.5rem;
 
       .header-caption {
         width: auto;
         display: flex;
-        flex-direction: column;
-        flex-wrap: wrap;
+        flex-direction: row;
+        align-items: start;
+        flex-wrap: nowrap;
       }
     }
 
@@ -470,6 +321,36 @@ div#research_table {
     flex-direction: column;
     padding: 0rem 1rem 0 1rem;
   }
+}
+
+.overview-ctr {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  
+  .row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
+    gap: 1rem;
+    width: 100%;
+  }
+  .col {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+}
+
+.with-padding{
+  padding: 0rem 1rem 1rem 1rem;
+}
+
+.tbl-toolbar {
+  padding: 1rem 1rem 0rem 1rem;
 }
 
 .notif-body {
@@ -614,13 +495,6 @@ div#research_table {
   }
 }
 
-.overview-ctr {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding: 1rem;
-}
-
 //expansion panel
 .expansion-title-body {
   width: 100%;
@@ -652,7 +526,7 @@ div#research_table {
 }
 
 .card-style {
-  color: #a5b4fc;
+  color: $orange-700;
 }
 
 //FOR MODAL FORMS
