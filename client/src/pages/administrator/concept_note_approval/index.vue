@@ -2,12 +2,23 @@
   <v-container fluid class="fill-height ctr">
     <v-card flat class="body">
       <v-card-title class="header">
-        <div class="header-left truncate">
+        <div class="header-left">
           <div class="header-caption">
-            <h2>Concept Note Submissions</h2>
-            <p class="caption">
-              Call for submission to start. Approve or reject submitted concept
-              note. Click on the concept note, on the left, to see overview.
+            <v-badge
+              color="primary"
+              prepend-icon="mdi-folder-multiple-outline"
+              style="text-align: start; width: fit-content"
+            >
+              <h5 style="margin-right: 0.5rem">Concept Note Submissions</h5>
+            </v-badge>
+
+            <p class="help">
+              help
+              <v-tooltip activator="parent" location="bottom">
+                Call for submission to start. Approve or reject submitted
+                concept note. Click on the concept note, on the left, to see
+                overview.
+              </v-tooltip>
             </p>
           </div>
         </div>
@@ -21,12 +32,14 @@
       </v-card-title>
 
       <!--tab container-->
-      <v-card-text elevation="5" class="content">
-        <v-card elevation="5" class="">
-          <v-tabs v-model="tab" :items="tab_items" />
+      <v-card-text class="content">
+        <v-card elevation="0" variant="flat" class="">
+          <v-tabs v-model="tab" :items="tab_items" color="primary" />
           <v-window v-model="tab" v-for="item in tab_items" :key="item">
             <v-window-item :value="item">
-              <concept_note_submissions_table :research_data="filteredResearchData(item)" />
+              <concept_note_submissions_table
+                :research_data="filteredResearchData(item)"
+              />
             </v-window-item>
           </v-window>
         </v-card>
@@ -49,14 +62,11 @@ onMounted(async () => {
   research_data.value = researchStore.researchList;
 });
 
-
-
 const filteredResearchData = computed(() => {
   return (status: string) => {
     return research_data.value.filter((item: any) => {
-      return item.conceptNote && item.conceptNote['status'] === status;
+      return item.conceptNote && item.conceptNote["status"] === status;
     });
   };
 });
-
 </script>

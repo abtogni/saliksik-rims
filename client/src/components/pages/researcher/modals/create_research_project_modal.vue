@@ -1,19 +1,24 @@
 <template>
-  <v-btn type="submit" variant="tonal" @click="prompt = true" class="button-regular">
-    <v-icon start icon="mdi-folder-plus-outline"></v-icon> Create
-    Research Project
-  </v-btn>
-  <v-dialog v-model="prompt" width="auto">
-    <v-card class="form">
+  <v-btn
+    flat
+    prepend-icon="mdi-folder-plus-outline"
+    class="button-regular"
+    @click="prompt = true"
+    text="Create
+    Research Project"
+  />
+  <v-dialog v-model="prompt">
+    <v-card class="form_modal">
       <v-toolbar color="primary">
+        
+        <v-toolbar-title>Create New Research</v-toolbar-title>
         <v-btn icon @click="prompt = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
-        <v-toolbar-title>Create New Research</v-toolbar-title>
       </v-toolbar>
 
       <v-form class="form_content" @submit.prevent="create">
-        <v-text-field class="inputs" label="Research Title" :error-messages="researchTitle.errorMessage.value"
+        <v-textarea class="inputs" label="Research Title" :error-messages="researchTitle.errorMessage.value"
           v-model="researchTitle.value.value" variant="outlined" />
         <!-- @vue-ignore -->
         <v-select multiple class="input-field" v-model="researchLeaders.value.value"

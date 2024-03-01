@@ -2,17 +2,22 @@
   <v-container class="fill-height ctr">
     <v-card flat class="body">
       <v-card-title class="header">
-        <div class="header-left truncate">
+        <div class="header-left">
           <div class="header-caption">
-            <h2>
-              Accounts
-              <v-chip class="header-count">
-                {{ users.userCount }}
-              </v-chip>
-            </h2>
+            <v-badge
+              :content="users.userCount"
+              color="primary"
+              prepend-icon="mdi-folder-multiple-outline"
+              style="text-align: start; width: fit-content"
+            >
+              <h5 style="margin-right: 0.5rem">Accounts</h5>
+            </v-badge>
 
-            <p class="caption">
-              Create and manage accounts here.
+            <p class="help">
+              help
+              <v-tooltip activator="parent" location="bottom">
+                Create and manage accounts here.
+              </v-tooltip>
             </p>
           </div>
         </div>
@@ -21,8 +26,8 @@
           <create_user_modal />
         </div>
       </v-card-title>
-      <v-card-text elevation="5" class="content">
-        <v-card elevation="5">
+      <v-card-text elevation="0" class="content">
+        <v-card elevation="0" variant="flat">
           <User_list id="user_container" :userList="users.userList" />
         </v-card>
       </v-card-text>
