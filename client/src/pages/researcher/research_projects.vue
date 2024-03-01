@@ -28,7 +28,7 @@
         </div>
       </v-card-title>
       <v-card-text class="content">
-        <v-card elevation="5">
+        <v-card elevation="0">
           <research_table :research="researches" />
         </v-card>
       </v-card-text>

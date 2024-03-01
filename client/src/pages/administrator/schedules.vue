@@ -2,24 +2,33 @@
   <v-container class="fill-height ctr">
     <v-card flat class="body">
       <v-card-title class="header">
-        <div class="header-left truncate">
+        <div class="header-left">
           <div class="header-caption">
-            <h5>Presentations</h5>
+            <v-badge
+            :content="schedules.length"
+              color="primary"
+              prepend-icon="mdi-folder-multiple-outline"
+              style="text-align: start; width: fit-content"
+            >
+              <h5 style="margin-right: 0.5rem">Presentations</h5>
+            </v-badge>
 
-            <p class="caption">
-              Create schedule, add research projects and assign panelist for
+            <p class="help">
+              help
+              <v-tooltip activator="parent" location="bottom">
+                Create schedule, add research projects and assign panelist for
               title and final presentation.
+              </v-tooltip>
             </p>
           </div>
         </div>
-
         <div class="header-right">
           <create_schedule_modal :users="users" :researchList="researchList" />
         </div>
       </v-card-title>
       <v-card-text class="content">
-        <v-card elevation="5" style="padding-bottom: 1rem">
-          <v-tabs v-model="tab">
+        <v-card elevation="0" variant="flat" style="padding-bottom: 1rem">
+          <v-tabs v-model="tab" color="primary">
             <v-tab value="title">Title
               <template v-slot:append>
                 <v-badge color="info" content="6" inline>

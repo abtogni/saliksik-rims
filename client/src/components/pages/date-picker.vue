@@ -1,5 +1,5 @@
 <template>
-  <v-menu v-model="isMenuOpen" :close-on-content-click="false">
+  <v-menu v-model="isMenuOpen" :close-on-content-click="false" >
     <template v-slot:activator="{ props }">
       <v-text-field :label="label" :rules="fieldNeed" :model-value="formattedDate" v-bind="props" variant="outlined"
         hide-details />
@@ -31,7 +31,7 @@ const isMenuOpen = ref(false);
 const selectedDate = ref(modelValue);
 
 const formattedDate = computed(() => {
-  return selectedDate.value ? moment(selectedDate.value).format('MMMM DD, YYYY h:mm a') : "";
+  return selectedDate.value ? moment(selectedDate.value).format('MMMM DD, YYYY h:mm A') : "";
 });
 
 watch(modelValue, (newDate) => {

@@ -2,10 +2,22 @@
   <v-container fluid class="fill-height ctr">
     <v-card flat class="body">
       <v-card-title class="header">
-        <div class="header-left truncate">
+        <div class="header-left">
           <div class="header-caption">
-            <h2>Incentive</h2>
-            <p class="caption">Track and manage incentive status here.</p>
+            <v-badge
+              color="primary"
+              prepend-icon="mdi-folder-multiple-outline"
+              style="text-align: start; width: fit-content"
+            >
+              <h5 style="margin-right: 0.5rem">Incentive</h5>
+            </v-badge>
+
+            <p class="help">
+              help
+              <v-tooltip activator="parent" location="bottom">
+                Track and manage incentives here.
+              </v-tooltip>
+            </p>
           </div>
         </div>
         <!--cta container
@@ -19,10 +31,10 @@
       </v-card-title>
 
       <!--tab container-->
-      <v-card-text elevation="5" class="content">
-        <v-card elevation="5" class="">
-          <v-tabs v-model="tab">
-            <v-tab value="No Status"
+      <v-card-text elevation="0" class="content">
+        <v-card elevation="0" variant="flat" class="">
+          <v-tabs v-model="tab" color="#5b21b6">
+            <v-tab value="No Status" 
               >No Status
               <template v-slot:append>
                 <v-badge color="info" content="6" inline>

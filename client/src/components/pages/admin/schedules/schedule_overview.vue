@@ -1,11 +1,11 @@
 <template>
   <v-card flat style="padding-top: 0.833rem" v-for="(schedule_group, date) in grouped_schedules" :key="date" class="body">
-    <v-card flat class="header">
+    <v-card-title flat class="header">
       <div class="header-left truncate">
         <div class="header-caption">
-          <h5>
+          <h6>
             {{ format_date(grouped_schedules[date][0].dateAndTime) }}
-          </h5>
+          </h6>
 
           <!-- <p class="caption">
             Track and monitor your research paper. Upload a copy of the research
@@ -13,13 +13,12 @@
           </p> -->
         </div>
       </div>
-
-    </v-card>
-    <div class="content">
+    </v-card-title>
+    <v-card-text class="content">
       <v-card variant="outlined" class="card-style">
         <v-expansion-panels>
           <v-expansion-panel v-for="(schedule, index) in schedule_group" :key="schedule._id">
-            <v-expansion-panel-title class="title expansion-title-body" v-if="should_display_time(schedule, index, schedule_group)
+            <v-expansion-panel-title class="title expansion-title-body b" v-if="should_display_time(schedule, index, schedule_group)
               ">
               <v-btn variant="text" icon="mdi-account-multiple-outline">
                 <v-badge color="info" :content="schedule.panelists.length" floating>
@@ -47,15 +46,14 @@
               </v-btn>
               <span class="expansion-title-left truncate">
                 <span class="truncate">
-                  {{ moment(schedule.dateAndTime).format('dddd') }}
-                  {{ format_time(schedule.dateAndTime) }}
+                  {{ moment(schedule.dateAndTime).format('MMMM D YYYY, h:mm A') }}
                 </span>
                 <span class="truncate"> | </span>
                 <span class="truncate">
                   {{ schedule.location }}
                 </span>
               </span>
-              <span class="expansion-title-right"><v-chip>{{ format_date(grouped_schedules[date][0].dateAndTime) }}
+              <span class="expansion-title-right"><v-chip color="primary" class="b">{{ moment(schedule.createdAt).format('MMMM D YYYY, h:mm A') }}
                   <v-tooltip activator="parent" location="bottom">Created In
                   </v-tooltip>
                 </v-chip></span>
@@ -65,7 +63,7 @@
                 <v-card-title flat class="header">
                   <div class="header-left truncate">
                     <div class="header-caption-ctr">
-                      <h5>{{ `${schedule.location} ${format_time(schedule.dateAndTime)}` }}</h5>
+                      <h5>{{ ` ${moment(schedule.dateAndTime).format('MMMM D YYYY, h:mm A')} · ${schedule.location}` }}</h5>
                     </div>
                   </div>
 
@@ -86,7 +84,7 @@
           </v-expansion-panel>
         </v-expansion-panels>
       </v-card>
-    </div>
+  </v-card-text>
   </v-card>
 </template>
 
