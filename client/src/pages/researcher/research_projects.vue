@@ -2,18 +2,23 @@
   <v-container fluid class="fill-height ctr">
     <v-card flat class="body">
       <v-card-title class="header">
-        <div class="header-left truncate">
+        <div class="header-left">
           <div class="header-caption">
-            <h2>
-              Research Projects
-              <v-chip class="header-count">
-                You have {{ researches.length }} research projects
-              </v-chip>
-            </h2>
+            <v-badge
+              :content="researches.length"
+              color="primary"
+              prepend-icon="mdi-folder-multiple-outline"
+              style="text-align: start; width: fit-content"
+            >
+              <h5 style="margin-right: 0.5rem">Research Projects</h5>
+            </v-badge>
 
-            <p class="caption">
-              Create new research project to start. View and manage your
-              research projects here.
+            <p class="help">
+              help
+              <v-tooltip activator="parent" location="bottom">
+                View and manage your research projects here. Create new research
+                project to start.
+              </v-tooltip>
             </p>
           </div>
         </div>
@@ -22,7 +27,7 @@
           <create_research_project_modal />
         </div>
       </v-card-title>
-      <v-card-text elevation="5" class="content">
+      <v-card-text class="content">
         <v-card elevation="5">
           <research_table :research="researches" />
         </v-card>
@@ -41,6 +46,5 @@ const researches = ref([]);
 onMounted(async () => {
   await researchStore.getUserResearches();
   researches.value = researchStore.userResearchList;
-})
-
+});
 </script>
