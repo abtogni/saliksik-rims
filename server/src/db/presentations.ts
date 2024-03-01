@@ -13,7 +13,10 @@ const PresentationSchema = new mongoose.Schema(
       ref: "Research",
     },
     presentationType: { type: String },
-    scheduleID: { type: String },
+    scheduleID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Schedule",
+    },
     status: { type: String },
     panelistNotes: [
       {
