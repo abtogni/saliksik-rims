@@ -79,7 +79,7 @@
                 </v-card-title>
               </v-card>
 
-              <schedule_researcher_preview :researches="schedule.presentations" :researchIDs="researchList" />
+              <schedule_researches_preview :researches="schedule.presentations" :researchIDs="researchList" />
               <br>
               <schedule_panelist_preview :panelists="schedule.panelists" :users="users" />
             </v-expansion-panel-text>
