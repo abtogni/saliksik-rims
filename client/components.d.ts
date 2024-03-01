@@ -34,7 +34,6 @@ declare module 'vue' {
     RouterView: typeof import('vue-router')['RouterView']
     Schedule_overview: typeof import('./src/components/pages/admin/schedules/schedule_overview.vue')['default']
     Schedule_panelist_preview: typeof import('./src/components/pages/admin/schedules/schedule_panelist_preview.vue')['default']
-    Schedule_researcher_preview: typeof import('./src/components/pages/admin/schedules/schedule_researcher_preview.vue')['default']
     Schedule_researches_preview: typeof import('./src/components/pages/admin/schedules/schedule_researches_preview.vue')['default']
     Status_concept_note_approved: typeof import('./src/components/pages/researcher/status/status_concept_note_approved.vue')['default']
     Status_concept_note_rejected: typeof import('./src/components/pages/researcher/status/status_concept_note_rejected.vue')['default']

@@ -56,9 +56,9 @@ const login = handleSubmit(async (values) => {
   }).then((response) => {
     alert(response.data.message);
     if (response.data.role == 'Administrator') {
-      window.location.href = '/administrator/concept-note-approval';
+      window.location.href = '/administrator/concept_note_approval';
     } else if (response.data.role == 'Researcher') {
-      window.location.href = '/researcher';
+      window.location.href = '/researcher/research_projects';
     } else if (response.data.role == 'Internal Panelist' || response.data.role == 'External Panelist') {
       window.location.href = '/panelists';
     }
