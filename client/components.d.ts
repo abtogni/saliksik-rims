@@ -7,9 +7,13 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Call_for_submission: typeof import('./src/components/pages/admin/modals/call_for_submission.vue')['default']
+    Concept_note_approve: typeof import('./src/components/pages/admin/modals/concept_note_approve.vue')['default']
     Concept_note_overview: typeof import('./src/components/pages/admin/concept note/concept_note_overview.vue')['default']
+    Concept_note_reject: typeof import('./src/components/pages/admin/modals/concept_note_reject.vue')['default']
     Concept_note_submissions_table: typeof import('./src/components/pages/admin/concept note/concept_note_submissions_table.vue')['default']
     Concept_note_tab: typeof import('./src/components/pages/researcher/tab/concept_note_tab.vue')['default']
+    copy: typeof import('./src/components/pages/admin/modals/concept_note_approve copy.vue')['default']
     Create_research_project_modal: typeof import('./src/components/pages/researcher/modals/create_research_project_modal.vue')['default']
     Create_schedule_modal: typeof import('./src/components/pages/admin/modals/create_schedule_modal.vue')['default']
     Create_user_modal: typeof import('./src/components/pages/admin/modals/create_user_modal.vue')['default']

@@ -1,6 +1,6 @@
 <template>
   <div style="padding-bottom: 0.833rem">
-    <v-row no-gutters class="tbl-toolbar">
+    <v-row no-gutters class="tbl-toolbar" style="margin-bottom: -2rem;">
       <v-text-field
         v-model="search"
         label="Search"
@@ -64,7 +64,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 const search = ref("");
-const expanded = ref([]);
 
 const props = defineProps(["research_data"]);
 

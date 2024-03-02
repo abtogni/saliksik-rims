@@ -24,10 +24,11 @@
         </div>
         <!--cta container-->
         <div class="header-right">
-          <v-btn type="submit" class="button-regular">
+          <!-- <v-btn type="submit" class="button-regular">
             <v-icon start icon="mdi-phone-in-talk-outline"></v-icon> Call For
             Submission
-          </v-btn>
+          </v-btn> -->
+          <call_for_submission/>
         </div>
       </v-card-title>
 
