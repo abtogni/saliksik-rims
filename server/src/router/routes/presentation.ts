@@ -23,7 +23,7 @@ export default (router: Router) => {
 
     //GET
     .get("/presentations/", isAuthenticated, getPresentations)
-    .get("/presentations/:id", isAuthenticated, fetchPresentation)
+    .get("/presentation/:id", isAuthenticated, fetchPresentation)
 
     //POST
     .post("/presentation/create", isAuthenticated, createNewPresentation)

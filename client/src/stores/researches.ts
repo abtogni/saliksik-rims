@@ -2,7 +2,9 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import axios from "axios";
 import { useUsersStore } from "./users";
+import { usePresentationsStore } from "@/stores/presentations";
 import moment from "moment";
+import { useSchedulesStore } from "./schedules";
 
 export const useResearchesStore = defineStore(
   "researches",
@@ -38,7 +40,7 @@ export const useResearchesStore = defineStore(
           createdAt: moment(research.createdAt).format("MMMM DD, YYYY"),
         }));
       } catch (e) {
-        alert(e);
+        console.error(e);
       } finally {
         isLoading.value = false;
       }
@@ -80,7 +82,7 @@ export const useResearchesStore = defineStore(
     const getCurrentResearch = async (id: string) => {
       return axios
         .get("/api/research/" + id)
-        .then((response) => {
+        .then(async (response) => {
           //@ts-ignore
           currentResearch.value = {
             _id: response.data._id,
@@ -103,9 +105,24 @@ export const useResearchesStore = defineStore(
             conceptNote: response.data.conceptNote,
             createdAt: moment(response.data.createdAt).format("MMMM DD, YYYY"),
             updatedAt: moment(response.data.updatedAt).format("MMMM DD, YYYY"),
+            presentations: await Promise.all(
+              response.data.presentations.map(async (p: any) => {
+                await usePresentationsStore().getCurrentPresentation(p);
+                const res: any = usePresentationsStore().currentPresentation;
+                if (res) {
+                  return {
+                    _id: res._id,
+                    presentationType: res.presentationType,
+                    panelistNotes: res.panelistNotes,
+                    schedule: await getScheduleData(res.scheduleID),
+                  };
+                }
+                return null;
+              }),
+            ),
           };
         })
-        .catch((e) => alert(e));
+        .catch((e) => console.error(e));
     };
 
     return {
@@ -131,7 +148,19 @@ export interface Research {
   conceptNote: any;
   createdAt: string;
   updatedAt: string;
-  titlePresentation: string;
-  initialPresentation: string;
-  finalPresentation: string;
+  presentations: any;
 }
+
+const getScheduleData = async (id: string) => {
+  await useSchedulesStore().getSchedule(id);
+  const s: any = useSchedulesStore().currentSchedule;
+  if (s) {
+    return {
+      _id: s._id,
+      dateAndTime: s.dateAndTime,
+      location: s.location,
+      panelists: s.panelists,
+    };
+  }
+  return null;
+};

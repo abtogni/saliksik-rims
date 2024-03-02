@@ -69,7 +69,7 @@ export const fetchSchedule = async (req: Request, res: Response) => {
 
     const data = await getScheduleByID(id);
 
-    return res.status(200).json({ data });
+    return res.status(200).json(data);
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);
