@@ -1,48 +1,33 @@
 <template>
   <v-btn
     flat
-    prepend-icon="mdi-folder-plus-outline"
+    prepend-icon="mdi-check-circle-outline"
     class="button-regular"
     @click="prompt = true"
-    text="Create
-    Research Project"
+    text="Approve"
   />
   <v-dialog v-model="prompt">
-    <v-card class="form_modal">
+    <v-card class="form_modal_small">
       <v-toolbar color="primary">
-        <v-toolbar-title>Create New Research Project</v-toolbar-title>
+        <v-toolbar-title>Approve Concept Note?</v-toolbar-title>
         <v-btn icon @click="prompt = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
 
-      <v-form class="form_content" @submit.prevent="create">
-        <v-textarea
-          class="inputs"
-          label="Research Title"
-          :error-messages="researchTitle.errorMessage.value"
-          v-model="researchTitle.value.value"
-          prepend-inner-icon="mdi-format-title"
-          rows="1"
-          auto-grow
-          variant="outlined"
-        />
-        <!-- @vue-ignore -->
-        <v-select
-          multiple
-          class="input-field"
-          v-model="researchLeaders.value.value"
-          :error-messages="researchLeaders.errorMessage.value"
-          label="Research Leaders"
-          prepend-inner-icon="mdi-account-multiple-outline"
-          :items="users"
-          item-title="name"
-          item-value="key"
-          variant="outlined"
-        />
+      <v-card-text class="form_content ">
+        <div class=" h-40">
+          <p class="p-reg ">
 
-        <v-btn type="submit" class="button-regular">Create New Research</v-btn>
-      </v-form>
+          
+          This action will send a <span class="p-reg b">notice to proceed</span> to <span class="p-reg b">NameOfResearch</span> by <span class="p-reg b">NameOfResearchers</span>
+        </p>
+        </div>
+        
+        <v-btn type="submit" class="button-regular">Approve Concept Note</v-btn>
+      </v-card-text>
+
+        
     </v-card>
   </v-dialog>
 </template>
