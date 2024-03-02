@@ -4,73 +4,29 @@
       <div class="header-left truncate">
         <div class="header-caption-ctr">
           <h6>Researches</h6>
-
-          <!-- <p class="caption">
-            Track and monitor your research paper. Upload a copy of the research
-            paper regularly.
-          </p> -->
         </div>
-      </div>
-
-      <div class="header-right">
-        <!--cta
-        <v-btn
-          type="submit"
-          flat
-          prepend-icon="mdi-note-plus-outline"
-          class="button-regular"
-          >Add More
-        </v-btn>
-         <v-btn
-          type="submit"
-          flat
-          variant="outlined"
-          prepend-icon="mdi-close-circle-outline"
-          class="button-outlined"
-          >Not Going
-        </v-btn>  -->
       </div>
     </v-card-title>
 
     <v-divider />
 
-    <v-hover v-slot:default="{ isHovering, props }">
+    <v-hover v-slot:default="{ isHovering, props }" v-for="research in researchData" :key="research._id">
       <v-card flat rounded="0" v-bind="props" :color="isHovering ? '#eef2ff' : undefined" style="height: fit-content">
         <v-card-text class="pres-res-body">
           <div class="pres-res-left">
             <v-btn variant="text" icon="mdi-account-multiple-outline">
               <v-icon></v-icon>
               <v-tooltip activator="parent" location="bottom" class="tooltip-list">
-                <div class="bold-upper">Researches</div>
+                <div class="bold-upper">Researchers</div>
+                <div v-for="leader in research.researchLeaders" :key="leader._id">
+                  {{ leader.name }}
+                </div>
               </v-tooltip>
             </v-btn>
             <div class="text">
-              {{ researches.join(', ') }}
+              {{ research.researchTitle }}
             </div>
           </div>
-          <div class="pres-res-right">
-            <!-- <v-btn variant="text" icon="mdi-trash-can-outline">
-<v-icon></v-icon>
-                  <v-tooltip
-                  activator="parent"
-                  location="bottom"
-                  class="tooltip-list"
-                >Remove
-                </v-tooltip>
-                </v-btn> -->
-          </div>
-
-          <!-- cta
-              <div>
-              <v-btn
-                flat
-                density="comfortable"
-                prepend-icon="mdi-calendar-month"
-                class="button-regular"
-              >
-                Check Schedule
-              </v-btn>
-            </div> -->
         </v-card-text>
       </v-card>
     </v-hover>
@@ -78,5 +34,9 @@
 </template>
 
 <script setup lang="ts">
-const { researches, researchIDs } = defineProps(['researches', 'researchIDs']);
+import { useResearchesStore } from '@/stores/researches';
+
+const { presentations, users } = defineProps(['presentations', 'users']);
+//@ts-ignore
+const researchData = useResearchesStore().researchList.filter(research => presentations.some((presentation: any) => presentation.researchID === research._id));
 </script>
