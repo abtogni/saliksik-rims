@@ -26,7 +26,6 @@
               {{ item.label }}
             </v-tab>
           </v-tabs>
-          <!-- @vue-skip -->
           <v-window v-model="tab" style="width: 100%">
             <v-window-item value="concept-note">
               <v-card flat style="padding-top: 0.833rem" class="body">
@@ -46,21 +45,20 @@
                   </div>
 
                   <div class="header-right">
-                    <status_concept_note_submitted v-if="
-                            currentResearch.conceptNote &&
-                            currentResearch.conceptNote.status ==
-                              'Verify and Review'
-                          " />
+                    <status_concept_note_submitted v-if="currentResearch.conceptNote &&
+    currentResearch.conceptNote.status ==
+    'Verify and Review'
+    " />
                     <status_no_status v-else />
                     <v-btn v-if="currentResearch.conceptNote" type="submit" flat variant="outlined"
                       prepend-icon="mdi-file-document-edit-outline" class="button-outlined">Edit Concept Note
                     </v-btn>
                     <v-btn type="submit" flat prepend-icon="mdi-file-document-plus-outline" class="button-regular"
                       @click="
-                        $router.push(
-                          `${currentResearch._id}/create_concept_note`,
-                        )
-                      " v-else>Create Concept Note
+    $router.push(
+      `${currentResearch._id}/create_concept_note`,
+    )
+    " v-else>Create Concept Note
                     </v-btn>
 
                   </div>
@@ -75,13 +73,15 @@
               </v-card>
             </v-window-item>
             <v-window-item value="title-presentation">
-              <title_presentation_tab />
+              <presentation_tab
+                :presentations="currentResearch.presentations.filter((presentation: any) => presentation.presentationType === 'Title')" />
             </v-window-item>
             <v-window-item value="research-paper">
               <research_paper_progress />
             </v-window-item>
             <v-window-item value="final-presentation">
-              <final_presentation_tab />
+              <presentation_tab
+                :presentations="currentResearch.presentations.filter((presentation: any) => presentation.presentationType === 'Final')" />
             </v-window-item>
             <v-window-item value="incentive">
               <incentive_status_tab />
@@ -91,11 +91,9 @@
       </v-card>
     </v-container>
   </div>
-  {{ JSON.stringify(currentResearch) }}
 </template>
 
 <script setup lang="ts">
-import Status_concept_note_submitted from "@/components/pages/researcher/status/status_concept_note_submitted.vue";
 import { useResearchesStore } from "@/stores/researches";
 import { onMounted, ref } from "vue";
 
@@ -129,7 +127,7 @@ const tabItems = [
 ];
 
 const url = window.location.href;
-const currentResearch = ref(null);
+const currentResearch: any = ref(null);
 const param = url.split("/").slice(-1)[0];
 
 const tab = ref("concept-note");

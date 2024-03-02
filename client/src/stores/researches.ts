@@ -40,7 +40,7 @@ export const useResearchesStore = defineStore(
           createdAt: moment(research.createdAt).format("MMMM DD, YYYY"),
         }));
       } catch (e) {
-        alert(e);
+        console.error(e);
       } finally {
         isLoading.value = false;
       }
@@ -111,10 +111,10 @@ export const useResearchesStore = defineStore(
                 const res: any = usePresentationsStore().currentPresentation;
                 if (res) {
                   return {
-                    _id: res.data._id,
-                    presentationType: res.data.presentationType,
-                    panelistNotes: res.data.panelistNotes,
-                    schedule: getScheduleData(res.data.scheduleID),
+                    _id: res._id,
+                    presentationType: res.presentationType,
+                    panelistNotes: res.panelistNotes,
+                    schedule: await getScheduleData(res.scheduleID),
                   };
                 }
                 return null;
@@ -122,7 +122,7 @@ export const useResearchesStore = defineStore(
             ),
           };
         })
-        .catch((e) => alert(e));
+        .catch((e) => console.error(e));
     };
 
     return {
@@ -154,14 +154,13 @@ export interface Research {
 const getScheduleData = async (id: string) => {
   await useSchedulesStore().getSchedule(id);
   const s: any = useSchedulesStore().currentSchedule;
-  console.log(s);
-  const scheduleData = s
-    ? {
-        _id: s.data._id,
-        dateAndTime: s.data.dateAndTime,
-        location: s.data.location,
-        panelists: s.data.panelists,
-      }
-    : null;
-  return { schedule: scheduleData };
+  if (s) {
+    return {
+      _id: s._id,
+      dateAndTime: s.dateAndTime,
+      location: s.location,
+      panelists: s.panelists,
+    };
+  }
+  return null;
 };
