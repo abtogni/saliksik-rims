@@ -15,5 +15,16 @@ export const usePresentationsStore = defineStore("presentations", () => {
     }
   };
 
-  return { presentationList, getPresentations };
+  const getCurrentPresentation = async (id: string) => {
+    return axios.get(`/api/presentation/${id}`).then((response) => {
+      currentPresentation.value = response.data;
+    });
+  };
+
+  return {
+    presentationList,
+    getPresentations,
+    getCurrentPresentation,
+    currentPresentation,
+  };
 });

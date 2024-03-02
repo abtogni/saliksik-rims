@@ -2,7 +2,9 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import axios from "axios";
 import { useUsersStore } from "./users";
+import { usePresentationsStore } from "@/stores/presentations";
 import moment from "moment";
+import { useSchedulesStore } from "./schedules";
 
 export const useResearchesStore = defineStore(
   "researches",
@@ -80,7 +82,7 @@ export const useResearchesStore = defineStore(
     const getCurrentResearch = async (id: string) => {
       return axios
         .get("/api/research/" + id)
-        .then((response) => {
+        .then(async (response) => {
           //@ts-ignore
           currentResearch.value = {
             _id: response.data._id,
@@ -103,6 +105,21 @@ export const useResearchesStore = defineStore(
             conceptNote: response.data.conceptNote,
             createdAt: moment(response.data.createdAt).format("MMMM DD, YYYY"),
             updatedAt: moment(response.data.updatedAt).format("MMMM DD, YYYY"),
+            presentations: await Promise.all(
+              response.data.presentations.map(async (p: any) => {
+                await usePresentationsStore().getCurrentPresentation(p);
+                const res: any = usePresentationsStore().currentPresentation;
+                if (res) {
+                  return {
+                    _id: res.data._id,
+                    presentationType: res.data.presentationType,
+                    panelistNotes: res.data.panelistNotes,
+                    schedule: getScheduleData(res.data.scheduleID),
+                  };
+                }
+                return null;
+              }),
+            ),
           };
         })
         .catch((e) => alert(e));
@@ -131,7 +148,20 @@ export interface Research {
   conceptNote: any;
   createdAt: string;
   updatedAt: string;
-  titlePresentation: string;
-  initialPresentation: string;
-  finalPresentation: string;
+  presentations: any;
 }
+
+const getScheduleData = async (id: string) => {
+  await useSchedulesStore().getSchedule(id);
+  const s: any = useSchedulesStore().currentSchedule;
+  console.log(s);
+  const scheduleData = s
+    ? {
+        _id: s.data._id,
+        dateAndTime: s.data.dateAndTime,
+        location: s.data.location,
+        panelists: s.data.panelists,
+      }
+    : null;
+  return { schedule: scheduleData };
+};

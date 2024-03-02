@@ -21,11 +21,7 @@
       <v-card elevation="0" variant="flat" class="body">
         <div class="d-flex flex-row">
           <v-tabs v-model="tab" direction="vertical" color="primary">
-            <v-tab
-              v-for="item in tabItems"
-              :key="item.value"
-              :value="item.value"
-            >
+            <v-tab v-for="item in tabItems" :key="item.value" :value="item.value">
               <v-icon start :icon="item.icon" />
               {{ item.label }}
             </v-tab>
@@ -39,60 +35,42 @@
                     <div class="header-caption">
                       <h5 style="margin-right: 0rem">
                         Concept Note
-                        
+
                       </h5>
                       <p class="help" style="padding-top: 0.3rem">
                         help
-                        <v-tooltip activator="parent" location="bottom"
-                          >Create and submit concept note to start.
+                        <v-tooltip activator="parent" location="bottom">Create and submit concept note to start.
                         </v-tooltip>
                       </p>
                     </div>
                   </div>
 
                   <div class="header-right">
-                    <status_concept_note_submitted
-                          v-if="
+                    <status_concept_note_submitted v-if="
                             currentResearch.conceptNote &&
                             currentResearch.conceptNote.status ==
                               'Verify and Review'
-                          "
-                        />
-                        <status_no_status v-else />
-                    <v-btn
-                      v-if="currentResearch.conceptNote"
-                      type="submit"
-                      flat
-                      variant="outlined"
-                      prepend-icon="mdi-file-document-edit-outline"
-                      class="button-outlined"
-                      >Edit Concept Note
+                          " />
+                    <status_no_status v-else />
+                    <v-btn v-if="currentResearch.conceptNote" type="submit" flat variant="outlined"
+                      prepend-icon="mdi-file-document-edit-outline" class="button-outlined">Edit Concept Note
                     </v-btn>
-                    <v-btn
-                      type="submit"
-                      flat
-                      prepend-icon="mdi-file-document-plus-outline"
-                      class="button-regular"
+                    <v-btn type="submit" flat prepend-icon="mdi-file-document-plus-outline" class="button-regular"
                       @click="
                         $router.push(
                           `${currentResearch._id}/create_concept_note`,
                         )
-                      "
-                      v-else
-                      >Create Concept Note
+                      " v-else>Create Concept Note
                     </v-btn>
-                    
+
                   </div>
                 </v-card-title>
 
                 <v-card-text v-if="currentResearch.conceptNote">
                   <concept_note_tab :data="currentResearch.conceptNote" />
                 </v-card-text>
-                <v-card variant="flat"
-                  text="You don't have a concept note yet, you should create one."
-                  class="bold"
-                  v-else
-                >
+                <v-card variant="flat" text="You don't have a concept note yet, you should create one." class="bold"
+                  v-else>
                 </v-card>
               </v-card>
             </v-window-item>
@@ -113,12 +91,14 @@
       </v-card>
     </v-container>
   </div>
+  {{ JSON.stringify(currentResearch) }}
 </template>
 
 <script setup lang="ts">
 import Status_concept_note_submitted from "@/components/pages/researcher/status/status_concept_note_submitted.vue";
 import { useResearchesStore } from "@/stores/researches";
 import { onMounted, ref } from "vue";
+
 
 const tabItems = [
   {

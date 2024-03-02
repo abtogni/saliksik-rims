@@ -40,7 +40,7 @@ export const fetchPresentation = async (req: Request, res: Response) => {
 
     const data = await getPresentationByID(id);
 
-    return res.status(200).json({ data });
+    return res.status(200).json(data);
   } catch (error) {
     console.log(error);
     return res.sendStatus(400);
