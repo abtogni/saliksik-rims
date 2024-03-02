@@ -7,10 +7,12 @@ export const usePresentationsStore = defineStore("presentations", () => {
   const currentPresentation = ref(null);
 
   const getPresentations = async () => {
-    return await axios
-      .get("api/presentations")
-      .then((response) => (presentationList.value = response.data))
-      .catch((error) => console.error(error));
+    try {
+      const response = await axios.get("/api/presentations");
+      presentationList.value = response.data;
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return { presentationList, getPresentations };

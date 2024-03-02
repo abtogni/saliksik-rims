@@ -48,7 +48,7 @@ declare module 'vue-router/auto/routes' {
     '/administrator/incentive': RouteRecordInfo<'/administrator/incentive', '/administrator/incentive', Record<never, never>, Record<never, never>>,
     '/administrator/research_papers': RouteRecordInfo<'/administrator/research_papers', '/administrator/research_papers', Record<never, never>, Record<never, never>>,
     '/administrator/schedules': RouteRecordInfo<'/administrator/schedules', '/administrator/schedules', Record<never, never>, Record<never, never>>,
-    '/panelist/[presentation_id]/panelist_comment_field': RouteRecordInfo<'/panelist/[presentation_id]/panelist_comment_field', '/panelist/:presentation_id/panelist_comment_field', { presentation_id: ParamValue<true> }, { presentation_id: ParamValue<false> }>,
+    '/panelist/panelist_comment_field': RouteRecordInfo<'/panelist/panelist_comment_field', '/panelist/panelist_comment_field', Record<never, never>, Record<never, never>>,
     '/panelist/panelist_comments_dashboard': RouteRecordInfo<'/panelist/panelist_comments_dashboard', '/panelist/panelist_comments_dashboard', Record<never, never>, Record<never, never>>,
     '/researcher/[research_id.vue]/': RouteRecordInfo<'/researcher/[research_id.vue]/', '/researcher/:research_ide(.*)', { research_ide: ParamValue<true> }, { research_ide: ParamValue<false> }>,
     '/researcher/[research_id.vue]/create_concept_note': RouteRecordInfo<'/researcher/[research_id.vue]/create_concept_note', '/researcher/:research_ide(.*)/create_concept_note', { research_ide: ParamValue<true> }, { research_ide: ParamValue<false> }>,

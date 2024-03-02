@@ -4,12 +4,8 @@
       <v-card-title class="header">
         <div class="header-left">
           <div class="header-caption">
-            <v-badge
-            :content="schedules.length"
-              color="primary"
-              prepend-icon="mdi-folder-multiple-outline"
-              style="text-align: start; width: fit-content"
-            >
+            <v-badge :content="schedules.length" color="primary" prepend-icon="mdi-folder-multiple-outline"
+              style="text-align: start; width: fit-content">
               <h5 style="margin-right: 0.5rem">Presentations</h5>
             </v-badge>
 
@@ -17,7 +13,7 @@
               help
               <v-tooltip activator="parent" location="bottom">
                 Create schedule, add research projects and assign panelist for
-              title and final presentation.
+                title and final presentation.
               </v-tooltip>
             </p>
           </div>
@@ -47,9 +43,11 @@
           </v-tabs>
           <v-window v-model="tab">
             <v-window-item value="title">
+
               <template v-if="schedules.length > 0">
-                <schedule_overview :schedule="schedules" :researchList="researchList" />
+                <schedule_overview :schedule="schedules" :researchList="researchList" :users="users" />
               </template>
+
               <template v-else>
                 <p>No schedules available.</p>
               </template>
@@ -60,7 +58,6 @@
       </v-card-text>
     </v-card>
   </v-container>
-  {{ JSON.stringify(schedules) }}
 </template>
 
 <script setup lang="ts">
@@ -68,6 +65,7 @@ import { useUsersStore } from '@/stores/users';
 import { useResearchesStore } from '@/stores/researches';
 import { onMounted, ref } from "vue";
 import { useSchedulesStore } from '@/stores/schedules';
+import { usePresentationsStore } from '@/stores/presentations';
 
 
 const users = ref<{ key: any; name: string; }[]>([]);
@@ -75,6 +73,7 @@ const researchList = ref<{ key: any; name: string; }[]>([]);
 const schedules = ref([]);
 
 onMounted(async () => {
+  await usePresentationsStore().getPresentations();
   await useSchedulesStore().getSchedulesList();
   await useResearchesStore().getResearchList();
   const userStore = useUsersStore().userList;

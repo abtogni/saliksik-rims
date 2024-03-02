@@ -12,7 +12,7 @@ export const useSchedulesStore = defineStore("schedules", () => {
   const getSchedulesList = async () => {
     return await axios.get("/api/schedules").then((response) => {
       schedulesList.value = response.data.map((schedule: any) => ({
-        _id: schedule.id,
+        _id: schedule._id,
         dateAndTime: schedule.dateAndTime,
         location: schedule.location,
         panelists: schedule.panelists.map((panelist: any) => {
@@ -40,6 +40,7 @@ export const useSchedulesStore = defineStore("schedules", () => {
               status: matchingPresentation.status,
             };
           }
+          return null;
         }),
       }));
     });

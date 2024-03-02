@@ -1,10 +1,11 @@
 <template>
-  <v-card flat style="padding-top: 0.833rem" v-for="(schedule_group, date) in grouped_schedules" :key="date" class="body">
+  <v-card flat style="padding-top: 0.833rem" v-for="(schedule_group, date) in grouped_schedules" :key="date"
+    class="body">
     <v-card-title flat class="header">
       <div class="header-left truncate">
         <div class="header-caption">
           <h6>
-            {{ format_date(grouped_schedules[date][0].dateAndTime) }}
+            {{ moment(grouped_schedules[date][0].dateAndTime).format("MMMM DD, YYYY") }}
           </h6>
 
           <!-- <p class="caption">
@@ -19,7 +20,7 @@
         <v-expansion-panels>
           <v-expansion-panel v-for="(schedule, index) in schedule_group" :key="schedule._id">
             <v-expansion-panel-title class="title expansion-title-body b" v-if="should_display_time(schedule, index, schedule_group)
-              ">
+    ">
               <v-btn variant="text" icon="mdi-account-multiple-outline">
                 <v-badge color="info" :content="schedule.panelists.length" floating>
                   <v-icon></v-icon>
@@ -39,8 +40,8 @@
 
                 <v-tooltip activator="parent" location="bottom" class="tooltip-list">
                   <div class="bold-upper">Research Projects</div>
-                  <div v-for="id in schedule.presentations" :key="id">
-                    {{ id }}
+                  <div v-for="p in schedule.presentations" :key="p._id">
+                    {{ researchList.find((research: any) => research.key === p.researchID)?.name }}
                   </div>
                 </v-tooltip>
               </v-btn>
@@ -53,7 +54,8 @@
                   {{ schedule.location }}
                 </span>
               </span>
-              <span class="expansion-title-right"><v-chip color="primary" class="b">{{ moment(schedule.createdAt).format('MMMM D YYYY, h:mm A') }}
+              <span class="expansion-title-right"><v-chip color="primary" class="b">{{
+    moment(schedule.createdAt).format('MMMM D YYYY, h:mm A') }}
                   <v-tooltip activator="parent" location="bottom">Created In
                   </v-tooltip>
                 </v-chip></span>
@@ -63,7 +65,8 @@
                 <v-card-title flat class="header">
                   <div class="header-left truncate">
                     <div class="header-caption-ctr">
-                      <h5>{{ ` ${moment(schedule.dateAndTime).format('MMMM D YYYY, h:mm A')} · ${schedule.location}` }}</h5>
+                      <h5>{{ ` ${moment(schedule.dateAndTime).format('MMMM D YYYY, h:mm A')} · ${schedule.location}` }}
+                      </h5>
                     </div>
                   </div>
 
@@ -77,21 +80,21 @@
                 </v-card-title>
               </v-card>
 
-              <schedule_researches_preview :researches="schedule.presentations" :researchIDs="researchList" />
+              <schedule_researches_preview :presentations="schedule.presentations" :users="users" />
               <br>
-              <schedule_panelist_preview :panelists="schedule.panelists" :users="users" />
+              <schedule_panelist_preview :panelists="schedule.panelists" />
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-card>
-  </v-card-text>
+    </v-card-text>
   </v-card>
 </template>
 
 <script setup lang="ts">
 import moment from "moment";
 
-const { schedule, researchList } = defineProps(['schedule', 'researchList']);
+const { schedule, researchList, users } = defineProps(['schedule', 'researchList', 'users']);
 
 
 const sortedSchedules = [...schedule].sort((a: any, b: any) => moment(a.dateAndTime).diff(moment(b.dateAndTime)));
@@ -118,14 +121,6 @@ const should_display_time = (
     index === 0 ||
     schedule.dateAndTime !== schedule_group[index - 1].dateAndTime
   );
-};
-
-const format_date = (date: string) => {
-  return moment(date).format("MMMM DD, YYYY");
-};
-
-const format_time = (date: string) => {
-  return moment(date).utc().format("LT");
 };
 
 </script>
