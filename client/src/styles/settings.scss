@@ -141,6 +141,9 @@ h6 {
   text-overflow: ellipsis;
 }
 
+.titlecase{
+  text-transform: capitalize;
+}
 .count {
   background-color: #1d4ed8;
   color: white;
@@ -409,6 +412,7 @@ div#research_table {
   }
 }
 
+
 .pres-res-body {
   display: flex;
   flex-direction: row;
@@ -428,8 +432,10 @@ div#research_table {
       font-size: 1rem;
       display: flex;
       align-items: center;
+      gap: 1rem;
     }
   }
+  
   .pres-res-right {
     display: flex;
     flex-direction: row;
@@ -539,7 +545,6 @@ div#research_table {
     text-wrap: nowrap;
     align-items: center;
     justify-content: end;
-    color: $gray-500;
   }
 }
 

@@ -54,16 +54,16 @@
           <v-badge color="info" content="6" inline></v-badge>
         </template>
       </v-list-item>
-      <v-list-item prepend-icon="mdi-account-outline" title="Accounts" value="accounts" href="/administrator/accounts"
+      <v-list-item prepend-icon="mdi-account-multiple-outline" title="Accounts" value="accounts" href="/administrator/accounts"
         link>
       </v-list-item>
-      <v-list-item prepend-icon="mdi-comment-text-outline" title="Panelist Comment " value="panelist_comments"
-        href="/panelist/panelist_comment_field" link>
+      <v-list-item prepend-icon="mdi-comment-account-outline" title="Panelist Comment " value="panelist_comments"
+        href="/panelist" link>
       </v-list-item>
     </v-list>
     <template v-slot:append>
       <v-list-item @click="logoutDialog = true" prepend-icon="mdi-logout" title="Logout" value="logout" />
-      <v-dialog v-model="logoutDialog" width="auto">
+      <v-dialog v-model="logoutDialog" width="30">
         <v-card>
           <v-card-text> Do you really want to log out? </v-card-text>
           <v-card-actions>

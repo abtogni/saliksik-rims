@@ -5,7 +5,7 @@
     </v-tabs>
 
     <v-container>
-      <v-window>
+      <v-window >
         <v-window-item :value="tab">
           <user_preview :users="filteredUsers" />
         </v-window-item>

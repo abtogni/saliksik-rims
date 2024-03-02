@@ -37,7 +37,7 @@
         <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-title class="title expansion-title-body">
-              <v-badge color="warning" content="6" inline>
+              <v-badge color="info" content="6" inline>
                 <v-tooltip
                   activator="parent"
                   location="bottom"
@@ -58,7 +58,7 @@
               </v-btn>
 
               <span class="expansion-title-left truncate">
-                <span class="truncate"> Insert research project name</span>
+                <span class="truncate-table p-reg b"> Insert research project name</span>
               </span>
               <span class="expansion-title-right">
                 <v-btn variant="text" icon="mdi-file-upload-outline">
@@ -73,7 +73,7 @@
                     >No. Of Uploads
                   </v-tooltip>
                 </v-btn>
-                <v-chip
+                <v-chip class="p-reg b" variant="text"
                   >January 21, 2023
                   <v-tooltip activator="parent" location="bottom"
                     >Last Upload

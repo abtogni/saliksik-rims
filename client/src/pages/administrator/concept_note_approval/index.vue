@@ -36,7 +36,7 @@
       <v-card-text class="content">
         <v-card elevation="0" variant="flat" class="">
           <v-tabs v-model="tab" :items="tab_items" color="primary" />
-          <v-window v-model="tab" v-for="item in tab_items" :key="item">
+          <v-window v-model="tab" v-for="item in tab_items" :key="item" >
             <v-window-item :value="item">
               <concept_note_submissions_table
                 :research_data="filteredResearchData(item)"

@@ -38,10 +38,12 @@
           <v-expansion-panel>
             <v-expansion-panel-title class="title expansion-title-body">
               <span class="expansion-title-left truncate">
-                <span class="truncate"> Insert research project name</span>
+
+                <span class="truncate-table p-reg b"> Insert research project name</span>
               </span>
+
               <span class="expansion-title-right">
-                <v-chip
+                <v-chip class="p-reg b" variant="text"
                   >January 21, 2023
                   <v-tooltip activator="parent" location="bottom"
                     >Uploaded In
