@@ -80,7 +80,7 @@
       </v-card>
     </v-card-text>
   </v-card>
-
+  <title_presentation_overview />
   {{ JSON.stringify(presentations) }}
 </template>
 
