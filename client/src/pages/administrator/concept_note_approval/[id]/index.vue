@@ -17,6 +17,7 @@
       <div class="header-right">
         <concept_note_approve/>
         <concept_note_reject/>
+        <concept_note_mark_as_verified_reviewed/>
       </div>
     </v-card-title>
     <v-card-text>
