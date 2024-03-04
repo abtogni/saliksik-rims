@@ -4,12 +4,12 @@
     prepend-icon="mdi-check-circle-outline"
     class="button-regular"
     @click="prompt = true"
-    text="Accept"
+    text="Mark As Verified And Reviewed"
   />
   <v-dialog v-model="prompt">
     <v-card class="form_modal_small">
       <v-toolbar color="primary">
-        <v-toolbar-title>Accept Presentation?</v-toolbar-title>
+        <v-toolbar-title>Mark As Verified And Reviewed?</v-toolbar-title>
         <v-btn icon @click="prompt = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
@@ -20,7 +20,7 @@
           <p class="p-reg ">
 
           
-          Accepting this invitation indicates your approval to be the panelist for this presentation on <span class="p-reg b">InsertDate and Time</span> at <span class="p-reg b">InsertLocation</span>.
+          Are you sure you want to mark as verified and reviewed the <span class="p-reg b">NameOfResearch </span>?
         </p>
         </div>
         

@@ -26,7 +26,7 @@
         
         </div>
         
-        <v-btn type="submit" class="button-regular">Reject Concept Note</v-btn>
+        <v-btn type="submit" class="button-regular">Confirm</v-btn>
       </v-card-text>
 
         

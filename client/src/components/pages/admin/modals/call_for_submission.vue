@@ -65,7 +65,7 @@
           style="padding: 0; margin: 0"
           color="#5b21b6"
         />
-        <v-btn class="button-regular" type="submit">Call For Submission</v-btn>
+        <v-btn class="button-regular" type="submit">Confirm</v-btn>
       </v-form>
     </v-card>
   </v-dialog>

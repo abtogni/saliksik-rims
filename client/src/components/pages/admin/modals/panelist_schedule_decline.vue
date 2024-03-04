@@ -24,7 +24,7 @@
         </p>
         </div>
         
-        <v-btn type="submit" class="button-regular">Decline</v-btn>
+        <v-btn type="submit" class="button-regular">Confirm</v-btn>
       </v-card-text>
 
         
