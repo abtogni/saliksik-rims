@@ -1,11 +1,5 @@
 <template>
-  <v-btn
-    flat
-    prepend-icon="mdi-check-circle-outline"
-    class="button-regular"
-    @click="prompt = true"
-    text="Approve"
-  />
+  <v-btn flat prepend-icon="mdi-check-circle-outline" class="button-regular" @click="prompt = true" text="Approve" />
   <v-dialog v-model="prompt">
     <v-card class="form_modal_small">
       <v-toolbar color="primary">
@@ -17,86 +11,47 @@
 
       <v-card-text class="form_content ">
         <div class=" h-40">
+          <!-- @vue-skip -->
           <p class="p-reg ">
 
-          
-          This action will send a <span class="p-reg b">notice to proceed</span> to <span class="p-reg b">NameOfResearch</span> by <span class="p-reg b">NameOfResearchers</span>
-        </p>
+
+            This action will send a <span class="p-reg b">notice to proceed</span> to
+            <span class="p-reg b">{{ research.researchTitle }}</span>
+            by <span class="p-reg b" v-for="(leader, index) in research.researchLeaders" :key="leader.name">
+              {{ leader.name }}{{ index !== research.researchLeaders.length - 1 ? ', ' : '' }}
+            </span>
+          </p>
         </div>
-        
-        <v-btn type="submit" class="button-regular">Confirm</v-btn>
+
+        <v-btn @click="confirm" class="button-regular">Confirm</v-btn>
       </v-card-text>
 
-        
+
     </v-card>
   </v-dialog>
 </template>
 
 <script setup lang="ts">
-import { useUsersStore } from "@/stores/users";
+import router from "@/router";
+import { useResearchesStore } from "@/stores/researches";
 import axios from "axios";
-import { useField, useForm } from "vee-validate";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 
-const users = ref<{ key: any; name: string }[]>([]);
 const prompt = ref(false);
+const research = useResearchesStore().currentResearch;
 
-const { handleSubmit } = useForm({
-  validationSchema: {
-    researchTitle(v: string) {
-      if (v) return true;
-
-      return "Field is required.";
-    },
-    researchLeaders(v: any[]) {
-      if (Array.isArray(v) && v.length > 0) return true;
-      return "At least one research leader is required.";
-    },
-  },
-});
-
-const researchTitle = useField("researchTitle");
-const researchLeaders = useField("researchLeaders");
-
-const create = handleSubmit(async (values) => {
-  const data = JSON.stringify(values);
+const confirm = async () => {
+  const data = JSON.stringify({ conceptNote: { status: 'Approved' } });
 
   return axios
-    .post("/api/research/create", data, {
+    //@ts-ignore
+    .patch(`/api/research/update/${research._id}`, data, {
       headers: {
         "Content-Type": "application/json",
       },
     })
-    .then(() => {
-      alert("Succesfully created a new research");
-      location.reload();
-    })
-    .catch((e) => {
-      alert(`An error occurred while creating a new research with error ${e}.`);
-    });
-});
-
-onMounted(async () => {
-  const userList = useUsersStore().userList;
-  users.value = userList.map((user: any) => ({
-    key: user._id,
-    name: user.firstName + " " + user.lastName,
-  }));
-});
+    .then(() => alert("Notice to proceed has been sent to the researchers"))
+    .catch(() => alert("An error occurred"))
+    .finally(() => router.push("/administrator/concept_note"));
+};
 </script>
-
-<style lang="scss">
-.form {
-  margin: 0 auto;
-  height: 25rem;
-  width: 40rem;
-
-  .form_content {
-    padding: 2rem;
-
-    .inputs {
-      margin-bottom: 1rem;
-    }
-  }
-}
-</style>

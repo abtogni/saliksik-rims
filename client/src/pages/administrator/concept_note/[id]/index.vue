@@ -15,9 +15,9 @@
       </div>
 
       <div class="header-right">
-        <concept_note_approve/>
-        <concept_note_reject/>
-        <concept_note_mark_as_verified_reviewed/>
+        <concept_note_approve />
+        <concept_note_reject />
+        <concept_note_mark_as_verified />
       </div>
     </v-card-title>
     <v-card-text>
@@ -31,11 +31,7 @@
           <v-card-text class="row">
             <div class="col">
               <div class="row-start">
-                <div
-                  class="p-reg b"
-                  v-for="(leader, index) in c.researchLeaders"
-                  :key="index"
-                >
+                <div class="p-reg b" v-for="(leader, index) in c.researchLeaders" :key="index">
                   {{ leader.name }}
                 </div>
               </div>
@@ -88,8 +84,7 @@
           <v-card-title>
             <h6>Project Description</h6>
           </v-card-title>
-          <v-card-text class="p-reg b"
-            >{{ c.conceptNote.projectDescription }}
+          <v-card-text class="p-reg b">{{ c.conceptNote.projectDescription }}
           </v-card-text>
         </v-card>
         <v-card variant="flat" color="#fff7ed">
