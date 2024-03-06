@@ -1,6 +1,6 @@
 <template>
   <!-- @vue-skip -->
-  <v-card flat style="padding-top: 0.833rem" class="body">
+  <v-card flat style="padding-top: 0.833rem" class="body" v-if="isDataLoaded && c">
     <v-card-title flat class="header">
       <div class="header-left">
         <div class="header-caption">
@@ -16,8 +16,13 @@
 
       <div class="header-right">
         <concept_note_approve />
-        <concept_note_reject />
-        <concept_note_mark_as_verified />
+        <div v-if="c.conceptNote.status != 'Rejected'">
+          <concept_note_reject />
+        </div>
+        <div v-if="c.conceptNote.status !== 'Verified' && c.conceptNote.status !== 'Approved'">
+          <concept_note_mark_as_verified />
+        </div>
+
       </div>
     </v-card-title>
     <v-card-text>
@@ -147,9 +152,12 @@ import { onMounted, ref } from "vue";
 const c = ref(null);
 const id = window.location.href.split("/").slice(-1)[0];
 
+const isDataLoaded = ref(false);
+
 onMounted(async () => {
   const researchStore = useResearchesStore();
   await researchStore.getCurrentResearch(id);
   c.value = researchStore.currentResearch;
+  isDataLoaded.value = true;
 });
 </script>
