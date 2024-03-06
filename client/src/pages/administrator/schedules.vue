@@ -23,7 +23,7 @@
         </div>
       </v-card-title>
       <v-card-text class="content">
-        <v-card elevation="0" variant="flat" style="padding-bottom: 1rem">
+        <v-card elevation="0" variant="flat" style="padding-bottom: 1rem" v-if="isDataLoaded">
           <v-tabs v-model="tab" color="primary">
             <v-tab value="title">Title
               <template v-slot:append>
@@ -45,7 +45,7 @@
             <v-window-item value="title">
 
               <template v-if="schedules.length > 0">
-                <schedule_overview :schedule="schedules" :researchList="researchList" :users="users" />
+                <schedule_overview :schedule="schedules" :researchList="researchList" :users="panelists" />
               </template>
 
               <template v-else>
@@ -55,6 +55,9 @@
             <v-window-item value="final"> final </v-window-item>
           </v-window>
         </v-card>
+        <v-card elevation="0" variant="flat" style="padding-bottom: 1rem" v-else>
+          <p>Loading data...</p>
+        </v-card>
       </v-card-text>
     </v-card>
   </v-container>
@@ -63,7 +66,7 @@
 <script setup lang="ts">
 import { useUsersStore } from '@/stores/users';
 import { useResearchesStore } from '@/stores/researches';
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import { useSchedulesStore } from '@/stores/schedules';
 import { usePresentationsStore } from '@/stores/presentations';
 
@@ -71,26 +74,48 @@ import { usePresentationsStore } from '@/stores/presentations';
 const users = ref<{ key: any; name: string; }[]>([]);
 const researchList = ref<{ key: any; name: string; }[]>([]);
 const schedules = ref([]);
+const isDataLoaded = ref(false);
 
 onMounted(async () => {
-  await usePresentationsStore().getPresentations();
-  await useSchedulesStore().getSchedulesList();
-  await useResearchesStore().getResearchList();
+  await Promise.all([
+    usePresentationsStore().getPresentations(),
+    useSchedulesStore().getSchedulesList(),
+    useResearchesStore().getResearchList()
+  ]);
+
   const userStore = useUsersStore().userList;
   const researchStore = useResearchesStore().researchList;
 
   schedules.value = useSchedulesStore().schedulesList;
   users.value = userStore.map((user: any) => ({
     key: user._id,
-    name: user.firstName + ' ' + user.lastName
+    name: user.firstName + ' ' + user.lastName,
+    role: user.role
   }));
 
-  researchList.value = researchStore.map((research: any) => ({
-    key: research._id,
-    name: research.researchTitle
-  }));
+  researchList.value = researchStore
+    .filter((research: any) => research.conceptNote)
+    .map((research: any) => ({
+      key: research._id,
+      name: research.researchTitle,
+      status: research.researchStatus,
+      conceptNote: research.conceptNote.status
+    }));
 
+
+  users.value = computePanelists();
+  researchList.value = computeResearches();
+  isDataLoaded.value = true;
 });
 
 const tab = ref("null");
+
+const computeResearches = () => {
+  return researchList.value.filter(research => research.status === 'Research Paper' || research.conceptNote === 'Verified');
+};
+
+const computePanelists = () => {
+  return users.value.filter(user => user.role === 'Internal Panelist' || user.role === 'External Panelist');
+};
+
 </script>
