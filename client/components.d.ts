@@ -26,6 +26,7 @@ declare module 'vue' {
     Nav_bar: typeof import('./src/components/pages/nav_bar.vue')['default']
     Notice_to_present: typeof import('./src/components/pages/researcher/notification/researcher/notice/notice_to_present.vue')['default']
     Notice_to_proceed: typeof import('./src/components/pages/researcher/notification/researcher/notice/notice_to_proceed.vue')['default']
+    Panelist_comments_researches: typeof import('./src/components/pages/panelist/panelist_comments_researches.vue')['default']
     Panelist_comments_schedule_overview: typeof import('./src/components/pages/panelist/panelist_comments_schedule_overview.vue')['default']
     Panelist_comments_schedule_researches_preview: typeof import('./src/components/pages/panelist/panelist_comments_schedule_researches_preview.vue')['default']
     Panelist_schedule_accept: typeof import('./src/components/pages/admin/modals/panelist_schedule_accept.vue')['default']

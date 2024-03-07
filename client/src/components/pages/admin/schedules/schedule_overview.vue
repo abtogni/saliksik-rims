@@ -34,9 +34,7 @@
               </v-btn>
 
               <v-btn variant="text" icon="mdi-note-outline">
-                <v-badge color="info" :content="schedule.presentations.length" floating>
-                  <v-icon></v-icon>
-                </v-badge>
+                <v-badge color="info" :content="schedule.presentations.length" floating> <v-icon /> </v-badge>
 
                 <v-tooltip activator="parent" location="bottom" class="tooltip-list">
                   <div class="bold-upper">Research Projects</div>

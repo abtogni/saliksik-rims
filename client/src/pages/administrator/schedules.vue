@@ -45,7 +45,7 @@
             <v-window-item value="title">
 
               <template v-if="schedules.length > 0">
-                <schedule_overview :schedule="schedules" :researchList="researchList" :users="panelists" />
+                <schedule_overview :schedule="schedules" :researchList="researchList" :users="users" />
               </template>
 
               <template v-else>
@@ -66,13 +66,13 @@
 <script setup lang="ts">
 import { useUsersStore } from '@/stores/users';
 import { useResearchesStore } from '@/stores/researches';
-import { onMounted, ref, computed } from "vue";
+import { onMounted, ref } from "vue";
 import { useSchedulesStore } from '@/stores/schedules';
 import { usePresentationsStore } from '@/stores/presentations';
 
 
-const users = ref<{ key: any; name: string; }[]>([]);
-const researchList = ref<{ key: any; name: string; }[]>([]);
+const users = ref<{ key: any, name: string, role: string }[]>([]);
+const researchList = ref<{ key: any, name: string, status: string, conceptNote: string }[]>([]);
 const schedules = ref([]);
 const isDataLoaded = ref(false);
 

@@ -1,17 +1,5 @@
 <template>
   <v-card flat style="padding-top: 0.833rem" class="body">
-    <!-- <v-card-title flat class="header">
-      <div class="header-left truncate">
-        <div class="header-caption">
-          <h6>asdas</h6>
-
-          <!-- <p class="caption">
-            Track and monitor your research paper. Upload a copy of the research
-            paper regularly.
-          </p> --
-        </div>
-      </div>
-    </v-card-title> -->
     <v-card-text class="content">
       <v-card variant="outlined" class="card-style">
         <v-expansion-panels>
@@ -22,27 +10,21 @@
                   <v-icon></v-icon>
                 </v-badge>
 
-                <v-tooltip
-                  activator="parent"
-                  location="bottom"
-                  class="tooltip-list"
-                >
-                  <div class="bold-upper">Research Projects</div>
-                  <div></div>
+                <v-tooltip activator="parent" location="bottom" class="tooltip-list">
+                  <div class="bold-upper">Researches</div>
+                  <div v-for="p in schedule.presentations" :key="p._id">
+                    {{ researchList.find((research: any) => research.key === p.researchID)?.name }}
+                  </div>
                 </v-tooltip>
               </v-btn>
               <span class="expansion-title-left truncate">
-                <span class="truncate"> Date and Time </span>
-                <span class="truncate"> | </span>
-                <span class="truncate"> Location </span>
+                <span class="truncate">
+                  {{ moment(schedule.dateAndTime).format('MMMM D YYYY, h:mm A') }} |
+                  {{ schedule.location }}</span>
               </span>
               <span class="expansion-title-right">
-                <panelist_schedule_accept/>
-                <panelist_schedule_decline/>
-                <v-chip color="primary" class="b"
-                  >CreatedIn
-                  <v-tooltip activator="parent" location="bottom"
-                    >Created In
+                <v-chip color="primary" class="b">{{ moment(schedule.createdIn).format('MMMM D YYYY, h:mm A') }}
+                  <v-tooltip activator="parent" location="bottom">Created In
                   </v-tooltip>
                 </v-chip>
               </span>
@@ -52,25 +34,25 @@
                 <v-card-title flat class="header">
                   <div class="header-left truncate">
                     <div class="header-caption-ctr">
-                      <h5>Date and Time · Location</h5>
+                      <h5>{{ moment(schedule.dateAndTime).format('MMMM D YYYY, h:mm A') }} · {{ schedule.location }}
+                      </h5>
                     </div>
                   </div>
 
                   <div class="header-right">
                   </div>
                 </v-card-title>
-
-
               </v-card>
-              <panelist_comments_schedule_researches_preview   />
+              <panelist_comments_researches :presentations="schedule.presentations" />
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-card>
     </v-card-text>
   </v-card>
-  
 </template>
 
 <script setup lang="ts">
+import moment from 'moment';
+const { schedule, researchList } = defineProps(['schedule', 'researchList']);
 </script>
