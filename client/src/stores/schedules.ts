@@ -9,6 +9,7 @@ export const useSchedulesStore = defineStore("schedules", () => {
   const schedulesList = ref([]);
   const currentSchedule = ref({});
   const presStore = usePresentationsStore();
+  presStore.getPresentations();
 
   const getSchedulesList = async () => {
     return axios.get("/api/schedules").then((response) => {
@@ -29,7 +30,7 @@ export const useSchedulesStore = defineStore("schedules", () => {
           return null;
         }),
         presentations: schedule.presentations.map((present: any) => {
-          const matchingPresentation: any = presStore.presentationList.find(
+         const matchingPresentation: any = presStore.presentationList.find(
             (presentation: any) =>
               presentation._id === present &&
               presentation.scheduleID === schedule._id,

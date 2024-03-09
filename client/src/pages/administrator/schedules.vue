@@ -44,7 +44,7 @@
           <v-window v-model="tab">
             <v-window-item value="title">
 
-              <template v-if="schedules.length > 0">
+              <template v-if="schedules">
                 <schedule_overview :schedule="schedules" :researchList="researchList" :users="users" />
               </template>
 
@@ -61,6 +61,7 @@
       </v-card-text>
     </v-card>
   </v-container>
+
 </template>
 
 <script setup lang="ts">
@@ -70,7 +71,6 @@ import { onMounted, ref } from "vue";
 import { useSchedulesStore } from '@/stores/schedules';
 import { usePresentationsStore } from '@/stores/presentations';
 
-
 const users = ref<{ key: any, name: string, role: string }[]>([]);
 const researchList = ref<{ key: any, name: string, status: string, conceptNote: string }[]>([]);
 const schedules = ref([]);
@@ -78,14 +78,13 @@ const isDataLoaded = ref(false);
 
 onMounted(async () => {
   await Promise.all([
-    usePresentationsStore().getPresentations(),
     useSchedulesStore().getSchedulesList(),
+    usePresentationsStore().getPresentations(),
     useResearchesStore().getResearchList()
   ]);
 
   const userStore = useUsersStore().userList;
   const researchStore = useResearchesStore().researchList;
-
   schedules.value = useSchedulesStore().schedulesList;
   users.value = userStore.map((user: any) => ({
     key: user._id,
