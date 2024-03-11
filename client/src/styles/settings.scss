@@ -575,6 +575,13 @@ div#research_table {
     padding: 1rem 1rem 1rem 1rem;
     width: 100%;
   }
+
+  .form_btn{
+    display: flex; 
+    flex-direction: row; 
+    gap: 1rem; 
+    width: 13rem;
+  }
 }
 
 .form_modal {
@@ -590,6 +597,12 @@ div#research_table {
     margin: 0;
     padding: 1rem 1rem 1rem 1rem;
     width: 100%;
+  }
+
+  .form_btn{
+    display: flex; 
+    flex-direction: row; 
+    gap: 1rem; width: 100%;
   }
 }
 
