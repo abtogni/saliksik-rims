@@ -6,6 +6,7 @@ import {
   getAllPanelistNotes,
   getPanelistNotesByPanelist,
   getPanelistNotesByPresentationID,
+  updatePresentationByID,
 } from "../db/presentations";
 
 export const getPanelistNotesList = async (_req: Request, res: Response) => {
@@ -47,7 +48,13 @@ export const createPanelistNote = async (req: Request, res: Response) => {
   try {
     const { panelistID, presentationID, comments } = req.body;
 
-    await createNewPanelistNote({ panelistID, presentationID, comments });
+    await createNewPanelistNote({ panelistID, presentationID, comments }).then(
+      async (result) => {
+        await updatePresentationByID(result.presentationID, {
+          $push: { panelistNotes: result._id },
+        });
+      }
+    );
 
     return res.sendStatus(201);
   } catch (error) {
