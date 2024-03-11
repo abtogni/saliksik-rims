@@ -7,6 +7,7 @@ import {
 } from "../db/users";
 import { authentication, random } from "../helpers";
 import { config } from "dotenv";
+import bcrypt from "bcrypt";
 
 config();
 
@@ -41,6 +42,7 @@ export const register = async (req: Request, res: Response) => {
     }
 
     const salt = random();
+    const hashedPassword = authentication(password, salt);
     await createUser({
       userID,
       role,
@@ -52,7 +54,7 @@ export const register = async (req: Request, res: Response) => {
       email,
       authentication: {
         salt,
-        password: authentication(salt, password),
+        password: hashedPassword,
       },
     });
 
@@ -82,9 +84,9 @@ export const login = async (req: Request, res: Response) => {
         .json({ userError: "Invalid user, please try again" });
     }
 
-    const expectedHash = authentication(user.authentication.salt, password);
+    const isPasswordMatch = bcrypt.compareSync(password, user.authentication.password);
 
-    if (user.authentication.password != expectedHash || user.role != role) {
+    if (!isPasswordMatch || user.role != role) {
       return res
         .status(403)
         .json({ passwordError: "Invalid password or user, please try again" });
@@ -114,7 +116,7 @@ export const login = async (req: Request, res: Response) => {
 };
 
 //LOGOUT
-export const logout = async (req: Request, res: Response) => {
+export const logout = async (_req: Request, res: Response) => {
   res.clearCookie(cookie, { domain: "localhost", path: "/" });
   return res.status(200).json({ message: "Successfully logged out!" });
 };
