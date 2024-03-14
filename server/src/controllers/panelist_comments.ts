@@ -44,6 +44,17 @@ export const getPanelistNotesByPresentation = async (
   }
 };
 
+export const getPanelistNotesByID = async (req: Request, res: Response) =>{
+  try {
+    const { id } = req.params;
+
+    const data = await findNoteByID(id);
+    return res.status(200).json(data).end();
+  } catch (error) {
+    return res.sendStatus(400);
+  }
+}
+
 export const createPanelistNote = async (req: Request, res: Response) => {
   try {
     const { panelistID, presentationID, comments } = req.body;

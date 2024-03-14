@@ -11,6 +11,7 @@ import {
   createPanelistNote,
   deletePanelistNote,
   getPanelistNotes,
+  getPanelistNotesByID,
   getPanelistNotesByPresentation,
   getPanelistNotesList,
   updatePanelistNote,
@@ -37,6 +38,7 @@ export default (router: Router) => {
 
     //GET
     .get("/comments/", isAuthenticated, getPanelistNotesList)
+    .get("/comment/:id", isAuthenticated, getPanelistNotesByID)
     .get("/comment/panelist/:id", isAuthenticated, getPanelistNotes)
     .get(
       "/comment/presentation/:id",

@@ -45,10 +45,7 @@
                   </div>
 
                   <div class="header-right">
-                    <status_concept_note_submitted v-if="currentResearch.conceptNote &&
-    currentResearch.conceptNote.status ==
-    'Verify and Review'
-    " />
+                    <status_concept_note_submitted v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Verify and Review'" />
                     <status_no_status v-else />
                     <v-btn v-if="currentResearch.conceptNote" type="submit" flat variant="outlined"
                       prepend-icon="mdi-file-document-edit-outline" class="button-outlined">Edit Concept Note
@@ -74,14 +71,14 @@
             </v-window-item>
             <v-window-item value="title-presentation">
               <presentation_tab
-                :presentations="currentResearch.presentations.filter((presentation: any) => presentation.presentationType === 'Title')" />
+                :presentations="currentResearch.presentations.filter((presentation) => presentation.presentationType === 'Title')" />
             </v-window-item>
             <v-window-item value="research-paper">
               <research_paper_progress />
             </v-window-item>
             <v-window-item value="final-presentation">
               <presentation_tab
-                :presentations="currentResearch.presentations.filter((presentation: any) => presentation.presentationType === 'Final')" />
+                :presentations="currentResearch.presentations.filter((presentation) => presentation.presentationType === 'Final')" />
             </v-window-item>
             <v-window-item value="incentive">
               <incentive_status_tab />

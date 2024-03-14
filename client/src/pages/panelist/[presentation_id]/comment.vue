@@ -40,7 +40,6 @@
       </v-form>
     </v-card>
   </v-container>
-  {{JSON.stringify(userID)}}
 </template>
 
 <script setup lang="ts">
@@ -71,7 +70,7 @@ const create = handleSubmit(async (values) => {
   const data = JSON.stringify({
     ...values,
     presentationID:lastParam,
-    userID: userID.value
+    panelistID: userID.value
   });
   return axios
     .post("/api/comment/create", data, {
