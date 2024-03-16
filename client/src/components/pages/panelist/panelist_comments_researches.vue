@@ -46,7 +46,6 @@
       </v-card>
     </v-hover>
   </v-card>
-  {{ JSON.stringify(researchData) }}
 </template>
 
 <script setup lang="ts">

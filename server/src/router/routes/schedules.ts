@@ -4,6 +4,7 @@ import {
   createNewSchedule,
   deleteSchedule,
   fetchSchedule,
+  getScheduleByPanelist,
   getSchedules,
   updateSchedule,
 } from "../../controllers/schedules";
@@ -13,6 +14,7 @@ export default (router: Router) => {
   router
     .get("/schedules", isAuthenticated, getSchedules)
     .get("/schedule/:id", isAuthenticated, fetchSchedule)
+    .get("/schedule/panelist/:id", isAuthenticated, getScheduleByPanelist)
 
     //POST
     .post("/schedule/create", isAuthenticated, createNewSchedule)

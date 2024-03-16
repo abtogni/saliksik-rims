@@ -26,7 +26,6 @@
 <script setup lang="ts">
 import axios from "axios";
 import { useField, useForm } from 'vee-validate';
-import router from '@/router';
 import { ref } from 'vue';
 
 const visible = ref(false);
@@ -44,7 +43,7 @@ const role = useField('role');
 const userID = useField('userID');
 const password = useField('password');
 
-const user_roles = ["Administrator", "Internal Panelist", "External Panelist", "Researcher"];
+const user_roles = ["Administrator", "Panelist", "Researcher"];
 
 const login = handleSubmit(async (values) => {
   const data = JSON.stringify(values);
@@ -59,7 +58,7 @@ const login = handleSubmit(async (values) => {
       window.location.href = '/administrator/concept_note_approval';
     } else if (response.data.role == 'Researcher') {
       window.location.href = '/researcher/research_projects';
-    } else if (response.data.role == 'Internal Panelist' || response.data.role == 'External Panelist') {
+    } else if (response.data.role == 'Panelist') {
       window.location.href = '/panelists';
     }
   }).catch(error => {

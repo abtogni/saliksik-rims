@@ -25,7 +25,7 @@ export const ScheduleModel = mongoose.model("Schedule", ScheduleSchema);
 //GET
 export const getAllSchedules = () => ScheduleModel.find();
 export const getScheduleByID = (id: string) => ScheduleModel.findById(id);
-
+export const getScheduleByPanelistID = (id: string) => ScheduleModel.find({ panelists: id });
 //POST
 export const createSchedule = (values: Record<string, any>) =>
   new ScheduleModel(values).save().then((x) => x.toObject());

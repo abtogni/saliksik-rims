@@ -68,24 +68,20 @@
 import { useUsersStore } from '@/stores/users';
 import { useResearchesStore } from '@/stores/researches';
 import { onMounted, ref } from "vue";
-import { useSchedulesStore } from '@/stores/schedules';
-import { usePresentationsStore } from '@/stores/presentations';
+import axios from 'axios';
 
 const users = ref<{ key: any, name: string, role: string }[]>([]);
+const schedules: any =  ref([]);
 const researchList = ref<{ key: any, name: string, status: string, conceptNote: string }[]>([]);
-const schedules = ref([]);
+
 const isDataLoaded = ref(false);
 
 onMounted(async () => {
-  await Promise.all([
-    useSchedulesStore().getSchedulesList(),
-    usePresentationsStore().getPresentations(),
-    useResearchesStore().getResearchList()
-  ]);
-
+  await axios.get('/api/schedules').then((response) => {
+    schedules.value = response.data;
+  });
   const userStore = useUsersStore().userList;
   const researchStore = useResearchesStore().researchList;
-  schedules.value = useSchedulesStore().schedulesList;
   users.value = userStore.map((user: any) => ({
     key: user._id,
     name: user.firstName + ' ' + user.lastName,

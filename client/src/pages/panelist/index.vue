@@ -50,32 +50,37 @@
       </v-card-text>
     </v-card>
   </v-container>
-
 </template>
 
 <script setup lang="ts">
 import { useUsersStore } from '@/stores/users';
 import { useResearchesStore } from '@/stores/researches';
 import { onMounted, ref } from "vue";
-import { useSchedulesStore } from '@/stores/schedules';
-import { usePresentationsStore } from '@/stores/presentations';
+import axios from 'axios';
 
 
 const researchList = ref<{ key: any; name: string; }[]>([]);
-const schedules = ref([]);
+const schedules: any = ref([]);
 const current: any = ref(null);
 const isDataLoaded = ref(false);
 const tab = ref(null);
 
 onMounted(async () => {
+  current.value = useUsersStore().currentUser;
+  schedules.value = await axios.get(`/api/schedule/panelist/${current.value._id}`).then(async(res) => {
+    const data = await Promise.all(res.data.map(async (item: any) => {
+      item.presentations = await Promise.all(item.presentations.map(async (presentation: any) => {
+        const res = await axios.get(`/api/presentation/${presentation}`);
+        return res.data;
+      }));
+      return item;
+    }));
+    return data;
+  });
   await Promise.all([
-    usePresentationsStore().getPresentations(),
-    useSchedulesStore().getSchedulesList(),
     useResearchesStore().getResearchList()
   ]);
-  current.value = useUsersStore().currentUser;
   const researchStore = useResearchesStore().researchList;
-  schedules.value = useSchedulesStore().schedulesList.filter((s: any) => s.panelists.some((p: any) => p._id === current.value._id));
 
   researchList.value = researchStore
     .filter((research: any) => research.conceptNote)

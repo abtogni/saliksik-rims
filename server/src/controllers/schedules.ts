@@ -5,6 +5,7 @@ import {
   deleteScheduleByID,
   getAllSchedules,
   getScheduleByID,
+  getScheduleByPanelistID,
   updateScheduleByID,
 } from "../db/schedules";
 import {
@@ -23,6 +24,17 @@ export const getSchedules = async (_req: Request, res: Response) => {
     return res.sendStatus(400);
   }
 };
+
+export const getScheduleByPanelist = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const data = await getScheduleByPanelistID(id);
+    return res.status(200).json(data).end();
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
+}
 
 // create new schedule
 export const createNewSchedule = async (req: Request, res: Response) => {
