@@ -38,7 +38,7 @@
                 <v-tooltip activator="parent" location="bottom" class="tooltip-list">
                   <div class="bold-upper">Research Projects</div>
                   <div v-for="p in schedule.presentations" :key="p._id">
-                    {{ researchList.find((research: any) => research.key === p.researchID)?.name }}
+                    {{ researches.find((research: any) => research.key === p.researchID)?.name }}
                   </div>
                 </v-tooltip>
               </v-btn>
@@ -77,9 +77,9 @@
                 </v-card-title>
               </v-card>
 
-              <schedule_researches_preview :presentations="schedule.presentations" :users="users" />
+              <schedule_researches_preview :presentations="schedule.presentations" :researches="researches" :users="users" />
               <br>
-              <schedule_panelist_preview :panelists="schedule.panelists" />
+              <schedule_panelist_preview :panelists="schedule.panelists" :users="users" />
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
@@ -91,8 +91,7 @@
 <script setup lang="ts">
 import moment from "moment";
 
-const { schedule, researchList, users } = defineProps(['schedule', 'researchList', 'users']);
-
+const { schedule, researches, users } = defineProps(['schedule', 'researches', 'users']);
 
 const sortedSchedules = [...schedule].sort((a: any, b: any) => moment(a.dateAndTime).diff(moment(b.dateAndTime)));
 

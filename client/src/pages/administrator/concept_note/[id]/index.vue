@@ -15,13 +15,16 @@
       </div>
 
       <div class="header-right">
+        <div v-if="c.conceptNote.status !== 'Verified' && c.conceptNote.status !== 'Approved' && c.conceptNote.status !== 'Rejected'">
+          <concept_note_mark_as_verified />
+        </div>
+        <div v-if="c.conceptNote.status != 'Submitted' && c.conceptNote.status !== 'Rejected'">
         <concept_note_approve />
+        </div>
         <div v-if="c.conceptNote.status != 'Rejected'">
           <concept_note_reject />
         </div>
-        <div v-if="c.conceptNote.status !== 'Verified' && c.conceptNote.status !== 'Approved'">
-          <concept_note_mark_as_verified />
-        </div>
+       
 
       </div>
     </v-card-title>

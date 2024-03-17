@@ -92,7 +92,7 @@ const create = handleSubmit(async (values) => {
 });
 
 onMounted(async () => {
-  const userList = useUsersStore().userList;
+  const userList = useUsersStore().userList.filter((user:any) => user.role === "Researcher");
   users.value = userList.map((user: any) => ({
     key: user._id,
     name: user.firstName + " " + user.lastName,
