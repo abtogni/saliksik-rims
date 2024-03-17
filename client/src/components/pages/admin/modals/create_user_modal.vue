@@ -18,7 +18,7 @@
               v-model="role.value.value"
               label="User Role"
               :error-messages="role.errorMessage.value"
-              prepend-inner-icon="mdi-briefcase"
+              prepend-inner-icon="mdi-card-account-details-outline"
               :items="user_roles"
               variant="outlined"
             />
@@ -75,8 +75,8 @@
             <v-text-field
               v-model="userID.value.value"
               :error-messages="userID.errorMessage.value"
-              label="User ID"
-              prepend-inner-icon="mdi-account"
+              label="Username"
+              prepend-inner-icon="mdi-account-outline"
               variant="outlined"
             />
             <v-text-field
