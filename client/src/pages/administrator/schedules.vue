@@ -45,7 +45,7 @@
             <v-window-item value="title">
 
               <template v-if="schedules">
-                <schedule :schedule="schedules" :researches="researchList" users="users" />
+                <schedule :schedule="schedules" :researches="researchList" :users="users" />
               </template>
 
               <template v-else>
