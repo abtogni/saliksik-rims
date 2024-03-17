@@ -4,7 +4,7 @@ import { get, merge } from "lodash";
 import { config } from "dotenv";
 config();
 
-const cookie = process.env.JWT_COOKIE;
+const cookie = "st";
 
 export const isAuthenticated = async (
   req: Request,

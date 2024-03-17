@@ -11,7 +11,7 @@ import bcrypt from "bcrypt";
 
 config();
 
-const cookie = process.env.JWT_COOKIE;
+const cookie = "st";
 
 //REGISTER
 export const register = async (req: Request, res: Response) => {

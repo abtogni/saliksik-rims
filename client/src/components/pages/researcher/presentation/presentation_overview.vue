@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="schedule">
     <v-card flat style="padding-top: 0.833rem" class="body" >
         <v-card-title flat class="header">
           <div class="header-left">
@@ -21,13 +21,13 @@
               <v-card-title>
                 <h5 style="text-transform: uppercase">
                   <v-icon start icon="mdi-calendar-month-outline" />
-                  {{ moment(p.schedule.dateAndTime).format('MMMM DD, YYYY, h:mm a') }}
+                  {{ moment(schedule.dateAndTime).format('MMMM DD, YYYY, h:mm a') }}
                 </h5>
               </v-card-title>
               <v-card-text>
                 <p style="font-weight: 600">
                   <v-icon start icon="mdi-map-marker-outline" />
-                  {{ p.schedule.location }}
+                  {{ schedule.location }}
                 </p>
               </v-card-text>
             </v-card>
@@ -71,9 +71,11 @@
   import { onMounted, ref } from 'vue';
   const {p} = defineProps(['p']);
   const comments: any = ref([]);
+  const schedule: any = ref(null);
   const userList = useUsersStore().userList;
 
   onMounted(async() => {
+    schedule.value = (await axios.get(`/api/schedule/${p.scheduleID}`)).data;
     comments.value = await Promise.all(p.panelistNotes.map(async (note: any) => {
       const response = await axios.get(`/api/comment/${note}`);
       return response.data;

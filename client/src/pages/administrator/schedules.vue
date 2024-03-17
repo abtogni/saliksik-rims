@@ -110,7 +110,7 @@ const computeResearches = () => {
 };
 
 const computePanelists = () => {
-  return users.value.filter(user => user.role === 'Internal Panelist' || user.role === 'External Panelist');
+  return users.value.filter(user => user.role === 'Panelist');
 };
 
 </script>

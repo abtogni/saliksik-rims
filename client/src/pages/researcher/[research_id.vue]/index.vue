@@ -71,14 +71,14 @@
             </v-window-item>
             <v-window-item value="title-presentation">
               <presentation_tab
-                :presentations="currentResearch.presentations.filter((presentation) => presentation.presentationType === 'Title')" />
+                :presentations="presentations.filter((presentation: any) => presentation.presentationType === 'Title')" />
             </v-window-item>
             <v-window-item value="research-paper">
               <research_paper_progress />
             </v-window-item>
             <v-window-item value="final-presentation">
               <presentation_tab
-                :presentations="currentResearch.presentations.filter((presentation) => presentation.presentationType === 'Final')" />
+                :presentations="presentations.filter((presentation: any) => presentation.presentationType === 'Final')" />
             </v-window-item>
             <v-window-item value="incentive">
               <incentive_status_tab />
@@ -87,11 +87,13 @@
         </div>
       </v-card>
     </v-container>
+    
   </div>
 </template>
 
 <script setup lang="ts">
 import { useResearchesStore } from "@/stores/researches";
+import axios from "axios";
 import { onMounted, ref } from "vue";
 
 
@@ -126,12 +128,17 @@ const tabItems = [
 const url = window.location.href;
 const currentResearch: any = ref(null);
 const param = url.split("/").slice(-1)[0];
-
+const presentations: any = ref([]);
 const tab = ref("concept-note");
 const r = useResearchesStore();
 
 onMounted(async () => {
   await r.getCurrentResearch(param);
   currentResearch.value = r.currentResearch;
-});
+  presentations.value = await Promise.all(currentResearch.value.presentations.map(async (p: any) => {
+    const response = await axios.get(`/api/presentation/${p}`);
+    return response.data;
+  }));
+  });
+
 </script>
