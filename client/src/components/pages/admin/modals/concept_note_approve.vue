@@ -38,13 +38,12 @@ import axios from "axios";
 import { ref } from "vue";
 
 const prompt = ref(false);
-const research = useResearchesStore().currentResearch;
+const research: any = useResearchesStore().currentResearch;
 
 const confirm = async () => {
-  const data = JSON.stringify({ conceptNote: { status: 'Approved' } });
+  const data = JSON.stringify({ researchStatus: "Research Paper" ,conceptNote: { status: 'Approved' } });
 
   return axios
-    //@ts-ignore
     .patch(`/api/research/update/${research._id}`, data, {
       headers: {
         "Content-Type": "application/json",
