@@ -20,8 +20,7 @@ import { ref, computed } from "vue";
 const { userList } = defineProps(["userList"]);
 const user_roles = [
   "Administrator",
-  "Internal Panelist",
-  "External Panelist",
+  "Panelist",
   "Researcher",
 ];
 const tab = ref(null);
