@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="fill-height ctr">
-    <v-card flat class="body" v-if="!loading">
+    <v-card flat class="body" v-cloak>
       <v-card-title class="header">
         <div class="header-left">
           <div class="header-caption">
@@ -36,9 +36,6 @@
           </v-window>
         </v-card>
       </v-card-text>
-    </v-card>
-    <v-card flat class="body" v-else>
-      <v-progress-circular indeterminate size="64" color="primary"></v-progress-circular>
     </v-card>
   </v-container>
 </template>

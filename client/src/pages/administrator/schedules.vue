@@ -1,6 +1,6 @@
 <template>
   <v-container class="fill-height ctr">
-    <v-card flat class="body">
+    <v-card flat class="body" v-cloak >
       <v-card-title class="header">
         <div class="header-left">
           <div class="header-caption">

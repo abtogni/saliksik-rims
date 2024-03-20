@@ -1,12 +1,16 @@
 <template>
   <v-navigation-drawer v-if="showDrawer" expand-on-hover rail>
     <!-- Drawer content -->
-    <v-list>
-      <v-list-item
-        :title="user?.firstName + ' ' + user?.lastName"
-        :subtitle="user?.userID"
+    <v-list >
+      <v-list-item v-if="user"
+        :title="user.firstName + ' ' + user.lastName"
+        :subtitle="user.userID"
       />
+      <v-list-item v-else>
+        Loading...
+      </v-list-item>
     </v-list>
+
 
     <v-divider />
 
