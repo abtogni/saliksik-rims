@@ -7,7 +7,9 @@ import {
   getAllResearches,
   getUserResearches,
   updateResearch,
+  uploadResearchFile,
 } from "../../controllers/researches";
+import { upload } from "../../middlewares/upload";
 
 export default (router: Router) => {
   //GET
@@ -18,6 +20,7 @@ export default (router: Router) => {
 
     //POST
     .post("/research/create", isAuthenticated, createNewResearch)
+    .post("/research/upload/:id", isAuthenticated, upload.single("file"), uploadResearchFile)
 
     //PATCH
     .patch("/research/update/:id", isAuthenticated, updateResearch)

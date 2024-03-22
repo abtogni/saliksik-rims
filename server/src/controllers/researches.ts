@@ -118,3 +118,15 @@ export const deleteResearch = async (req: Request, res: Response) => {
     return res.sendStatus(400);
   }
 };
+
+export const uploadResearchFile = async (req: Request, res: Response) => {
+  try {
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
+    }
+    return res.status(200).json({ message: "File uploaded successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
