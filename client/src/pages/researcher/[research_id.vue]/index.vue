@@ -45,20 +45,20 @@
                   </div>
 
                   <div class="header-right">
-                    <status_concept_note_submitted v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Submitted'" />
-                    <status_concept_note_verified v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Verified'" />
-                    <status_concept_note_approved v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Approved'" />
-                    <status_concept_note_rejected v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Rejected'" />
+                    <status_concept_note_submitted
+                      v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Submitted'" />
+                    <status_concept_note_verified
+                      v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Verified'" />
+                    <status_concept_note_approved
+                      v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Approved'" />
+                    <status_concept_note_rejected
+                      v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Rejected'" />
                     <status_no_status v-else />
                     <v-btn v-if="currentResearch.conceptNote" type="submit" flat variant="outlined"
                       prepend-icon="mdi-file-document-edit-outline" class="button-outlined">Edit Concept Note
                     </v-btn>
                     <v-btn type="submit" flat prepend-icon="mdi-file-document-plus-outline" class="button-regular"
-                      @click="
-    $router.push(
-      `${currentResearch._id}/create_concept_note`,
-    )
-    " v-else>Create Concept Note
+                      @click="$router.push(`${currentResearch._id}/create_concept_note`,)" v-else>Create Concept Note
                     </v-btn>
 
                   </div>
@@ -90,7 +90,7 @@
         </div>
       </v-card>
     </v-container>
-    
+
   </div>
 </template>
 
@@ -142,6 +142,6 @@ onMounted(async () => {
     const response = await axios.get(`/api/presentation/${p}`);
     return response.data;
   }));
-  });
+});
 
 </script>

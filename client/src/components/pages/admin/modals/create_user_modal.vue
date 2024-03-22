@@ -1,94 +1,44 @@
 <template>
-  <v-btn
-    color="#297be5"
-    prepend-icon="mdi-account-plus-outline"
-    class="new_user"
-    >Create Account
+  <v-btn color="#297be5" prepend-icon="mdi-account-plus-outline" class="new_user">Create Account
     <v-dialog v-model="create_user" activator="parent">
       <v-card class="form_modal">
         <v-toolbar color="primary">
           <v-toolbar-title>Create Account</v-toolbar-title>
           <v-btn icon="mdi-close" @click="create_user = false">
-        </v-btn>
+          </v-btn>
         </v-toolbar>
         <v-form class="form_content" @submit.prevent="register">
           <div style="display: flex; flex-direction: column; gap: 1rem">
             <!-- @vue-ignore -->
-            <v-select
-              v-model="role.value.value"
-              label="User Role"
-              :error-messages="role.errorMessage.value"
-              prepend-inner-icon="mdi-card-account-details-outline"
-              :items="user_roles"
-              variant="outlined"
-            />
+            <v-select v-model="role.value.value" label="User Role" :error-messages="role.errorMessage.value"
+              prepend-inner-icon="mdi-card-account-details-outline" :items="user_roles" variant="outlined" />
             <div style="display: flex; flex-direction: row; gap: 1rem">
-              <v-text-field
-                v-model="email.value.value"
-                :error-messages="email.errorMessage.value"
-                label="UNC Email"
-                variant="outlined"
-              />
+              <v-text-field v-model="email.value.value" :error-messages="email.errorMessage.value" label="UNC Email"
+                variant="outlined" />
 
-              <v-text-field
-                v-model="affiliation.value.value"
-                :error-messages="affiliation.errorMessage.value"
-                label="Affiliation"
-                variant="outlined"
-              />
+              <v-text-field v-model="affiliation.value.value" :error-messages="affiliation.errorMessage.value"
+                label="Affiliation" variant="outlined" />
             </div>
             <div style="display: flex; flex-direction: row; gap: 1rem">
-              <v-text-field
-                v-model="firstName.value.value"
-                :error-messages="firstName.errorMessage.value"
-                label="First Name"
-                variant="outlined"
-              />
-              <v-text-field
-                v-model="middleName.value.value"
-                :error-messages="middleName.errorMessage.value"
-                label="Middle Name"
-                variant="outlined"
-              />
+              <v-text-field v-model="firstName.value.value" :error-messages="firstName.errorMessage.value"
+                label="First Name" variant="outlined" />
+              <v-text-field v-model="middleName.value.value" :error-messages="middleName.errorMessage.value"
+                label="Middle Name" variant="outlined" />
             </div>
 
-            <v-text-field
-              v-model="lastName.value.value"
-              :error-messages="lastName.errorMessage.value"
-              label="Last Name"
-              variant="outlined"
-            />
+            <v-text-field v-model="lastName.value.value" :error-messages="lastName.errorMessage.value" label="Last Name"
+              variant="outlined" />
             <div style="display: flex; flex-direction: row; gap: 1rem">
-            <v-text-field
-              v-model="suffix.value.value"
-              :error-messages="suffix.errorMessage.value"
-              label="Suffix"
-              variant="outlined"
-            />
-            <v-text-field
-              v-model="honorifics.value.value"
-              :error-messages="honorifics.errorMessage.value"
-              label="Honorifics"
-              variant="outlined"
-            />
-          </div>
-            <v-text-field
-              v-model="userID.value.value"
-              :error-messages="userID.errorMessage.value"
-              label="Username"
-              prepend-inner-icon="mdi-account-outline"
-              variant="outlined"
-            />
-            <v-text-field
-              v-model="password.value.value"
-              :error-messages="password.errorMessage.value"
-              label="Password"
-              :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
-              :type="visible ? 'text' : 'password'"
-              prepend-inner-icon="mdi-lock-outline"
-              variant="outlined"
-              @click:append-inner="visible = !visible"
-            />
+              <v-text-field v-model="suffix.value.value" :error-messages="suffix.errorMessage.value" label="Suffix"
+                variant="outlined" />
+              <v-text-field v-model="honorifics.value.value" :error-messages="honorifics.errorMessage.value"
+                label="Honorifics" variant="outlined" />
+            </div>
+            <v-text-field v-model="userID.value.value" :error-messages="userID.errorMessage.value" label="Username"
+              prepend-inner-icon="mdi-account-outline" variant="outlined" />
+            <v-text-field v-model="password.value.value" :error-messages="password.errorMessage.value" label="Password"
+              :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'" :type="visible ? 'text' : 'password'"
+              prepend-inner-icon="mdi-lock-outline" variant="outlined" @click:append-inner="visible = !visible" />
           </div>
 
           <v-btn color="#297be5" type="submit" block> Create Account </v-btn>

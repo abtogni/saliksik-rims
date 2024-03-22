@@ -9,9 +9,9 @@
         <v-form @submit.prevent="login">
           <!-- @vue-ignore -->
           <v-select class="input-field" v-model="role.value.value" :error-messages="role.errorMessage.value"
-            label="User Role" prepend-inner-icon="mdi-briefcase" :items="user_roles" variant="outlined" />
+            label="User Role" prepend-inner-icon="mdi-card-account-details-outline" :items="user_roles" variant="outlined" />
           <v-text-field class="input-field" v-model="userID.value.value" :error-messages="userID.errorMessage.value"
-            label="User ID" prepend-inner-icon="mdi-account" variant="outlined" />
+            label="Username" prepend-inner-icon="mdi-account-outline" variant="outlined" />
           <v-text-field class="input-field" label="Password" v-model="password.value.value"
             :error-messages="password.errorMessage.value" :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
             :type="visible ? 'text' : 'password'" prepend-inner-icon="mdi-lock-outline" variant="outlined"
