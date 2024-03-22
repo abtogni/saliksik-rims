@@ -45,6 +45,7 @@ declare module 'vue-router/auto/routes' {
     '/administrator/administrator_notification': RouteRecordInfo<'/administrator/administrator_notification', '/administrator/administrator_notification', Record<never, never>, Record<never, never>>,
     '/administrator/concept_note/': RouteRecordInfo<'/administrator/concept_note/', '/administrator/concept_note', Record<never, never>, Record<never, never>>,
     '/administrator/concept_note/[id]/': RouteRecordInfo<'/administrator/concept_note/[id]/', '/administrator/concept_note/:id', { id: ParamValue<true> }, { id: ParamValue<false> }>,
+    '/administrator/create_schedule': RouteRecordInfo<'/administrator/create_schedule', '/administrator/create_schedule', Record<never, never>, Record<never, never>>,
     '/administrator/incentive': RouteRecordInfo<'/administrator/incentive', '/administrator/incentive', Record<never, never>, Record<never, never>>,
     '/administrator/research_papers': RouteRecordInfo<'/administrator/research_papers', '/administrator/research_papers', Record<never, never>, Record<never, never>>,
     '/administrator/schedules': RouteRecordInfo<'/administrator/schedules', '/administrator/schedules', Record<never, never>, Record<never, never>>,
