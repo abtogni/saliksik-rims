@@ -60,6 +60,7 @@
             color="#5b21b6"
           />
 
+          
           <div
             style="
               display: flex;
@@ -81,9 +82,10 @@
               color="#5b21b6"
             />
             <date-picker label="Time" v-model="dateAndTime.value.value" />
+            <v-btn variant="flat" icon="mdi-folder-plus-outline" size="x-large" class="" type="submit"></v-btn>
           </div>
 
-          <v-btn variant="flat" prepend-icon="mdi-folder-plus-outline" class="button-outlined" type="submit">Add Research Project</v-btn>
+          
 
           <v-card variant="outlined" color="primary">
             <v-card-text style="display: flex; flex-direction: row; gap: 1rem; text-wrap: nowrap;">
