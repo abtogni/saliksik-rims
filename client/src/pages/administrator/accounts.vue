@@ -6,7 +6,7 @@
           <div class="header-caption">
             <v-badge
               :content="users.userCount"
-              color="primary"
+              color="#1d4ed8"
               prepend-icon="mdi-folder-multiple-outline"
               style="text-align: start; width: fit-content"
             >

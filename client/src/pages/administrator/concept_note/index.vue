@@ -45,7 +45,7 @@
               :key="item.value"
               :value="item.value"
             >
-                {{ item.label }}
+              {{ item.label }}
             </v-tab>
           </v-tabs>
           <v-window v-model="tab">

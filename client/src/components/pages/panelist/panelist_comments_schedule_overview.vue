@@ -6,21 +6,17 @@
           <v-expansion-panel>
             <v-expansion-panel-title class="title expansion-title-body b">
               <v-btn variant="text" icon="mdi-note-outline">
-                <v-badge color="info" floating>
+                <v-badge color="info" floating >
                   <v-icon></v-icon>
                 </v-badge>
 
                 <v-tooltip activator="parent" location="bottom" class="tooltip-list">
-                  <div class="bold-upper">Researches</div>
-                  <div v-for="p in schedule.presentations" :key="p._id">
-                    {{ researchList.find((research: any) => research.key === p.researchID)?.name }}
-                  </div>
+                  <div class="bold-upper">Research Projects</div>
                 </v-tooltip>
               </v-btn>
               <span class="expansion-title-left truncate">
-                <span class="truncate">
-                  {{ moment(schedule.dateAndTime).format('MMMM D YYYY, h:mm A') }} |
-                  {{ schedule.location }}</span>
+                  {{ moment(schedule.dateAndTime).format('MMMM D YYYY, h:mm A') }} <span class="p-reg b" >|</span>
+                  {{ schedule.location }}
               </span>
               <span class="expansion-title-right">
                 <v-chip color="primary" class="b">{{ moment(schedule.createdIn).format('MMMM D YYYY, h:mm A') }}
@@ -32,12 +28,12 @@
             <v-expansion-panel-text>
               <v-card flat class="body">
                 <v-card-title flat class="header">
-                  <div class="header-left truncate">
+                  <!-- <div class="header-left truncate">
                     <div class="header-caption-ctr">
                       <h5>{{ moment(schedule.dateAndTime).format('MMMM D YYYY, h:mm A') }} · {{ schedule.location }}
                       </h5>
                     </div>
-                  </div>
+                  </div> -->
 
                   <div class="header-right">
                   </div>

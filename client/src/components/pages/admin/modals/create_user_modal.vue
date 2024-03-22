@@ -1,8 +1,8 @@
 <template>
-  <v-btn color="#297be5" prepend-icon="mdi-account-plus-outline" class="new_user">Create Account
+  <v-btn variant="flat" prepend-icon="mdi-account-plus-outline" class="new_user button-regular">Create Account
     <v-dialog v-model="create_user" activator="parent">
       <v-card class="form_modal">
-        <v-toolbar color="primary">
+        <v-toolbar color="#1d4ed8">
           <v-toolbar-title>Create Account</v-toolbar-title>
           <v-btn icon="mdi-close" @click="create_user = false">
           </v-btn>
@@ -41,7 +41,7 @@
               prepend-inner-icon="mdi-lock-outline" variant="outlined" @click:append-inner="visible = !visible" />
           </div>
 
-          <v-btn color="#297be5" type="submit" block> Create Account </v-btn>
+          <v-btn variant="flat" type="submit" block class="button-regular"> Create Account </v-btn>
         </v-form>
       </v-card>
     </v-dialog>
