@@ -2,8 +2,14 @@ import mongoose from "mongoose";
 
 const PanelistNoteSchema = new mongoose.Schema({
   panelistID: { type: String },
+  time: {type: Date },
   presentationID: { type: String },
-  comments: { type: String },
+  comment:{
+    title: { type: String },
+    objective: { type: String },
+    methodology: { type: String },
+    others: { type: String },
+  }
 });
 
 const PresentationSchema = new mongoose.Schema(
@@ -12,7 +18,6 @@ const PresentationSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Research",
     },
-    presentationType: { type: String },
     scheduleID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Schedule",

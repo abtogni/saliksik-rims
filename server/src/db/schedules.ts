@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 
 const ScheduleSchema = new mongoose.Schema(
   {
-    dateAndTime: { type: Date, required: true },
+    date: { type: Date, required: true },
+    presentationType: { type: String, required: true },
     location: { type: String, required: true },
     panelists: [
       {
@@ -11,10 +12,7 @@ const ScheduleSchema = new mongoose.Schema(
       },
     ],
     presentations: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Presentation",
-      },
+      {type: mongoose.Schema.Types.ObjectId, ref: "Presentation",},
     ],
   },
   { timestamps: true },

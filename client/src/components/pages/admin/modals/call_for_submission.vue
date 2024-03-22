@@ -25,46 +25,11 @@
           "
         >
           <date-picker
-            label="Date and Time"
+            label="Deadline"
             v-model="dateAndTime.value.value"
           />
-
-          <v-text-field
-            v-model="location.value.value"
-            label="Location"
-            :error-messages="location.errorMessage.value"
-            variant="outlined"
-            style="padding: 0; margin: 0"
-            color="#5b21b6"
-          />
         </div>
-        <!-- @vue-ignore -->
-        <v-select
-          label="Researches"
-          multiple
-          variant="outlined"
-          v-model="researches.value.value"
-          :error-messages="researches.errorMessage.value"
-          :items="researchList"
-          item-title="name"
-          item-value="key"
-          style="padding: 0; margin: 0"
-          color="#5b21b6"
-        />
-
-        <!-- @vue-ignore -->
-        <v-select
-          label="Panelists"
-          multiple
-          variant="outlined"
-          v-model="panelists.value.value"
-          :error-messages="panelists.errorMessage.value"
-          :items="users"
-          item-title="name"
-          item-value="key"
-          style="padding: 0; margin: 0"
-          color="#5b21b6"
-        />
+        
         <v-btn class="button-regular" type="submit">Confirm</v-btn>
       </v-form>
     </v-card>
@@ -78,7 +43,6 @@ import axios from "axios";
 
 const prompt = ref(false);
 
-const { users, researchList } = defineProps(["users", "researchList"]);
 
 const { handleSubmit } = useForm({
   validationSchema: {
@@ -106,9 +70,6 @@ const { handleSubmit } = useForm({
 });
 
 const dateAndTime = useField("dateAndTime");
-const location = useField("location");
-const panelists = useField("panelists");
-const researches = useField("researches");
 
 const create = handleSubmit(async (values) => {
   const data = JSON.stringify(values);

@@ -50,6 +50,7 @@ declare module 'vue-router/auto/routes' {
     '/administrator/schedules': RouteRecordInfo<'/administrator/schedules', '/administrator/schedules', Record<never, never>, Record<never, never>>,
     '/panelist/': RouteRecordInfo<'/panelist/', '/panelist', Record<never, never>, Record<never, never>>,
     '/panelist/[presentation_id]/comment': RouteRecordInfo<'/panelist/[presentation_id]/comment', '/panelist/:presentation_id/comment', { presentation_id: ParamValue<true> }, { presentation_id: ParamValue<false> }>,
+    '/register': RouteRecordInfo<'/register', '/register', Record<never, never>, Record<never, never>>,
     '/researcher/[research_id.vue]/': RouteRecordInfo<'/researcher/[research_id.vue]/', '/researcher/:research_ide(.*)', { research_ide: ParamValue<true> }, { research_ide: ParamValue<false> }>,
     '/researcher/[research_id.vue]/create_concept_note': RouteRecordInfo<'/researcher/[research_id.vue]/create_concept_note', '/researcher/:research_ide(.*)/create_concept_note', { research_ide: ParamValue<true> }, { research_ide: ParamValue<false> }>,
     '/researcher/research_projects': RouteRecordInfo<'/researcher/research_projects', '/researcher/research_projects', Record<never, never>, Record<never, never>>,

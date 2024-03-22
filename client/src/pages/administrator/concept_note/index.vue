@@ -4,12 +4,9 @@
       <v-card-title class="header">
         <div class="header-left">
           <div class="header-caption">
-            <v-badge color="primary" prepend-icon="mdi-folder-multiple-outline"
-              style="text-align: start; width: fit-content">
-              <h5 style="margin-right: 0.5rem">Concept Note Submissions</h5>
-            </v-badge>
+            <h5 style="margin-right: 0rem">Concept Note Submissions</h5>
 
-            <p class="help">
+            <p class="help" style="margin-top: 0.3rem">
               help
               <v-tooltip activator="parent" location="bottom">
                 Call for submission to start. Approve or reject submitted
@@ -28,10 +25,49 @@
       <!--tab container-->
       <v-card-text class="content">
         <v-card elevation="0" variant="flat" class="">
-          <v-tabs v-model="tab" :items="tab_items" color="primary" />
-          <v-window v-model="tab" v-for="item in tab_items" :key="item" :class="{ 'active': item === 'Submitted' }">
-            <v-window-item :value="item">
-              <concept_note_submissions_table :research_data="filteredResearchData(item)" />
+          <v-tabs v-model="tab">
+            <v-tab
+              v-for="item in tab_items"
+              :key="item.value"
+              :value="item.value"
+            >
+              <v-badge
+                color="primary"
+                style="text-align: start; width: fit-content"
+                :content="item.content"
+                floating
+              >
+                {{ item.label }}
+              </v-badge>
+            </v-tab>
+            <v-tab
+              v-for="item in tab_items2"
+              :key="item.value"
+              :value="item.value"
+            >
+                {{ item.label }}
+            </v-tab>
+          </v-tabs>
+          <v-window v-model="tab">
+            <v-window-item value="submitted" mandatory="force">
+              <concept_note_submissions_table
+                :research_data="filteredResearchData('submitted')"
+              />
+            </v-window-item>
+            <v-window-item value="verified">
+              <concept_note_submissions_table
+                :research_data="filteredResearchData('Verified')"
+              />
+            </v-window-item>
+            <v-window-item value="approved">
+              <concept_note_submissions_table
+                :research_data="filteredResearchData('Approved')"
+              />
+            </v-window-item>
+            <v-window-item value="rejected">
+              <concept_note_submissions_table
+                :research_data="filteredResearchData('Rejected')"
+              />
             </v-window-item>
           </v-window>
         </v-card>
@@ -45,8 +81,32 @@ import { useResearchesStore } from "@/stores/researches";
 import { ref, computed, onMounted } from "vue";
 
 const research_data = ref([]);
-const tab = ref('');
-const tab_items = ["Submitted", "Verified", "Approved", "Rejected"];
+const tab = ref("");
+const tab_items = [
+  {
+    value: "submitted",
+    label: "Submitted",
+    content: "22",
+  },
+  {
+    value: "verified",
+    label: "Verified",
+    content: "",
+  },
+];
+
+const tab_items2 = [
+  {
+    value: "approved",
+    label: "Approved",
+    content: "",
+  },
+  {
+    value: "rejected",
+    label: "Rejected",
+    content: "",
+  },
+];
 const loading = ref(true);
 
 onMounted(async () => {
