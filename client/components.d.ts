@@ -13,6 +13,7 @@ declare module 'vue' {
     Concept_note_reject: typeof import('./src/components/pages/admin/modals/concept_note_reject.vue')['default']
     Concept_note_submissions_table: typeof import('./src/components/pages/admin/concept note/concept_note_submissions_table.vue')['default']
     Concept_note_tab: typeof import('./src/components/pages/researcher/tab/concept_note_tab.vue')['default']
+    copy: typeof import('./src/components/pages/researcher/modals/create_research_project_modal copy.vue')['default']
     Create_research_project_modal: typeof import('./src/components/pages/researcher/modals/create_research_project_modal.vue')['default']
     Create_schedule_modal: typeof import('./src/components/pages/admin/modals/create_schedule_modal.vue')['default']
     Create_user_modal: typeof import('./src/components/pages/admin/modals/create_user_modal.vue')['default']
@@ -54,6 +55,7 @@ declare module 'vue' {
     Status_update_concept_note_verified_and_reviewed: typeof import('./src/components/pages/researcher/notification/researcher/concept note/status_update_concept_note_verified_and_reviewed.vue')['default']
     Status_update_incentive_processing: typeof import('./src/components/pages/researcher/notification/researcher/incentive/status_update_incentive_processing.vue')['default']
     Status_update_incentive_released: typeof import('./src/components/pages/researcher/notification/researcher/incentive/status_update_incentive_released.vue')['default']
+    Upload_research_paper: typeof import('./src/components/pages/researcher/modals/upload_research_paper.vue')['default']
     User_list: typeof import('./src/components/pages/admin/account/user_list.vue')['default']
     User_preview: typeof import('./src/components/pages/admin/account/user_preview.vue')['default']
   }

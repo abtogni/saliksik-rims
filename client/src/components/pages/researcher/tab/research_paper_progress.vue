@@ -15,13 +15,7 @@
       </div>
 
       <div class="header-right">
-        <v-btn
-          type="submit"
-          flat
-          prepend-icon="mdi-file-upload-outline"
-          class="button-regular"
-          >Submit Research Paper
-        </v-btn>
+        <upload_research_paper/>
 
         <!-- <v-btn
           type="submit"

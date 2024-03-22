@@ -137,6 +137,13 @@ h6 {
   text-overflow: ellipsis;
 }
 
+.truncate-table {
+  max-width: 50vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .truncate-table-sm {
   max-width: 38vw;
   white-space: nowrap;
