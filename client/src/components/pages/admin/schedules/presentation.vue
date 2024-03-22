@@ -5,12 +5,11 @@
     v-for="(presentation_group, date) in grouped_presentations"
     :key="date"
     class="body"
-    
   >
-    <v-card flat class="header" >
+    <v-card flat class="header">
       <div class="header-left truncate">
         <div class="header-caption">
-          <h5 style="padding-bottom: .3rem;">
+          <h5 style="padding-bottom: 0.3rem">
             {{ format_date(grouped_presentations[date][0].datetime) }}
           </h5>
 
@@ -21,7 +20,7 @@
         </div>
       </div>
     </v-card>
-    <div class="content" >
+    <div class="content">
       <v-card variant="outlined" class="card-style">
         <v-expansion-panels>
           <v-expansion-panel
@@ -77,28 +76,27 @@
                   {{ presentation.location }}
                 </span>
               </span>
-              <span class="expansion-title-right"
-                ><v-chip
+              <span class="expansion-title-right">
+                <v-chip
                   >January 21, 2023
                   <v-tooltip activator="parent" location="bottom"
                     >Created In
                   </v-tooltip>
-                </v-chip></span
-              >
+                </v-chip>
+              </span>
             </v-expansion-panel-title>
             <v-expansion-panel-text>
-              <presentation_schedule_preview/>
-           
-              <presentation_researcher_preview/>
-              <br>
-              <presentation_panelist_preview/>
+              <presentation_schedule_preview />
+
+              <presentation_researcher_preview />
+              <br />
+              <presentation_panelist_preview />
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>
       </v-card>
     </div>
   </v-card>
-  
 </template>
 
 <script setup lang="ts">

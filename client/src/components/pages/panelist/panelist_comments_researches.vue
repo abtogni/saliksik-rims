@@ -23,8 +23,10 @@
                 </div>
               </v-tooltip>
             </v-btn>
-            <div class="text">
+            <div class="text truncate-table">
+              <p class=" truncate-table"> 
               {{ research.researchTitle }}
+            </p>
             </div>
           </div>
           <div class="pres-res-right text">
