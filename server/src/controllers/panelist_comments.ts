@@ -59,7 +59,7 @@ export const createPanelistNote = async (req: Request, res: Response) => {
   try {
     const { panelistID, presentationID, comments } = req.body;
 
-    await createNewPanelistNote({ panelistID, presentationID, comments }).then(
+    await createNewPanelistNote({ panelistID, presentationID }).then(
       async (result) => {
         await updatePresentationByID(result.presentationID, {
           $push: { panelistNotes: result._id },
@@ -75,12 +75,11 @@ export const createPanelistNote = async (req: Request, res: Response) => {
 
 export const updatePanelistNote = async (req: Request, res: Response) => {
   try {
-    const { panelistNoteID, presentationID, comments } = req.body;
+    const { panelistNoteID, presentationID} = req.body;
 
     const note = await findNoteByID(panelistNoteID);
 
     note.presentationID = presentationID ? presentationID : note.presentationID;
-    note.comments = comments ? comments : note.comments;
 
     return res.sendStatus(200);
   } catch (error) {
