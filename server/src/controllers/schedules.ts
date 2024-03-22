@@ -38,10 +38,10 @@ export const getScheduleByPanelist = async (req: Request, res: Response) => {
 
 // create new schedule
 export const createNewSchedule = async (req: Request, res: Response) => {
-  const { dateAndTime, location, panelists, researches } = req.body;
+  const { date, location, panelists, researches } = req.body;
 
   const result = await createSchedule({
-    dateAndTime,
+    date,
     location,
     panelists,
   });
@@ -92,10 +92,10 @@ export const fetchSchedule = async (req: Request, res: Response) => {
 export const updateSchedule = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const { dateAndTime, location, panelists, presentations } = req.body;
+    const { date, location, panelists, presentations } = req.body;
     const schedule = await getScheduleByID(id);
 
-    if (dateAndTime) schedule.dateAndTime = dateAndTime;
+    if (date) schedule.date = date;
     if (location) schedule.location = location;
     if (panelists) schedule.panelists = panelists;
     if (presentations) schedule.presentations = presentations;
