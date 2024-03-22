@@ -101,6 +101,9 @@ h6 {
   font-weight: 500;
 }
 
+.upper{
+  text-transform: uppercase;
+}
 .bold-upper {
   font-weight: 500;
   text-transform: uppercase;
@@ -134,8 +137,8 @@ h6 {
   text-overflow: ellipsis;
 }
 
-.truncate-table {
-  max-width: 50vw;
+.truncate-table-sm {
+  max-width: 38vw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

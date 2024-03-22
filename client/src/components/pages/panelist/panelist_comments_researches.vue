@@ -23,7 +23,7 @@
                 </div>
               </v-tooltip>
             </v-btn>
-            <div class="text truncate-table">
+            <div class="text">
               <p class=" truncate-table"> 
               {{ research.researchTitle }}
             </p>

@@ -6,24 +6,24 @@
     :key="date"
     class="body"
   >
-    <v-card-title flat class="header">
+    <!-- <v-card-title flat class="header">
       <div class="header-left truncate">
         <div class="header-caption">
-          <h6>
+          <!-- <h6>
             {{
               moment(grouped_schedules[date][0].dateAndTime).format(
                 "MMMM DD, YYYY",
               )
             }}
-          </h6>
+          </h6> --
 
           <!-- <p class="caption">
             Track and monitor your research paper. Upload a copy of the research
             paper regularly.
-          </p> -->
+          </p> --
         </div>
       </div>
-    </v-card-title>
+    </v-card-title> -->
     <v-card-text class="content">
       <v-card variant="outlined" class="card-style">
         <v-expansion-panels>
@@ -81,10 +81,10 @@
                   </div>
                 </v-tooltip>
               </v-btn>
-              <span class="expansion-title-left truncate">
+              <span class="expansion-title-left truncate upper">
                 <span class="truncate">
                   {{
-                    moment(schedule.dateAndTime).format("MMMM D YYYY, h:mm A")
+                    moment(schedule.dateAndTime).format("LL")
                   }}
                 </span>
                 <span class="truncate"> | </span>
@@ -96,10 +96,10 @@
                 >
                 <v-chip color="primary" class="b"
                   >{{
-                    moment(schedule.createdAt).format("MMMM D YYYY, h:mm A")
+                    moment(schedule.createdAt).format("L")
                   }}
                   <v-tooltip activator="parent" location="bottom"
-                    >Created In
+                    >Created In {{ moment(schedule.createdAt).format("MMMM D YYYY, h:mm A") }}
                   </v-tooltip>
                 </v-chip>
               </span>
