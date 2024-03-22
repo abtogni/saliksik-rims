@@ -45,7 +45,7 @@
             <v-window-item value="title">
 
               <template v-if="schedules">
-                <schedule :schedule="schedules" :researchList="researchList"/>
+                <schedule :schedule="schedules" :researches="researchList" :users="users" />
               </template>
 
               <template v-else>
@@ -72,7 +72,7 @@ import axios from 'axios';
 
 const users = ref<{ key: any, name: string, role: string }[]>([]);
 const schedules: any =  ref([]);
-const researchList = ref<{ key: any, name: string, status: string, conceptNote: string }[]>([]);
+const researchList = ref<{ key: any, name: string, status: string, researchLeaders: any, conceptNote: any }[]>([]);
 
 const isDataLoaded = ref(false);
 
@@ -94,6 +94,7 @@ onMounted(async () => {
       key: research._id,
       name: research.researchTitle,
       status: research.researchStatus,
+      researchLeaders: research.researchLeaders,
       conceptNote: research.conceptNote.status
     }));
 

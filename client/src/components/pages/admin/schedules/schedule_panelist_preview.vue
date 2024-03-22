@@ -18,7 +18,7 @@
           <div class="pres-res-left">
             <v-btn variant="text" icon="mdi-account-multiple-outline"> </v-btn>
             <div class="text">
-              {{ panelists.map((p: any) => p.name).join(' · ') }}
+              {{ panelistData.map((p: any) => p.name).join(' · ') }}
             </div>
           </div>
           <div class="pres-res-right">
@@ -30,5 +30,7 @@
 </template>
 
 <script setup lang="ts">
-const { panelists } = defineProps(['panelists']);
+const { panelists, users } = defineProps(['panelists', 'users']);
+
+const panelistData = users.filter((user: any) => panelists.includes(user.key));
 </script>

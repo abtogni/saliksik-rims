@@ -9,7 +9,6 @@
     </v-card-title>
 
     <v-divider />
-    <!-- @vue-skip -->
     <card style="width: 100%;">
       <v-hover v-slot:default="{ isHovering, props }" v-for="research in researchData" :key="research._id">
         <v-card flat rounded="0" v-bind="props" :color="isHovering ? '#eef2ff' : undefined" style="width: 100%;">
@@ -26,7 +25,7 @@
               </v-btn>
               <div class="text">
                 <p class="truncate-table">
-                  {{ research.researchTitle }}
+                  {{ research.name }}
                 </p>
 
               </div>
@@ -46,13 +45,24 @@
 </template>
 
 <script setup lang="ts">
-import { useResearchesStore } from "@/stores/researches";
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
 
-const { presentations } = defineProps(["presentations"]);
-//@ts-ignore
-const researchData = useResearchesStore().researchList.filter((research) =>
-  presentations.some(
-    (presentation: any) => presentation.researchID === research._id,
-  ),
-);
+const { presentations, researches } = defineProps(["presentations", 'researches']);
+
+const presentationData: any = ref([]);
+const researchData: any = ref([]);
+
+onMounted(async () => {
+  presentationData.value = await Promise.all(
+    presentations.map(async (p: any) => {
+        const response = await axios.get(`/api/presentation/${p}`);
+        return response.data;
+      })
+    );
+    researchData.value = researches.filter((research:any) =>
+      presentationData.value.some( 
+        (presentation: any) => presentation.research_id === research._id
+      ));
+  });
 </script>

@@ -48,11 +48,11 @@
                     <status_concept_note_submitted
                       v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Submitted'" />
                     <status_concept_note_verified
-                      v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Verified'" />
+                      v-else-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Verified'" />
                     <status_concept_note_approved
-                      v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Approved'" />
+                      v-else-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Approved'" />
                     <status_concept_note_rejected
-                      v-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Rejected'" />
+                      v-else-if="currentResearch.conceptNote && currentResearch.conceptNote.status == 'Rejected'" />
                     <status_no_status v-else />
                     <v-btn v-if="currentResearch.conceptNote" type="submit" flat variant="outlined"
                       prepend-icon="mdi-file-document-edit-outline" class="button-outlined">Edit Concept Note

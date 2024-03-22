@@ -40,9 +40,10 @@
             <v-tab value="previous">Previous</v-tab>
           </v-tabs>
           <v-window v-model="tab">
-            <!-- @vue-skip -->
-            <v-window-item v-for="schedule in schedules" :key="schedule._id" value="current">
-              <panelist_comments_schedule_overview :schedule="schedule" :researchList="researchList" :users="users" />
+            <v-window-item >
+              <div v-for="schedule in schedules" :key="schedule._id">
+                <panelist_comments_schedule_overview :schedule="schedule" :researchList="researchList" />
+              </div>
             </v-window-item>
             <v-window-item value="previous"> Previous </v-window-item>
           </v-window>
