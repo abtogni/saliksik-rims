@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 
 const PanelistNoteSchema = new mongoose.Schema({
   panelistID: { type: String },
-  time: {type: Date },
   presentationID: { type: String },
   comment:{
     title: { type: String },
@@ -18,6 +17,7 @@ const PresentationSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Research",
     },
+    time: {type: Date },
     scheduleID: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Schedule",

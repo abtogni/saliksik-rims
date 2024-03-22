@@ -57,9 +57,9 @@ export const getPanelistNotesByID = async (req: Request, res: Response) =>{
 
 export const createPanelistNote = async (req: Request, res: Response) => {
   try {
-    const { panelistID, presentationID, comments } = req.body;
+    const { panelistID, presentationID, comment } = req.body;
 
-    await createNewPanelistNote({ panelistID, presentationID }).then(
+    await createNewPanelistNote({ panelistID, presentationID, comment }).then(
       async (result) => {
         await updatePresentationByID(result.presentationID, {
           $push: { panelistNotes: result._id },
@@ -75,11 +75,17 @@ export const createPanelistNote = async (req: Request, res: Response) => {
 
 export const updatePanelistNote = async (req: Request, res: Response) => {
   try {
-    const { panelistNoteID, presentationID} = req.body;
+    const { panelistNoteID, presentationID, comment} = req.body;
 
     const note = await findNoteByID(panelistNoteID);
 
     note.presentationID = presentationID ? presentationID : note.presentationID;
+
+    if (comment)
+    note.comment = {
+      ...note.comment,
+      ...comment,
+    };
 
     return res.sendStatus(200);
   } catch (error) {
