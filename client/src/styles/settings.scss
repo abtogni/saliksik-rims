@@ -26,7 +26,7 @@ $gray-900: #111827;
 $orange-50: #fff7ed;
 $orange-700: #c2410c;
 $def-h-color: $gray-900;
-$def-p-color: $gray-700;
+$def-p-color: $gray-900;
 
 * {
   margin: 0;
@@ -79,7 +79,7 @@ h6 {
   font-size: 1rem;
   color: $def-p-color;
   font-weight: 400;
-  text-wrap: pre-wrap;
+  white-space:pre-wrap;
 }
 
 .p-sm {
@@ -569,6 +569,7 @@ div#research_table {
   .form_content {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 1rem;
     text-align: left;
     margin: 0;

@@ -16,34 +16,32 @@
         </v-btn>
       </v-toolbar>
       <v-form class="form_content" @submit.prevent="create">
-        <div style="display: flex; flex-direction: row; align-items: start; gap: 1rem;">
-
-        
-        <date-picker label="Date and Time"  v-model="dateAndTime.value.value" />
-
-        <v-text-field
-          v-model="location.value.value"
-          label="Location"
-          :error-messages="location.errorMessage.value"
-          variant="outlined"
-          style="padding: 0; margin: 0"
-          color="#5b21b6"
-        />
-      </div>
-        <!-- @vue-ignore -->
         <v-select
-          label="Researches"
-          multiple
+          label="Presentation Type"
           variant="outlined"
-          v-model="researches.value.value"
-          :error-messages="researches.errorMessage.value"
-          :items="researchList"
-          item-title="name"
-          item-value="key"
+          :items="presentation_type"
           style="padding: 0; margin: 0"
           color="#5b21b6"
         />
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            align-items: start;
+            gap: 1rem;
+          "
+        >
+          <date-picker label="Date" v-model="dateAndTime.value.value" />
 
+          <v-text-field
+            v-model="location.value.value"
+            label="Location"
+            :error-messages="location.errorMessage.value"
+            variant="outlined"
+            style="padding: 0; margin: 0"
+            color="#5b21b6"
+          />
+        </div>
         <!-- @vue-ignore -->
         <v-select
           label="Panelists"
@@ -57,6 +55,33 @@
           style="padding: 0; margin: 0"
           color="#5b21b6"
         />
+
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            align-items: start;
+            gap: 1rem;
+          "
+        >
+          <!-- @vue-ignore -->
+          <v-select
+            label="Researches"
+            variant="outlined"
+            v-model="researches.value.value"
+            :error-messages="researches.errorMessage.value"
+            :items="researchList"
+            item-title="name"
+            item-value="key"
+            style="padding: 0; margin: 0; width: 75%"
+            color="#5b21b6"
+          />
+          <date-picker
+            label="Time"
+            v-model="dateAndTime.value.value"
+          />
+        </div>
+
         <v-btn class="button-regular" type="submit">Confirm</v-btn>
       </v-form>
     </v-card>
@@ -101,6 +126,8 @@ const dateAndTime = useField("dateAndTime");
 const location = useField("location");
 const panelists = useField("panelists");
 const researches = useField("researches");
+
+const presentation_type = ["Title Presentation", "Final Presentation"];
 
 const create = handleSubmit(async (values) => {
   const data = JSON.stringify(values);

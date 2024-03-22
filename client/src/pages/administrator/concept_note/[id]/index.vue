@@ -107,7 +107,7 @@
           <v-card-title>
             <h6>Objectives</h6>
           </v-card-title>
-          <v-card-text class="p-reg b">
+          <v-card-text class="p-reg ">
             {{ c.conceptNote.objectives }}
           </v-card-text>
         </v-card>
