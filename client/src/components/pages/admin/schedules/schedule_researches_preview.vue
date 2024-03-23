@@ -23,7 +23,7 @@
           style="width: 100%"
         >
           <v-card-text class="pres-res-body">
-            <div class="pres-res-left">
+            <div class="pres-res-left truncate">
               <v-btn variant="text" icon="mdi-account-multiple-outline">
                 <v-icon></v-icon>
                 <v-tooltip
@@ -40,11 +40,9 @@
                   </div>
                 </v-tooltip>
               </v-btn>
-              <div class="text">
-                <p class="truncate-table-sm">
+                <p class="p-reg b truncate">
                   {{ research.name }}
                 </p>
-              </div>
             </div>
             <div class="pres-res-right" style="display: flex; flex-direction: row; gap: 0.5rem">
               

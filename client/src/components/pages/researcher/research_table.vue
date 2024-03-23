@@ -25,9 +25,9 @@
         <td class="truncate-table">
           <v-btn
             variant="text"
-            density="comfortable"
+            density="default"
             icon="mdi-account-multiple-outline"
-            style="margin-right: 1rem"
+            style="margin-right: .5rem"
           >
             <v-icon></v-icon>
             <v-tooltip
@@ -44,21 +44,19 @@
               </div>
             </v-tooltip>
           </v-btn>
-          <a :href="'/researcher/' + research._id">{{
+          <a :href="'/researcher/' + research._id" class="p-reg b truncate">{{
             research.researchTitle
           }}</a>
         </td>
         <td>
           <v-chip
-            variant="text"
-            color=""
-            density="compact"
-            prepend-icon="mdi-file-document-outline"
-            class="b"
+            variant="outlined"
+            density="default"
+            class="button-outlined b"
             >{{ research.researchStatus }}</v-chip
           >
         </td>
-        <td>{{ research.createdAt }}</td>
+        <td class="p-reg b">{{ research.createdAt }}</td>
       </tr>
     </template>
   </v-data-table>

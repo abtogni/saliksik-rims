@@ -82,6 +82,7 @@ h6 {
   color: $def-p-color;
   font-weight: 500;
   white-space:pre-wrap;
+  text-decoration: none;
 }
 
 .p-sm {
@@ -100,7 +101,7 @@ h6 {
 }
 
 .b {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .upper{
@@ -154,7 +155,7 @@ h6 {
 }
 
 .truncate-table-long {
-  max-width: 63vw;
+  max-width: 50vw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -438,6 +439,7 @@ div#research_table {
   justify-content: space-between;
   width: 100%;
   padding: 0rem 0rem 0rem 0rem;
+  gap: 1rem;
 
   .pres-res-left {
     display: flex;
@@ -445,6 +447,7 @@ div#research_table {
     gap: 0rem;
     width: 100%;
     align-content: center;
+    align-items: center;
 
     .text {
       font-weight: 500;

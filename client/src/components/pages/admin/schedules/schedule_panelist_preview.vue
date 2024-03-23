@@ -17,7 +17,7 @@
         <v-card-text class="pres-res-body">
           <div class="pres-res-left">
             <v-btn variant="text" icon="mdi-account-multiple-outline"> </v-btn>
-            <div class="text">
+            <div class="p-reg b">
               {{ panelistData.map((p: any) => p.name).join(' · ') }}
             </div>
           </div>

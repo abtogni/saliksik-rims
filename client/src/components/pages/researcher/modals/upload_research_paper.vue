@@ -1,7 +1,7 @@
 <template>
   <v-btn flat prepend-icon="mdi-file-document-plus-outline" class="button-regular" @click="prompt = true" text="Upload Research Paper"></v-btn>
   <v-dialog v-model="prompt">
-    <v-card class="form_modal_small">
+    <v-card class="form_modal_small" style="height: auto;">
       <v-toolbar color="primary">
         <v-toolbar-title>Upload Research Paper</v-toolbar-title>
         <v-btn icon @click="prompt = false">
@@ -12,7 +12,7 @@
       <v-form class="form_content" @submit.prevent="uploadFile">
         <v-file-input v-model="file" class="inputs" label="Research Paper In PDF" prepend-icon="mdi-file-document-outline" rows="1" auto-grow variant="outlined" accept=".pdf" name="research"></v-file-input>
 
-        <v-btn type="submit" class="button-regular">Submit Paper</v-btn>
+        <v-btn type="submit" variant="flat" class="button-regular">Submit Paper</v-btn>
       </v-form>
     </v-card>
   </v-dialog>

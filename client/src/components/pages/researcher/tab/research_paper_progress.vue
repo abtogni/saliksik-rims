@@ -36,12 +36,15 @@
               flex-direction: row;
               gap: 1rem;
               align-items: center;
-              width: 100%;
+              padding: 1rem;
             "
+            class="truncate"
           >
-            <div>
-              <a :href="`/api/uploads/${id}/${f}`" target="_blank">{{ f }}</a>
-            </div>
+              <a
+              :href="`/api/uploads/${id}/${f}`"
+                target="_blank"
+                class="p-reg b truncate">{{ f }}</a
+              >
           </div>
           <div
             style="
@@ -50,6 +53,7 @@
               gap: 1rem;
               align-items: center;
             "
+            class="pres-res-right"
           >
             <v-chip variant="text" class="b button-outlined"
               >Uploaded In
@@ -72,8 +76,8 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import axios from "axios";
+import { onMounted, ref } from "vue";
 
   const {id} = defineProps(['id']);
 
@@ -94,5 +98,5 @@ import { onMounted, ref } from 'vue';
     } catch (error: any) {
       console.error(error.response.data);
     }
-  };
+};
 </script>

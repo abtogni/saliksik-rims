@@ -83,9 +83,9 @@
               <presentation_tab
                 :presentations="presentations.filter((presentation: any) => presentation.presentationType === 'Final')" />
             </v-window-item>
-            <v-window-item value="incentive">
+            <!-- <v-window-item value="incentive">
               <incentive_status_tab />
-            </v-window-item>
+            </v-window-item> -->
           </v-window>
         </div>
       </v-card>
@@ -120,11 +120,6 @@ const tabItems = [
     value: "final-presentation",
     icon: "mdi-calendar-month-outline",
     label: "Final Presentation",
-  },
-  {
-    value: "incentive",
-    icon: "mdi-currency-php",
-    label: "Incentive Status",
   },
 ];
 

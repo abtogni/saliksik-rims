@@ -1,7 +1,7 @@
 <template>
   <v-card variant="flat" class="overview-ctr">
     <v-card variant="flat" >
-      <v-card-title>
+      <v-card-title style="padding-bottom: 2rem;">
         <h5>
           {{ data.projectTitle }}
         </h5>

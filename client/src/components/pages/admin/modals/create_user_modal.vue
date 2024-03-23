@@ -17,7 +17,7 @@
                 variant="outlined" />
 
               <v-text-field v-model="affiliation.value.value" :error-messages="affiliation.errorMessage.value"
-                label="Affiliation" variant="outlined" />
+                label="Department" variant="outlined" />
             </div>
             <div style="display: flex; flex-direction: row; gap: 1rem">
               <v-text-field v-model="firstName.value.value" :error-messages="firstName.errorMessage.value"
