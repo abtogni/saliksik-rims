@@ -31,7 +31,6 @@
             text="Create Schedule"
             href="/administrator/create_schedule"
           />
-          <create_schedule />
         </div>
       </v-card-title>
       <v-card-text class="content">
