@@ -7,57 +7,89 @@
           <p class="help" style="padding-top: 0.2rem">
             help
             <v-tooltip activator="parent" location="bottom"
-              >Track and monitor your research paper. Upload a copy of the research paper regularly.
-
+              >Track and monitor your research paper. Upload a copy of the
+              research paper regularly.
             </v-tooltip>
           </p>
         </div>
       </div>
 
       <div class="header-right">
-        <upload_research_paper/>
+        <upload_research_paper />
+
+        <!-- <v-btn
+          type="submit"
+          flat
+          variant="outlined"
+          prepend-icon="mdi-close-circle-outline"
+          class="button-outlined"
+          >Not Going
+        </v-btn>  -->
       </div>
     </v-card-title>
-    <v-card-text>
-      <v-card variant="flat" class="overview-ctr" v-if="checkFile">
-        <v-card variant="outlined" class="card-style">
-          <a :href="`/api/uploads/${id}/research-paper.pdf`"  >File goes here</a>
-          <v-expansion-panels>
-            <v-expansion-panel>
-              <v-expansion-panel-title class="title expansion-title-body">
-                <span class="expansion-title-left truncate">
-                  <span>
-                    <v-icon start icon="mdi-account-multiple-outline"></v-icon>
-                    <v-tooltip
-                      activator="parent"
-                      location="top"
-                      style="display: flex; flex-direction: column"
-                    >
-                      <div style="text-transform: uppercase; font-weight: 600">
-                        Uploaded by
-                      </div>
-                      <div>Jomari Valenciano</div>
-                      <div>Andrei Togñi</div>
-                    </v-tooltip>
-                  </span>
-                  <span class="truncate">
-                    Insert research titleInsert research titleInsert research
-                    titleInsert research titleInsert research titleInsert
-                    research titleInsert research titleInsert research
-                    titleInsert research titleInsert research titleInsert
-                    research titleInsert research titleInsert research
-                    title</span
-                  >
-                </span>
-                <span class="expansion-title-right"
-                  ><v-chip>January 21, 2023</v-chip></span
-                >
-              </v-expansion-panel-title>
-              <v-expansion-panel-text>dasfdsaf</v-expansion-panel-text>
-            </v-expansion-panel>
-            <v-expansion-panel title="Panelist Name 2"> </v-expansion-panel>
-          </v-expansion-panels>
-        </v-card>
+    <v-card-text class="content">
+      <v-card variant="outlined" class="card-style">
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              gap: 1rem;
+              align-items: center;
+              width: 100%;
+            "
+          >
+            <v-btn variant="text" icon="mdi-account-multiple-outline">
+              <v-icon></v-icon>
+              <v-tooltip
+                activator="parent"
+                location="bottom"
+                class="tooltip-list"
+              >
+                <div class="bold-upper">Uploaded By</div>
+                <div>insert name</div>
+              </v-tooltip>
+            </v-btn>
+            <div>
+              <p class="p-reg b truncate-table-long">
+                Streamlining Outcome-Based Education and Continuous Quality
+                Improvement of University of Nueva Caceres through Technology: A
+                Information Management System for Improving Inclusiveness
+              </p>
+            </div>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              gap: 1rem;
+              align-items: center;
+            "
+          >
+            <v-chip variant="text" class="b button-outlined"
+              >Uploaded In
+            </v-chip>
+
+            <v-btn variant="text" icon="mdi-file-download-outline">
+              <v-icon></v-icon>
+              <v-tooltip
+                activator="parent"
+                location="bottom"
+                class="tooltip-list"
+                >Download As PDF
+              </v-tooltip>
+            </v-btn>
+          </div>
+        </div>
       </v-card>
     </v-card-text>
   </v-card>
