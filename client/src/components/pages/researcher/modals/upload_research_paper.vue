@@ -37,7 +37,6 @@ const uploadFile = async () => {
       const response = await axios.post(`/api/research/upload/${currentResearch._id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
-          "filename": "research-paper"
         },
       });
 
