@@ -16,7 +16,7 @@
               <v-text-field v-model="email.value.value" :error-messages="email.errorMessage.value" label="UNC Email"
                 variant="outlined" />
 
-              <v-text-field v-model="affiliation.value.value" :error-messages="affiliation.errorMessage.value"
+              <v-text-field v-model="department.value.value" :error-messages="department.errorMessage.value"
                 label="Department" variant="outlined" />
             </div>
             <div style="display: flex; flex-direction: row; gap: 1rem">
@@ -109,7 +109,7 @@ const { handleSubmit } = useForm({
 
       return "Please enter your email.";
     },
-    affiliation(v: string) {
+    department(v: string) {
       if (v) return true;
 
       return "Select an item.";
@@ -139,7 +139,7 @@ const middleName = useField("middleName");
 const lastName = useField("lastName");
 const suffix = useField("suffix");
 const email = useField("email");
-const affiliation = useField("affiliation");
+const department = useField("department");
 const userID = useField("userID");
 const password = useField("password");
 

@@ -38,7 +38,7 @@ export const updateUser = async (req: Request, res: Response) => {
     const { id } = req.params;
     const {
       role,
-      affiliation,
+      department,
       firstName,
       middleName,
       lastName,
@@ -50,7 +50,7 @@ export const updateUser = async (req: Request, res: Response) => {
     const user = await getUserById(id);
 
     if (role) user.role = role;
-    if (affiliation) user.affiliation = affiliation;
+    if (department) user.department = department;
     if (firstName) user.firstName = firstName;
     if (middleName) user.middleName = middleName;
     if (lastName) user.lastName = lastName;

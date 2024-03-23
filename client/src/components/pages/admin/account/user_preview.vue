@@ -31,7 +31,7 @@
         </div>
 
         <div class="pres-res-right">
-          <v-chip color="primary" class="b">{{ user.affiliation }}</v-chip>
+          <v-chip color="primary" class="b">{{ user.department }}</v-chip>
           <v-btn variant="text" icon="mdi-account-edit-outline">
             <v-icon></v-icon>
             <v-tooltip activator="parent" location="bottom" class="tooltip-list"
