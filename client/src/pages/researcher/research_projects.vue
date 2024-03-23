@@ -25,6 +25,13 @@
         <!--cta container-->
         <div class="header-right">
           <create_research_project_modal />
+          <v-btn
+            flat
+            prepend-icon="mdi-currency-php"
+            class="button-outlined"
+            text="Apply For Incentive"
+            href="/researcher/apply_for_incentive"
+          />
         </div>
       </v-card-title>
       <v-card-text class="content">
