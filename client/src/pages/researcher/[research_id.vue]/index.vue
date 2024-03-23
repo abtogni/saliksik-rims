@@ -77,7 +77,7 @@
                 :presentations="presentations.filter((presentation: any) => presentation.presentationType === 'Title')" />
             </v-window-item>
             <v-window-item value="research-paper">
-              <research_paper_progress :id="currentResearch._id" :title="currentResearch.researchTitle"/>
+              <research_paper_progress :id="currentResearch._id" />
             </v-window-item>
             <v-window-item value="final-presentation">
               <presentation_tab
