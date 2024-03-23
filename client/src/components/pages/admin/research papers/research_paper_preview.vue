@@ -37,14 +37,6 @@
         <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-title class="title expansion-title-body">
-              <v-badge color="info" content="6" inline>
-                <v-tooltip
-                  activator="parent"
-                  location="bottom"
-                  class="tooltip-list"
-                  >New Uploads
-                </v-tooltip>
-              </v-badge>
               <v-btn variant="text" icon="mdi-account-multiple-outline">
                 <v-icon></v-icon>
                 <v-tooltip
@@ -58,9 +50,18 @@
               </v-btn>
 
               <span class="expansion-title-left truncate">
-                <span class="truncate-table p-reg b"> Insert research project name</span>
+                <span class="truncate p-reg b">
+                  Insert research project name Insert research project name Insert research project name Insert research project name Insert research project name Insert research project name Insert research project name Insert research project name Insert research project name Insert research project name Insert research project name
+                </span>
               </span>
+              
               <span class="expansion-title-right">
+                <v-chip class="p-reg b button-outlined" variant="outlined" style="text-wrap: nowrap;">
+                  Verified or Not
+                  <v-tooltip activator="parent" location="bottom"
+                    >Last Upload
+                  </v-tooltip>
+                </v-chip>
                 <v-btn variant="text" icon="mdi-file-upload-outline">
                   <v-badge color="info" content="6" floating>
                     <v-icon></v-icon>
@@ -70,19 +71,19 @@
                     activator="parent"
                     location="bottom"
                     class="tooltip-list"
-                    >No. Of Uploads
+                    >Number Of Uploads
                   </v-tooltip>
                 </v-btn>
-                <v-chip class="p-reg b" variant="text"
-                  >January 21, 2023
+                <v-chip class="p-reg b button-outlined" variant="outlined">
+                  January 21, 2023
                   <v-tooltip activator="parent" location="bottom"
                     >Last Upload
                   </v-tooltip>
-                </v-chip></span
-              >
+                </v-chip>
+              </span>
             </v-expansion-panel-title>
             <v-expansion-panel-text>
-              <research_paper_upload/>
+              <research_paper_upload />
             </v-expansion-panel-text>
           </v-expansion-panel>
         </v-expansion-panels>

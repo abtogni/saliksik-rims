@@ -3,7 +3,7 @@
     <v-card-title flat class="header" style="padding: 0">
       <div class="header-left truncate">
         <div class="header-caption-ctr">
-          <h6>January</h6>
+          <h6></h6>
 
           <!-- <p class="caption">
             Track and monitor your research paper. Upload a copy of the research
@@ -13,47 +13,68 @@
       </div>
 
       <div class="header-right">
-        <!--cta
-        <v-btn
-          type="submit"
-          flat
-          prepend-icon="mdi-note-plus-outline"
-          class="button-regular"
-          >Add More
-        </v-btn>
          <v-btn
           type="submit"
           flat
           variant="outlined"
-          prepend-icon="mdi-close-circle-outline"
-          class="button-outlined"
-          >Not Going
-        </v-btn>  -->
+          prepend-icon="mdi-check-circle-outline"
+          class="button-regular"
+          >Mark As Verified
+        </v-btn>  
       </div>
     </v-card-title>
 
     <div class="content" style="padding: 0">
       <v-card variant="outlined" class="card-style">
-        <v-expansion-panels>
-          <v-expansion-panel>
-            <v-expansion-panel-title class="title expansion-title-body">
-              <span class="expansion-title-left truncate">
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+          "
+        >
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              gap: 1rem;
+              align-items: center;
+              padding: 1rem;
+            "
+            class="truncate"
+          >
+              <a
+                target="_blank"
+                class="p-reg b truncate">Insert File Name 
+              </a>
+          </div>
+          <div
+            style="
+              display: flex;
+              flex-direction: row;
+              gap: 1rem;
+              align-items: center;
+            "
+            class="pres-res-right"
+          >
+            <v-chip variant="text" class="b button-outlined"
+              >Uploaded In
+            </v-chip>
 
-                <span class="truncate-table p-reg b"> Insert research project name</span>
-              </span>
-
-              <span class="expansion-title-right">
-                <v-chip class="p-reg b" variant="text"
-                  >January 21, 2023
-                  <v-tooltip activator="parent" location="bottom"
-                    >Uploaded In
-                  </v-tooltip>
-                </v-chip>
-              </span>
-            </v-expansion-panel-title>
-            <v-expansion-panel-text>embed pdf file for overview </v-expansion-panel-text>
-          </v-expansion-panel>
-        </v-expansion-panels>
+            <v-btn variant="text" icon="mdi-file-download-outline">
+              <v-icon></v-icon>
+              <v-tooltip
+                activator="parent"
+                location="bottom"
+                class="tooltip-list"
+                >Download As PDF
+              </v-tooltip>
+            </v-btn>
+          </div>
+        </div>
       </v-card>
     </div>
   </v-card>
