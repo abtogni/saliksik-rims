@@ -10,7 +10,7 @@
 // );
 @import "https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap";
 
-$primary-font: "Open Sans", sans-serif;
+$primary-font: Inter, Roboto, "Open Sans", sans-serif;
 $blue-300: #93c5fd;
 $blue-500: #6366f1;
 $blue-700: #1d4ed8;
@@ -23,10 +23,12 @@ $gray-600: #4b5563;
 $gray-700: #374151;
 $gray-800: #1f2937;
 $gray-900: #111827;
+$black: #222222;
 $orange-50: #fff7ed;
 $orange-700: #c2410c;
+$orange: #FFBE00;
 $def-h-color: $gray-900;
-$def-p-color: $gray-900;
+$def-p-color: $black;
 
 * {
   margin: 0;
@@ -78,7 +80,7 @@ h6 {
 .p-reg {
   font-size: 1rem;
   color: $def-p-color;
-  font-weight: 400;
+  font-weight: 500;
   white-space:pre-wrap;
 }
 
@@ -146,6 +148,13 @@ h6 {
 
 .truncate-table-sm {
   max-width: 38vw;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.truncate-table-long {
+  max-width: 63vw;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -559,7 +568,7 @@ div#research_table {
 }
 
 .card-style {
-  color: $orange-700;
+  border-color: $orange-700;
 }
 
 //m MODAL FORMS

@@ -46,22 +46,11 @@
                 </p>
               </div>
             </div>
-            <div class="pres-res-right">
-              <div style="display: flex; flex-direction: row; gap: .5rem;">
-
+            <div class="pres-res-right" style="display: flex; flex-direction: row; gap: 0.5rem">
               
-              <v-chip variant="text"  class="b button-outlined">Time </v-chip>
-              <v-chip color="primary" class="b">insert department </v-chip>
-            </div>
-              <v-btn variant="text" icon="mdi-file-eye-outline">
-                <v-icon></v-icon>
-                <v-tooltip
-                  activator="parent"
-                  location="bottom"
-                  class="tooltip-list"
-                  >Overview
-                </v-tooltip>
-              </v-btn>
+                <v-chip variant="text" class="b button-outlined">Time </v-chip>
+                <v-chip color="primary" class="b">insert department </v-chip>
+             
             </div>
           </v-card-text>
         </v-card>
