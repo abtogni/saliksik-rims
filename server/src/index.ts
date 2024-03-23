@@ -32,3 +32,4 @@ mongoose.connect(dbURL);
 mongoose.connection.on("error", (error: Error) => console.log(error));
 
 app.use("/api", router());
+app.use("/api", express.static('public'));

@@ -3,9 +3,10 @@ import fs from "fs";
 import path from "path";
 
 const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: (req, _file, cb) => {
+        const folder = req.headers["addFolder"];
         const id = req.params.id;
-        const dir = `./public/uploads/${id}`;
+        const dir = folder == "true" ? `./public/uploads/${id}/conceptNote` : `./public/uploads/${id}`;
 
         if (!fs.existsSync(dir)) {
             fs.mkdirSync(dir, { recursive: true });
@@ -14,9 +15,9 @@ const storage = multer.diskStorage({
         cb(null, dir);
     },
     filename: (req, file, cb) => {
-        const { id } = req.params;
+        const fileName = req.headers["filename"] || "undefined";
         const extension = path.extname(file.originalname);
-        cb(null, `${id}${extension}`);
+        cb(null, `${fileName}${extension}`);
     }
 });
 

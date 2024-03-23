@@ -16,20 +16,12 @@
 
       <div class="header-right">
         <upload_research_paper/>
-
-        <!-- <v-btn
-          type="submit"
-          flat
-          variant="outlined"
-          prepend-icon="mdi-close-circle-outline"
-          class="button-outlined"
-          >Not Going
-        </v-btn>  -->
       </div>
     </v-card-title>
     <v-card-text>
-      <v-card variant="flat" class="overview-ctr">
+      <v-card variant="flat" class="overview-ctr" v-if="checkFile">
         <v-card variant="outlined" class="card-style">
+          <a :href="`/api/uploads/${id}/research-paper.pdf`"  >File goes here</a>
           <v-expansion-panels>
             <v-expansion-panel>
               <v-expansion-panel-title class="title expansion-title-body">
@@ -70,3 +62,28 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup lang="ts">
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+
+  const {id} = defineProps(['id']);
+
+  const checkFile = ref(false);
+
+  onMounted(() => {
+    checkIfFileExists();
+  });
+
+  
+  const checkIfFileExists = async () => {
+    try {
+      const response = await axios.get(`/api/uploads/${id}/research-paper.pdf`);
+      if (response.status === 200) {
+        checkFile.value = true;
+      }
+    } catch (error: any) {
+      console.error(error.response.data);
+    }
+  };
+</script>
