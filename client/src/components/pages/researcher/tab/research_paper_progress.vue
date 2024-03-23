@@ -19,7 +19,7 @@
       </div>
     </v-card-title>
     <v-card-text class="content">
-      <v-card variant="outlined" class="card-style" v-if="checkFile">
+      <v-card variant="outlined" class="card-style" >
         <div
           style="
             display: flex;
@@ -29,6 +29,7 @@
             padding: 0;
             margin: 0;
           "
+          v-for="f in files"
         >
           <div
             style="
@@ -41,9 +42,9 @@
             class="truncate"
           >
               <a
-                :href="`/api/uploads/${id}/research-paper.pdf`"
+              :href="`/api/uploads/${id}/${f}`"
                 target="_blank"
-                class="p-reg b truncate">{{ title }}</a
+                class="p-reg b truncate">{{ f }}</a
               >
           </div>
           <div
@@ -79,22 +80,24 @@
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-const { id, title } = defineProps(["id", "title"]);
+  const {id} = defineProps(['id']);
 
-const checkFile = ref(false);
+  const files = ref(null);
 
-onMounted(() => {
-  checkIfFileExists();
-});
+  onMounted(() => {
+    checkIfDirExists();
+  });
 
-const checkIfFileExists = async () => {
-  try {
-    const response = await axios.get(`/api/uploads/${id}/research-paper.pdf`);
-    if (response.status === 200) {
-      checkFile.value = true;
+  
+  const checkIfDirExists = async () => {
+    try {
+      const response = await axios.get(`/api/research/files/${id}`);
+      if (response.status === 200) {
+        files.value = response.data;
+        console.log(files.value);
+      }
+    } catch (error: any) {
+      console.error(error.response.data);
     }
-  } catch (error: any) {
-    console.error(error.response.data);
-  }
 };
 </script>

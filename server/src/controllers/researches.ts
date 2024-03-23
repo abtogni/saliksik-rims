@@ -7,6 +7,7 @@ import {
   updateResearchByID,
 } from "../db/researches";
 import { Request, Response } from "express";
+import fs from "fs";
 
 // create a new research project
 export const createNewResearch = async (req: Request, res: Response) => {
@@ -125,6 +126,25 @@ export const uploadResearchFile = async (req: Request, res: Response) => {
       return res.status(400).json({ error: "No file uploaded" });
     }
     return res.status(200).json({ message: "File uploaded successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+export const fetchResearchFiles = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const directoryPath = `./public/uploads/${id}`; 
+
+    fs.readdir(directoryPath, (err, files) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: "Internal server error" });
+      }
+
+      return res.status(200).json(files);
+    });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ error: "Internal server error" });

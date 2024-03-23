@@ -4,6 +4,7 @@ import {
   createNewResearch,
   deleteResearch,
   fetchResearch,
+  fetchResearchFiles,
   getAllResearches,
   getUserResearches,
   updateResearch,
@@ -17,6 +18,7 @@ export default (router: Router) => {
     .get("/researches", isAuthenticated, getAllResearches)
     .get("/researches/:id", isAuthenticated, getUserResearches)
     .get("/research/:id", isAuthenticated, fetchResearch)
+    .get("/research/files/:id", isAuthenticated, fetchResearchFiles)
 
     //POST
     .post("/research/create", isAuthenticated, createNewResearch)
