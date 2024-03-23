@@ -64,7 +64,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 const search = ref("");
-const props = defineProps(["research_data"]);
+const {research_data} = defineProps(["research_data"]);
 
 const concept_note_header: readonly {
   title: any;
@@ -81,7 +81,7 @@ const concept_note_header: readonly {
   },
 ];
 
-const formattedConceptNote = props.research_data.map((item: any) => ({
+const formattedConceptNote = research_data.map((item: any) => ({
   ...item,
 }));
 </script>

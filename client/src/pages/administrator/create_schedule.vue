@@ -1,6 +1,7 @@
 <template>
-  <v-container class="fill-height ctr">
-    <v-card flat class="body" v-cloak>
+  <v-container class="fill-height ctr" v-if="mounted"> 
+    <v-card flat class="body">
+      <v-form class="form_content" @submit.prevent="create">
       <v-card-title class="header">
         <div class="header-left">
           <div class="header-caption">
@@ -12,18 +13,18 @@
             </p>
           </div>
         </div>
-        <div class="header-right">
           <v-btn variant="flat" class="button-regular" type="submit"
             >Create</v-btn
           >
-        </div>
       </v-card-title>
       <v-card-text class="content">
-        <v-form class="form_content" @submit.prevent="create">
+        <!-- @vue-ignore -->
           <v-select
             label="Presentation Type"
             variant="outlined"
             :items="presentation_type"
+            v-model="presentationType.value.value"
+            :error-messages="presentationType.errorMessage.value"
             style="padding: 0; margin: 0"
             color="#5b21b6"
           />
@@ -35,7 +36,7 @@
               gap: 1rem;
             "
           >
-            <date-picker label="Date" v-model="dateAndTime.value.value" />
+            <date-picker label="Date" v-model="date.value.value" />
 
             <v-text-field
               v-model="location.value.value"
@@ -73,16 +74,20 @@
             <v-select
               label="Researches"
               variant="outlined"
-              v-model="researches.value.value"
-              :error-messages="researches.errorMessage.value"
+              v-model="researches"
               :items="researchList"
               item-title="name"
               item-value="key"
               style="padding: 0; margin: 0; width: 75%"
               color="#5b21b6"
             />
-            <date-picker label="Time" v-model="dateAndTime.value.value" />
-            <v-btn variant="flat" icon="mdi-folder-plus-outline" size="x-large" class="" type="submit"></v-btn>
+            <v-text-field
+              label="Time"
+              variant="outlined"
+              style="padding: 0; margin: 0"
+              color="#5b21b6"
+            />
+            <v-btn variant="flat" icon="mdi-folder-plus-outline" size="x-large" />
           </div>
 
           
@@ -97,22 +102,83 @@
             </v-card-text>
           </v-card>
           
-        </v-form>
+        
       </v-card-text>
+    </v-form>
     </v-card>
+
   </v-container>
 </template>
 
 <script setup lang="ts">
-import { useField, useForm } from "vee-validate";
+import { useUsersStore } from "@/stores/users";
+import { useResearchesStore } from "@/stores/researches";
+import { onMounted, ref } from "vue";
 import axios from "axios";
+import { useField, useForm } from "vee-validate";
+
+const researches = ref('');
+const users = ref<{ key: any; name: string; role: string }[]>([]);
+const schedules: any = ref([]);
+const researchList = ref<
+  {
+    key: any;
+    name: string;
+    status: string;
+    researchLeaders: any;
+    conceptNote: any;
+  }[]
+>([]);
+
+const mounted = ref(false);
+
+onMounted(async () => {
+  await axios.get("/api/schedules").then((response) => {
+    schedules.value = response.data;
+  });
+  const userStore = useUsersStore().userList;
+  const researchStore = useResearchesStore().researchList;
+  users.value = userStore.map((user: any) => ({
+    key: user._id,
+    name: user.firstName + " " + user.lastName,
+    role: user.role,
+  }));
+
+  researchList.value = researchStore
+    .filter((research: any) => research.conceptNote)
+    .map((research: any) => ({
+      key: research._id,
+      name: research.researchTitle,
+      status: research.researchStatus,
+      researchLeaders: research.researchLeaders,
+      conceptNote: research.conceptNote.status,
+    }));
+
+  users.value = computePanelists();
+  researchList.value = computeResearches();
+  mounted.value = true;
+});
+
+const tab = ref("null");
+
+const computeResearches = () => {
+  return researchList.value.filter(
+    (research) =>
+      research.status === "Research Paper" ||
+      research.conceptNote === "Verified",
+  );
+};
+
+const computePanelists = () => {
+  return users.value.filter((user) => user.role === "Panelist");
+};
 
 
-const { users, researchList } = defineProps(["users", "researchList"]);
+
 
 const { handleSubmit } = useForm({
   validationSchema: {
-    dateAndTime(v: string) {
+    date(v: string) {
       if (v) return true;
 
       return "Please enter a string.";
@@ -122,12 +188,12 @@ const { handleSubmit } = useForm({
 
       return "Please enter a string.";
     },
-    panelists(v: string) {
+    presentationType(v: string) {
       if (v) return true;
 
       return "Select an item.";
     },
-    researches(v: string) {
+    panelists(v: string) {
       if (v) return true;
 
       return "Select an item.";
@@ -135,23 +201,26 @@ const { handleSubmit } = useForm({
   },
 });
 
-const dateAndTime = useField("dateAndTime");
+
+const date = useField("date");
 const location = useField("location");
 const panelists = useField("panelists");
-const researches = useField("researches");
+
+const presentationType = useField("presentationType");
 
 const presentation_type = ["Title Presentation", "Final Presentation"];
 
 const create = handleSubmit(async (values) => {
   const data = JSON.stringify(values);
-  return axios
-    .post("/api/schedule/create", data, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-    .then(() => alert("Successfully set a new schedule"))
-    .catch(() => alert("An error occurred"))
-    .finally(() => window.location.reload());
+  console.log(data);
+  // return axios
+  //   .post("/api/schedule/create", data, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   })
+  //   .then(() => alert("Successfully set a new schedule"))
+  //   .catch(() => alert("An error occurred"))
+  //   .finally(() => window.location.reload());
 });
 </script>

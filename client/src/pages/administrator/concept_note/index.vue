@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="fill-height ctr">
-    <v-card flat class="body" v-cloak>
+    <v-card flat class="body" v-if="mounted">
       <v-card-title class="header">
         <div class="header-left">
           <div class="header-caption">
@@ -49,22 +49,22 @@
             </v-tab>
           </v-tabs>
           <v-window v-model="tab">
-            <v-window-item value="submitted" mandatory="force">
+            <v-window-item value="Submitted" mandatory="force">
               <concept_note_submissions_table
-                :research_data="filteredResearchData('submitted')"
+                :research_data="filteredResearchData('Submitted')"
               />
             </v-window-item>
-            <v-window-item value="verified">
+            <v-window-item value="Verified">
               <concept_note_submissions_table
                 :research_data="filteredResearchData('Verified')"
               />
             </v-window-item>
-            <v-window-item value="approved">
+            <v-window-item value="Approved">
               <concept_note_submissions_table
                 :research_data="filteredResearchData('Approved')"
               />
             </v-window-item>
-            <v-window-item value="rejected">
+            <v-window-item value="Rejected">
               <concept_note_submissions_table
                 :research_data="filteredResearchData('Rejected')"
               />
@@ -80,16 +80,18 @@
 import { useResearchesStore } from "@/stores/researches";
 import { ref, computed, onMounted } from "vue";
 
+
+const mounted = ref(false);
 const research_data = ref([]);
 const tab = ref("");
 const tab_items = [
   {
-    value: "submitted",
+    value: "Submitted",
     label: "Submitted",
     content: "22",
   },
   {
-    value: "verified",
+    value: "Verified",
     label: "Verified",
     content: "",
   },
@@ -97,23 +99,22 @@ const tab_items = [
 
 const tab_items2 = [
   {
-    value: "approved",
+    value: "Approved",
     label: "Approved",
     content: "",
   },
   {
-    value: "rejected",
+    value: "Rejected",
     label: "Rejected",
     content: "",
   },
 ];
-const loading = ref(true);
 
 onMounted(async () => {
   const researchStore = useResearchesStore();
   await researchStore.getResearchList();
   research_data.value = researchStore.researchList;
-  loading.value = false;
+  mounted.value = true;
 });
 
 const filteredResearchData = computed(() => {
