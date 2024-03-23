@@ -4,8 +4,7 @@
       <v-text-field :label="label" :rules="fieldNeed" :model-value="formattedDate" v-bind="props" variant="outlined"
         hide-details />
     </template>
-    <VueDatePicker label="Date and Time" v-model="selectedDate" :min-date="new Date()" :is-24="false"
-      aria-errormessage="dateAndTime.errorMessage.value" inline />
+    <v-date-picker  v-model="selectedDate" :min="new Date()" @change="closeDatePicker" />
   </v-menu>
 </template>
 
@@ -31,7 +30,7 @@ const isMenuOpen = ref(false);
 const selectedDate = ref(modelValue);
 
 const formattedDate = computed(() => {
-  return selectedDate.value ? moment(selectedDate.value).format('MMMM DD, YYYY h:mm A') : "";
+  return selectedDate.value ? moment(selectedDate.value).format('MMMM DD, YYYY') : "";
 });
 
 watch(modelValue, (newDate) => {
@@ -41,6 +40,10 @@ watch(modelValue, (newDate) => {
 watch(selectedDate, (newDate) => {
   emit("update:modelValue", newDate);
 });
+
+const closeDatePicker = () => {
+  isMenuOpen.value = false;
+};
 </script>
 
 <style>
