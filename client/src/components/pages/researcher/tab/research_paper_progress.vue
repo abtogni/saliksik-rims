@@ -28,7 +28,7 @@
       </div>
     </v-card-title>
     <v-card-text class="content">
-      <v-card variant="outlined" class="card-style">
+      <v-card variant="outlined" class="card-style ">
         <div
           style="
             display: flex;
@@ -45,8 +45,8 @@
               flex-direction: row;
               gap: 1rem;
               align-items: center;
-              width: 100%;
             "
+            class="truncate"
           >
             <v-btn variant="text" icon="mdi-account-multiple-outline">
               <v-icon></v-icon>
@@ -59,13 +59,11 @@
                 <div>insert name</div>
               </v-tooltip>
             </v-btn>
-            <div>
-              <p class="p-reg b truncate-table-long">
+              <p class="p-reg b truncate">
                 Streamlining Outcome-Based Education and Continuous Quality
                 Improvement of University of Nueva Caceres through Technology: A
                 Information Management System for Improving Inclusiveness
               </p>
-            </div>
           </div>
           <div
             style="
@@ -74,6 +72,7 @@
               gap: 1rem;
               align-items: center;
             "
+            class="pres-res-right"
           >
             <v-chip variant="text" class="b button-outlined"
               >Uploaded In
