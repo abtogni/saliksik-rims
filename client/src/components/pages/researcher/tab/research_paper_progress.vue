@@ -36,12 +36,15 @@
               flex-direction: row;
               gap: 1rem;
               align-items: center;
+              padding: 1rem;
             "
             class="truncate"
           >
-            <div>
-              <a :href="`/api/uploads/${id}/research-paper.pdf`" target="_blank">{{ title }}</a>
-            </div>
+              <a
+                :href="`/api/uploads/${id}/research-paper.pdf`"
+                target="_blank"
+                class="p-reg b truncate">{{ title }}</a
+              >
           </div>
           <div
             style="
@@ -73,26 +76,25 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
+import axios from "axios";
+import { onMounted, ref } from "vue";
 
-  const {id, title} = defineProps(['id', 'title']);
+const { id, title } = defineProps(["id", "title"]);
 
-  const checkFile = ref(false);
+const checkFile = ref(false);
 
-  onMounted(() => {
-    checkIfFileExists();
-  });
+onMounted(() => {
+  checkIfFileExists();
+});
 
-  
-  const checkIfFileExists = async () => {
-    try {
-      const response = await axios.get(`/api/uploads/${id}/research-paper.pdf`);
-      if (response.status === 200) {
-        checkFile.value = true;
-      }
-    } catch (error: any) {
-      console.error(error.response.data);
+const checkIfFileExists = async () => {
+  try {
+    const response = await axios.get(`/api/uploads/${id}/research-paper.pdf`);
+    if (response.status === 200) {
+      checkFile.value = true;
     }
-  };
+  } catch (error: any) {
+    console.error(error.response.data);
+  }
+};
 </script>

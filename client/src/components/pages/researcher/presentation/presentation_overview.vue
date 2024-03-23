@@ -69,8 +69,8 @@
                 :text=""
               /> -->
               <v-expansion-panel>
-              <v-expansion-panel-title>Title And Authors</v-expansion-panel-title>
-              <v-expansion-panel-text v-for="c in comments" :key="c._id">
+              <v-expansion-panel-title class="p-reg b">Title And Authors</v-expansion-panel-title>
+              <v-expansion-panel-text class="p-reg" v-for="c in comments" :key="c._id">
                 {{ userList.find((user: any) => user?._id === c?.panelistID
                     ?.firstName) +
                   ' ' +
@@ -84,16 +84,16 @@
               </v-expansion-panel-text>
             </v-expansion-panel>
             <v-expansion-panel>
-              <v-expansion-panel-title>Objectives</v-expansion-panel-title>
-              <v-expansion-panel-text> aa</v-expansion-panel-text>
+              <v-expansion-panel-title class="p-reg b">Objectives</v-expansion-panel-title>
+              <v-expansion-panel-text class="p-reg"> aa</v-expansion-panel-text>
             </v-expansion-panel>
               <v-expansion-panel>
-              <v-expansion-panel-title>Methodology</v-expansion-panel-title>
-              <v-expansion-panel-text>aa </v-expansion-panel-text>
+              <v-expansion-panel-title class="p-reg b">Methodology</v-expansion-panel-title>
+              <v-expansion-panel-text class="p-reg">aa </v-expansion-panel-text>
             </v-expansion-panel>
               <v-expansion-panel>
-              <v-expansion-panel-title>Other Comments</v-expansion-panel-title>
-              <v-expansion-panel-text>aa </v-expansion-panel-text>
+              <v-expansion-panel-title class="p-reg b">Other Comments</v-expansion-panel-title>
+              <v-expansion-panel-text class="p-reg">aa </v-expansion-panel-text>
             </v-expansion-panel>
             </v-expansion-panels>
           </v-card>

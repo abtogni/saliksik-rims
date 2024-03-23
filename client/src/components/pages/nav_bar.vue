@@ -19,12 +19,6 @@
 
       <v-list-item prepend-icon="mdi-folder-multiple-outline" title="Research Projects" value="research_projects"
         href="/researcher/research_projects" link />
-      <v-list-item prepend-icon="mdi-bell-outline" title="Notifications" value="notifications"
-        href="/researcher/researcher_notification" link>
-        <template v-slot:append>
-          <v-badge color="info" content="6" inline></v-badge>
-        </template>
-      </v-list-item>
       <v-list-item prepend-icon="mdi-calendar-month-outline" title="Presentations" value="presentations" link />
       <v-list-item prepend-icon="mdi-account-outline" title="Profile" value="profile" link />
     </v-list>
@@ -51,12 +45,6 @@
       </v-list-item>
       <v-list-item prepend-icon="mdi-currency-php" title="Incentive" value="incentive" href="/administrator/incentive"
         link>
-        <template v-slot:append>
-          <v-badge color="info" content="6" inline></v-badge>
-        </template>
-      </v-list-item>
-      <v-list-item prepend-icon="mdi-bell-outline" title="Notifications" value="notifications"
-        href="/administrator/administrator_notification" link>
         <template v-slot:append>
           <v-badge color="info" content="6" inline></v-badge>
         </template>
