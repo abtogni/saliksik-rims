@@ -16,19 +16,10 @@
 
       <div class="header-right">
         <upload_research_paper />
-
-        <!-- <v-btn
-          type="submit"
-          flat
-          variant="outlined"
-          prepend-icon="mdi-close-circle-outline"
-          class="button-outlined"
-          >Not Going
-        </v-btn>  -->
       </div>
     </v-card-title>
     <v-card-text class="content">
-      <v-card variant="outlined" class="card-style ">
+      <v-card variant="outlined" class="card-style" v-if="checkFile">
         <div
           style="
             display: flex;
@@ -48,22 +39,9 @@
             "
             class="truncate"
           >
-            <v-btn variant="text" icon="mdi-account-multiple-outline">
-              <v-icon></v-icon>
-              <v-tooltip
-                activator="parent"
-                location="bottom"
-                class="tooltip-list"
-              >
-                <div class="bold-upper">Uploaded By</div>
-                <div>insert name</div>
-              </v-tooltip>
-            </v-btn>
-              <p class="p-reg b truncate">
-                Streamlining Outcome-Based Education and Continuous Quality
-                Improvement of University of Nueva Caceres through Technology: A
-                Information Management System for Improving Inclusiveness
-              </p>
+            <div>
+              <a :href="`/api/uploads/${id}/research-paper.pdf`" target="_blank">{{ title }}</a>
+            </div>
           </div>
           <div
             style="
@@ -93,3 +71,28 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script setup lang="ts">
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+
+  const {id, title} = defineProps(['id', 'title']);
+
+  const checkFile = ref(false);
+
+  onMounted(() => {
+    checkIfFileExists();
+  });
+
+  
+  const checkIfFileExists = async () => {
+    try {
+      const response = await axios.get(`/api/uploads/${id}/research-paper.pdf`);
+      if (response.status === 200) {
+        checkFile.value = true;
+      }
+    } catch (error: any) {
+      console.error(error.response.data);
+    }
+  };
+</script>

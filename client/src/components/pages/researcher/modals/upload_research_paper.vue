@@ -25,7 +25,7 @@ import { useResearchesStore } from "../../../../stores/researches";
 
 const currentResearch: any = useResearchesStore().currentResearch;
 const prompt = ref(false);
-const file = ref(null);
+const file: any = ref(null);
 
 const uploadFile = async () => {
   if (file.value) {
@@ -37,11 +37,13 @@ const uploadFile = async () => {
       const response = await axios.post(`/api/research/upload/${currentResearch._id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
+          "filename": "research-paper"
         },
       });
 
-      console.log(response.data);
-    } catch (error) {
+      alert(response.data.message);
+      location.reload();
+    } catch (error: any) {
       console.error(error.response.data);
     }
   }
