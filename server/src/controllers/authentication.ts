@@ -20,7 +20,7 @@ export const register = async (req: Request, res: Response) => {
     const {
       userID,
       role,
-      affiliation,
+      department,
       firstName,
       middleName,
       lastName,
@@ -46,7 +46,7 @@ export const register = async (req: Request, res: Response) => {
     await createUser({
       userID,
       role,
-      affiliation,
+      department,
       firstName,
       middleName,
       lastName,
