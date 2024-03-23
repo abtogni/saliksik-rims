@@ -19,7 +19,7 @@
       </div>
     </v-card-title>
     <v-card-text class="content">
-      <v-card variant="outlined" class="card-style" v-for="f in files">
+      <v-card variant="outlined" class="card-style" >
         <div
           style="
             display: flex;
@@ -29,6 +29,7 @@
             padding: 0;
             margin: 0;
           "
+          v-for="f in files"
         >
           <div
             style="
