@@ -74,7 +74,7 @@
             <v-select
               label="Researches"
               variant="outlined"
-              v-model="researches"
+              v-model="research"
               :items="researchList"
               item-title="name"
               item-value="key"
@@ -83,22 +83,24 @@
             />
             <v-text-field
               label="Time"
+              v-model="time"
               variant="outlined"
               style="padding: 0; margin: 0"
               color="#5b21b6"
             />
-            <v-btn variant="flat" icon="mdi-folder-plus-outline" size="x-large" />
+            <v-btn variant="flat" icon="mdi-folder-plus-outline" size="x-large" @click="addPresentation" />
           </div>
 
           
 
-          <v-card variant="outlined" color="primary">
+          <v-card variant="outlined" color="primary" v-for="i in presentations">
             <v-card-text style="display: flex; flex-direction: row; gap: 1rem; text-wrap: nowrap;">
               <div class="truncate">
-                <p class="p-reg truncate">Streamlining Outcome-Based Education and Continuous Quality Improvement of University of Nueva Caceres through Technology: A Information Management System for Improving Inclusiveness</p>
+                <!-- @vue-ignore -->
+                <p class="p-reg truncate">{{ researchList.find(item => item.key === i.research)?.name }}</p>
               </div>
               <span>|</span>
-              <p class="p-reg b" style="text-wrap: nowrap;">10:30 AM - 12:00 NN</p>
+              <p class="p-reg b" style="text-wrap: nowrap;">{{ i.time }}</p>
             </v-card-text>
           </v-card>
           
@@ -117,7 +119,9 @@ import { onMounted, ref } from "vue";
 import axios from "axios";
 import { useField, useForm } from "vee-validate";
 
-const researches = ref('');
+const presentations = ref<{ research: any; time: any }[]>([]);
+const research: any = ref('');
+const time: any = ref('');
 const users = ref<{ key: any; name: string; role: string }[]>([]);
 const schedules: any = ref([]);
 const researchList = ref<
@@ -173,7 +177,14 @@ const computePanelists = () => {
   return users.value.filter((user) => user.role === "Panelist");
 };
 
-
+const addPresentation = () => {
+  presentations.value.push({
+    research: research.value,
+    time: time.value,
+  });
+  research.value = '';
+  time.value = '';
+};
 
 
 const { handleSubmit } = useForm({
@@ -211,16 +222,18 @@ const presentationType = useField("presentationType");
 const presentation_type = ["Title Presentation", "Final Presentation"];
 
 const create = handleSubmit(async (values) => {
-  const data = JSON.stringify(values);
-  console.log(data);
-  // return axios
-  //   .post("/api/schedule/create", data, {
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   })
-  //   .then(() => alert("Successfully set a new schedule"))
-  //   .catch(() => alert("An error occurred"))
-  //   .finally(() => window.location.reload());
+  const data = JSON.stringify({
+    presentations: presentations.value,
+    ...values,
+  });
+  return axios
+    .post("/api/schedule/create", data, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    .then(() => alert("Successfully set a new schedule"))
+    .catch(() => alert("An error occurred"))
+    .finally(() => window.location.reload());
 });
 </script>

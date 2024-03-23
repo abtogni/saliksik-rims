@@ -38,29 +38,28 @@ export const getScheduleByPanelist = async (req: Request, res: Response) => {
 
 // create new schedule
 export const createNewSchedule = async (req: Request, res: Response) => {
-  const { date, location, panelists, researches } = req.body;
+  const { date, location, panelists, presentations, presentationType } = req.body;
 
   const result = await createSchedule({
     date,
     location,
     panelists,
+    presentationType,
+    presentations,
   });
 
   await Promise.all(
-    researches.map(async (research: any) => {
-      const existingPresentation = await getPresentationByResearchID(research);
-
-      const presentationType = existingPresentation ? "Final" : "Title";
+    presentations.map(async (p: any) => {
 
       const presentation = await createPresentation({
         scheduleID: result._id,
-        researchID: research,
+        researchID: p.research,
+        time: p.time,
         status: "Pending",
-        presentationType,
       });
       const id = result._id.toString();
       await Promise.all([
-        updateResearchByID(research, {
+        updateResearchByID(p.research, {
           $push: { presentations: presentation._id },
         }),
 
