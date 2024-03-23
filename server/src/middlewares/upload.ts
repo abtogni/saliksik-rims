@@ -22,12 +22,14 @@ const storage = multer.diskStorage({
         const ext = path.extname(originalname);
         const basename = path.basename(originalname, ext);
 
+        const timestamp = Date.now(); 
+
         let count = 0;
-        let filename = originalname;
+        let filename = `${timestamp}_${originalname}`;
 
         while (fs.existsSync(path.join(dir, filename))) {
             count++;
-            filename = `${basename}_${count}${ext}`;
+            filename = `${timestamp}_${basename}_${count}${ext}`;
         }
 
         cb(null, filename);

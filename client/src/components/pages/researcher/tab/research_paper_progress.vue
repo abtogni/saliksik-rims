@@ -29,7 +29,7 @@
             padding: 0;
             margin: 0;
           "
-          v-for="f in files"
+            v-for="f in files"
         >
           <div
             style="
@@ -42,10 +42,10 @@
             class="truncate"
           >
               <a
-              :href="`/api/uploads/${id}/${f}`"
+              :href="`/api/uploads/${id}/${f.file}`"
                 target="_blank"
-                class="p-reg b truncate">{{ f }}</a
-              >
+                class="p-reg b truncate">{{ f.file }}
+              </a>
           </div>
           <div
             style="
@@ -57,7 +57,7 @@
             class="pres-res-right"
           >
             <v-chip variant="text" class="b button-outlined"
-              >Uploaded In
+              >{{ moment(parseInt(f.timestamp)).calendar()  }}
             </v-chip>
 
             <v-btn variant="text" icon="mdi-file-download-outline">
@@ -79,10 +79,11 @@
 <script setup lang="ts">
 import axios from "axios";
 import { onMounted, ref } from "vue";
+import moment from "moment";
 
   const {id} = defineProps(['id']);
 
-  const files = ref(null);
+  const files:any = ref([]);
 
   onMounted(() => {
     checkIfDirExists();
@@ -93,11 +94,18 @@ import { onMounted, ref } from "vue";
     try {
       const response = await axios.get(`/api/research/files/${id}`);
       if (response.status === 200) {
-        files.value = response.data;
-        console.log(files.value);
+        files.value = response.data.map((f: any) => {
+          return {
+            timestamp: f.split("_")[0],
+            file: f
+          };
+        });
+        files.value.sort((a: any, b: any) => {
+          return parseInt(b.timestamp) - parseInt(a.timestamp);
+        });
       }
     } catch (error: any) {
-      console.error(error.response.data);
+      console.error(error);
     }
 };
 </script>
