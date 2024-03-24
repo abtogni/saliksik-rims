@@ -81,9 +81,11 @@
               style="padding: 0; margin: 0; width: 75%"
               color="#5b21b6"
             />
+            <flat-pickr v-model="date" v-model="time" />
             <v-text-field
+              id="timepicker"
               label="Time"
-              v-model="time"
+              
               variant="outlined"
               style="padding: 0; margin: 0"
               color="#5b21b6"
@@ -108,7 +110,6 @@
       </v-card-text>
     </v-form>
     </v-card>
-
   </v-container>
 </template>
 
@@ -117,8 +118,12 @@ import { useUsersStore } from "@/stores/users";
 import { useResearchesStore } from "@/stores/researches";
 import { onMounted, ref } from "vue";
 import axios from "axios";
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 import { useField, useForm } from "vee-validate";
 
+
+const config = { enableTime: true, noCalendar: true, dateFormat: "H:i",};
 const presentations = ref<{ research: any; time: any }[]>([]);
 const research: any = ref('');
 const time: any = ref('');
@@ -137,6 +142,7 @@ const researchList = ref<
 const mounted = ref(false);
 
 onMounted(async () => {
+  
   await axios.get("/api/schedules").then((response) => {
     schedules.value = response.data;
   });
@@ -149,39 +155,35 @@ onMounted(async () => {
   }));
 
   researchList.value = researchStore
-    .filter((research: any) => research.conceptNote)
-    .map((research: any) => ({
+      .map((research: any) => ({
       key: research._id,
       name: research.researchTitle,
       status: research.researchStatus,
       researchLeaders: research.researchLeaders,
-      conceptNote: research.conceptNote.status,
-    }));
+      conceptNote: research.hasOwnProperty('conceptNote') ? research.conceptNote.status : "",
+    }))
+    .filter((research:any) => research.conceptNote !== null &&
+      (research.status === "Research Paper" ||
+      research.conceptNote === "Verified"),
+      );
 
   users.value = computePanelists();
-  researchList.value = computeResearches();
   mounted.value = true;
 });
 
-const tab = ref("null");
 
-const computeResearches = () => {
-  return researchList.value.filter(
-    (research) =>
-      research.status === "Research Paper" ||
-      research.conceptNote === "Verified",
-  );
-};
 
 const computePanelists = () => {
   return users.value.filter((user) => user.role === "Panelist");
 };
 
 const addPresentation = () => {
-  presentations.value.push({
-    research: research.value,
-    time: time.value,
-  });
+  if (research.value && time.value) {
+    presentations.value.push({
+      research: research.value,
+      time: time.value,
+    });
+  }
   research.value = '';
   time.value = '';
 };
@@ -237,3 +239,4 @@ const create = handleSubmit(async (values) => {
     .finally(() => window.location.reload());
 });
 </script>
+
