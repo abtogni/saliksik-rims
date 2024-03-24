@@ -81,7 +81,6 @@
               style="padding: 0; margin: 0; width: 75%"
               color="#5b21b6"
             />
-            <flat-pickr v-model="date" v-model="time" />
             <v-text-field
               id="timepicker"
               label="Time"
@@ -118,7 +117,6 @@ import { useUsersStore } from "@/stores/users";
 import { useResearchesStore } from "@/stores/researches";
 import { onMounted, ref } from "vue";
 import axios from "axios";
-import flatPickr from 'vue-flatpickr-component';
 import 'flatpickr/dist/flatpickr.css';
 import { useField, useForm } from "vee-validate";
 
