@@ -13,6 +13,7 @@ import {
   getPresentationByResearchID,
 } from "../db/presentations";
 import { updateResearchByID } from "../db/researches";
+import moment from "moment";
 
 // get all schedules
 export const getSchedules = async (_req: Request, res: Response) => {
@@ -39,38 +40,46 @@ export const getScheduleByPanelist = async (req: Request, res: Response) => {
 // create new schedule
 export const createNewSchedule = async (req: Request, res: Response) => {
   const { date, location, panelists, presentations, presentationType } = req.body;
+  try {
+    const result = await createSchedule({
+      date,
+      location,
+      panelists,
+      presentationType
+    });
 
-  const result = await createSchedule({
-    date,
-    location,
-    panelists,
-    presentationType,
-    presentations,
-  });
+    await Promise.all(
+      presentations.map(async (p: any) => {
 
-  await Promise.all(
-    presentations.map(async (p: any) => {
+        const presentation = await createPresentation({
+          scheduleID: result._id,
+          researchID: p.research,
+          time: moment(p.time, "HH:mm").unix(),
+          status: "Pending",
+        });
+        const id = result._id.toString();
+        try {
+          await Promise.all([
+            updateResearchByID(p.research, {
+              $push: { presentations: presentation._id },
+            }),
 
-      const presentation = await createPresentation({
-        scheduleID: result._id,
-        researchID: p.research,
-        time: p.time,
-        status: "Pending",
-      });
-      const id = result._id.toString();
-      await Promise.all([
-        updateResearchByID(p.research, {
-          $push: { presentations: presentation._id },
-        }),
+            updateScheduleByID(id, {
+              $push: { presentations: presentation._id },
+            }),
+          ]);
+        } catch (error) {
+          console.log(error);
+          return res.sendStatus(400);
+        }
+      }),
+    );
 
-        updateScheduleByID(id, {
-          $push: { presentations: presentation._id },
-        }),
-      ]);
-    }),
-  );
-
-  res.status(200).end();
+    res.status(200).end();
+  } catch (error) {
+    console.log(error);
+    return res.sendStatus(400);
+  }
 };
 
 // fetch a schedule

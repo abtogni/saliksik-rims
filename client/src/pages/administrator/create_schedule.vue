@@ -81,14 +81,15 @@
               style="padding: 0; margin: 0; width: 75%"
               color="#5b21b6"
             />
-            <v-text-field
-              id="timepicker"
-              label="Time"
-              
+            <flat-pickr
+              v-model="time"
+              :config="config"
+              class="form-control"
+              name="time"
               variant="outlined"
-              style="padding: 0; margin: 0"
-              color="#5b21b6"
-            />
+              style="padding: 0; margin: 0; border: 1 px solid #5b21b6;"
+              label="Time"
+              />
             <v-btn variant="flat" icon="mdi-folder-plus-outline" size="x-large" @click="addPresentation" />
           </div>
 
@@ -104,7 +105,6 @@
               <p class="p-reg b" style="text-wrap: nowrap;">{{ i.time }}</p>
             </v-card-text>
           </v-card>
-          
         
       </v-card-text>
     </v-form>
@@ -116,14 +116,18 @@
 import { useUsersStore } from "@/stores/users";
 import { useResearchesStore } from "@/stores/researches";
 import { onMounted, ref } from "vue";
-import axios from "axios";
-import 'flatpickr/dist/flatpickr.css';
 import { useField, useForm } from "vee-validate";
+import axios from "axios";
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 
-
-const config = { enableTime: true, noCalendar: true, dateFormat: "H:i",};
 const presentations = ref<{ research: any; time: any }[]>([]);
 const research: any = ref('');
+const config = {
+  enableTime: true,
+  noCalendar: true,
+  dateFormat: "H:i",
+};
 const time: any = ref('');
 const users = ref<{ key: any; name: string; role: string }[]>([]);
 const schedules: any = ref([]);
