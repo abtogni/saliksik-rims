@@ -144,7 +144,7 @@ const researchList = ref<
 const mounted = ref(false);
 
 onMounted(async () => {
-  
+  useResearchesStore().getResearchList();
   await axios.get("/api/schedules").then((response) => {
     schedules.value = response.data;
   });
