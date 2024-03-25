@@ -59,51 +59,45 @@
         <v-card flat class="overview-ctr">
           <v-card variant="outlined" class="card-style">
             <v-expansion-panels  multiple >
-              <!-- @vue-ignore -->
-              <!-- <v-expansion-panel
-                :title="
-                  userList.find((user: any) => user?._id === c?.panelistID)
-                    ?.firstName +
-                  ' ' +
-                  userList.find((user: any) => user?._id === c?.panelistID)
-                    ?.lastName
-                "
-                :text=""
-              /> -->
               <v-expansion-panel>
               <v-expansion-panel-title class="p-reg b">Title And Authors</v-expansion-panel-title>
               <v-expansion-panel-text class="p-reg" v-for="c in comments" :key="c._id">
-                {{ userList.find((user: any) => user?._id === c?.panelistID
-                    ?.firstName) +
-                  ' ' +
-                  userList.find((user: any) => user?._id === c?.panelistID
-                    ?.lastName) }}
-                
-                
-                
-                {{c?.comments}}
-              
+                {{ userList.find((user: any) => user._id === c.panelistID)?.firstName || '' }}{{ userList.find((user: any) => user._id === c.panelistID)?.lastName || '' }}: {{c.comment.title}}
+                <hr>
               </v-expansion-panel-text>
             </v-expansion-panel>
             <v-expansion-panel>
               <v-expansion-panel-title class="p-reg b">Objectives</v-expansion-panel-title>
-              <v-expansion-panel-text class="p-reg"> aa</v-expansion-panel-text>
+              <v-expansion-panel-text class="p-reg" v-for="c in comments" :key="c._id">
+                {{ userList.find((user: any) => user._id === c.panelistID)?.firstName || '' }}{{ userList.find((user: any) => user._id === c.panelistID)?.lastName || '' }}: {{c.comment.objective}}
+                <hr>
+              </v-expansion-panel-text>
             </v-expansion-panel>
               <v-expansion-panel>
               <v-expansion-panel-title class="p-reg b">Methodology</v-expansion-panel-title>
-              <v-expansion-panel-text class="p-reg">aa </v-expansion-panel-text>
+              <v-expansion-panel-text class="p-reg" v-for="c in comments" :key="c._id">
+                {{ userList.find((user: any) => user._id === c.panelistID)?.firstName || '' }}{{ userList.find((user: any) => user._id === c.panelistID)?.lastName || '' }}: {{c.comment.methodology}}
+                <hr>
+              </v-expansion-panel-text>
             </v-expansion-panel>
               <v-expansion-panel>
               <v-expansion-panel-title class="p-reg b">Other Comments</v-expansion-panel-title>
-              <v-expansion-panel-text class="p-reg">aa </v-expansion-panel-text>
+              <v-expansion-panel-text class="p-reg" v-for="c in comments" :key="c._id">
+                {{ userList.find((user: any) => user._id === c.panelistID)?.firstName || '' }}{{ userList.find((user: any) => user._id === c.panelistID)?.lastName || '' }}: {{c.comment.others}}
+                <hr>
+              </v-expansion-panel-text>
             </v-expansion-panel>
             </v-expansion-panels>
           </v-card>
         </v-card>
       </v-card-text>
+
     </v-card>
   </div>
-  {{ JSON.stringify(p) }}
+  {{ JSON.stringify(comments) }}
+
+  <hr />
+  {{ JSON.stringify(userList) }}
 </template>
 
 <script setup lang="ts">
@@ -113,7 +107,7 @@ import moment from "moment";
 import { onMounted, ref } from "vue";
 const { p } = defineProps(["p"]);
 const comments: any = ref([]);
-const userList = useUsersStore().userList;
+const userList: any = useUsersStore().userList;
 
 onMounted(async () => {
   if (p.panelistNotes.length > 0) {
