@@ -52,8 +52,8 @@
                   required
                   auto-grow
                   style="color: #5b21b6"
-                  :error-messages="comments.errorMessage.value"
-                  v-model="comments.value.value"
+                  :error-messages="title.errorMessage.value"
+                  v-model="title.value.value"
                 />
 
                 <v-textarea
@@ -63,8 +63,8 @@
                   required
                   auto-grow
                   style="color: #5b21b6"
-                  :error-messages="comments.errorMessage.value"
-                  v-model="comments.value.value"
+                  :error-messages="objective.errorMessage.value"
+                  v-model="objective.value.value"
                 />
                 <v-textarea
                   label="Methodology"
@@ -73,8 +73,8 @@
                   required
                   auto-grow
                   style="color: #5b21b6"
-                  :error-messages="comments.errorMessage.value"
-                  v-model="comments.value.value"
+                  :error-messages="methodology.errorMessage.value"
+                  v-model="methodology.value.value"
                 />
                 <v-textarea
                   label="Other Comments"
@@ -83,8 +83,8 @@
                   required
                   auto-grow
                   style="color: #5b21b6"
-                  :error-messages="comments.errorMessage.value"
-                  v-model="comments.value.value"
+                  :error-messages="others.errorMessage.value"
+                  v-model="others.value.value"
                 />
               </div>
             </v-card-text>
@@ -112,18 +112,29 @@ if (user) {
 
 const { handleSubmit } = useForm({
   validationSchema: {
-    comments(v: string) {
+    title(v: string) {
+      if (v) return true;
+      return "Field is required.";
+    },
+    objective(v: string) {
+      if (v) return true;
+      return "Field is required.";
+    },
+    methodology(v: string) {
       if (v) return true;
       return "Field is required.";
     },
   },
 });
 
-const comments = useField("comments");
+const title = useField("title");
+const objective = useField("objective");
+const methodology = useField("methodology");
+const others = useField("others");
 
 const create = handleSubmit(async (values) => {
   const data = JSON.stringify({
-    ...values,
+    comment: {...values},
     presentationID: lastParam,
     panelistID: userID.value,
   });
