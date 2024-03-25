@@ -74,14 +74,14 @@
             </v-window-item>
             <v-window-item value="title-presentation">
               <presentation_tab
-                :presentations="presentations.filter((presentation: any) => presentation.presentationType === 'Title')" />
+                :presentations="presentations.filter((p: any) => p.schedule.presentationType === 'Title Presentation')" />
             </v-window-item>
             <v-window-item value="research-paper">
               <research_paper_progress :id="currentResearch._id" />
             </v-window-item>
             <v-window-item value="final-presentation">
               <presentation_tab
-                :presentations="presentations.filter((presentation: any) => presentation.presentationType === 'Final')" />
+                :presentations="presentations.filter((p: any) => p.schedule.presentationType === 'Final Presentation')" />
             </v-window-item>
             <!-- <v-window-item value="incentive">
               <incentive_status_tab />
@@ -90,7 +90,7 @@
         </div>
       </v-card>
     </v-container>
-
+ 
   </div>
 </template>
 
@@ -135,7 +135,15 @@ onMounted(async () => {
   currentResearch.value = r.currentResearch;
   presentations.value = await Promise.all(currentResearch.value.presentations.map(async (p: any) => {
     const response = await axios.get(`/api/presentation/${p}`);
-    return response.data;
+    const schedule = await axios.get(`/api/schedule/${response.data.scheduleID}`);
+    return {
+      id: response.data._id,
+      time: response.data.time,
+      schedule: schedule.data,
+      status: response.data.status,
+      panelistNotes: response.data.panelistNotes,
+      createdAt: response.data.createdAt,
+    };
   }));
 });
 

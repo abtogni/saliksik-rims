@@ -1,5 +1,5 @@
 <template>
-  <div v-if="schedule">
+  <div>
     <v-card flat style="padding-top: 0.833rem" class="body">
       <v-card-title flat class="header">
         <div class="header-left">
@@ -23,13 +23,15 @@
               <p style="text-transform: uppercase" class="p-reg b">
                 <v-icon start icon="mdi-calendar-month-outline" />
                 {{
-                  moment(schedule.dateAndTime).format("MMMM DD, YYYY, h:mm a")
+                  moment(p.schedule.date).format("MMMM DD, YYYY") +
+                    " " +
+                    moment(p.time).format("h:mm a")
                 }}
               </p>
               <span class="p-reg">|</span>
               <p style="text-transform: uppercase" class="p-reg b">
                 <v-icon start icon="mdi-map-marker-outline" />
-                {{ schedule.location }}
+                {{ p.schedule.location }}
               </p>
             </v-card-text>
           </v-card>
@@ -101,6 +103,7 @@
       </v-card-text>
     </v-card>
   </div>
+  {{ JSON.stringify(p) }}
 </template>
 
 <script setup lang="ts">
@@ -110,16 +113,16 @@ import moment from "moment";
 import { onMounted, ref } from "vue";
 const { p } = defineProps(["p"]);
 const comments: any = ref([]);
-const schedule: any = ref(null);
 const userList = useUsersStore().userList;
 
 onMounted(async () => {
-  schedule.value = (await axios.get(`/api/schedule/${p.scheduleID}`)).data;
-  comments.value = await Promise.all(
-    p.panelistNotes.map(async (note: any) => {
-      const response = await axios.get(`/api/comment/${note}`);
-      return response.data;
-    }),
-  );
+  if (p.panelistNotes.length > 0) {
+    comments.value = await Promise.all(
+      p.panelistNotes.map(async (note: any) => {
+        const response = await axios.get(`/api/comment/${note}`);
+        return response.data;
+      }),
+    );
+  }
 });
 </script>
