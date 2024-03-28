@@ -88,7 +88,7 @@
                     project that can be used as communication material.
                   </v-tooltip>
                   <v-file-input accept="image/*" label="Upload images, charts, tables here, if necessary." variant="outlined" v-model="files.projectDescription" chips
-                    multiple color="#5b21b6" style="color: #5b21b6" />
+                     color="#5b21b6" style="color: #5b21b6" />
                 </v-card>
                 <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
                   <v-textarea v-model="significance.value.value" :error-messages="significance.errorMessage.value"
@@ -103,7 +103,7 @@
                     (d) Prior Art Search, and; (e) other relevant.
                   </v-tooltip>
                   <v-file-input accept="image/*" label="Upload images, charts, tables here, if necessary." variant="outlined" v-model="files.significance" chips
-                    multiple color="#5b21b6" style="color: #5b21b6" />
+                     color="#5b21b6" style="color: #5b21b6" />
                 </v-card>
                 <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
                   <v-textarea v-model="objectives.value.value" :error-messages="objectives.errorMessage.value"
@@ -114,7 +114,7 @@
                     grant giving body’s agenda.
                   </v-tooltip>
                   <v-file-input accept="image/*" label="Upload images, charts, tables here, if necessary." variant="outlined" v-model="files.objectives" chips
-                    multiple color="#5b21b6" style="color: #5b21b6" />
+                     color="#5b21b6" style="color: #5b21b6" />
                 </v-card>
                 <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
                   <v-textarea v-model="methodology.value.value" :error-messages="methodology.errorMessage.value"
@@ -127,7 +127,7 @@
                     strategies for implementation (Conceptual/Analytical framework).
                   </v-tooltip>
                   <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" v-model="files.methodology" chips
-                    multiple color="#5b21b6" style="color: #5b21b6" />
+                     color="#5b21b6" style="color: #5b21b6" />
                 </v-card>
                 <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
                   <v-textarea v-model="technologyRoadmap.value.value" :error-messages="technologyRoadmap.errorMessage.value"
@@ -137,7 +137,7 @@
                     technology.
                   </v-tooltip>
                   <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required v-model="files.technologyRoadmap" chips
-                    multiple color="#5b21b6" style="color: #5b21b6" />
+                     color="#5b21b6" style="color: #5b21b6" />
                 </v-card>
                 <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
                   <v-textarea v-model="expectedOutputs.value.value" :error-messages="expectedOutputs.errorMessage.value"
@@ -150,7 +150,7 @@
                     Partnership, and Policy).
                   </v-tooltip>
                   <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required v-model="files.expectedOutputs" chips
-                    multiple color="#5b21b6" style="color: #5b21b6" />
+                     color="#5b21b6" style="color: #5b21b6" />
                 </v-card>
                 <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
                   <v-textarea v-model="workPlan.value.value" :error-messages="workPlan.errorMessage.value" label="Work Plan"
@@ -158,7 +158,7 @@
                   <v-tooltip activator="parent" location="top" width="25%">Detailed plan of activities and timeline for the
                     project</v-tooltip>
                   <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required v-model="files.workPlan" chips
-                    multiple color="#5b21b6" style="color: #5b21b6" />
+                     color="#5b21b6" style="color: #5b21b6" />
                 </v-card>
               </v-card-text>
             </v-card>
@@ -166,78 +166,92 @@
         </v-container>
             </template>
 
-            <script setup lang="ts">
-            import router from "@/router";
-            import { useResearchesStore } from "@/stores/researches";
-            import axios from "axios";
-            import { useField, useForm } from "vee-validate";
-            import { ref } from "vue";
-            const r = useResearchesStore();
-            const research = r.currentResearch;
+<script setup lang="ts">
+    import router from "@/router";
+    import { useResearchesStore } from "@/stores/researches";
+    import axios from "axios";
+    import { useField, useForm } from "vee-validate";
+    import { ref } from "vue";
+    const r = useResearchesStore();
+    const research: any = r.currentResearch;
 
-            const files: any = {
-              projectDescription: ref(null),
-              significance: ref(null),
-              objectives: ref(null),
-              methodology: ref(null),
-              technologyRoadmap: ref(null),
-              expectedOutputs: ref(null),
-              workPlan: ref(null),
-            };
+    const files: any = {
+      projectDescription: ref(null),
+      significance: ref(null),
+      objectives: ref(null),
+      methodology: ref(null),
+      technologyRoadmap: ref(null),
+      expectedOutputs: ref(null),
+      workPlan: ref(null),
+    };
 
-            const { handleSubmit } = useForm({
-              validationSchema: {
-                projectTitle: (v: string) => (v ? true : "Field is required."),
-                implementingAgency: (v: string) => (v ? true : "Field is required."),
-                cooperatingAgency: (v: string) => (v ? true : "Field is required."),
-                siteOfImplementation: (v: string) => (v ? true : "Field is required."),
-                projectDuration: (v: string) => (v ? true : "Field is required."),
-                totalProjectCost: (v: string) =>
-                  !isNaN(Number(v)) ? true : "Field must be a number.",
-                fundingSource: (v: string) => (v ? true : "Field is required."),
-                projectDescription: (v: string) => (v ? true : "Field is required."),
-                significance: (v: string) => (v ? true : "Field is required."),
-                objectives: (v: string) => (v ? true : "Field is required."),
-                methodology: (v: string) => (v ? true : "Field is required."),
-                technologyRoadmap: (v: string) => (v ? true : "Field is required."),
-                expectedOutputs: (v: string) => (v ? true : "Field is required."),
-                workPlan: (v: string) => (v ? true : "Field is required."),
-              },
-            });
+    const { handleSubmit } = useForm({
+      validationSchema: {
+        projectTitle: (v: string) => (v ? true : "Field is required."),
+        implementingAgency: (v: string) => (v ? true : "Field is required."),
+        cooperatingAgency: (v: string) => (v ? true : "Field is required."),
+        siteOfImplementation: (v: string) => (v ? true : "Field is required."),
+        projectDuration: (v: string) => (v ? true : "Field is required."),
+        totalProjectCost: (v: string) =>
+          !isNaN(Number(v)) ? true : "Field must be a number.",
+        fundingSource: (v: string) => (v ? true : "Field is required."),
+        projectDescription: (v: string) => (v ? true : "Field is required."),
+        significance: (v: string) => (v ? true : "Field is required."),
+        objectives: (v: string) => (v ? true : "Field is required."),
+        methodology: (v: string) => (v ? true : "Field is required."),
+        technologyRoadmap: (v: string) => (v ? true : "Field is required."),
+        expectedOutputs: (v: string) => (v ? true : "Field is required."),
+        workPlan: (v: string) => (v ? true : "Field is required."),
+      },
+    });
 
-            const projectTitle = useField("projectTitle");
-            const implementingAgency = useField("implementingAgency");
-            const cooperatingAgency = useField("cooperatingAgency");
-            const siteOfImplementation = useField("siteOfImplementation");
-            const projectDuration = useField("projectDuration");
-            const totalProjectCost = useField("totalProjectCost");
-            const fundingSource = useField("fundingSource");
-            const projectDescription = useField("projectDescription");
-            const significance = useField("significance");
-            const objectives = useField("objectives");
-            const methodology = useField("methodology");
-            const technologyRoadmap = useField("technologyRoadmap");
-            const expectedOutputs = useField("expectedOutputs");
-            const workPlan = useField("workPlan");
+    const projectTitle = useField("projectTitle");
+    const implementingAgency = useField("implementingAgency");
+    const cooperatingAgency = useField("cooperatingAgency");
+    const siteOfImplementation = useField("siteOfImplementation");
+    const projectDuration = useField("projectDuration");
+    const totalProjectCost = useField("totalProjectCost");
+    const fundingSource = useField("fundingSource");
+    const projectDescription = useField("projectDescription");
+    const significance = useField("significance");
+    const objectives = useField("objectives");
+    const methodology = useField("methodology");
+    const technologyRoadmap = useField("technologyRoadmap");
+    const expectedOutputs = useField("expectedOutputs");
+    const workPlan = useField("workPlan");
 
-            const create = handleSubmit(async (values) => {
-              console.log(files);
-              const data = JSON.stringify({
-                researchStatus: "Concept Note",
-                conceptNote: {
-                  ...values,
-                  status: 'Submitted',
-                },
-              });
-              return axios
-                // @ts-ignore
-                .patch(`/api/research/update/${research._id}`, data, {
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                })
-                .then(() => alert("Successfully created a new concept note"))
-                .catch(() => alert("An error occurred"))
-                .finally(() => router.push("/researcher/research_projects"));
-            });
-            </script>
+    const create = handleSubmit(async (values) => {
+      Object.keys(files).forEach( async (key) => {
+        const data = new FormData();
+        const file = files[key];
+
+        if (Array.isArray(file)) {
+          data.append("file", file[0]);
+          await axios.post(`/api/research/upload/${research._id}`, data, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              "addFolder": "true",
+              "fileName": key
+            },
+          });
+        }
+      });
+      const data = JSON.stringify({
+        researchStatus: "Concept Note",
+        conceptNote: {
+          ...values,
+          status: 'Submitted',
+        },
+      });
+      return axios
+        // @ts-ignore
+        .patch(`/api/research/update/${research._id}`, data, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        })
+        .then(() => alert("Successfully created a new concept note"))
+        .catch(() => alert("An error occurred"))
+        .finally(() => router.push("/researcher/research_projects"));
+    });
+</script>

@@ -17,6 +17,7 @@ const storage = multer.diskStorage({
     filename: (req, file, cb) => {
         const originalname = file.originalname;
         const folder = req.headers["addFolder"];
+        const name = req.headers["fileName"];
         const id = req.params.id;
         const dir = folder == "true" ? `./public/uploads/${id}/conceptNote` : `./public/uploads/${id}`;
         const ext = path.extname(originalname);
@@ -25,11 +26,11 @@ const storage = multer.diskStorage({
         const timestamp = Date.now(); 
 
         let count = 0;
-        let filename = `${timestamp}_${originalname}`;
+        let filename = name ? `${name}${ext}` : `${timestamp}_${originalname}`;
 
         while (fs.existsSync(path.join(dir, filename))) {
             count++;
-            filename = `${timestamp}_${basename}_${count}${ext}`;
+            filename = name ? `${name}_${count}${ext}` : `${timestamp}_${basename}_${count}${ext}`;
         }
 
         cb(null, filename);
