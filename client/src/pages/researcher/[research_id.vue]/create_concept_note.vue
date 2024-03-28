@@ -6,12 +6,9 @@
         <v-card-title class="header">
           <div class="header-left">
             <div class="header-caption">
-              <v-badge color="primary" prepend-icon="mdi-folder-multiple-outline"
-                style="text-align: start; width: fit-content">
-                <h5 style="margin-right: 0.5rem">Create Concept Note</h5>
-              </v-badge>
+                <h5 style="">Create Concept Note</h5>
 
-              <p class="help">
+              <p class="help" style="margin-top: .2rem;" >
                 help
                 <v-tooltip activator="parent" location="bottom">Fill out all required fields. Put "N/A" if not
                   applicable. </v-tooltip>
@@ -28,7 +25,7 @@
         <v-card-text class="card-ctr-concept-note">
           <!--form-->
 
-          <v-card class="card-concept-note" variant="flat" color="#fff7ed">
+          <v-card class="card-concept-note" variant="flat" >
             <v-textarea v-model="projectTitle.value.value" :error-messages="projectTitle.errorMessage.value"
               label="Project Title" density="compact" required rows="1" auto-grow variant="outlined" color="#5b21b6"
               style="color: #5b21b6" />
@@ -78,7 +75,7 @@
               </v-col>
             </v-row>
           </v-card>
-          <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
+          <v-card class="card-concept-note2" variant="flat" >
             <v-textarea v-model="projectDescription.value.value" :error-messages="projectDescription.errorMessage.value"
               label="Project Description" variant="outlined" required auto-grow color="#5b21b6"
               style="color: #5b21b6" />
@@ -93,7 +90,7 @@
             <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required chips
               multiple color="#5b21b6" style="color: #5b21b6" />
           </v-card>
-          <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
+          <v-card class="card-concept-note2" variant="flat" >
             <v-textarea v-model="significance.value.value" :error-messages="significance.errorMessage.value"
               label="Significance" variant="outlined" required auto-grow color="#5b21b6" style="color: #5b21b6" />
             <v-tooltip activator="parent" location="top" width="75%">Refers to the alignment to UNC research agenda/ UN
@@ -108,7 +105,7 @@
             <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required chips
               multiple color="#5b21b6" style="color: #5b21b6" />
           </v-card>
-          <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
+          <v-card class="card-concept-note2" variant="flat" >
             <v-textarea v-model="objectives.value.value" :error-messages="objectives.errorMessage.value"
               label="Objectives" variant="outlined" required auto-grow color="#5b21b6" style="color: #5b21b6" />
             <v-tooltip activator="parent" location="top" width="75%">Statements of the general and specific purposes to
@@ -119,7 +116,7 @@
             <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required chips
               multiple color="#5b21b6" style="color: #5b21b6" />
           </v-card>
-          <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
+          <v-card class="card-concept-note2" variant="flat" >
             <v-textarea v-model="methodology.value.value" :error-messages="methodology.errorMessage.value"
               label="Methodology" variant="outlined" required auto-grow color="#5b21b6" style="color: #5b21b6" />
             <v-tooltip activator="parent" location="top" width="75%">Discuss the following: (a) variables or parameters
@@ -132,17 +129,17 @@
             <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required chips
               multiple color="#5b21b6" style="color: #5b21b6" />
           </v-card>
-          <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
+          <v-card class="card-concept-note2" variant="flat" >
             <v-textarea v-model="technologyRoadmap.value.value" :error-messages="technologyRoadmap.errorMessage.value"
               label="Technology Roadmap" variant="outlined" required auto-grow color="#5b21b6" style="color: #5b21b6" />
-            <v-tooltip activator="parent" location="top" width="75%">
+            <v-tooltip activator="parent" location="top" width="25%">
               (If applicable) A visual document that communicates the plan for
               technology.
             </v-tooltip>
             <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required chips
               multiple color="#5b21b6" style="color: #5b21b6" />
           </v-card>
-          <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
+          <v-card class="card-concept-note2" variant="flat" >
             <v-textarea v-model="expectedOutputs.value.value" :error-messages="expectedOutputs.errorMessage.value"
               label="Expected Outputs (6Ps)" variant="outlined" required auto-grow color="#5b21b6"
               style="color: #5b21b6" />
@@ -155,7 +152,7 @@
             <v-file-input label="Upload images, charts, tables here, if necessary." variant="outlined" required chips
               multiple color="#5b21b6" style="color: #5b21b6" />
           </v-card>
-          <v-card class="card-concept-note2" variant="flat" color="#fff7ed">
+          <v-card class="card-concept-note2" variant="flat" >
             <v-textarea v-model="workPlan.value.value" :error-messages="workPlan.errorMessage.value" label="Work Plan"
               variant="outlined" required auto-grow color="#5b21b6" style="color: #5b21b6" />
             <v-tooltip activator="parent" location="top" width="25%">Detailed plan of activities and timeline for the
