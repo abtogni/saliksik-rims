@@ -1,10 +1,11 @@
 <template>
   <v-container class="fill-height ctr">
     <v-card flat class="body" v-cloak>
+      <v-form class="form_content" @submit.prevent="create">
       <v-card-title class="header" style="padding-bottom: 1rem">
         <div class="header-left">
           <div class="header-caption">
-            <h5 style="margin-right: 0.5rem">Apply For Incentive</h5>
+            <h5 style="margin-right: 0.5rem">Application For Incentive</h5>
 
             <p class="help">
               help
@@ -19,7 +20,7 @@
         </div>
       </v-card-title>
       <v-card-text class="content">
-        <v-form class="form_content" @submit.prevent="create">
+        
           1
           <v-select
             label="Level Of Dissemination"
@@ -98,8 +99,9 @@
             style="padding: 0; margin: 0"
             color="#5b21b6"
           />
-        </v-form>
+        
       </v-card-text>
+    </v-form>
     </v-card>
   </v-container>
 </template>

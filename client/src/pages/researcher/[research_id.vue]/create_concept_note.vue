@@ -6,12 +6,9 @@
         <v-card-title class="header">
           <div class="header-left">
             <div class="header-caption">
-              <v-badge color="primary" prepend-icon="mdi-folder-multiple-outline"
-                style="text-align: start; width: fit-content">
-                <h5 style="margin-right: 0.5rem">Create Concept Note</h5>
-              </v-badge>
+                <h5 style="">Create Concept Note</h5>
 
-              <p class="help">
+              <p class="help" style="margin-top: .2rem;" >
                 help
                 <v-tooltip activator="parent" location="bottom">Fill out all required fields. Put "N/A" if not
                   applicable. </v-tooltip>
@@ -28,7 +25,7 @@
         <v-card-text class="card-ctr-concept-note">
           <!--form-->
 
-          <v-card class="card-concept-note" variant="flat" color="#fff7ed">
+          <v-card class="card-concept-note" variant="flat" >
             <v-textarea v-model="projectTitle.value.value" :error-messages="projectTitle.errorMessage.value"
               label="Project Title" density="compact" required rows="1" auto-grow variant="outlined" color="#5b21b6"
               style="color: #5b21b6" />
